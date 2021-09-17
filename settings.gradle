@@ -10,3 +10,7 @@ rootProject.name = "TrackHabit"
 include ':app'
 include ':feature'
 include ':feature:trackhabit'
+include ':navigation'
+include ':remote'
+include ':buildsrc'
+include ':common'
