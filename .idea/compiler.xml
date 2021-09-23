@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="11" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="TrackHabit.app" target="11" />
+      <module name="TrackHabit.buildSrc" target="11" />
+      <module name="TrackHabit.common" target="11" />
+      <module name="TrackHabit.feature.trackhabit" target="11" />
+      <module name="TrackHabit.navigation" target="11" />
+      <module name="TrackHabit.remote" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
