@@ -1,14 +1,19 @@
 package com.track.buildsrc
 
+import org.gradle.api.JavaVersion
+
 object SdkVersions {
-    const val compileSdkVersion = 30
-    const val buildToolsVersion = "30.0.1"
+    const val compileSdkVersion = 31
+    const val buildToolsVersion = "31.0.0"
     const val minSdkVersion = 23
-    const val targetSdkVersion = 30
+    const val targetSdkVersion = 31
+
+    val javaVersion = JavaVersion.VERSION_1_8
+    const val jvmTarget = "1.8"
 }
 
 object Versions {
-    val kotlin = "1.5.20"
+    val kotlin = "1.5.31"
     const val room = "2.2.5"
     val timber = "4.7.1"
 
