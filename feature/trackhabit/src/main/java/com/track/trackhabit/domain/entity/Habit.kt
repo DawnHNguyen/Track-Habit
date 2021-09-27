@@ -1,7 +1,7 @@
 package com.track.trackhabit.domain.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
-class Habit {
-}
+data class Habit(@PrimaryKey val id: String)

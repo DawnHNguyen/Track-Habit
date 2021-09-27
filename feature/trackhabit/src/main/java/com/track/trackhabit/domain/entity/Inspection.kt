@@ -3,5 +3,5 @@ package com.track.trackhabit.domain.entity
 import androidx.room.Entity
 
 @Entity
-class Inspection {
+data class Inspection(val id: String) {
 }
