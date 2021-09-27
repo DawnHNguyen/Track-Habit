@@ -22,6 +22,8 @@ object Versions {
     val constraintLayout = "2.0.0-rc1"
 
     val recyclerview = "1.2.0-alpha05"
+
+    val hilt = "2.38.1"
 }
 
 object Libraries {
@@ -32,6 +34,10 @@ object Libraries {
 
     // TIMBER
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+
+    //HILT
+    val daggerHilt = "com.google.dagger:hilt-android:${Versions.hilt}"
+    val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 }
 
 object KotlinLibraries {
