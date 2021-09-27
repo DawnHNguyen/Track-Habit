@@ -37,7 +37,7 @@ object Libraries {
 
     //HILT
     val daggerHilt = "com.google.dagger:hilt-android:${Versions.hilt}"
-    val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions}"
+    val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 }
 
 object KotlinLibraries {
