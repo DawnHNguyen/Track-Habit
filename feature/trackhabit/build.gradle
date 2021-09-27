@@ -1,3 +1,5 @@
+import com.track.buildsrc.Libraries
+
 plugins {
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
@@ -44,8 +46,8 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation("com.google.dagger:hilt-android:2.38.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+    implementation Libraries.daggerHilt
+    kapt Libraries.hiltCompiler
 }
 
 // Allow references to generated code
