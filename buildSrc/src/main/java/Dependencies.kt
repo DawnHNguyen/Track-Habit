@@ -14,7 +14,7 @@ object SdkVersions {
 
 object Versions {
     val kotlin = "1.5.31"
-    const val room = "2.2.5"
+    const val room = "2.3.0"
     val timber = "4.7.1"
 
     val appCompat = "1.3.0-alpha01"
