@@ -13,7 +13,7 @@ class UserDto(
     val name: String,
     private val habits: List<Habit>
 ) : RemoteDto {
-    override fun mapToDomainModel() = User(id,name, habits)
+    override fun mapToDomainModel() = User(id, name, habits)
 
     override fun mapToLocalDto() = UserLocal(id, name, habits)
 }

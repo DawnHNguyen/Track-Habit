@@ -12,7 +12,8 @@ import java.util.*
 @Entity
 data class Inspection(
     @PrimaryKey val time: Date,
-    val check: Boolean):DomainModel {
+    val check: Boolean
+) : DomainModel {
     override fun toLocalDto() = InspectionLocal(time, check)
 
     override fun toRemoteDto() = InspectionDto(time, check)

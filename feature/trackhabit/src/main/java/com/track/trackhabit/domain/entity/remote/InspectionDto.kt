@@ -11,7 +11,7 @@ import java.util.*
 data class InspectionDto(
     @PrimaryKey val time: Date,
     val check: Boolean
-): RemoteDto {
+) : RemoteDto {
     override fun mapToDomainModel() = Inspection(time, check)
 
     override fun mapToLocalDto() = InspectionLocal(time, check)

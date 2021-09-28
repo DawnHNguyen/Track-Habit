@@ -15,7 +15,7 @@ data class HabitLocal(
     val description: String,
     val time: Date,
     val performances: List<Inspection>
-): LocalDto {
+) : LocalDto {
     override fun mapToDomainModel() = Habit(id, title, description, time, performances)
 
     override fun mapToRemoteDto() = HabitDto(id, title, description, time, performances)

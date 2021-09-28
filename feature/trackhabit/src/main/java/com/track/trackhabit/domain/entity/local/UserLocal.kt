@@ -12,8 +12,8 @@ data class UserLocal(
     @PrimaryKey val id: String,
     val name: String,
     val habits: List<Habit>
-): LocalDto {
-    override fun mapToDomainModel() = User(id,name, habits)
+) : LocalDto {
+    override fun mapToDomainModel() = User(id, name, habits)
 
     override fun mapToRemoteDto() = UserDto(id, name, habits)
 }
