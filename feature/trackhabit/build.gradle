@@ -1,4 +1,5 @@
 import com.track.buildsrc.Libraries
+import com.track.buildsrc.Modules
 
 plugins {
     id("kotlin-kapt")
@@ -45,6 +46,8 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation project(Modules.common)
 
     implementation Libraries.roomRuntime
     kapt Libraries.roomCompiler
