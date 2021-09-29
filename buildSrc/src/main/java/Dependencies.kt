@@ -24,6 +24,8 @@ object Versions {
     val recyclerview = "1.2.0-alpha05"
 
     val hilt = "2.38.1"
+
+    val nav = "2.3.5"
 }
 
 object Libraries {
@@ -50,6 +52,10 @@ object AndroidLibraries {
     val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
+
+    // NAVIGATION
+    val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
+    val navigationFrag = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
 }
 
 object Modules {
