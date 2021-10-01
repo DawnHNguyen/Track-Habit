@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="binding"
+            name="main"
             type="com.track.trackhabit.MainActivity" />
     </data>
 
