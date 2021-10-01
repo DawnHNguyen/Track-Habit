@@ -9,12 +9,12 @@ import com.track.trackhabit.domain.entity.local.InspectionLocal
 import com.track.trackhabit.domain.entity.remote.InspectionDto
 import java.util.*
 
-@Entity
+
 data class Inspection(
-    @PrimaryKey val time: Date,
+    val time: Date,
     val check: Boolean
 ) : DomainModel {
-    override fun toLocalDto() = InspectionLocal(time, check)
+    override fun toLocalDto() = InspectionLocal(time.time, check)
 
     override fun toRemoteDto() = InspectionDto(time, check)
 

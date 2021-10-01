@@ -9,11 +9,11 @@ import com.track.trackhabit.domain.entity.User
 import com.track.trackhabit.domain.entity.local.UserLocal
 
 class UserDto(
-    @PrimaryKey val id: String,
+    @PrimaryKey val userId: String,
     val name: String,
     private val habits: List<Habit>
 ) : RemoteDto {
-    override fun mapToDomainModel() = User(id, name, habits)
+    override fun mapToDomainModel() = User(userId, name, habits)
 
-    override fun mapToLocalDto() = UserLocal(id, name, habits)
+    override fun mapToLocalDto() = UserLocal(userId, name)
 }
