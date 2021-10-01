@@ -2,7 +2,6 @@ package com.track.trackhabit.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.track.trackhabit.R
@@ -11,10 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivityFeature : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_feature)
         val recyclerView: RecyclerView = findViewById(R.id.test_recyclerView)
         val habitsListAdapter = HabitsListAdapter()
         val habitList = mutableListOf<Habit>()
