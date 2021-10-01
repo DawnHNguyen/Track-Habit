@@ -41,6 +41,6 @@ class HabitsListAdapter() :
 
     class HabitsListDiffUtil() : DiffUtil.ItemCallback<Habit>() {
         override fun areContentsTheSame(oldItem: Habit, newItem: Habit) = oldItem == newItem
-        override fun areItemsTheSame(oldItem: Habit, newItem: Habit) = oldItem.id == newItem.id
+        override fun areItemsTheSame(oldItem: Habit, newItem: Habit) = oldItem.habitId == newItem.habitId
     }
 }
