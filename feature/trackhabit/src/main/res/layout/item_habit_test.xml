@@ -3,7 +3,7 @@
 
     <data>
 <variable
-    name="habit"
+    name="habitItem"
     type="com.track.trackhabit.domain.entity.Habit" />
     </data>
 
@@ -14,7 +14,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="qwerty"
+            android:text="@{habitItem.title}"
             android:textSize="30dp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

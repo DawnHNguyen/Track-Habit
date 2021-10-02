@@ -14,11 +14,20 @@
         android:layout_height="match_parent"
         tools:context=".presentation.ui.MainActivityFeature">
 
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Just a f*cking button"
+            android:layout_marginStart="100dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/test_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

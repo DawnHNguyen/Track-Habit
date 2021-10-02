@@ -4,9 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/activity_main.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/activity_main_fake.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/activity_start.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_main_feature.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/item_habit.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/item_habit_test.xml" value="0.20260416666666667" />
         <entry key="feature/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
         <entry key="feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.2617753623188406" />
       </map>

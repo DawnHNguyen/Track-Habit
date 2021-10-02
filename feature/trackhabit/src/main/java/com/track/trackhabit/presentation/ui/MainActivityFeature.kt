@@ -1,6 +1,7 @@
 package com.track.trackhabit.presentation.ui
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,9 +19,12 @@ class MainActivityFeature : AppCompatActivity() {
         val habitsListAdapter = HabitsListAdapter()
         val habitList = mutableListOf<Habit>()
         val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf())
-        habitList.add(habit)
-        habitsListAdapter.submitList(habitList)
+        val button: Button = findViewById(R.id.button)
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        button.setOnClickListener {
+            habitList.add(habit)
+            habitsListAdapter.submitList(habitList)
+        }
     }
 }
