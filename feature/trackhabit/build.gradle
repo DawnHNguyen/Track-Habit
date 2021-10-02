@@ -48,6 +48,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation project(Modules.common)
+    implementation project(Modules.navigation)
 
     implementation Libraries.roomRuntime
     kapt Libraries.roomCompiler

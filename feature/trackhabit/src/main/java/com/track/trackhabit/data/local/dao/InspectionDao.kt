@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.track.trackhabit.domain.entity.local.InspectionLocal
 
 @Dao
-abstract class InspectionDao {
+abstract class InspectionDao() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertInspection(inspectionLocal: InspectionLocal)
 

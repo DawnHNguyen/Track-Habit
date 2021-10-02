@@ -4,7 +4,7 @@ import androidx.room.*
 import com.track.trackhabit.domain.entity.local.HabitLocal
 
 @Dao
-abstract class HabitDao {
+abstract class HabitDao() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertHabit(habit: HabitLocal)
 
