@@ -6,7 +6,7 @@
     <data>
 <variable
     name="habit"
-    type="com.track.trackhabit.domain.entity.Habit" />
+    type="com.track.trackhabit.presentation.ui.MainActivityFeature" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
