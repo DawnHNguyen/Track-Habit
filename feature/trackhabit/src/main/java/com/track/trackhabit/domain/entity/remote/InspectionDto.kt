@@ -14,5 +14,5 @@ data class InspectionDto(
 ) : RemoteDto {
     override fun mapToDomainModel() = Inspection(time, check)
 
-    override fun mapToLocalDto() = InspectionLocal(time, check)
+    override fun mapToLocalDto() = InspectionLocal(time.time, check)
 }

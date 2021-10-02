@@ -11,6 +11,6 @@ abstract class InspectionDao() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertInspection(inspectionLocal: InspectionLocal)
 
-    @Query("SELECT * FROM inspection")
+    @Query("SELECT * FROM inspectionlocal")
     abstract suspend fun getInspection(): List<InspectionLocal>
 }

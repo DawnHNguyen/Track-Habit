@@ -8,12 +8,12 @@ abstract class HabitDao() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertHabit(habit: HabitLocal)
 
-    @Query("SELECT * FROM habit")
+    @Query("SELECT * FROM habitlocal")
     abstract suspend fun getHabit(): List<HabitLocal>
 
     @Update
     abstract suspend fun updateHabit(habit: HabitLocal)
 
-    @Query("DELETE FROM habit WHERE id=:id")
+    @Query("DELETE FROM habitlocal WHERE habit_id=:id")
     abstract suspend fun deleteHabit(id: Int)
 }

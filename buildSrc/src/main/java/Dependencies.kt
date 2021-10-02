@@ -56,6 +56,9 @@ object AndroidLibraries {
     // NAVIGATION
     val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
     val navigationFrag = "androidx.navigation:navigation-fragment-ktx:${Versions.nav}"
+
+    // SAFE ARGS
+    val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav}"
 }
 
 object Modules {

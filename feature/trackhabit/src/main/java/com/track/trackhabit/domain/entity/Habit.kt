@@ -9,16 +9,15 @@ import com.track.trackhabit.domain.entity.local.HabitLocal
 import com.track.trackhabit.domain.entity.remote.HabitDto
 import java.util.*
 
-@Entity
 data class Habit(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    val habitId: Int,
     val title: String,
     val description: String,
     val time: Date,
     val performances: List<Inspection>
 ) : DomainModel {
-    override fun toLocalDto() = HabitLocal(id, title, description, time, performances)
+    override fun toLocalDto() = HabitLocal(habitId, title, description, time.time)
 
-    override fun toRemoteDto() = HabitDto(id, title, description, time, performances)
+    override fun toRemoteDto() = HabitDto(habitId, title, description, time, performances)
 
 }

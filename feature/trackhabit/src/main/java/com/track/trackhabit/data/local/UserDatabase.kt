@@ -2,16 +2,15 @@ package com.track.trackhabit.data.local
 
 import android.content.Context
 import androidx.room.*
-import androidx.sqlite.db.SupportSQLiteOpenHelper
 import com.track.trackhabit.data.local.dao.HabitDao
 import com.track.trackhabit.data.local.dao.InspectionDao
 import com.track.trackhabit.data.local.dao.UserDao
-import com.track.trackhabit.domain.entity.Habit
-import com.track.trackhabit.domain.entity.Inspection
-import com.track.trackhabit.domain.entity.User
+import com.track.trackhabit.domain.entity.local.HabitLocal
+import com.track.trackhabit.domain.entity.local.InspectionLocal
+import com.track.trackhabit.domain.entity.local.UserLocal
 
 @Database(
-    entities = [User::class, Habit::class, Inspection::class],
+    entities = [UserLocal::class, HabitLocal::class, InspectionLocal::class],
     version = 1,
     exportSchema = false
 )
