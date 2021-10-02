@@ -9,7 +9,6 @@ import com.track.trackhabit.domain.entity.local.HabitLocal
 import com.track.trackhabit.domain.entity.remote.HabitDto
 import java.util.*
 
-
 data class Habit(
     val habitId: Int,
     val title: String,
