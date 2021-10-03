@@ -6,7 +6,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.track.trackhabit.databinding.ActivityMainBinding
-import com.track.trackhabit.habit.presentation.ui.MainActivityFeature
+import com.track.trackhabit.habit.presentation.ui.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         Log.d("check_intent","da goi den")
-        val intent = Intent(this, MainActivityFeature::class.java)
+        val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
     }
 }

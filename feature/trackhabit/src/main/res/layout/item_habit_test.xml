@@ -2,9 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-<variable
-    name="habitItem"
-    type="com.track.trackhabit.habit.domain.entity.Habit" />
+        <variable
+            name="habit"
+            type="com.track.trackhabit.habit.domain.entity.Habit" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -14,7 +14,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{habitItem.title}"
+            android:text="@{habit.title}"
             android:textSize="30dp"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.track.trackhabit.databinding.ItemHabitTestBinding
+import com.track.trackhabit.habit.databinding.ItemHabitTestBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 
 class HabitsListAdapter() :
@@ -26,7 +26,7 @@ class HabitsListAdapter() :
     class HabitsListViewHolder private constructor(private val binding: ItemHabitTestBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(habit: Habit) {
-            binding.habitItem = habit
+            binding.habit = habit
             binding.executePendingBindings()
         }
 
