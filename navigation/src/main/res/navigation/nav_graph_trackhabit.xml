@@ -5,7 +5,7 @@
     app:startDestination="@id/mainAcitivity_feature">
 
     <activity android:id="@+id/mainAcitivity_feature"
-        android:name="com.track.trackhabit.presentation.ui.MainActivityFeature">
+        android:name="com.track.trackhabit.habit.presentation.ui.MainActivityFeature">
 
     </activity>
 

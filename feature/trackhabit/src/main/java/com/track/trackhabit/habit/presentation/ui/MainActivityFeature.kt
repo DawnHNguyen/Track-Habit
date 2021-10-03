@@ -1,4 +1,4 @@
-package com.track.trackhabit.presentation.ui
+package com.track.trackhabit.habit.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
