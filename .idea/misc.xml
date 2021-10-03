@@ -3,17 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/activity_main.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/activity_main_fake.xml" value="0.20260416666666667" />
+        <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.654891304347826" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/a.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/activity_main.xml" value="0.19948717948717948" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/app/src/main/res/layout/activity_start.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_main_feature.xml" value="0.20260416666666667" />
-        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/item_habit.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/ADMIN/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/item_habit_test.xml" value="0.20260416666666667" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2453125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2270168855534709" />
         <entry key="feature/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
         <entry key="feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.2617753623188406" />
-        <entry key="feature/trackhabit/src/main/res/layout/item_habit_test.xml" value="0.15462962962962962" />
+        <entry key="navigation/src/main/res/drawable/ic_launcher_background.xml" value="0.23020833333333332" />
       </map>
     </option>
   </component>

@@ -1,7 +1,6 @@
 package com.track.trackhabit.habit.domain.entity
 
 import com.track.common.base.DomainModel
-import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.local.UserLocal
 import com.track.trackhabit.habit.domain.entity.remote.UserDto
 
