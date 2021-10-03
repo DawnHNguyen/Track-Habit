@@ -1,12 +1,10 @@
-package com.track.trackhabit.domain.entity.remote
+package com.track.trackhabit.habit.domain.entity.remote
 
 import androidx.room.PrimaryKey
-import com.track.common.base.DomainModel
-import com.track.common.base.dto.LocalDto
 import com.track.common.base.dto.RemoteDto
-import com.track.trackhabit.domain.entity.Habit
-import com.track.trackhabit.domain.entity.User
-import com.track.trackhabit.domain.entity.local.UserLocal
+import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.entity.User
+import com.track.trackhabit.habit.domain.entity.local.UserLocal
 
 class UserDto(
     @PrimaryKey val userId: String,

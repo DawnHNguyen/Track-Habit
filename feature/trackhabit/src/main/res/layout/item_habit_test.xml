@@ -4,7 +4,7 @@
     <data>
 <variable
     name="habitItem"
-    type="com.track.trackhabit.domain.entity.Habit" />
+    type="com.track.trackhabit.habit.domain.entity.Habit" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

@@ -1,4 +1,4 @@
-package com.track.trackhabit.presentation.ui
+package com.track.trackhabit.habit.presentation.ui
 
 import android.os.Bundle
 import android.widget.Button
@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.track.trackhabit.R
-import com.track.trackhabit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.entity.Habit
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 

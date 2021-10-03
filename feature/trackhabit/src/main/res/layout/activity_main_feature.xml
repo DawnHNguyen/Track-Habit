@@ -6,13 +6,13 @@
     <data>
 <variable
     name="habit"
-    type="com.track.trackhabit.presentation.ui.MainActivityFeature" />
+    type="com.track.trackhabit.habit.presentation.ui.MainActivityFeature" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.MainActivityFeature">
+        tools:context=".habit.presentation.ui.MainActivityFeature">
 
         <Button
             android:id="@+id/button"
