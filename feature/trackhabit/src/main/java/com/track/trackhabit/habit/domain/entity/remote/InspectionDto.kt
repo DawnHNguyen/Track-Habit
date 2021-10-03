@@ -1,11 +1,9 @@
-package com.track.trackhabit.domain.entity.remote
+package com.track.trackhabit.habit.domain.entity.remote
 
 import androidx.room.PrimaryKey
-import com.track.common.base.DomainModel
-import com.track.common.base.dto.LocalDto
 import com.track.common.base.dto.RemoteDto
-import com.track.trackhabit.domain.entity.Inspection
-import com.track.trackhabit.domain.entity.local.InspectionLocal
+import com.track.trackhabit.habit.domain.entity.Inspection
+import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
 import java.util.*
 
 data class InspectionDto(
