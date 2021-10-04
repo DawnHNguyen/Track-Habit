@@ -26,6 +26,8 @@ object Versions {
     val hilt = "2.38.1"
 
     val nav = "2.3.5"
+
+    val core_version = "1.6.0"
 }
 
 object Libraries {
@@ -40,6 +42,9 @@ object Libraries {
     //HILT
     val daggerHilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
+
+    // NOTIFICATION
+    val notification = "androidx.core:core-ktx:${Versions}.core_version"
 }
 
 object KotlinLibraries {

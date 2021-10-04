@@ -7,6 +7,7 @@
     tools:context=".presentation.ui.MainActivityFeature">
 
     <TextView
+        android:id="@+id/textView_testNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World at feature!"
