@@ -1,6 +1,7 @@
 package com.track.trackhabit.habit.data.local.dao
 
 import androidx.room.*
+import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.local.HabitLocal
 
 @Dao
