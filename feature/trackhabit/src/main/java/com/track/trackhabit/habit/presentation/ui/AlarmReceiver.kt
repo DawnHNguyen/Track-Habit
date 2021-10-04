@@ -1,4 +1,4 @@
-package com.track.trackhabit.presentation.ui
+package com.track.trackhabit.habit.presentation.ui
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -9,10 +9,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import com.track.trackhabit.R
-import kotlinx.coroutines.channels.Channel
+import com.track.trackhabit.habit.R
 
 
 class AlarmReceiver: BroadcastReceiver() {

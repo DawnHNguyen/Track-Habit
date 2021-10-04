@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".presentation.ui.AlarmReceiver"
+        <receiver android:name=".habit.presentation.ui.AlarmReceiver"
             android:enabled="true"
             android:exported="false">
 

@@ -1,34 +1,54 @@
-package com.track.trackhabit.presentation.ui
+package com.track.trackhabit.habit.presentation.ui
 
 import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.track.trackhabit.R
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.track.trackhabit.habit.R
+import com.track.trackhabit.habit.databinding.ActivityHomeBinding
+import com.track.trackhabit.habit.domain.entity.Habit
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
-class MainActivityFeature : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var alarmMng: AlarmManager
     private lateinit var alarmIntent: PendingIntent
 
+    private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_feature)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+
+        val recyclerView = binding.testRecyclerView
+        val habitsListAdapter = HabitsListAdapter()
+        val habitList = mutableListOf<Habit>()
+        val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf())
+        val button: Button = findViewById(R.id.button)
+        recyclerView.adapter = habitsListAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        button.setOnClickListener {
+            habitList.add(habit)
+            habitsListAdapter.submitList(habitList)
+        }
+
 
         createChannel()
 
         setAlarm()
 
-        val textView = findViewById<TextView>(R.id.textView_testNotification)
+        val textView = findViewById<TextView>(R.id.button_testNotification)
         textView.setOnClickListener {
             Log.d("done","da hien")
             val builder = NotificationCompat.Builder(this, "channel_id")
@@ -41,13 +61,15 @@ class MainActivityFeature : AppCompatActivity() {
             with(NotificationManagerCompat.from(this)) {
                 notify(12, builder.build())
             }
-        }
-
     }
+
+
+
+}
 
     private fun setAlarm() {
         alarmMng = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmIntent = Intent(this, AlarmReceiver::class.java).let {  intent ->
+        alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
             PendingIntent.getBroadcast(this,0,intent,0)
         }
 
@@ -69,6 +91,4 @@ class MainActivityFeature : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
-
 }

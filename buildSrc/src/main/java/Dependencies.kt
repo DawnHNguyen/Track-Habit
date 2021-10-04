@@ -67,8 +67,6 @@ object AndroidLibraries {
 }
 
 object Modules {
-    val app = ":app"
-
     val navigation = ":navigation"
 
     val common = ":common"

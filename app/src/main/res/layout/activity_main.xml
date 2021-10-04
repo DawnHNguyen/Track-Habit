@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
-        <variable
-            name="binding"
-            type="com.track.trackhabit.MainActivity" />
-    </data>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity">
-
-        <Button
-            android:id="@+id/button_activityMainApp_intent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="bam vao day de dich chuyen" />
-
-
-    </FrameLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
