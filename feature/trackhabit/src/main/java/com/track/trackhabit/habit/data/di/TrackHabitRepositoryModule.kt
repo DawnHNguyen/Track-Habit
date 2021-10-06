@@ -1,6 +1,6 @@
-package com.track.trackhabit.data.di
+package com.track.trackhabit.habit.data.di
 
-import com.track.trackhabit.data.repository.TrackHabitRepositoryImpl
+import com.track.trackhabit.habit.data.repository.TrackHabitRepositoryImpl
 import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
 import dagger.Binds
 import dagger.Module

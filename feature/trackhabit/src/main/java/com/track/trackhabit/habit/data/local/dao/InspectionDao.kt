@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.data.local.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -12,5 +13,5 @@ abstract class InspectionDao() {
     abstract suspend fun insertInspection(inspectionLocal: InspectionLocal)
 
     @Query("SELECT * FROM inspectionlocal")
-    abstract suspend fun getInspection(): List<InspectionLocal>
+    abstract fun getInspection(): LiveData<List<InspectionLocal>>
 }

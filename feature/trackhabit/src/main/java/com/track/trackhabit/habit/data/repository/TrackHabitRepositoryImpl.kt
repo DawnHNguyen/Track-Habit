@@ -1,4 +1,4 @@
-package com.track.trackhabit.data.repository
+package com.track.trackhabit.habit.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -31,7 +31,7 @@ class TrackHabitRepositoryImpl @Inject constructor(
 
     override suspend fun getHabit(): LiveData<List<Habit>> {
         val liveData = MutableLiveData<List<Habit>>()
-        liveData.postValue(habitDao.getHabit().map {
+        liveData.postValue(habitDao.getHabit().value?.map {
             it.mapToDomainModel()
         })
         return liveData
@@ -39,7 +39,7 @@ class TrackHabitRepositoryImpl @Inject constructor(
 
     override suspend fun getInspection(): LiveData<List<Inspection>> {
         val liveData = MutableLiveData<List<Inspection>>()
-        liveData.postValue(inspectionDao.getInspection().map {
+        liveData.postValue(inspectionDao.getInspection().value?.map {
             it.mapToDomainModel()
         })
         return liveData
