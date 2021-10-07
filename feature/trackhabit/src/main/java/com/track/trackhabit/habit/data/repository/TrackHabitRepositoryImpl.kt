@@ -2,6 +2,7 @@ package com.track.trackhabit.habit.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.track.trackhabit.habit.data.local.dao.HabitDao
 import com.track.trackhabit.habit.data.local.dao.InspectionDao
 import com.track.trackhabit.habit.data.local.dao.UserDao
@@ -29,21 +30,15 @@ class TrackHabitRepositoryImpl @Inject constructor(
         inspectionDao.insertInspection(inspection.toLocalDto())
     }
 
-    override suspend fun getHabit(): LiveData<List<Habit>> {
-        val liveData = MutableLiveData<List<Habit>>()
-        liveData.postValue(habitDao.getHabit().value?.map {
-            it.mapToDomainModel()
-        })
-        return liveData
-    }
+    override suspend fun getHabit(): LiveData<List<Habit>> =
+        Transformations.map(habitDao.getHabit()) { list ->
+            list.map { it.mapToDomainModel() }
+        }
 
-    override suspend fun getInspection(): LiveData<List<Inspection>> {
-        val liveData = MutableLiveData<List<Inspection>>()
-        liveData.postValue(inspectionDao.getInspection().value?.map {
-            it.mapToDomainModel()
-        })
-        return liveData
-    }
+    override suspend fun getInspection(): LiveData<List<Inspection>> =
+        Transformations.map(inspectionDao.getInspection()) { list ->
+            list.map { it.mapToDomainModel() }
+        }
 
     override suspend fun updateHabit(habit: Habit) {
         habitDao.updateHabit(habit.toLocalDto())
