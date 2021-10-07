@@ -46,15 +46,17 @@ class HomeActivity : AppCompatActivity() {
 
         createChannel()
 
-        setAlarm()
+
 
         val textView = findViewById<TextView>(R.id.button_testNotification)
         textView.setOnClickListener {
-            Log.d("done","da hien")
+
+            setAlarm()
+
             val builder = NotificationCompat.Builder(this, "channel_id")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Alarm manager")
-                .setContentText("This is an alarm")
+                .setContentText("Đã đặt báo thức cho bạn")
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setPriority(NotificationCompat.PRIORITY_MAX)
 
@@ -73,11 +75,27 @@ class HomeActivity : AppCompatActivity() {
             PendingIntent.getBroadcast(this,0,intent,0)
         }
 
-        alarmMng.set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + 20*1000,
-            alarmIntent
-        )
+        val calendar: Calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 18)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmMng.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                alarmIntent
+            )
+        }
+        else{
+            alarmMng.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                alarmIntent
+            )
+        }
     }
 
     private fun createChannel() {
