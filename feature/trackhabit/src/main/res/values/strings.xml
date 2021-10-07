@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">trackhabit</string>
+    <string name="featureTrackhabit_channelId_notification">channel_id</string>
+    <string name="featureTrackhabit_nameOfChannel_notification">name</string>
 </resources>

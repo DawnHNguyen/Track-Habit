@@ -15,15 +15,7 @@ import com.track.trackhabit.habit.R
 class AlarmReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = NotificationManager.IMPORTANCE_HIGH
-            val channel = NotificationChannel("channel_id","name", importance).apply {
-                description = "dong mo ta nay that vo dung"
-            }
-
-            val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
+        createChannel(context)
 
         val builder = NotificationCompat.Builder(context, "channel_id")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
