@@ -23,7 +23,9 @@ abstract class UserDatabase: RoomDatabase() {
 
     companion object{
         fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext, UserDatabase::class.java, "track_habit_db")
-                .build()
+            Room.databaseBuilder(context.applicationContext,
+                UserDatabase::class.java,
+                "track_habit_db"
+            ).build()
     }
 }
