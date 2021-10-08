@@ -52,6 +52,8 @@ dependencies {
     implementation project(Modules.common)
     implementation project(Modules.navigation)
 
+    implementation Libraries.notification
+
     implementation Libraries.roomRuntime
     kapt Libraries.roomCompiler
     implementation Libraries.roomKtx
