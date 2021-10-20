@@ -2,4 +2,8 @@
     <string name="app_name">trackhabit</string>
     <string name="featureTrackhabit_channelId_notification">channel_id</string>
     <string name="featureTrackhabit_nameOfChannel_notification">name</string>
+    <string name="icontitle_bottomnav_home">Home</string>
+    <string name="icontitle_bottomnav_statistical">Statistical</string>
+    <string name="icontitle_bottomnav_sleeptime">Sleep time</string>
+    <string name="icontitle_bottomnav_profile">Profile</string>
 </resources>
