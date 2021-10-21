@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.track.trackhabit.habit.databinding.ItemHabitTestBinding
+import com.track.trackhabit.habit.databinding.ItemHabitBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 
 class HabitsListAdapter() :
@@ -23,7 +23,7 @@ class HabitsListAdapter() :
         holder.bind(habit)
     }
 
-    class HabitsListViewHolder private constructor(private val binding: ItemHabitTestBinding) :
+    class HabitsListViewHolder private constructor(private val binding: ItemHabitBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(habit: Habit) {
             binding.habit = habit
@@ -33,7 +33,7 @@ class HabitsListAdapter() :
         companion object {
             fun from(parent: ViewGroup): HabitsListViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemHabitTestBinding.inflate(layoutInflater, parent, false)
+                val binding = ItemHabitBinding.inflate(layoutInflater, parent, false)
                 return HabitsListViewHolder(binding)
             }
         }
