@@ -26,11 +26,14 @@ class HomeActivity : AppCompatActivity() {
 
     private lateinit var alarmMng: AlarmManager
     private lateinit var alarmIntent: PendingIntent
+    private lateinit var alarmService: AlarmService
 
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+
+        alarmService = AlarmService(this)
 
         val recyclerView = binding.testRecyclerView
         val habitsListAdapter = HabitsListAdapter()
@@ -53,21 +56,26 @@ class HomeActivity : AppCompatActivity() {
 
         val cancelNoti = findViewById<Button>(R.id.button_canceltNotification)
         val setNoti = findViewById<Button>(R.id.button_setNotification)
+
         setNoti.setOnClickListener {
-
-            setAlarm()
-
-            val builder = NotificationCompat.Builder(this, "channel_id")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle("Alarm manager")
-                .setContentText("Đã đặt báo thức cho bạn")
-                .setDefaults(Notification.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_MAX)
-
-            with(NotificationManagerCompat.from(this)) {
-                notify(12, builder.build())
-            }
+            setAlarm { alarmService.setRepeating(it) }
         }
+
+//        setNoti.setOnClickListener {
+//
+//            setAlarm()
+//
+//            val builder = NotificationCompat.Builder(this, "channel_id")
+//                .setSmallIcon(R.drawable.ic_launcher_foreground)
+//                .setContentTitle("Alarm manager")
+//                .setContentText("Đã đặt báo thức cho bạn")
+//                .setDefaults(Notification.DEFAULT_ALL)
+//                .setPriority(NotificationCompat.PRIORITY_MAX)
+//
+//            with(NotificationManagerCompat.from(this)) {
+//                notify(12, builder.build())
+//            }
+//        }
 
         cancelNoti.setOnClickListener {
             alarmMng.cancel(alarmIntent)
@@ -99,6 +107,37 @@ class HomeActivity : AppCompatActivity() {
                 calendar.timeInMillis,
                 alarmIntent
             )
+        }
+    }
+
+    private fun setAlarm(callback: (Long) -> Unit) {
+        Calendar.getInstance().apply {
+            this.set(Calendar.SECOND, 0)
+            this.set(Calendar.MILLISECOND, 0)
+            DatePickerDialog(
+                this@HomeActivity,
+                0,
+                { _, year, month, day ->
+                    this.set(Calendar.YEAR, year)
+                    this.set(Calendar.MONTH, month)
+                    this.set(Calendar.DAY_OF_MONTH, day)
+                    TimePickerDialog(
+                        this@HomeActivity,
+                        0,
+                        { _, hour, minute ->
+                            this.set(Calendar.HOUR_OF_DAY, hour)
+                            this.set(Calendar.MINUTE, minute)
+                            callback(this.timeInMillis)
+                        },
+                        this.get(Calendar.HOUR_OF_DAY),
+                        this.get(Calendar.MINUTE),
+                        false
+                    ).show()
+                },
+                this.get(Calendar.YEAR),
+                this.get(Calendar.MONTH),
+                this.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
     }
 
