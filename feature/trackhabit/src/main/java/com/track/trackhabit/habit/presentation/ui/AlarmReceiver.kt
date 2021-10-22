@@ -25,11 +25,8 @@ class AlarmReceiver: BroadcastReceiver() {
 
         createChannel(context)
         val timeInMillis = intent.getLongExtra("EXTRA_EXACT_ALARM_TIME", 0L)
-        when (intent.action) {
-            "ACTION_SET_EXACT" -> {
-                buildNotification(context, "Set Exact Time", convertDate(timeInMillis))
-            }
 
+        when (intent.action) {
             "ACTION_SET_REPETITIVE_EXACT" -> {
                 setRepetitiveAlarm(AlarmService(context))
                 buildNotification(context, "Set Repetitive Exact Time", convertDate(timeInMillis))
@@ -39,12 +36,12 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     private fun convertDate(timeInMillis: Long): String {
-        return ("dd/MM/yyyy hh:mm:ss").format(Date(timeInMillis))
+        return SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(Date(timeInMillis))
     }
 
     private fun setRepetitiveAlarm(alarmService: AlarmService) {
         val cal = Calendar.getInstance().apply {
-            this.timeInMillis = timeInMillis + TimeUnit.DAYS.toMillis(1)
+            this.timeInMillis += TimeUnit.DAYS.toMillis(1)
         }
         alarmService.setRepeating(cal.timeInMillis)
     }

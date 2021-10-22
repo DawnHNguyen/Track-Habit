@@ -58,24 +58,22 @@ class HomeActivity : AppCompatActivity() {
         val setNoti = findViewById<Button>(R.id.button_setNotification)
 
         setNoti.setOnClickListener {
-            setAlarm { alarmService.setRepeating(it) }
-        }
+            setAlarm {
+                alarmService.setRepeating(it)
+                val builder = NotificationCompat.Builder(this, "channel_id")
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("Alarm manager")
+                    .setContentText("Đã đặt báo thức cho bạn")
+                    .setDefaults(Notification.DEFAULT_ALL)
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
 
-//        setNoti.setOnClickListener {
-//
-//            setAlarm()
-//
-//            val builder = NotificationCompat.Builder(this, "channel_id")
-//                .setSmallIcon(R.drawable.ic_launcher_foreground)
-//                .setContentTitle("Alarm manager")
-//                .setContentText("Đã đặt báo thức cho bạn")
-//                .setDefaults(Notification.DEFAULT_ALL)
-//                .setPriority(NotificationCompat.PRIORITY_MAX)
-//
-//            with(NotificationManagerCompat.from(this)) {
-//                notify(12, builder.build())
-//            }
-//        }
+                with(NotificationManagerCompat.from(this)) {
+                    notify(12, builder.build())
+                }
+
+            }
+
+        }
 
         cancelNoti.setOnClickListener {
             alarmMng.cancel(alarmIntent)
@@ -85,30 +83,6 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun setAlarm() {
-
-        val calendar: Calendar = Calendar.getInstance().apply {
-            timeInMillis = System.currentTimeMillis()
-            set(Calendar.HOUR_OF_DAY, 22)
-            set(Calendar.MINUTE, 8)
-            set(Calendar.SECOND, 0)
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmMng.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                alarmIntent
-            )
-        }
-        else{
-            alarmMng.setExact(
-                AlarmManager.RTC_WAKEUP,
-                calendar.timeInMillis,
-                alarmIntent
-            )
-        }
-    }
 
     private fun setAlarm(callback: (Long) -> Unit) {
         Calendar.getInstance().apply {
