@@ -9,13 +9,19 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="@dimen/height_itemhabit_habit"
+        android:layout_margin="@dimen/margin_itemhabit_habit"
+        android:background="@drawable/background_itemhabit"
+        android:backgroundTint="@color/color_defaulthabit"
+        android:paddingStart="@dimen/padding_itemhabit_habit_paddingstart">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{habit.title}"
-            android:textSize="30sp"/>
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_itemhabit_habitname"/>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>
