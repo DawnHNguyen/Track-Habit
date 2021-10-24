@@ -24,13 +24,13 @@ class AlarmReceiver: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
-        val timeInMillis = intent.getLongExtra("EXTRA_EXACT_ALARM_TIME", 0L)
+        val timeInMillis = intent.getLongExtra(Const.EXTRA_EXACT_ALARM_TIME, 0L)
 
         when (intent.action) {
-            "CANCEL_ALARM_TIME" -> {
+            Const.CANCEL_ALARM_TIME -> {
                 setCancelAlarm(AlarmService(context))
             }
-            "ACTION_SET_REPETITIVE_EXACT" -> {
+            Const.ACTION_SET_REPETITIVE_EXACT -> {
                 setRepetitiveAlarm(AlarmService(context))
                 buildNotification(context, "Set Repetitive Exact Time", convertDate(timeInMillis))
             }

@@ -13,8 +13,8 @@ class AlarmService(private val context: Context) {
     fun setCancel(){
         setCancel(getPendingIntent(
             getIntent().apply {
-                action = "ACTION_SET_REPETITIVE_EXACT"
-                putExtra("CANCEL_ALARM_TIME",0L)
+                action = Const.ACTION_SET_REPETITIVE_EXACT
+                putExtra(Const.CANCEL_ALARM_TIME,0L)
             }
         ))
     }
@@ -24,8 +24,8 @@ class AlarmService(private val context: Context) {
             timeInMillis,
             getPendingIntent(
                 getIntent().apply {
-                    action = "ACTION_SET_REPETITIVE_EXACT"
-                    putExtra("EXTRA_EXACT_ALARM_TIME", timeInMillis)
+                    action = Const.ACTION_SET_REPETITIVE_EXACT
+                    putExtra(Const.EXTRA_EXACT_ALARM_TIME, timeInMillis)
                 }
             )
         )
