@@ -1,14 +1,8 @@
 package com.track.trackhabit.habit.presentation.ui
 
 import android.app.*
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.os.SystemClock
-import android.util.Log
 import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -24,8 +18,6 @@ import java.util.*
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var alarmMng: AlarmManager
-    private lateinit var alarmIntent: PendingIntent
     private lateinit var alarmService: AlarmService
 
     private lateinit var binding: ActivityHomeBinding
@@ -49,10 +41,6 @@ class HomeActivity : AppCompatActivity() {
 
 
         createChannel( this)
-        alarmMng = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(this,0,intent,0)
-        }
 
         val cancelNoti = findViewById<Button>(R.id.button_canceltNotification)
         val setNoti = findViewById<Button>(R.id.button_setNotification)
@@ -63,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
                 val builder = NotificationCompat.Builder(this, "channel_id")
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentTitle("Alarm manager")
-                    .setContentText("Đã đặt báo thức cho bạn")
+                    .setContentText("complete")
                     .setDefaults(Notification.DEFAULT_ALL)
                     .setPriority(NotificationCompat.PRIORITY_MAX)
 
@@ -76,7 +64,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         cancelNoti.setOnClickListener {
-            alarmMng.cancel(alarmIntent)
+            alarmService.setCancel()
             Toast.makeText(this,"đã hủy báo thức", Toast.LENGTH_LONG).show()
         }
 

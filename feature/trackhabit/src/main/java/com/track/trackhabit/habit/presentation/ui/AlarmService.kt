@@ -10,6 +10,15 @@ class AlarmService(private val context: Context) {
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
 
+    fun setCancel(){
+        setCancel(getPendingIntent(
+            getIntent().apply {
+                action = "ACTION_SET_REPETITIVE_EXACT"
+                putExtra("CANCEL_ALARM_TIME",0L)
+            }
+        ))
+    }
+
     fun setRepeating(timeInMillis: Long){
         setAlarm(
             timeInMillis,
@@ -43,5 +52,8 @@ class AlarmService(private val context: Context) {
         }
     }
 
+    private fun setCancel(pendingIntent: PendingIntent){
+        alarmManager?.cancel(pendingIntent)
+    }
     private fun getIntent() = Intent(context, AlarmReceiver::class.java)
 }
