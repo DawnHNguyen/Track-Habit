@@ -28,6 +28,10 @@ object Versions {
     val nav = "2.3.5"
 
     val core_version = "1.6.0"
+
+    val coroutines = "1.3.8"
+
+    val lifecycle = "2.3.0-alpha06"
 }
 
 object Libraries {
@@ -52,9 +56,13 @@ object KotlinLibraries {
 }
 
 object AndroidLibraries {
+    //Coroutine
+    val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+
     // ANDROID
     val appCompat = "androidx.appcompat:appcompat:${Versions.appCompat}"
     val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
+    val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
 
