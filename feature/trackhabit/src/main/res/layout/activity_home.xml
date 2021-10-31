@@ -39,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/test_recyclerView" />
 
         <Button
-            android:id="@+id/button_canceltNotification"
+            android:id="@+id/button_cancelNotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -47,6 +47,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_setNotification" />
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnav_activityhome_bottomnav"
