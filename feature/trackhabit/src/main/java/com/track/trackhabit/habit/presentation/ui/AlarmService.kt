@@ -8,7 +8,6 @@ import android.os.Build
 import android.os.SystemClock
 import android.util.Log
 import com.track.trackhabit.habit.presentation.constpackage.Const
-import com.track.trackhabit.habit.presentation.constpackage.ConstIdChannel
 import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
 
 class AlarmService(private val context: Context) {
@@ -56,7 +55,7 @@ class AlarmService(private val context: Context) {
     private fun setElapse(pendingIntent: PendingIntent){
         alarmManager.let {
             it?.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + Const.ELAPSE_5M,
+                SystemClock.elapsedRealtime() + Const.ELAPSE_SNOOZE_NOTIFICATION_5M,
                 pendingIntent)
         }
     }
@@ -79,6 +78,6 @@ class AlarmService(private val context: Context) {
         }
     }
 
-    private fun getPendingIntent(intent: Intent) = PendingIntent.getBroadcast(context,ConstRequestCode.requestCodeReceiver, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    private fun getPendingIntent(intent: Intent) = PendingIntent.getBroadcast(context,ConstRequestCode.REQUEST_CODE_RECEIVER, intent, PendingIntent.FLAG_UPDATE_CURRENT)
     private fun getIntent() = Intent(context, AlarmReceiver::class.java)
 }

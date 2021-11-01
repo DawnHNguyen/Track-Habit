@@ -29,7 +29,7 @@ class AlarmReceiver: BroadcastReceiver() {
             Const.START_SNOOZE_ALARM_TIME -> {
                 setSnoozeAlarm(alarmService)
                 with(NotificationManagerCompat.from(context)){
-                    cancel(ConstIdChannel.id_noti_1)
+                    cancel(ConstIdChannel.ID_NOTIFICATION_1)
                 }
             }
 
@@ -70,9 +70,9 @@ class AlarmReceiver: BroadcastReceiver() {
         val intent = Intent(context ,HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, ConstRequestCode.requestCodeActivity, intent, 0)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, 0)
 
-        val builder = NotificationCompat.Builder(context, ConstIdChannel.notification_1)
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText("het thong bao roi day, co lam khong?")
@@ -81,7 +81,7 @@ class AlarmReceiver: BroadcastReceiver() {
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
         with(NotificationManagerCompat.from(context)) {
-            notify(ConstIdChannel.id_noti_snooze, builder.build())
+            notify(ConstIdChannel.ID_NOTIFICATION_SNOOZE, builder.build())
         }
     }
 
@@ -89,16 +89,16 @@ class AlarmReceiver: BroadcastReceiver() {
         val intent = Intent(context ,HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, ConstRequestCode.requestCodeActivity, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, PendingIntent.FLAG_CANCEL_CURRENT)
 
         val snoozeIntent = Intent(context, AlarmReceiver::class.java).apply {
             action = Const.START_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
         }
         val snoozePendingIntent: PendingIntent =
-            PendingIntent.getBroadcast(context, ConstRequestCode.requestCodeActivity, snoozeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, snoozeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val builder = NotificationCompat.Builder(context, ConstIdChannel.notification_1)
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText("I got triggered at - $message")
@@ -110,7 +110,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
 
         with(NotificationManagerCompat.from(context)) {
-            notify(ConstIdChannel.id_noti_1, builder.build())
+            notify(ConstIdChannel.ID_NOTIFICATION_1, builder.build())
 
         }
     }
