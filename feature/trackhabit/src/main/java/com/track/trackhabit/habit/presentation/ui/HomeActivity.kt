@@ -42,7 +42,7 @@ class HomeActivity : AppCompatActivity() {
 
         createChannel( this)
 
-        val cancelNoti = findViewById<Button>(R.id.button_canceltNotification)
+        val cancelNoti = findViewById<Button>(R.id.button_cancelNotification)
         val setNoti = findViewById<Button>(R.id.button_setNotification)
 
         setNoti.setOnClickListener {

@@ -5,6 +5,10 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.SystemClock
+import android.util.Log
+import com.track.trackhabit.habit.presentation.constpackage.Const
+import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
 
 class AlarmService(private val context: Context) {
     private val alarmManager: AlarmManager? =
@@ -13,8 +17,19 @@ class AlarmService(private val context: Context) {
     fun setCancel(){
         setCancel(getPendingIntent(
             getIntent().apply {
-                action = Const.ACTION_SET_REPETITIVE_EXACT
-                putExtra(Const.CANCEL_ALARM_TIME,0L)
+                action = Const.CANCEL_ALARM_TIME
+                putExtra(Const.EXTRA_EXACT_ALARM_TIME,0L)
+                Log.d("checkCancel","Status: OK")
+            }
+        ))
+
+    }
+
+    fun setSnoozeAlarm(){
+         setElapse(getPendingIntent(
+            getIntent().apply {
+                action = Const.SET_SNOOZE_ALARM_TIME
+                putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
             }
         ))
     }
@@ -32,7 +47,18 @@ class AlarmService(private val context: Context) {
     }
 
 
-    private fun getPendingIntent(intent: Intent) = PendingIntent.getBroadcast(context,12, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+    private fun setCancel(pendingIntent: PendingIntent){
+        alarmManager?.cancel(pendingIntent)
+        Log.d("checkPenDing","${pendingIntent} ")
+    }
+
+    private fun setElapse(pendingIntent: PendingIntent){
+        alarmManager.let {
+            it?.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + Const.ELAPSE_SNOOZE_NOTIFICATION_5M,
+                pendingIntent)
+        }
+    }
 
     private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
         alarmManager?.let {
@@ -52,8 +78,6 @@ class AlarmService(private val context: Context) {
         }
     }
 
-    private fun setCancel(pendingIntent: PendingIntent){
-        alarmManager?.cancel(pendingIntent)
-    }
+    private fun getPendingIntent(intent: Intent) = PendingIntent.getBroadcast(context,ConstRequestCode.REQUEST_CODE_RECEIVER, intent, PendingIntent.FLAG_UPDATE_CURRENT)
     private fun getIntent() = Intent(context, AlarmReceiver::class.java)
 }
