@@ -56,7 +56,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:labelVisibilityMode="labeled"
-            android:theme="@style/BottomNavigationTheme"
             app:menu="@menu/bottom_nav_menu"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -64,7 +63,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_activityhome_fab"
-            android:backgroundTint="@color/maincolor_orange"
             android:src="@drawable/ic_plus_fab"
             app:fabSize="auto"
             app:layout_constraintBottom_toTopOf="@id/bottomnav_activityhome_bottomnav"

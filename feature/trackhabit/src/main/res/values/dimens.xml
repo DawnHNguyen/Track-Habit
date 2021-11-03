@@ -6,4 +6,11 @@
     <dimen name="padding_itemhabit_habit_paddingstart">16dp</dimen>
     <dimen name="textsize_itemhabit_habitname">16sp</dimen>
     <dimen name="radius_itemhabit_itemcorner">16dp</dimen>
+    <dimen name="radius_sleeptime_time">8dp</dimen>
+    <dimen name="textsize_sleeptime_title">16sp</dimen>
+    <dimen name="textsize_sleeptime_button">14sp</dimen>
+    <dimen name="textsize_sleeptime_time">56sp</dimen>
+    <dimen name="margintop_sleeptime_time">36dp</dimen>
+    <dimen name="margintop_sleeptime_confirmwaketimebutton">56dp</dimen>
+    <dimen name="margintop_sleeptime_sleeptimetitle">56dp</dimen>
 </resources>

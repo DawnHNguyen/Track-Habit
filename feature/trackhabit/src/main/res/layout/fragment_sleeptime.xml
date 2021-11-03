@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+<variable
+    name="binding"
+    type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.ui.SleeptimeFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_sleeptime_waketimetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sleeptime_waketimetitle"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_sleeptime_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_sleeptime_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margintop_sleeptime_time"
+            android:background="@drawable/background_sleeptime_time"
+            android:text="@{binding}"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_sleeptime_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_waketimetitle"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_sleeptime_confirmwaketime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margintop_sleeptime_confirmwaketimebutton"
+            android:text="@string/sleeptime_confirmwaketime"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_time"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_sleeptime_sleeptimetitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margintop_sleeptime_sleeptimetitle"
+            android:text="@string/sleeptime_sleeptimetitle"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_sleeptime_title"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_time"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

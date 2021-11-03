@@ -6,4 +6,7 @@
     <string name="icontitle_bottomnav_statistical">Statistical</string>
     <string name="icontitle_bottomnav_sleeptime">Sleep time</string>
     <string name="icontitle_bottomnav_profile">Profile</string>
+    <string name="sleeptime_waketimetitle">You want to wake up at</string>
+    <string name="sleeptime_sleeptimetitle">You need to go to bed at</string>
+    <string name="sleeptime_confirmwaketime">Sleep</string>
 </resources>
