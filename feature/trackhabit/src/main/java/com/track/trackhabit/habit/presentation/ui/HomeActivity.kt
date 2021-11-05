@@ -1,106 +1,35 @@
 package com.track.trackhabit.habit.presentation.ui
 
-import android.app.*
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.ActivityHomeBinding
-import com.track.trackhabit.habit.domain.entity.Habit
-import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
-@AndroidEntryPoint
+//@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
-
-    private lateinit var alarmService: AlarmService
 
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
 
-        alarmService = AlarmService(this)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val recyclerView = binding.testRecyclerView
-        val habitsListAdapter = HabitsListAdapter()
-        val habitList = mutableListOf<Habit>()
-        val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf())
-        val button: Button = findViewById(R.id.button)
-        recyclerView.adapter = habitsListAdapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        button.setOnClickListener {
-            habitList.add(habit)
-            habitsListAdapter.submitList(habitList)
-        }
+        val navBottom: BottomNavigationView = binding.bottomnavActivityhomeBottomnav
+        val navController = findNavController(R.id.nav_host_fragment)
 
+        AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_statistical, R.id.nav_sleeptime, R.id.nav_profile
+            )
+        )
 
-        createChannel( this)
+        navBottom.setupWithNavController(navController)
 
-        val cancelNoti = findViewById<Button>(R.id.button_cancelNotification)
-        val setNoti = findViewById<Button>(R.id.button_setNotification)
-
-        setNoti.setOnClickListener {
-            setAlarm {
-                alarmService.setRepeating(it)
-                val builder = NotificationCompat.Builder(this, "channel_id")
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("Alarm manager")
-                    .setContentText("complete")
-                    .setDefaults(Notification.DEFAULT_ALL)
-                    .setPriority(NotificationCompat.PRIORITY_MAX)
-
-                with(NotificationManagerCompat.from(this)) {
-                    notify(12, builder.build())
-                }
-
-            }
-
-        }
-
-        cancelNoti.setOnClickListener {
-            alarmService.setCancel()
-            Toast.makeText(this,"đã hủy báo thức", Toast.LENGTH_LONG).show()
-        }
-
-
-    }
-
-
-    private fun setAlarm(callback: (Long) -> Unit) {
-        Calendar.getInstance().apply {
-            this.set(Calendar.SECOND, 0)
-            this.set(Calendar.MILLISECOND, 0)
-            DatePickerDialog(
-                this@HomeActivity,
-                0,
-                { _, year, month, day ->
-                    this.set(Calendar.YEAR, year)
-                    this.set(Calendar.MONTH, month)
-                    this.set(Calendar.DAY_OF_MONTH, day)
-                    TimePickerDialog(
-                        this@HomeActivity,
-                        0,
-                        { _, hour, minute ->
-                            this.set(Calendar.HOUR_OF_DAY, hour)
-                            this.set(Calendar.MINUTE, minute)
-                            callback(this.timeInMillis)
-                        },
-                        this.get(Calendar.HOUR_OF_DAY),
-                        this.get(Calendar.MINUTE),
-                        false
-                    ).show()
-                },
-                this.get(Calendar.YEAR),
-                this.get(Calendar.MONTH),
-                this.get(Calendar.DAY_OF_MONTH)
-            ).show()
-        }
     }
 
 }
