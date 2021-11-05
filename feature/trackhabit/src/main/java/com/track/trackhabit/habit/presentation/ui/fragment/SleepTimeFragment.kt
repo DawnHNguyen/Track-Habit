@@ -30,6 +30,9 @@ class SleepTimeFragment : Fragment() {
                 binding.textviewSleeptimeTime.text = SimpleDateFormat("HH:mm").format(cal.time)
             }
             TimePickerDialog(this.context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            binding.buttonSleeptimeConfirmwaketime.visibility = View.GONE
+            binding.textviewSleeptimeSleeptimetitle.visibility = View.VISIBLE
         }
+
     }
 }

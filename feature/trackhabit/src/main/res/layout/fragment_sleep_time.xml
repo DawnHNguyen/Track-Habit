@@ -46,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margintop_sleeptime_confirmwaketimebutton"
             android:text="@string/sleeptime_confirmwaketime"
+            android:textSize="@dimen/textsize_sleeptime_button"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +65,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_time"/>
 
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_sleeptime_suggestsleeptime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_sleeptime_suggestsleeptime_horizontal"
+            android:layout_marginTop="@dimen/margin_sleeptime_suggestsleeptime_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_sleeptimetitle"/>
+        
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_sleeptime_confrimsleeptime"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_sleeptime_confirmsleeptime_buttun"
+            android:layout_marginHorizontal="@dimen/margin_sleeptime_confirmsleeptime_button_horizontal"
+            android:layout_marginTop="@dimen/margin_sleeptime_confirmsleeptime_buttun_top"
+            android:background="@drawable/background_confirmsleeptime_button"
+            android:gravity="center"
+            android:text="@string/sleeptime_confirmsleeptime"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_sleeptime_button"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerview_sleeptime_suggestsleeptime"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

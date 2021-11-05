@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="sleeptime"
+            type="android.view.View" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_itemsleeptime_sleeptime"
+        android:layout_marginVertical="@dimen/margin_itemsleeptime_vertical"
+        android:background="@drawable/background_itemsleeptime"
+        android:paddingStart="@dimen/padding_itemsleeptime_sleeptime_paddingstart">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_itemsleeptime"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
