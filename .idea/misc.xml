@@ -6,17 +6,21 @@
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.654891304347826" />
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/item_habit_test.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_itemhabit.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_sleeptime_time.xml" value="0.16203703703703703" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/habit_background.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/ic_launcher_background.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/itemcolor_bottomnav_selectedicon.xml" value="0.16666666666666666" />
-        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.25" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/ic_plus_fab.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.22" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_sleeptime.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/fragment_sleep_time.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/fragment_sleeptime.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/item_habit.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2270168855534709" />
         <entry key="feature/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
-        <entry key="feature/trackhabit/src/main/res/drawable/background_itemhabit.xml" value="0.30572916666666666" />
-        <entry key="feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.23278985507246377" />
         <entry key="feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.2617753623188406" />
-        <entry key="feature/trackhabit/src/main/res/layout/item_habit.xml" value="0.29010416666666666" />
-        <entry key="feature/trackhabit/src/main/res/menu/bottom_nav_menu.xml" value="0.29010416666666666" />
         <entry key="navigation/src/main/res/drawable/ic_launcher_background.xml" value="0.23020833333333332" />
       </map>
     </option>
