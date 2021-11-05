@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-<variable
-    name="binding"
-    type="String" />
+        <variable
+            name="binding"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margintop_sleeptime_time"
             android:background="@drawable/background_sleeptime_time"
-            android:text="@{binding}"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/sleeptime_defaulttimepicker"
             android:textColor="@color/black"
             android:textSize="@dimen/textsize_sleeptime_time"
             app:layout_constraintEnd_toEndOf="parent"
