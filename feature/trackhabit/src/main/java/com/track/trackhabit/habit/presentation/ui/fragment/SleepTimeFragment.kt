@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentSleepTimeBinding
 import com.track.trackhabit.habit.domain.entity.SleepDuration
 import com.track.trackhabit.habit.domain.entity.Sleeptime
@@ -26,9 +27,33 @@ class SleepTimeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val recyclerView = binding.recyclerviewSleeptimeSuggestsleeptime
-        val sleeptimeListAdapter = SleeptimeListAdapter()
-        val sleepTimeList = mutableListOf<Sleeptime>()
+        setTimePicker()
+        showListSleepTime()
+    }
+
+    private fun showListSleepTime() {
+        binding.buttonSleeptimeConfirmwaketime.setOnClickListener {
+            binding.buttonSleeptimeConfirmwaketime.visibility = View.GONE
+            binding.textviewSleeptimeSleeptimetitle.visibility = View.VISIBLE
+            val recyclerView = binding.recyclerviewSleeptimeSuggestsleeptime
+            val sleeptimeListAdapter = SleeptimeListAdapter()
+            val sleepTimeList = mutableListOf<Sleeptime>()
+            recyclerView.adapter = sleeptimeListAdapter
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            val wakeTime = binding.textviewSleeptimeTime.text
+            SleepDuration.values().forEachIndexed { index: Int, it: SleepDuration ->
+                val sleepTimeLoop = Sleeptime(
+                    index,
+                    calSleepTime(wakeTime.toString(), it.sleepDurationHour, it.sleepDurationMin),
+                    getString(R.string.sleeptime, it.sleepDuration, it.loop)
+                )
+                sleepTimeList.add(sleepTimeLoop)
+            }
+            sleeptimeListAdapter.submitList(sleepTimeList)
+        }
+    }
+
+    private fun setTimePicker() {
         binding.textviewSleeptimeTime.setOnClickListener {
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
@@ -44,41 +69,9 @@ class SleepTimeFragment : Fragment() {
                 true
             ).show()
         }
-        recyclerView.adapter = sleeptimeListAdapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.buttonSleeptimeConfirmwaketime.setOnClickListener {
-            binding.buttonSleeptimeConfirmwaketime.visibility = View.GONE
-            binding.textviewSleeptimeSleeptimetitle.visibility = View.VISIBLE
-            val wakeTime = binding.textviewSleeptimeTime.text
-            val sleepTime6Loop = Sleeptime(
-                1,
-                sleepTime = calSleepTime(wakeTime.toString(), SleepDuration.Six.sleepDurationString),
-                "Ngủ " + SleepDuration.Six.sleepDurationDouble.toString() + " tiếng - " + SleepDuration.Six.loop.toString() + " chu kỳ giấc ngủ"
-            )
-            val sleepTime5Loop = Sleeptime(
-                2,
-                sleepTime = calSleepTime(wakeTime.toString(), SleepDuration.Five.sleepDurationString),
-                "Ngủ " + SleepDuration.Five.sleepDurationDouble.toString() + " tiếng - " + SleepDuration.Five.loop.toString() + " chu kỳ giấc ngủ"
-            )
-            val sleepTime4Loop = Sleeptime(
-                3,
-                sleepTime = calSleepTime(wakeTime.toString(), SleepDuration.Four.sleepDurationString),
-                "Ngủ " + SleepDuration.Four.sleepDurationDouble.toString() + " tiếng - " + SleepDuration.Four.loop.toString() + " chu kỳ giấc ngủ"
-            )
-            val sleepTime3Loop = Sleeptime(
-                4,
-                sleepTime = calSleepTime(wakeTime.toString(), SleepDuration.Three.sleepDurationString),
-                "Ngủ " + SleepDuration.Three.sleepDurationDouble.toString() + " tiếng - " + SleepDuration.Three.loop.toString() + " chu kỳ giấc ngủ"
-            )
-            sleepTimeList.add(sleepTime6Loop)
-            sleepTimeList.add(sleepTime5Loop)
-            sleepTimeList.add(sleepTime4Loop)
-            sleepTimeList.add(sleepTime3Loop)
-            sleeptimeListAdapter.submitList(sleepTimeList)
-        }
     }
 
-    private fun calSleepTime(wakeTime: String, sleepDuration: String): String {
+    private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
         val arrayWake = wakeTime.split(':').run {
             IntArray(size) {
@@ -88,13 +81,6 @@ class SleepTimeFragment : Fragment() {
         val wakeMin = arrayWake[1]
         var wakeHour = arrayWake[0]
 
-        val arrayDuration = sleepDuration.split(':').run {
-            IntArray(size) {
-                get(it).toInt()
-            }
-        }
-        val durationMin = arrayDuration[1]
-        val durationHour = arrayDuration[0]
         val sleepMin: Int
         if (wakeMin < durationMin) {
             sleepMin = 60 - (durationMin - wakeMin)
@@ -106,4 +92,5 @@ class SleepTimeFragment : Fragment() {
         sleepTime = if (sleepMin < 10) "$sleepTime:0$sleepMin" else "$sleepTime:$sleepMin"
         return sleepTime
     }
+
 }

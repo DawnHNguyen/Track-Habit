@@ -11,4 +11,5 @@
     <string name="sleeptime_confirmwaketime">Sleep</string>
     <string name="sleeptime_defaulttimepicker">00:00</string>
     <string name="sleeptime_confirmsleeptime">Select and set an alarm</string>
+    <string name="sleeptime">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
 </resources>
