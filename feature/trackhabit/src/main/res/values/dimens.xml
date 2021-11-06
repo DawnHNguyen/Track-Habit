@@ -3,7 +3,25 @@
     <dimen name="margin_activityhome_fab">16dp</dimen>
     <dimen name="margin_itemhabit_habit">16dp</dimen>
     <dimen name="height_itemhabit_habit">80dp</dimen>
+    <dimen name="height_itemsleeptime_sleeptime">56dp</dimen>
     <dimen name="padding_itemhabit_habit_paddingstart">16dp</dimen>
+    <dimen name="padding_itemsleeptime_sleeptime_paddingstart">16dp</dimen>
     <dimen name="textsize_itemhabit_habitname">16sp</dimen>
+    <dimen name="textsize_itemsleeptime">14sp</dimen>
     <dimen name="radius_itemhabit_itemcorner">16dp</dimen>
+    <dimen name="radius_sleeptime_time">8dp</dimen>
+    <dimen name="radius_itemsleeptime_itemcorner">8dp</dimen>
+    <dimen name="radius_sleeptime_confirmsleeptime_buttoncorner">8dp</dimen>
+    <dimen name="textsize_sleeptime_title">16sp</dimen>
+    <dimen name="textsize_sleeptime_button">14sp</dimen>
+    <dimen name="textsize_sleeptime_time">56sp</dimen>
+    <dimen name="margintop_sleeptime_time">36dp</dimen>
+    <dimen name="margintop_sleeptime_confirmwaketimebutton">56dp</dimen>
+    <dimen name="margintop_sleeptime_sleeptimetitle">56dp</dimen>
+    <dimen name="margin_itemsleeptime_vertical">16dp</dimen>
+    <dimen name="margin_sleeptime_suggestsleeptime_horizontal">32dp</dimen>
+    <dimen name="margin_sleeptime_confirmsleeptime_button_horizontal">32dp</dimen>
+    <dimen name="margin_sleeptime_suggestsleeptime_top">20dp</dimen>
+    <dimen name="height_sleeptime_confirmsleeptime_buttun">40dp</dimen>
+    <dimen name="margin_sleeptime_confirmsleeptime_buttun_top">28dp</dimen>
 </resources>

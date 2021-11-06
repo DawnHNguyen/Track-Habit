@@ -6,6 +6,10 @@
     <string name="icontitle_bottomnav_statistical">Statistical</string>
     <string name="icontitle_bottomnav_sleeptime">Sleep time</string>
     <string name="icontitle_bottomnav_profile">Profile</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sleeptime_waketimetitle">You want to wake up at</string>
+    <string name="sleeptime_sleeptimetitle">You need to go to bed at</string>
+    <string name="sleeptime_confirmwaketime">Sleep</string>
+    <string name="sleeptime_defaulttimepicker">00:00</string>
+    <string name="sleeptime_confirmsleeptime">Select and set an alarm</string>
+    <string name="sleeptime">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
 </resources>

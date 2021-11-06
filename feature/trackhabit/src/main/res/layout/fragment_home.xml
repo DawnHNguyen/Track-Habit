@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/test_recyclerView"
+            android:id="@+id/recyclerview_home_habitlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             android:text="tap here to send notification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/test_recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_home_habitlist" />
 
         <Button
             android:id="@+id/button_cancelNotification"
@@ -48,10 +48,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_activityhome_fab"
-            android:backgroundTint="@color/maincolor_orange"
             android:src="@drawable/ic_plus_fab"
             app:fabSize="auto"
-            app:layout_constraintTop_toBottomOf="@id/button_cancelNotification"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/white"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
