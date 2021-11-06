@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
 
         alarmService = AlarmService(requireContext())
 
-        val recyclerView = binding.testRecyclerView
+        val recyclerView = binding.recyclerviewHomeHabitlist
         val habitsListAdapter = HabitsListAdapter()
         val habitList = mutableListOf<Habit>()
         val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf())

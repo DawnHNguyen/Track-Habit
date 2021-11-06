@@ -17,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/test_recyclerView"
+            android:id="@+id/recyclerview_home_habitlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             android:text="tap here to send notification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/test_recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerview_home_habitlist" />
 
         <Button
             android:id="@+id/button_cancelNotification"
