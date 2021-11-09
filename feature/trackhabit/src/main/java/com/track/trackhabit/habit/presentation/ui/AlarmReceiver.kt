@@ -23,6 +23,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
         createChannel(context)
         val timeInMillis = intent.getLongExtra(Const.EXTRA_EXACT_ALARM_TIME, 0L)
+
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
         var alarmService = AlarmService(context)
         when (intent.action) {
@@ -37,14 +38,72 @@ class AlarmReceiver: BroadcastReceiver() {
                 buildNotification(context, "Set Snooze Time")
             }
             Const.CANCEL_ALARM_TIME -> {
-                setCancelAlarm(alarmService)
+                setCancelAlarmService(alarmService)
             }
             Const.ACTION_SET_REPETITIVE_EXACT -> {
                 setRepetitiveAlarm(alarmService)
-                Toast.makeText(context,"day la tin nhan delay", Toast.LENGTH_LONG).show()
-                buildSnoozeNotification(context, "Set Repetitive Exact Time", convertDate(timeInMillis))
+                if(isToday(intent)){
+                    buildSnoozeNotification(context, "Set Repetitive Exact Time", convertDate(timeInMillis))
+                }
             }
         }
+
+    }
+
+    private fun isToday(intent: Intent): Boolean{
+        val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        when(today){
+            Calendar.MONDAY -> {
+                Log.d("checkm" ,"${intent.getBooleanExtra("MONDAY", true)}")
+                if (intent.getBooleanExtra("MONDAY", true)){
+                    return true
+                }
+                return false
+            }
+            Calendar.TUESDAY -> {
+                Log.d("checkm" ,"${intent.getBooleanExtra("TUESDAY", true)}")
+                if (intent.getBooleanExtra("TUESDAY", true)){
+                    return true
+                }
+                return false
+            }
+            Calendar.WEDNESDAY -> {
+                Log.d("checkm" ,"${intent.getBooleanExtra("WEDNESDAY", true)}")
+                if(intent.getBooleanExtra("WEDNESDAY", true)){
+                    return true
+                }
+                return false
+            }
+            Calendar.THURSDAY -> {
+                Log.d("checkm" ,"${intent.getBooleanExtra("THURSDAY", true)}")
+                if (intent.getBooleanExtra("THURSDAY", true)){
+                    return true
+                }
+                return false
+            }
+            Calendar.FRIDAY -> {
+                Log.d("checkm" ,"${intent.getBooleanExtra("FRIDAY", true)}")
+                if (intent.getBooleanExtra("FRIDAY", true)){
+                     return true
+                }
+                return false
+            }
+            Calendar.SATURDAY -> {
+                Log.d("checkm" ,"${intent.getBooleanExtra("SATURDAY", true)}")
+                if (intent.getBooleanExtra("SATURDAY", true)){
+                    return true
+                }
+                return false
+            }
+            Calendar.SUNDAY -> {
+                Log.d("checkm" ,"${intent.getBooleanExtra("SUNDAY", true)}")
+                if (intent.getBooleanExtra("SUNDAY", true)){
+                    return true
+                }
+                return false
+            }
+        }
+        return true
 
     }
 
@@ -54,13 +113,13 @@ class AlarmReceiver: BroadcastReceiver() {
 
     private fun setRepetitiveAlarm(alarmService: AlarmService) {
         val cal = Calendar.getInstance().apply {
-            this.timeInMillis += TimeUnit.DAYS.toMillis(1)
+            this.timeInMillis += TimeUnit.HOURS.toMillis(24)
         }
         alarmService.setRepeating(cal.timeInMillis)
     }
 
-    private fun setCancelAlarm(alarmService: AlarmService){
-        alarmService.setCancel()
+    private fun setCancelAlarmService(alarmService: AlarmService){
+        alarmService.setCancelAlarm()
     }
     private fun setSnoozeAlarm(alarmService: AlarmService){
         alarmService.setSnoozeAlarm()
