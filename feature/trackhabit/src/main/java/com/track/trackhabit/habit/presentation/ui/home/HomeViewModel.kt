@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.viewmodel
+package com.track.trackhabit.habit.presentation.ui.home
 
 import android.util.Log
 import androidx.lifecycle.*

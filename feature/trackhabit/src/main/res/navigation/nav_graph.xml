@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.track.trackhabit.habit.presentation.ui.fragment.HomeFragment"
+        android:name="com.track.trackhabit.habit.presentation.ui.home.HomeFragment"
         android:label="home"
         tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.track.trackhabit.habit.presentation.ui.fragment.ProfileFragment"
+        android:name="com.track.trackhabit.habit.presentation.ui.profile.ProfileFragment"
         android:label="profile"
         tools:layout="@layout/fragment_profile"/>
 
     <fragment
         android:id="@+id/nav_statistical"
-        android:name="com.track.trackhabit.habit.presentation.ui.fragment.StatisticalFragment"
+        android:name="com.track.trackhabit.habit.presentation.ui.statistical.StatisticalFragment"
         android:label="profile"
         tools:layout="@layout/fragment_statistical"/>
 
     <fragment
         android:id="@+id/nav_sleeptime"
-        android:name="com.track.trackhabit.habit.presentation.ui.fragment.SleepTimeFragment"
+        android:name="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeFragment"
         android:label="profile"
         tools:layout="@layout/fragment_sleep_time"/>
 
