@@ -8,25 +8,21 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.track.trackhabit.habit.presentation.ui.home.HomeFragment"
-        android:label="home"
-        tools:layout="@layout/fragment_home"/>
+        android:label="home"/>
 
     <fragment
         android:id="@+id/nav_profile"
         android:name="com.track.trackhabit.habit.presentation.ui.profile.ProfileFragment"
-        android:label="profile"
-        tools:layout="@layout/fragment_profile"/>
+        android:label="profile"/>
 
     <fragment
         android:id="@+id/nav_statistical"
         android:name="com.track.trackhabit.habit.presentation.ui.statistical.StatisticalFragment"
-        android:label="profile"
-        tools:layout="@layout/fragment_statistical"/>
+        android:label="profile"/>
 
     <fragment
         android:id="@+id/nav_sleeptime"
         android:name="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeFragment"
-        android:label="profile"
-        tools:layout="@layout/fragment_sleep_time"/>
+        android:label="profile"/>
 
 </navigation>
