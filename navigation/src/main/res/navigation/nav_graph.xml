@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.track.trackhabit.habit.presentation.ui.home.HomeFragment"
+        android:label="home"/>
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.track.trackhabit.habit.presentation.ui.profile.ProfileFragment"
+        android:label="profile"/>
+
+    <fragment
+        android:id="@+id/nav_statistical"
+        android:name="com.track.trackhabit.habit.presentation.ui.statistical.StatisticalFragment"
+        android:label="profile"/>
+
+    <fragment
+        android:id="@+id/nav_sleeptime"
+        android:name="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeFragment"
+        android:label="profile"/>
+
+</navigation>

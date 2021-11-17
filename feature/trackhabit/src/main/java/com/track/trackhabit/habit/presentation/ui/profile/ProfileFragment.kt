@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.ui.fragment
+package com.track.trackhabit.habit.presentation.ui.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import com.track.trackhabit.habit.R
 
 //@AndroidEntryPoint
-class StatisticalFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistical, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 }
