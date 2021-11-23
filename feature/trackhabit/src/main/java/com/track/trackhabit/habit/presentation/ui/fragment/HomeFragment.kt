@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
 
         binding.fabActivityhomeAddhabit.setOnClickListener {
             val dialog = SelectTimeNotificationDialogFragment()
-            dialog.show(childFragmentManager, "Dialog select days for notigication")
+            dialog.show(childFragmentManager, "Dialog select days for notification")
         }
     }
 

@@ -37,9 +37,11 @@ class AlarmReceiver: BroadcastReceiver() {
             Const.SET_SNOOZE_ALARM_TIME ->{
                 buildNotification(context, "Set Snooze Time")
             }
+
             Const.CANCEL_ALARM_TIME -> {
                 setCancelAlarmService(alarmService)
             }
+
             Const.ACTION_SET_REPETITIVE_EXACT -> {
                 setRepetitiveAlarm(alarmService)
                 if(isToday(intent)){
@@ -52,51 +54,53 @@ class AlarmReceiver: BroadcastReceiver() {
 
     private fun isToday(intent: Intent): Boolean{
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
+        Log.d("checkm" ,"${intent.getBooleanExtra("MONDAY", false)}")
+        Log.d("checktu" ,"${intent.getBooleanExtra("TUESDAY", false)}")
+        Log.d("checkwe" ,"${intent.getBooleanExtra("WEDNESDAY", false)}")
+        Log.d("checkmth" ,"${intent.getBooleanExtra("THURSDAY", false)}" )
+        Log.d("checkfr" ,"${intent.getBooleanExtra("FRIDAY", false)}")
+        Log.d("checksa" ,"${intent.getBooleanExtra("SATURDAY", false)}")
+        Log.d("checksu" ,"${intent.getBooleanExtra("SUNDAY", false)}")
+
         when(today){
             Calendar.MONDAY -> {
-                Log.d("checkm" ,"${intent.getBooleanExtra("MONDAY", true)}")
                 if (intent.getBooleanExtra("MONDAY", true)){
                     return true
                 }
                 return false
             }
             Calendar.TUESDAY -> {
-                Log.d("checkm" ,"${intent.getBooleanExtra("TUESDAY", true)}")
+
                 if (intent.getBooleanExtra("TUESDAY", true)){
                     return true
                 }
                 return false
             }
             Calendar.WEDNESDAY -> {
-                Log.d("checkm" ,"${intent.getBooleanExtra("WEDNESDAY", true)}")
                 if(intent.getBooleanExtra("WEDNESDAY", true)){
                     return true
                 }
                 return false
             }
             Calendar.THURSDAY -> {
-                Log.d("checkm" ,"${intent.getBooleanExtra("THURSDAY", true)}")
                 if (intent.getBooleanExtra("THURSDAY", true)){
                     return true
                 }
                 return false
             }
             Calendar.FRIDAY -> {
-                Log.d("checkm" ,"${intent.getBooleanExtra("FRIDAY", true)}")
                 if (intent.getBooleanExtra("FRIDAY", true)){
                      return true
                 }
                 return false
             }
             Calendar.SATURDAY -> {
-                Log.d("checkm" ,"${intent.getBooleanExtra("SATURDAY", true)}")
                 if (intent.getBooleanExtra("SATURDAY", true)){
                     return true
                 }
                 return false
             }
             Calendar.SUNDAY -> {
-                Log.d("checkm" ,"${intent.getBooleanExtra("SUNDAY", true)}")
                 if (intent.getBooleanExtra("SUNDAY", true)){
                     return true
                 }
@@ -104,7 +108,6 @@ class AlarmReceiver: BroadcastReceiver() {
             }
         }
         return true
-
     }
 
     private fun convertDate(timeInMillis: Long): String {
