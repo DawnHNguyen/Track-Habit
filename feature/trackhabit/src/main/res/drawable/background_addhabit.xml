@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true" android:state_pressed="true">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+            <item android:top="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#46484A" />
+<!--                    toggle_button_pressed-->
+                </shape>
+            </item>
+            <item android:top="2dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#6DB5CB" />
+<!--                    toggle_button_checked-->
+                </shape>
+            </item>
+            <item android:top="2dp" android:bottom="2dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#46484A" />
+<!--                    toggle_button_pressed-->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_pressed="true">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+            <item android:top="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#46484A" />
+<!--                    toggle_button_pressed-->
+                </shape>
+            </item>
+            <item android:top="2dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#DBDADA" />
+<!--                    toggle_button_unchecked-->
+                </shape>
+            </item>
+            <item android:top="2dp" android:bottom="2dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#46484A" />
+<!--                    toggle_button_pressed-->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item android:state_checked="true">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="#B7D8DF" />
+<!--                    toggle_button_shadow-->
+                </shape>
+            </item>
+            <item android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#5AC8FA" />
+<!--                    toggle_button_unpressed-->
+                </shape>
+            </item>
+            <item android:bottom="2dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#2DA732" />
+<!--                    toggle_button_checked-->
+                </shape>
+            </item>
+            <item android:bottom="4dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#5AC8FA" />
+<!--                    toggle_button_unpressed-->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="#DBDADA" />
+<!--                    toggle_button_shadow-->
+                </shape>
+            </item>
+            <item android:bottom="2dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#818283" />
+<!--                    toggle_button_unpressed-->
+                </shape>
+            </item>
+            <item android:bottom="2dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#EF6060" />
+<!--                    toggle_button_unchecked-->
+                </shape>
+            </item>
+            <item android:bottom="4dp" android:left="10dp" android:right="10dp">
+                <shape android:shape="rectangle">
+                    <solid android:color="#818283" />
+<!--                    toggle_button_unpressed-->
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

@@ -1,27 +1,21 @@
 package com.track.trackhabit.habit.presentation.ui
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
-import android.app.PendingIntent
 import android.app.TimePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.presentation.constpackage.Const
-import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
-import kotlinx.android.synthetic.main.dialog_select_time_notification.*
-import timber.log.Timber
+import kotlinx.android.synthetic.main.fragment_select_time_notification.*
+import java.text.SimpleDateFormat
 import java.util.*
 
-class SelectTimeNotificationDialogFragment: DialogFragment() {
+class SelectTimeNotificationFragment: Fragment() {
     private lateinit var alarmService: AlarmService
     private var monday: Boolean = true
     private var tuesday: Boolean = true
@@ -35,49 +29,45 @@ class SelectTimeNotificationDialogFragment: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dialog_select_time_notification, container, false)
+        return inflater.inflate(R.layout.fragment_select_time_notification, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-        dialog?.window?.setLayout(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
-    }
 
     @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        button_fragmentAddHabit_setTime.text = SimpleDateFormat("HH:mm").format(Date())
         alarmService = AlarmService(requireContext())
 
-        check_monday.setOnClickListener {
-            monday = check_monday.isChecked
+        toggleButton_fragmentAddHabit_checkMonday.setOnClickListener {
+            monday = toggleButton_fragmentAddHabit_checkMonday.isChecked
         }
 
-        check_tuesday.setOnClickListener {
-            tuesday = check_tuesday.isChecked
+        toggleButton_fragmentAddHabit_checkTuesday.setOnClickListener {
+            tuesday = toggleButton_fragmentAddHabit_checkTuesday.isChecked
         }
 
-        check_wednesday.setOnClickListener {
-            wednesday = check_wednesday.isChecked
+        toggleButton_fragmentAddHabit_checkWednesday.setOnClickListener {
+            wednesday = toggleButton_fragmentAddHabit_checkWednesday.isChecked
         }
 
-        check_thursday.setOnClickListener {
-            thursday = check_thursday.isChecked
+        toggleButton_fragmentAddHabit_checkThursday.setOnClickListener {
+            thursday = toggleButton_fragmentAddHabit_checkThursday.isChecked
         }
 
-        check_friday.setOnClickListener {
-            friday = check_friday.isChecked
+        toggleButton_fragmentAddHabit_checkFriday.setOnClickListener {
+            friday = toggleButton_fragmentAddHabit_checkFriday.isChecked
         }
 
-        check_saturday.setOnClickListener {
-            saturday = check_saturday.isChecked
+        toggleButton_fragmentAddHabit_checkSaturday.setOnClickListener {
+            saturday = toggleButton_fragmentAddHabit_checkSaturday.isChecked
         }
-        check_sunday.setOnClickListener {
-            sunday = check_sunday.isChecked
+        toggleButton_fragmentAddHabit_checkSunday.setOnClickListener {
+            sunday = toggleButton_fragmentAddHabit_checkSunday.isChecked
 
         }
 
-        buttonOK.setOnClickListener {
+        button_fragmentAddHabit_buttonDone.setOnClickListener {
             setAlarm {
                 alarmService.setRepeating(it)
                 val intent =  Intent(context, AlarmReceiver::class.java).apply {
@@ -92,12 +82,18 @@ class SelectTimeNotificationDialogFragment: DialogFragment() {
 //                    putExtra("TIME", it)
                 }
                 requireContext().sendBroadcast(intent)
-            }
-            dismiss()
-        }
 
-        buttonCancel.setOnClickListener {
-            dismiss()
+            }
+            findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
+
+        }
+        button_fragmentAddHabit_setTime.setOnClickListener {
+            setAlarm {
+                button_fragmentAddHabit_setTime.text = SimpleDateFormat("HH:mm").format(Date(it))
+            }
+        }
+        button_fragmentAddHabit_cancel.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
         }
     }
     private fun setAlarm(callback: (Long) -> Unit) {

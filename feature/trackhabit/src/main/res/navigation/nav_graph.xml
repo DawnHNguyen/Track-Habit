@@ -9,7 +9,11 @@
         android:id="@+id/nav_home"
         android:name="com.track.trackhabit.habit.presentation.ui.fragment.HomeFragment"
         android:label="home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_addhabit"
+            app:destination="@id/nav_addhabit" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_profile"
@@ -28,5 +32,15 @@
         android:name="com.track.trackhabit.habit.presentation.ui.fragment.SleepTimeFragment"
         android:label="profile"
         tools:layout="@layout/fragment_sleep_time"/>
+
+    <fragment
+        android:id="@+id/nav_addhabit"
+        android:name="com.track.trackhabit.habit.presentation.ui.SelectTimeNotificationFragment"
+        android:label="profile"
+        tools:layout="@layout/fragment_select_time_notification">
+        <action
+            android:id="@+id/action_nav_addhabit_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
 </navigation>

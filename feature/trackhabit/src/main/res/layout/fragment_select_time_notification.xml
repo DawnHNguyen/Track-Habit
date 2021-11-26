@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_fragmentAddHabit_name"
+        android:text="Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputEditText_fragmentAddHabit_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_fragmentAddHabit_name"
+        app:layout_constraintStart_toEndOf="@id/textView_fragmentAddHabit_name"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_fragmentAddHabit_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Habit name"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_fragmentAddHabit_description"
+        android:text="Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputEditText_fragmentAddHabit_name"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputEditText_fragmentAddHabit_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textView_fragmentAddHabit_description"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText_fragmentAddHabit_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Habit description"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <HorizontalScrollView
+        android:id="@+id/scrollView_fragmentAddHabit_daySelection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputEditText_fragmentAddHabit_description">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ToggleButton
+                android:id="@+id/toggleButton_fragmentAddHabit_checkMonday"
+                android:checked="true"
+                android:layout_marginEnd="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_addhabit"
+                android:textOn="Monday"
+                android:textOff="Monday"
+                />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_fragmentAddHabit_checkTuesday"
+                android:checked="true"
+                android:layout_marginEnd="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_addhabit"
+                android:textOn="Tuesday"
+                android:textOff="Tuesday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_fragmentAddHabit_checkWednesday"
+                android:checked="true"
+                android:layout_marginEnd="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_addhabit"
+                android:textOn="Wednesday"
+                android:textOff="Wednesday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_fragmentAddHabit_checkThursday"
+                android:checked="true"
+                android:layout_marginEnd="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_addhabit"
+                android:textOn="Thursday"
+                android:textOff="Thursday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_fragmentAddHabit_checkFriday"
+                android:checked="true"
+                android:layout_marginEnd="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_addhabit"
+                android:textOn="Friday"
+                android:textOff="Friday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_fragmentAddHabit_checkSaturday"
+                android:checked="true"
+                android:layout_marginEnd="6dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_addhabit"
+                android:textOn="Saturday"
+                android:textOff="Saturday" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton_fragmentAddHabit_checkSunday"
+                android:checked="true"
+                android:layout_marginEnd="6dp"
+                app:boxCornerRadiusTopStart="50dp"
+                app:boxCornerRadiusBottomStart="50dp"
+                app:boxCornerRadiusTopEnd="50dp"
+                app:boxCornerRadiusBottomEnd="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_addhabit"
+                android:textOn="Sunday"
+                android:textOff="Sunday" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textView_fragmentAddHabit_setTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set time:"
+        android:textStyle="bold"
+        android:textSize="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scrollView_fragmentAddHabit_daySelection"/>
+
+    <Button
+        android:id="@+id/button_fragmentAddHabit_setTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@+id/textView_fragmentAddHabit_setTime"
+        app:layout_constraintTop_toBottomOf="@id/scrollView_fragmentAddHabit_daySelection"
+        app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentAddHabit_setTime"/>
+
+    <Button
+        android:id="@+id/button_fragmentAddHabit_buttonDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hoàn tất"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_fragmentAddHabit_setTime" />
+
+    <Button
+        android:id="@+id/button_fragmentAddHabit_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancel"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_fragmentAddHabit_buttonDone" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
