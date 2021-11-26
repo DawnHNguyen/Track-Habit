@@ -17,6 +17,7 @@ import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
+import com.track.trackhabit.habit.presentation.ui.SelectTimeNotificationDialogFragment
 import com.track.trackhabit.habit.presentation.ui.createChannel
 import java.util.*
 
@@ -73,8 +74,13 @@ class HomeFragment : Fragment() {
         }
 
         binding.buttonCancelNotification.setOnClickListener {
-            alarmService.setCancel()
+            alarmService.setCancelAlarm()
             Toast.makeText(requireContext(),"đã hủy báo thức", Toast.LENGTH_LONG).show()
+        }
+
+        binding.fabActivityhomeAddhabit.setOnClickListener {
+            val dialog = SelectTimeNotificationDialogFragment()
+            dialog.show(childFragmentManager, "Dialog select days for notification")
         }
     }
 
@@ -99,7 +105,7 @@ class HomeFragment : Fragment() {
                         },
                         this.get(Calendar.HOUR_OF_DAY),
                         this.get(Calendar.MINUTE),
-                        false
+                        true
                     ).show()
                 },
                 this.get(Calendar.YEAR),

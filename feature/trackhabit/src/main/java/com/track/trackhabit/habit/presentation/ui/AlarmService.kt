@@ -14,7 +14,7 @@ class AlarmService(private val context: Context) {
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
 
-    fun setCancel(){
+    fun setCancelAlarm(){
         setCancel(getPendingIntent(
             getIntent().apply {
                 action = Const.CANCEL_ALARM_TIME
