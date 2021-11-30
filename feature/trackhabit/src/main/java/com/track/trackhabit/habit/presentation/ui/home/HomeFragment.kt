@@ -1,24 +1,26 @@
-package com.track.trackhabit.habit.presentation.ui.home
+package com.track.trackhabit.habit.presentation.ui.fragment
 
 import android.app.DatePickerDialog
 import android.app.Notification
 import android.app.TimePickerDialog
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
-import com.track.trackhabit.habit.presentation.ui.SelectTimeNotificationDialogFragment
+import com.track.trackhabit.habit.presentation.ui.SelectTimeNotificationFragment
 import com.track.trackhabit.habit.presentation.ui.createChannel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 //@AndroidEntryPoint
@@ -79,8 +81,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.fabActivityhomeAddhabit.setOnClickListener {
-            val dialog = SelectTimeNotificationDialogFragment()
-            dialog.show(childFragmentManager, "Dialog select days for notification")
+            findNavController().navigate(R.id.action_nav_home_to_nav_addhabit)
         }
     }
 
