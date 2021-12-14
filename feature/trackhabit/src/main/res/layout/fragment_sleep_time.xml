@@ -52,6 +52,7 @@
                 android:layout_marginTop="@dimen/margintop_sleeptime_confirmwaketimebutton"
                 android:text="@string/sleeptime_confirmwaketime"
                 android:textAllCaps="false"
+                android:visibility="@{sleeptimeViewModel.conFirmWakeTimeVisibility}"
                 android:textSize="@dimen/textsize_sleeptime_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +66,7 @@
                 android:text="@string/sleeptime_sleeptimetitle"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize_sleeptime_title"
-                android:visibility="invisible"
+                android:visibility="@{sleeptimeViewModel.sleepTimeTitleVisibility}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_waketime" />

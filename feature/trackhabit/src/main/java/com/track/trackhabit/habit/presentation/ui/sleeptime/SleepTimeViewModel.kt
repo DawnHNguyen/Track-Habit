@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui.sleeptime
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +17,14 @@ class SleepTimeViewModel @Inject constructor(
     private val _wakeTime =  MutableLiveData("00:00")
     val wakeTime: LiveData<String>
     get() = _wakeTime
+
+    private val _conFirmWakeTimeVisibility = MutableLiveData(View.VISIBLE)
+    val conFirmWakeTimeVisibility: LiveData<Int>
+    get() = _conFirmWakeTimeVisibility
+
+    private val _sleepTimeTilteVisibility = MutableLiveData(View.INVISIBLE)
+    val sleepTimeTitleVisibility: LiveData<Int>
+        get() = _sleepTimeTilteVisibility
 
     private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
@@ -62,5 +71,10 @@ class SleepTimeViewModel @Inject constructor(
 
     fun setWakeTime(wakeTime: String) {
         _wakeTime.value = wakeTime
+    }
+
+    fun updateVisibility(){
+        _conFirmWakeTimeVisibility.value = View.GONE
+        _sleepTimeTilteVisibility.value = View.VISIBLE
     }
 }

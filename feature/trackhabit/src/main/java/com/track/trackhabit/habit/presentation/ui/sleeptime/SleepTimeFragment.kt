@@ -32,10 +32,10 @@ class SleepTimeFragment : Fragment() {
         binding.sleeptimeViewModel = viewModel
         setTimePicker()
         binding.buttonSleeptimeConfirmwaketime.setOnClickListener {
-            binding.buttonSleeptimeConfirmwaketime.visibility = View.GONE
-            binding.textviewSleeptimeSleeptimetitle.visibility = View.VISIBLE
-            showListSleepTime()
+            viewModel.updateVisibility()
+            viewModel.addListSleepTime()
         }
+        showListSleepTime()
     }
 
     private fun showListSleepTime() {
@@ -43,7 +43,6 @@ class SleepTimeFragment : Fragment() {
         val sleeptimeListAdapter = SleeptimeListAdapter()
         recyclerView.adapter = sleeptimeListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        viewModel.addListSleepTime()
         viewModel.sleepTimeList.observe(viewLifecycleOwner){
             sleeptimeListAdapter.submitList(it)
         }
