@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentSleepTimeBinding
-import com.track.trackhabit.habit.domain.entity.SleepDuration
-import com.track.trackhabit.habit.domain.entity.Sleeptime
 import com.track.trackhabit.habit.presentation.ui.SleeptimeListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -44,22 +41,12 @@ class SleepTimeFragment : Fragment() {
     private fun showListSleepTime() {
         val recyclerView = binding.recyclerviewSleeptimeSuggestsleeptime
         val sleeptimeListAdapter = SleeptimeListAdapter()
-        val sleepTimeList = mutableListOf<Sleeptime>()
         recyclerView.adapter = sleeptimeListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        SleepDuration.values().forEachIndexed { index: Int, it: SleepDuration ->
-            val sleepTimeLoop = Sleeptime(
-                index,
-                viewModel.calSleepTime(
-                    viewModel.wakeTime.value ?: "00:00",
-                    it.sleepDurationHour,
-                    it.sleepDurationMin
-                ),
-                getString(R.string.sleeptime, it.sleepDuration, it.loop)
-            )
-            sleepTimeList.add(sleepTimeLoop)
+        viewModel.addListSleepTime()
+        viewModel.sleepTimeList.observe(viewLifecycleOwner){
+            sleeptimeListAdapter.submitList(it)
         }
-        sleeptimeListAdapter.submitList(sleepTimeList)
     }
 
     private fun setTimePicker() {

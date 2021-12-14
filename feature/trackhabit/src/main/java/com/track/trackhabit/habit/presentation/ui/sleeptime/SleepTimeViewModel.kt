@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.track.common.base.AppDispatchers
+import com.track.trackhabit.habit.domain.entity.SleepDuration
+import com.track.trackhabit.habit.domain.entity.Sleeptime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -14,7 +16,8 @@ class SleepTimeViewModel @Inject constructor(
     private val _wakeTime =  MutableLiveData("00:00")
     val wakeTime: LiveData<String>
     get() = _wakeTime
-    fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
+
+    private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
         val arrayWake = wakeTime.split(':').run {
             IntArray(size) {
@@ -34,6 +37,27 @@ class SleepTimeViewModel @Inject constructor(
         sleepTime = if (sleepHour < 10) "0$sleepHour" else "$sleepHour"
         sleepTime = if (sleepMin < 10) "$sleepTime:0$sleepMin" else "$sleepTime:$sleepMin"
         return sleepTime
+    }
+
+    private val sleepTimeListLiveData = MutableLiveData<List<Sleeptime>>()
+    val sleepTimeList: LiveData<List<Sleeptime>>
+    get() = sleepTimeListLiveData
+    fun addListSleepTime(){
+        val sleepTimeList = mutableListOf<Sleeptime>()
+        SleepDuration.values().forEachIndexed { index: Int, it: SleepDuration ->
+            val sleepTimeLoop = Sleeptime(
+                index,
+                calSleepTime(
+                    wakeTime.value ?: "00:00",
+                    it.sleepDurationHour,
+                    it.sleepDurationMin
+                ),
+                it.sleepDuration,
+                it.loop
+            )
+            sleepTimeList.add(sleepTimeLoop)
+        }
+        sleepTimeListLiveData.value = sleepTimeList
     }
 
     fun setWakeTime(wakeTime: String) {
