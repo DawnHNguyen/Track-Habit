@@ -7,6 +7,8 @@ plugins {
     id("dagger.hilt.android.plugin")
     id 'com.android.application'
     id 'kotlin-android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -61,6 +63,14 @@ dependencies {
     implementation Libraries.daggerHilt
     implementation AndroidLibraries.kotlinCoroutineAndroid
     kapt Libraries.hiltCompiler
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.0.2')
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
 kapt {
     correctErrorTypes true
