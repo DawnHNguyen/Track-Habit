@@ -32,6 +32,9 @@ object Versions {
     val coroutines = "1.3.8"
 
     val lifecycle = "2.3.0-alpha06"
+
+    val firebase_version = "4.3.10"
+    val crashlytic_version = "2.8.1"
 }
 
 object Libraries {
@@ -49,6 +52,12 @@ object Libraries {
 
     // NOTIFICATION
     val notification = "androidx.core:core-ktx:${Versions}.core_version"
+
+    //FIREBASE
+    val firebase = "com.google.gms:google-services:${Versions.firebase_version}"
+
+    // CRASHLYTIC
+    val crashlytic = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytic_version}"
 }
 
 object KotlinLibraries {
