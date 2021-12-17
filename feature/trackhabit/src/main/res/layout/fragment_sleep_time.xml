@@ -8,6 +8,10 @@
         <variable
             name="sleeptimeViewModel"
             type="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeViewModel" />
+
+        <variable
+            name="confirm"
+            type="com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -53,6 +57,7 @@
                 android:text="@string/sleeptime_confirmwaketime"
                 android:textAllCaps="false"
                 android:visibility="@{sleeptimeViewModel.conFirmWakeTimeVisibility}"
+                android:onClick="@{() -> confirm.onClickConfirmWaketime()}"
                 android:textSize="@dimen/textsize_sleeptime_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_sleeptime_suggestsleeptime_horizontal"
                 android:layout_marginTop="@dimen/margin_sleeptime_suggestsleeptime_top"
+                app:sleeptime="@{sleeptimeViewModel.sleepTimeList}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_sleeptimetitle" />
 
