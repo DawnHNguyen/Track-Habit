@@ -10,7 +10,7 @@
             type="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeViewModel" />
 
         <variable
-            name="confirm"
+            name="confirmSleepTimeListene"
             type="com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime" />
     </data>
 
@@ -57,7 +57,7 @@
                 android:text="@string/sleeptime_confirmwaketime"
                 android:textAllCaps="false"
                 android:visibility="@{sleeptimeViewModel.conFirmWakeTimeVisibility}"
-                android:onClick="@{() -> confirm.onClickConfirmWaketime()}"
+                android:onClick="@{() -> confirmSleepTimeListene.onClickConfirmWaketime()}"
                 android:textSize="@dimen/textsize_sleeptime_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
