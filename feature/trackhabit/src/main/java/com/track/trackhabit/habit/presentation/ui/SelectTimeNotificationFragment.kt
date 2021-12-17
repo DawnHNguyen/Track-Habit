@@ -2,21 +2,34 @@ package com.track.trackhabit.habit.presentation.ui
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isEmpty
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.track.trackhabit.habit.R
-import com.track.trackhabit.habit.presentation.constpackage.Const
+import com.track.trackhabit.habit.databinding.FragmentSelectTimeNotificationBinding
+import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.entity.Inspection
+import com.track.trackhabit.habit.domain.entity.local.HabitLocal
+import com.track.trackhabit.habit.presentation.ui.home.SelectTimeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_select_time_notification.*
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
+@AndroidEntryPoint
 class SelectTimeNotificationFragment: Fragment() {
+    private val selectTimeViewModel by viewModels<SelectTimeViewModel>()
     private lateinit var alarmService: AlarmService
+    private lateinit var binding: FragmentSelectTimeNotificationBinding
     private var monday: Boolean = true
     private var tuesday: Boolean = true
     private var wednesday: Boolean = true
@@ -29,73 +42,100 @@ class SelectTimeNotificationFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_select_time_notification, container, false)
+        binding = FragmentSelectTimeNotificationBinding.inflate(inflater,container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = selectTimeViewModel
+        return binding.root
     }
+
 
 
     @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        button_fragmentAddHabit_setTime.text = SimpleDateFormat("HH:mm").format(Date())
+
+        selectTimeViewModel.timeHabit.value = SimpleDateFormat("HH:mm").format(Date())
         alarmService = AlarmService(requireContext())
 
-        toggleButton_fragmentAddHabit_checkMonday.setOnClickListener {
-            monday = toggleButton_fragmentAddHabit_checkMonday.isChecked
+        binding.toggleButtonFragmentAddHabitCheckMonday.setOnClickListener {
+            monday = binding.toggleButtonFragmentAddHabitCheckMonday.isChecked
         }
 
-        toggleButton_fragmentAddHabit_checkTuesday.setOnClickListener {
-            tuesday = toggleButton_fragmentAddHabit_checkTuesday.isChecked
+        binding.toggleButtonFragmentAddHabitCheckTuesday.setOnClickListener {
+            tuesday = binding.toggleButtonFragmentAddHabitCheckTuesday.isChecked
         }
 
-        toggleButton_fragmentAddHabit_checkWednesday.setOnClickListener {
-            wednesday = toggleButton_fragmentAddHabit_checkWednesday.isChecked
+        binding.toggleButtonFragmentAddHabitCheckWednesday.setOnClickListener {
+            wednesday = binding.toggleButtonFragmentAddHabitCheckWednesday.isChecked
         }
 
-        toggleButton_fragmentAddHabit_checkThursday.setOnClickListener {
-            thursday = toggleButton_fragmentAddHabit_checkThursday.isChecked
+        binding.toggleButtonFragmentAddHabitCheckThursday.setOnClickListener {
+            thursday = binding.toggleButtonFragmentAddHabitCheckThursday.isChecked
         }
 
-        toggleButton_fragmentAddHabit_checkFriday.setOnClickListener {
-            friday = toggleButton_fragmentAddHabit_checkFriday.isChecked
+        binding.toggleButtonFragmentAddHabitCheckFriday.setOnClickListener {
+            friday = binding.toggleButtonFragmentAddHabitCheckFriday.isChecked
         }
 
-        toggleButton_fragmentAddHabit_checkSaturday.setOnClickListener {
-            saturday = toggleButton_fragmentAddHabit_checkSaturday.isChecked
+        binding.toggleButtonFragmentAddHabitCheckSaturday.setOnClickListener {
+            saturday = binding.toggleButtonFragmentAddHabitCheckSaturday.isChecked
         }
-        toggleButton_fragmentAddHabit_checkSunday.setOnClickListener {
-            sunday = toggleButton_fragmentAddHabit_checkSunday.isChecked
+        binding.toggleButtonFragmentAddHabitCheckSunday.setOnClickListener {
+            sunday = binding.toggleButtonFragmentAddHabitCheckSunday.isChecked
 
         }
 
-        button_fragmentAddHabit_buttonDone.setOnClickListener {
-            setAlarm {
-                alarmService.setRepeating(it)
-                val intent =  Intent(context, AlarmReceiver::class.java).apply {
-                    action = Const.ACTION_SET_REPETITIVE_EXACT
-                    putExtra("MONDAY", monday)
-                    putExtra("TUESDAY", tuesday)
-                    putExtra("WEDNESDAY", wednesday)
-                    putExtra("THURSDAY", thursday)
-                    putExtra("FRIDAY", friday)
-                    putExtra("SATURDAY", saturday)
-                    putExtra("SUNDAY", sunday)
-//                    putExtra("TIME", it)
+        binding.buttonFragmentAddHabitButtonDone.setOnClickListener {
+            setVisibilityErrorMessage()
+            if (binding.textInputEditTextFragmentAddHabitName.text.isNullOrBlank()  || binding.textInputEditTextFragmentAddHabitDescription.text.isNullOrBlank()) {
+                if(binding.textInputEditTextFragmentAddHabitName.text.isNullOrBlank()){
+                    binding.textViewFragmentAddHabitNameError.visibility = View.VISIBLE
                 }
-                requireContext().sendBroadcast(intent)
-
+                if (binding.textInputEditTextFragmentAddHabitDescription.text.isNullOrBlank()){
+                    binding.textViewFragmentAddHabitDescriptionError.visibility = View.VISIBLE
+                }
             }
-            findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
+            else{
+                Log.d("check_databinding","${selectTimeViewModel.nameHabit.value} + ${selectTimeViewModel.descriptionHabit.value} + ${binding.buttonFragmentAddHabitSetTime.text}")
+                selectTimeViewModel.addHabit(HabitLocal(0,
+                    selectTimeViewModel.nameHabit.toString(),
+                    selectTimeViewModel.descriptionHabit.toString(),
+                    SimpleDateFormat("HH:mm").parse(binding.buttonFragmentAddHabitSetTime.text.toString()).time).mapToDomainModel())
+                findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
+            }
+
+
+//                alarmService.setRepeating(it)
+//                val intent =  Intent(context, AlarmReceiver::class.java).apply {
+//                    action = Const.ACTION_SET_REPETITIVE_EXACT
+//                    putExtra("MONDAY", monday)
+//                    putExtra("TUESDAY", tuesday)
+//                    putExtra("WEDNESDAY", wednesday)
+//                    putExtra("THURSDAY", thursday)
+//                    putExtra("FRIDAY", friday)
+//                    putExtra("SATURDAY", saturday)
+//                    putExtra("SUNDAY", sunday)
+////                    putExtra("TIME", it)
+//                }
+//                requireContext().sendBroadcast(intent)
+
 
         }
-        button_fragmentAddHabit_setTime.setOnClickListener {
+        binding.buttonFragmentAddHabitSetTime.setOnClickListener {
             setAlarm {
-                button_fragmentAddHabit_setTime.text = SimpleDateFormat("HH:mm").format(Date(it))
+                binding.buttonFragmentAddHabitSetTime.text = SimpleDateFormat("HH:mm").format(Date(it))
             }
         }
-        button_fragmentAddHabit_cancel.setOnClickListener {
+        binding.buttonFragmentAddHabitCancel.setOnClickListener {
             findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
         }
     }
+
+    private fun setVisibilityErrorMessage(){
+        binding.textViewFragmentAddHabitNameError.visibility = View.GONE
+        binding.textViewFragmentAddHabitDescriptionError.visibility = View.GONE
+    }
+
     private fun setAlarm(callback: (Long) -> Unit) {
         Calendar.getInstance().apply {
             this.set(Calendar.SECOND, 0)

@@ -22,13 +22,15 @@
         <entry key="feature/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_addhabit.xml" value="0.2989583333333333" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_itemhabit.xml" value="0.30572916666666666" />
+        <entry key="feature/trackhabit/src/main/res/drawable/button_selector.xml" value="0.31927083333333334" />
         <entry key="feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.23278985507246377" />
         <entry key="feature/trackhabit/src/main/res/layout/activity_main.xml" value="0.2617753623188406" />
         <entry key="feature/trackhabit/src/main/res/layout/dialog_select_time_notification.xml" value="0.290625" />
         <entry key="feature/trackhabit/src/main/res/layout/fragment_home.xml" value="0.290625" />
         <entry key="feature/trackhabit/src/main/res/layout/fragment_profile.xml" value="0.30833333333333335" />
-        <entry key="feature/trackhabit/src/main/res/layout/fragment_select_time_notification.xml" value="0.25" />
+        <entry key="feature/trackhabit/src/main/res/layout/fragment_select_time_notification.xml" value="0.5" />
         <entry key="feature/trackhabit/src/main/res/layout/fragment_sleep_time.xml" value="0.30833333333333335" />
+        <entry key="feature/trackhabit/src/main/res/layout/fragment_statistical.xml" value="0.27447916666666666" />
         <entry key="feature/trackhabit/src/main/res/layout/item_habit.xml" value="0.29010416666666666" />
         <entry key="feature/trackhabit/src/main/res/menu/bottom_nav_menu.xml" value="0.29010416666666666" />
         <entry key="navigation/src/main/res/drawable/ic_launcher_background.xml" value="0.23020833333333332" />
