@@ -10,7 +10,7 @@
             type="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeViewModel" />
 
         <variable
-            name="confirm"
+            name="confirmSleepTimeListener"
             type="com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime" />
     </data>
 
@@ -54,11 +54,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintop_sleeptime_confirmwaketimebutton"
+                android:onClick="@{() -> confirmSleepTimeListener.onClickConfirmWaketime()}"
                 android:text="@string/sleeptime_confirmwaketime"
                 android:textAllCaps="false"
-                android:visibility="@{sleeptimeViewModel.conFirmWakeTimeVisibility}"
-                android:onClick="@{() -> confirm.onClickConfirmWaketime()}"
                 android:textSize="@dimen/textsize_sleeptime_button"
+                android:visibility="@{sleeptimeViewModel.conFirmWakeTimeVisibility}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_waketime" />
@@ -82,9 +82,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_sleeptime_suggestsleeptime_horizontal"
                 android:layout_marginTop="@dimen/margin_sleeptime_suggestsleeptime_top"
-                app:sleeptime="@{sleeptimeViewModel.sleepTimeList}"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_sleeptimetitle" />
+                app:layout_constraintTop_toBottomOf="@id/textview_sleeptime_sleeptimetitle"
+                app:sleeptime="@{sleeptimeViewModel.sleepTimeList}" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_sleeptime_confrimsleeptime"

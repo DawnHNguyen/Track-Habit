@@ -31,12 +31,12 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.sleeptimeViewModel = viewModel
-        binding.confirm = this
+        binding.confirmSleepTimeListener = this
         setTimePicker()
-        showListSleepTime()
+        initializeSleeptimeRecyclerView()
     }
 
-    private fun showListSleepTime() {
+    private fun initializeSleeptimeRecyclerView() {
         val recyclerView = binding.recyclerviewSleeptimeSuggestsleeptime
         val sleeptimeListAdapter = SleeptimeListAdapter()
         recyclerView.adapter = sleeptimeListAdapter
