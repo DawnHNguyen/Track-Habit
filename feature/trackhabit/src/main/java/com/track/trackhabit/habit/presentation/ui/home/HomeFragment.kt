@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
         val recyclerView = binding.recyclerviewHomeHabitlist
         val habitsListAdapter = HabitsListAdapter()
         val habitList = mutableListOf<Habit>()
-        val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf())
+        val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf(),"1111111")
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.button.setOnClickListener {

@@ -96,11 +96,13 @@ class SelectTimeNotificationFragment: Fragment() {
                 }
             }
             else{
-                Log.d("check_databinding","${selectTimeViewModel.nameHabit.value} + ${selectTimeViewModel.descriptionHabit.value} + ${binding.buttonFragmentAddHabitSetTime.text}")
+
+                var frequency = ""+ monday.compareTo(false) + tuesday.compareTo(false) + wednesday.compareTo(false) + thursday.compareTo(false) + friday.compareTo(false) + saturday.compareTo(false) + sunday.compareTo(false)
+                Log.d("check_databinding","${selectTimeViewModel.nameHabit.value} + ${selectTimeViewModel.descriptionHabit.value} + ${binding.buttonFragmentAddHabitSetTime.text} + ${frequency}")
                 selectTimeViewModel.addHabit(HabitLocal(0,
                     selectTimeViewModel.nameHabit.toString(),
                     selectTimeViewModel.descriptionHabit.toString(),
-                    SimpleDateFormat("HH:mm").parse(binding.buttonFragmentAddHabitSetTime.text.toString()).time).mapToDomainModel())
+                    SimpleDateFormat("HH:mm").parse(binding.buttonFragmentAddHabitSetTime.text.toString()).time, frequency).mapToDomainModel())
                 findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
             }
 
