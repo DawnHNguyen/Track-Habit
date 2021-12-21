@@ -30,13 +30,7 @@ class SelectTimeNotificationFragment: Fragment() {
     private val selectTimeViewModel by viewModels<SelectTimeViewModel>()
     private lateinit var alarmService: AlarmService
     private lateinit var binding: FragmentSelectTimeNotificationBinding
-    private var monday: Boolean = true
-    private var tuesday: Boolean = true
-    private var wednesday: Boolean = true
-    private var thursday: Boolean = true
-    private var friday: Boolean = true
-    private var saturday: Boolean = true
-    private var sunday: Boolean = true
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,31 +52,30 @@ class SelectTimeNotificationFragment: Fragment() {
         alarmService = AlarmService(requireContext())
 
         binding.toggleButtonFragmentAddHabitCheckMonday.setOnClickListener {
-            monday = binding.toggleButtonFragmentAddHabitCheckMonday.isChecked
+            selectTimeViewModel.monday = binding.toggleButtonFragmentAddHabitCheckMonday.isChecked
         }
 
         binding.toggleButtonFragmentAddHabitCheckTuesday.setOnClickListener {
-            tuesday = binding.toggleButtonFragmentAddHabitCheckTuesday.isChecked
+            selectTimeViewModel.tuesday = binding.toggleButtonFragmentAddHabitCheckTuesday.isChecked
         }
 
         binding.toggleButtonFragmentAddHabitCheckWednesday.setOnClickListener {
-            wednesday = binding.toggleButtonFragmentAddHabitCheckWednesday.isChecked
+            selectTimeViewModel.wednesday = binding.toggleButtonFragmentAddHabitCheckWednesday.isChecked
         }
 
         binding.toggleButtonFragmentAddHabitCheckThursday.setOnClickListener {
-            thursday = binding.toggleButtonFragmentAddHabitCheckThursday.isChecked
+            selectTimeViewModel.thursday = binding.toggleButtonFragmentAddHabitCheckThursday.isChecked
         }
 
         binding.toggleButtonFragmentAddHabitCheckFriday.setOnClickListener {
-            friday = binding.toggleButtonFragmentAddHabitCheckFriday.isChecked
+            selectTimeViewModel.friday = binding.toggleButtonFragmentAddHabitCheckFriday.isChecked
         }
 
         binding.toggleButtonFragmentAddHabitCheckSaturday.setOnClickListener {
-            saturday = binding.toggleButtonFragmentAddHabitCheckSaturday.isChecked
+            selectTimeViewModel.saturday = binding.toggleButtonFragmentAddHabitCheckSaturday.isChecked
         }
         binding.toggleButtonFragmentAddHabitCheckSunday.setOnClickListener {
-            sunday = binding.toggleButtonFragmentAddHabitCheckSunday.isChecked
-
+            selectTimeViewModel.sunday = binding.toggleButtonFragmentAddHabitCheckSunday.isChecked
         }
 
         binding.buttonFragmentAddHabitButtonDone.setOnClickListener {
@@ -97,12 +90,13 @@ class SelectTimeNotificationFragment: Fragment() {
             }
             else{
 
-                var frequency = ""+ monday.compareTo(false) + tuesday.compareTo(false) + wednesday.compareTo(false) + thursday.compareTo(false) + friday.compareTo(false) + saturday.compareTo(false) + sunday.compareTo(false)
+                var frequency = selectTimeViewModel.getFrequency()
                 Log.d("check_databinding","${selectTimeViewModel.nameHabit.value} + ${selectTimeViewModel.descriptionHabit.value} + ${binding.buttonFragmentAddHabitSetTime.text} + ${frequency}")
                 selectTimeViewModel.addHabit(HabitLocal(0,
                     selectTimeViewModel.nameHabit.toString(),
                     selectTimeViewModel.descriptionHabit.toString(),
-                    SimpleDateFormat("HH:mm").parse(binding.buttonFragmentAddHabitSetTime.text.toString()).time, frequency).mapToDomainModel())
+                    selectTimeViewModel.changeToTime(binding.buttonFragmentAddHabitSetTime.text.toString()),
+                    frequency).mapToDomainModel())
                 findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
             }
 
