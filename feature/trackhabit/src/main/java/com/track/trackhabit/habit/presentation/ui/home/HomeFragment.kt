@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.R
@@ -20,10 +21,11 @@ import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
 import com.track.trackhabit.habit.presentation.ui.SelectTimeNotificationFragment
 import com.track.trackhabit.habit.presentation.ui.createChannel
+import com.track.trackhabit.habit.presentation.ui.home.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var alarmService: AlarmService
