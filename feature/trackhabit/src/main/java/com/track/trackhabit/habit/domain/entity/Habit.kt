@@ -13,7 +13,7 @@ data class Habit(
     val performances: List<Inspection>,
     val frequency: String?
 ) : DomainModel {
-    override fun toLocalDto() = HabitLocal(0, title, description, time.time,frequency)
+    override fun toLocalDto() = HabitLocal(0, title, description, time.time,frequency).apply { userId = "AAAA" }
 
     override fun toRemoteDto() = HabitDto(habitId, title, description, time, performances,frequency)
 

@@ -19,9 +19,10 @@ import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
 import com.track.trackhabit.habit.presentation.ui.createChannel
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var alarmService: AlarmService

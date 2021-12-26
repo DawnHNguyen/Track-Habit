@@ -3,6 +3,7 @@ package com.track.trackhabit.habit.domain.entity.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 import com.track.common.base.dto.LocalDto
 import com.track.trackhabit.habit.domain.entity.Habit
@@ -12,7 +13,8 @@ import java.util.*
 @Entity(foreignKeys = [ForeignKey(
     entity = UserLocal::class,
     parentColumns = arrayOf("user_id"),
-    childColumns = arrayOf("user_id")
+    childColumns = arrayOf("user_id"),
+    onDelete = CASCADE
 )])
 data class HabitLocal(
     @PrimaryKey(autoGenerate = true)
