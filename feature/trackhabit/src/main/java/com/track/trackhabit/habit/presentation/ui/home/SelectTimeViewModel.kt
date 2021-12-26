@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -37,10 +38,17 @@ class SelectTimeViewModel @Inject constructor(
     var saturday: Boolean = true
     var sunday: Boolean = true
 
-    fun addHabit(habit: Habit){
+    fun addHabit(){
         viewModelScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO){
-                addHabitUseCase(habit)
+                addHabitUseCase(Habit(
+                    0,
+                    nameHabit.value.toString(),
+                    descriptionHabit.value.toString(),
+                    changeToTime(timeHabit.value!!),
+                    emptyList(),
+                    getFrequency())
+                )
             }
         }
     }
@@ -49,7 +57,7 @@ class SelectTimeViewModel @Inject constructor(
         return ""+ monday.compareTo(false) + tuesday.compareTo(false) + wednesday.compareTo(false) + thursday.compareTo(false) + friday.compareTo(false) + saturday.compareTo(false) + sunday.compareTo(false)
     }
 
-    fun changeToTime(timeSelect: String): Long {
-        return  SimpleDateFormat("HH:mm").parse(timeSelect).time
+    fun changeToTime(timeSelect: String): Date {
+        return  Date(SimpleDateFormat("HH:mm").parse(timeSelect).time)
     }
 }
