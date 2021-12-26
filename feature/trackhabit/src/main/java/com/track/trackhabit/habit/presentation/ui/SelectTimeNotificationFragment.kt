@@ -93,8 +93,8 @@ class SelectTimeNotificationFragment: Fragment() {
                 var frequency = selectTimeViewModel.getFrequency()
                 Log.d("check_databinding","${selectTimeViewModel.nameHabit.value} + ${selectTimeViewModel.descriptionHabit.value} + ${binding.buttonFragmentAddHabitSetTime.text} + ${frequency}")
                 selectTimeViewModel.addHabit(HabitLocal(0,
-                    selectTimeViewModel.nameHabit.toString(),
-                    selectTimeViewModel.descriptionHabit.toString(),
+                    selectTimeViewModel.nameHabit.value.toString(),
+                    selectTimeViewModel.descriptionHabit.value.toString(),
                     selectTimeViewModel.changeToTime(binding.buttonFragmentAddHabitSetTime.text.toString()),
                     frequency).mapToDomainModel())
                 findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)

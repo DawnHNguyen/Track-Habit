@@ -40,7 +40,7 @@ abstract class UserDatabase: RoomDatabase() {
         private val userCallback = object : Callback(){
             override fun onCreate(db: SupportSQLiteDatabase) {
                 super.onCreate(db)
-                callBackDatabase(db as UserDatabase)
+                db.execSQL("INSERT INTO UserLocal VALUES ('AAAA','Squad 1')")
             }
         }
 
