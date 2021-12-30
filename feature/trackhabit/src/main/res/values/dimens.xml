@@ -12,6 +12,7 @@
     <dimen name="radius_sleeptime_time">8dp</dimen>
     <dimen name="radius_itemsleeptime_itemcorner">8dp</dimen>
     <dimen name="radius_sleeptime_confirmsleeptime_buttoncorner">8dp</dimen>
+    <dimen name="radius_sleeptime_backbutton_buttoncorner">8dp</dimen>
     <dimen name="textsize_sleeptime_title">16sp</dimen>
     <dimen name="textsize_sleeptime_button">14sp</dimen>
     <dimen name="textsize_sleeptime_time">56sp</dimen>
@@ -20,10 +21,11 @@
     <dimen name="margintop_sleeptime_sleeptimetitle">56dp</dimen>
     <dimen name="margin_itemsleeptime_vertical">16dp</dimen>
     <dimen name="margin_sleeptime_suggestsleeptime_horizontal">32dp</dimen>
-    <dimen name="margin_sleeptime_confirmsleeptime_button_horizontal">32dp</dimen>
     <dimen name="margin_sleeptime_suggestsleeptime_top">20dp</dimen>
-    <dimen name="height_sleeptime_confirmsleeptime_buttun">40dp</dimen>
+    <dimen name="height_sleeptime_confirmsleeptime_button">40dp</dimen>
+    <dimen name="height_sleeptime_back_button">40dp</dimen>
     <dimen name="margin_sleeptime_confirmsleeptime_buttun_top">28dp</dimen>
+    <dimen name="margin_sleeptime_confirmsleeptime_buttun_start">40dp</dimen>
     <dimen name="all_margin_start">16dp</dimen>
     <dimen name="all_margin_top_parent">30dp</dimen>
     <dimen name="add_habit_margin_textview">8dp</dimen>
@@ -33,4 +35,7 @@
     <dimen name="all_textsize_settime">32sp</dimen>
     <dimen name="addhabit_margin_scrollview">16dp</dimen>
     <dimen name="all_marginall">16dp</dimen>
+    <dimen name="stroke_sleeptime_backbutton">2dp</dimen>
+    <dimen name="width_sleeptime_confirmsleeptime">120dp</dimen>
+    <dimen name="width_sleeptime_back">120dp</dimen>
 </resources>

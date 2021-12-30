@@ -8,5 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_defaulthabit">#B3C4C4C4</color>
-    <color name="sleeptime_maincolor">#6DB5CB</color>
+    <color name="purple_sleeptime">#6869AC</color>
 </resources>

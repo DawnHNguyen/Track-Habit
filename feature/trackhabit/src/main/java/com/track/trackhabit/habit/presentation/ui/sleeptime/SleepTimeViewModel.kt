@@ -26,6 +26,14 @@ class SleepTimeViewModel @Inject constructor(
     val sleepTimeTitleVisibility: LiveData<Int>
         get() = _sleepTimeTilteVisibility
 
+    private val _confirmSleeptimeVisibility = MutableLiveData(View.INVISIBLE)
+    val confirmSleeptimeVisibility: LiveData<Int>
+        get() = _confirmSleeptimeVisibility
+
+    private val _backButtonVisibility = MutableLiveData(View.INVISIBLE)
+    val backButtonVisibility: LiveData<Int>
+        get() = _backButtonVisibility
+
     private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
         val arrayWake = wakeTime.split(':').run {
@@ -76,5 +84,7 @@ class SleepTimeViewModel @Inject constructor(
     fun updateVisibility(){
         _conFirmWakeTimeVisibility.value = View.GONE
         _sleepTimeTilteVisibility.value = View.VISIBLE
+        _confirmSleeptimeVisibility.value = View.VISIBLE
+        _backButtonVisibility.value=View.VISIBLE
     }
 }
