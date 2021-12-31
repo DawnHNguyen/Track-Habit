@@ -12,6 +12,10 @@
         <variable
             name="confirmSleepTimeListener"
             type="com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime" />
+
+        <variable
+            name="backListener"
+            type="com.track.trackhabit.habit.presentation.ui.OnClickBackSleeptime" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -93,6 +97,7 @@
                 android:layout_marginTop="@dimen/margin_sleeptime_confirmsleeptime_buttun_top"
                 android:background="@drawable/background_sleeptime_backbutton"
                 android:gravity="center"
+                android:onClick="@{() -> backListener.onClickBackButton()}"
                 android:text="@string/sleeptime_backbutton"
                 android:textColor="@color/purple_sleeptime"
                 android:textSize="@dimen/textsize_sleeptime_button"
@@ -106,9 +111,11 @@
                 android:id="@+id/button_sleeptime_confrimsleeptime"
                 android:layout_width="@dimen/width_sleeptime_confirmsleeptime"
                 android:layout_height="@dimen/height_sleeptime_confirmsleeptime_button"
-                android:layout_marginTop="@dimen/margin_sleeptime_confirmsleeptime_buttun_top"
                 android:layout_marginStart="@dimen/margin_sleeptime_confirmsleeptime_buttun_start"
+                android:layout_marginTop="@dimen/margin_sleeptime_confirmsleeptime_buttun_top"
                 android:background="@drawable/background_confirmsleeptime_button"
+                android:clickable="false"
+                android:enabled="false"
                 android:gravity="center"
                 android:text="@string/sleeptime_confirmsleeptime"
                 android:textColor="@color/white"

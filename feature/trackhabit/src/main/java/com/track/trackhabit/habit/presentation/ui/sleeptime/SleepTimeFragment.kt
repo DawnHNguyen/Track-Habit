@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.databinding.FragmentSleepTimeBinding
+import com.track.trackhabit.habit.presentation.ui.OnClickBackSleeptime
 import com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime
 import com.track.trackhabit.habit.presentation.ui.SleeptimeListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,7 @@ import java.util.*
 import java.text.SimpleDateFormat as SimpleDateFormat1
 
 @AndroidEntryPoint
-class SleepTimeFragment : Fragment(), OnClickConfirmWaketime {
+class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleeptime {
     lateinit var binding: FragmentSleepTimeBinding
     val viewModel: SleepTimeViewModel by viewModels()
     override fun onCreateView(
@@ -32,6 +33,7 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.sleeptimeViewModel = viewModel
         binding.confirmSleepTimeListener = this
+        binding.backListener = this
         setTimePicker()
         initializeSleeptimeRecyclerView()
     }
@@ -62,7 +64,13 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime {
     }
 
     override fun onClickConfirmWaketime() {
-        viewModel.updateVisibility()
+        viewModel.onConfirmWaketimeUpdateVisibility()
         viewModel.addListSleepTime()
+    }
+
+    override fun onClickBackButton() {
+        viewModel.clearListSuggestSleeptime()
+        viewModel.onBackUpdateVisibility()
+        viewModel.resetTimepicker()
     }
 }
