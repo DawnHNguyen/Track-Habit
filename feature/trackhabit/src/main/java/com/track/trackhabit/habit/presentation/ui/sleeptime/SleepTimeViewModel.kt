@@ -4,10 +4,13 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
 import com.track.trackhabit.habit.domain.entity.SleepDuration
 import com.track.trackhabit.habit.domain.entity.Sleeptime
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,6 +37,10 @@ class SleepTimeViewModel @Inject constructor(
     val backButtonVisibility: LiveData<Int>
         get() = _backButtonVisibility
 
+    private val _isEnabledConfirmSleeptimeButton = MutableLiveData(false)
+    val isEnabledConfirmSleeptime: LiveData<Boolean>
+        get() = _isEnabledConfirmSleeptimeButton
+
     private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
         val arrayWake = wakeTime.split(':').run {
@@ -57,9 +64,9 @@ class SleepTimeViewModel @Inject constructor(
         return sleepTime
     }
 
-    private val sleepTimeListLiveData = MutableLiveData<List<Sleeptime>>()
+    private val _sleepTimeList = MutableLiveData<List<Sleeptime>>()
     val sleepTimeList: LiveData<List<Sleeptime>>
-        get() = sleepTimeListLiveData
+        get() = _sleepTimeList
 
     fun addListSleepTime() {
         val sleepTimeList = mutableListOf<Sleeptime>()
@@ -76,7 +83,7 @@ class SleepTimeViewModel @Inject constructor(
             )
             sleepTimeList.add(sleepTimeLoop)
         }
-        sleepTimeListLiveData.value = sleepTimeList
+        _sleepTimeList.value = sleepTimeList
     }
 
     fun setWakeTime(wakeTime: String) {
@@ -84,14 +91,17 @@ class SleepTimeViewModel @Inject constructor(
     }
 
     fun onConfirmWaketimeUpdateVisibility() {
-        _conFirmWakeTimeVisibility.value = View.GONE
-        _sleepTimeTilteVisibility.value = View.VISIBLE
-        _confirmSleeptimeVisibility.value = View.VISIBLE
-        _backButtonVisibility.value = View.VISIBLE
+        viewModelScope.launch {
+            delay(40)
+            _conFirmWakeTimeVisibility.value = View.GONE
+            _sleepTimeTilteVisibility.value = View.VISIBLE
+            _confirmSleeptimeVisibility.value = View.VISIBLE
+            _backButtonVisibility.value = View.VISIBLE
+        }
     }
 
     fun clearListSuggestSleeptime() {
-        sleepTimeListLiveData.value = listOf()
+        _sleepTimeList.value = listOf()
     }
 
     fun onBackUpdateVisibility() {
@@ -103,5 +113,32 @@ class SleepTimeViewModel @Inject constructor(
 
     fun resetTimepicker() {
         _wakeTime.value = "00:00"
+    }
+
+    fun setCofirmSleeptimeEnabled() {
+        _isEnabledConfirmSleeptimeButton.value = true
+    }
+
+    fun setConfirmSleeptimeDisable(){
+        _isEnabledConfirmSleeptimeButton.value = false
+    }
+
+    fun onClickItem(clickedLoop: Int) {
+        val sleepTimeList = mutableListOf<Sleeptime>()
+        SleepDuration.values().forEachIndexed { index: Int, it: SleepDuration ->
+            val sleepTimeLoop = Sleeptime(
+                index,
+                calSleepTime(
+                    wakeTime.value ?: "00:00",
+                    it.sleepDurationHour,
+                    it.sleepDurationMin
+                ),
+                it.sleepDuration,
+                it.loop,
+                clickedLoop == it.loop
+            )
+            sleepTimeList.add(sleepTimeLoop)
+        }
+        _sleepTimeList.value = sleepTimeList
     }
 }

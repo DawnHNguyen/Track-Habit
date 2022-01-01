@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.databinding.FragmentSleepTimeBinding
 import com.track.trackhabit.habit.presentation.ui.OnClickBackSleeptime
 import com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime
+import com.track.trackhabit.habit.presentation.ui.OnClickSuggestTimeRecyclerView
 import com.track.trackhabit.habit.presentation.ui.SleeptimeListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -32,7 +33,7 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.sleeptimeViewModel = viewModel
-        binding.confirmSleepTimeListener = this
+        binding.confirmWakeTimeListener = this
         binding.backListener = this
         setTimePicker()
         initializeSleeptimeRecyclerView()
@@ -40,7 +41,13 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
 
     private fun initializeSleeptimeRecyclerView() {
         val recyclerView = binding.recyclerviewSleeptimeSuggestsleeptime
-        val sleeptimeListAdapter = SleeptimeListAdapter()
+        recyclerView.itemAnimator = null
+        val sleeptimeListAdapter = SleeptimeListAdapter(object : OnClickSuggestTimeRecyclerView {
+            override fun onClickItemSugesstTime(clickedLoop: Int) {
+                viewModel.setCofirmSleeptimeEnabled()
+                viewModel.onClickItem(clickedLoop)
+            }
+        })
         recyclerView.adapter = sleeptimeListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -64,13 +71,14 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
     }
 
     override fun onClickConfirmWaketime() {
-        viewModel.onConfirmWaketimeUpdateVisibility()
         viewModel.addListSleepTime()
+        viewModel.onConfirmWaketimeUpdateVisibility()
     }
 
     override fun onClickBackButton() {
         viewModel.clearListSuggestSleeptime()
         viewModel.onBackUpdateVisibility()
         viewModel.resetTimepicker()
+        viewModel.setConfirmSleeptimeDisable()
     }
 }

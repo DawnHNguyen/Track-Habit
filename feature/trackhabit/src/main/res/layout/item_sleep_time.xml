@@ -2,32 +2,42 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="sleeptime"
             type="com.track.trackhabit.habit.domain.entity.Sleeptime" />
+
+        <variable
+            name="itemListener"
+            type="com.track.trackhabit.habit.presentation.ui.OnClickSuggestTimeRecyclerView" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/item_sleeptime"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_itemsleeptime_sleeptime"
         android:layout_marginVertical="@dimen/margin_itemsleeptime_vertical"
-        android:background="@drawable/background_itemsleeptime"
+        android:background="@drawable/background_itemsleeptime_default"
+        android:gravity="center_vertical"
         android:orientation="vertical"
+        android:onClick="@{() -> itemListener.onClickItemSugesstTime(sleeptime.loop)}"
         android:paddingStart="@dimen/padding_itemsleeptime_sleeptime_paddingstart">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_itemsleeptime_sleeptime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{sleeptime.sleepTime}"
             android:textColor="@color/black"
-            android:textSize="@dimen/textsize_itemsleeptime"/>
+            android:textSize="@dimen/textsize_itemsleeptime" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textview_itemsleeptime_loop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{@string/sleeptime(sleeptime.sleepDuration, sleeptime.loop)}"
             android:textColor="@color/black"
-            android:textSize="@dimen/textsize_itemsleeptime"/>
+            android:textSize="@dimen/textsize_itemsleeptime" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

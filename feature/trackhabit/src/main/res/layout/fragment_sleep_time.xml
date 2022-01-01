@@ -10,7 +10,7 @@
             type="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeViewModel" />
 
         <variable
-            name="confirmSleepTimeListener"
+            name="confirmWakeTimeListener"
             type="com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime" />
 
         <variable
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintop_sleeptime_confirmwaketimebutton"
-                android:onClick="@{() -> confirmSleepTimeListener.onClickConfirmWaketime()}"
+                android:onClick="@{() -> confirmWakeTimeListener.onClickConfirmWaketime()}"
                 android:text="@string/sleeptime_confirmwaketime"
                 android:textAllCaps="false"
                 android:textSize="@dimen/textsize_sleeptime_button"
@@ -114,8 +114,8 @@
                 android:layout_marginStart="@dimen/margin_sleeptime_confirmsleeptime_buttun_start"
                 android:layout_marginTop="@dimen/margin_sleeptime_confirmsleeptime_buttun_top"
                 android:background="@drawable/background_confirmsleeptime_button"
-                android:clickable="false"
-                android:enabled="false"
+                android:backgroundTint="@color/background_confirmsleeptime_button_color"
+                android:enabled="@{sleeptimeViewModel.isEnabledConfirmSleeptime}"
                 android:gravity="center"
                 android:text="@string/sleeptime_confirmsleeptime"
                 android:textColor="@color/white"
