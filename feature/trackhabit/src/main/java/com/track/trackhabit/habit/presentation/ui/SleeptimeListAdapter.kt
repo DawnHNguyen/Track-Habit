@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.ItemSleepTimeBinding
 import com.track.trackhabit.habit.domain.entity.Sleeptime
 
-class SleeptimeListAdapter(): ListAdapter<Sleeptime, SleeptimeListAdapter.SleeptimeListViewHolder>(SleeptimeListDiffUtil()){
+class SleeptimeListAdapter(private val onClickSuggestTime: OnClickSuggestTimeRecyclerView) :
+    ListAdapter<Sleeptime, SleeptimeListAdapter.SleeptimeListViewHolder>(SleeptimeListDiffUtil()) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
@@ -19,14 +21,42 @@ class SleeptimeListAdapter(): ListAdapter<Sleeptime, SleeptimeListAdapter.Sleept
         position: Int,
     ) {
         val sleeptime = getItem(position)
-        holder.bind(sleeptime)
+        holder.bind(sleeptime, onClickSuggestTime)
     }
 
     class SleeptimeListViewHolder private constructor(private val binding: ItemSleepTimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(sleepTime: Sleeptime) {
+        fun bind(sleepTime: Sleeptime, item: OnClickSuggestTimeRecyclerView) {
+            binding.itemListener = item
             binding.sleeptime = sleepTime
             binding.executePendingBindings()
+            if (sleepTime.isClicked) {
+                binding.itemSleeptime.background =
+                    binding.root.context.getDrawable(R.drawable.background_itemsleeptime_clicked)
+                binding.textviewItemsleeptimeSleeptime.setTextColor(
+                    binding.root.context.resources.getColor(
+                        R.color.white
+                    )
+                )
+                binding.textviewItemsleeptimeLoop.setTextColor(
+                    binding.root.context.resources.getColor(
+                        R.color.white
+                    )
+                )
+            } else {
+                binding.itemSleeptime.background =
+                    binding.root.context.getDrawable(R.drawable.background_itemsleeptime_default)
+                binding.textviewItemsleeptimeSleeptime.setTextColor(
+                    binding.root.context.resources.getColor(
+                        R.color.black
+                    )
+                )
+                binding.textviewItemsleeptimeLoop.setTextColor(
+                    binding.root.context.resources.getColor(
+                        R.color.black
+                    )
+                )
+            }
         }
 
         companion object {
@@ -38,8 +68,9 @@ class SleeptimeListAdapter(): ListAdapter<Sleeptime, SleeptimeListAdapter.Sleept
         }
     }
 
-    class SleeptimeListDiffUtil(): DiffUtil.ItemCallback<Sleeptime>() {
+    class SleeptimeListDiffUtil : DiffUtil.ItemCallback<Sleeptime>() {
         override fun areContentsTheSame(oldItem: Sleeptime, newItem: Sleeptime) = oldItem == newItem
-        override fun areItemsTheSame(oldItem: Sleeptime, newItem: Sleeptime) = oldItem.sleepTimeId == newItem.sleepTimeId
+        override fun areItemsTheSame(oldItem: Sleeptime, newItem: Sleeptime) =
+            oldItem.sleepTimeId == newItem.sleepTimeId
     }
 }

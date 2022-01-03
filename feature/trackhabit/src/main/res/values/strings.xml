@@ -10,7 +10,7 @@
     <string name="sleeptime_sleeptimetitle">You need to go to bed at</string>
     <string name="sleeptime_confirmwaketime">Sleep</string>
     <string name="sleeptime_defaulttimepicker">00:00</string>
-    <string name="sleeptime_confirmsleeptime">Select and set an alarm</string>
+    <string name="sleeptime_confirmsleeptime">Confirm</string>
     <string name="sleeptime">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
     <string name="fragment_addhabit_monday">Monday</string>
     <string name="fragment_addhabit_tuesday">Tuesday</string>
@@ -21,10 +21,14 @@
     <string name="fragment_addhabit_sunday">Sunday</string>
     <string name="fragment_addhabit_settime">Set time:</string>
     <string name="fragment_addhabit_done">Hoàn tất</string>
-    <string name="fragment_addhabit_cancel">cancel</string>
+    <string name="all_cancel">cancel</string>
     <string name="fragment_addhabit_habitdescription">Habit description</string>
     <string name="fragment_addhabit_description">Description</string>
     <string name="fragment_addhabit_habitname">Habit name</string>
     <string name="fragment_addhabit_name">Name</string>
     <string name="fragment_addhabit_frequency">frequency</string>
+    <string name="sleeptime_backbutton">Back</string>
+    <string name="dialogsetnotisleeptime_message">Reminders will be sent to you 15 minutes before bedtime</string>
+    <string name="all_ok">OK</string>
+
 </resources>
