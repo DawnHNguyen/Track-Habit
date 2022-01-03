@@ -231,7 +231,7 @@
             android:id="@+id/button_fragmentAddHabit_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_addhabit_cancel"
+            android:text="@string/all_cancel"
             android:layout_marginStart="@dimen/all_margin_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_fragmentAddHabit_buttonDone" />

@@ -92,7 +92,7 @@ class SleepTimeViewModel @Inject constructor(
 
     fun onConfirmWaketimeUpdateVisibility() {
         viewModelScope.launch {
-            delay(40)
+            delay(20)
             _conFirmWakeTimeVisibility.value = View.GONE
             _sleepTimeTilteVisibility.value = View.VISIBLE
             _confirmSleeptimeVisibility.value = View.VISIBLE

@@ -1,14 +1,18 @@
 package com.track.trackhabit.habit.presentation.ui.sleeptime
 
+import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentSleepTimeBinding
+import com.track.trackhabit.habit.databinding.SetRemindSleepDialogFragmentBinding
 import com.track.trackhabit.habit.presentation.ui.OnClickBackSleeptime
 import com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime
 import com.track.trackhabit.habit.presentation.ui.OnClickSuggestTimeRecyclerView
@@ -37,6 +41,9 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         binding.backListener = this
         setTimePicker()
         initializeSleeptimeRecyclerView()
+        binding.buttonSleeptimeConfrimsleeptime.setOnClickListener {
+            showDialogSetReminSleep()
+        }
     }
 
     private fun initializeSleeptimeRecyclerView() {
@@ -80,5 +87,28 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         viewModel.onBackUpdateVisibility()
         viewModel.resetTimepicker()
         viewModel.setConfirmSleeptimeDisable()
+    }
+
+    private fun showDialogSetReminSleep() {
+        val dialogBinding: SetRemindSleepDialogFragmentBinding? = DataBindingUtil.inflate(
+            LayoutInflater.from(this.context),
+            R.layout.set_remind_sleep_dialog_fragment,
+            null,
+            false
+        )
+        val dialog = AlertDialog.Builder(this.context).create()
+
+        dialog.apply {
+            setView(dialogBinding?.root)
+            window?.setBackgroundDrawable(
+                resources.getDrawable(
+                    R.drawable.background_dialog_setremindsleep
+                )
+            )
+        }.show()
+
+        dialogBinding?.buttonDialogsetremindsleepCancel?.setOnClickListener {
+            dialog.cancel()
+        }
     }
 }

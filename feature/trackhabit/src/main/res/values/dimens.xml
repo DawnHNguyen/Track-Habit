@@ -13,6 +13,7 @@
     <dimen name="radius_itemsleeptime_itemcorner">8dp</dimen>
     <dimen name="radius_sleeptime_confirmsleeptime_buttoncorner">8dp</dimen>
     <dimen name="radius_sleeptime_backbutton_buttoncorner">8dp</dimen>
+    <dimen name="radius_sleeptime_dialog_buttoncorner">8dp</dimen>
     <dimen name="textsize_sleeptime_title">16sp</dimen>
     <dimen name="textsize_sleeptime_button">14sp</dimen>
     <dimen name="textsize_sleeptime_time">56sp</dimen>
@@ -38,4 +39,9 @@
     <dimen name="stroke_sleeptime_backbutton">2dp</dimen>
     <dimen name="width_sleeptime_confirmsleeptime">120dp</dimen>
     <dimen name="width_sleeptime_back">120dp</dimen>
+    <dimen name="textsize_sleeptime_dialog_setremindsleep_message">14sp</dimen>
+    <dimen name="paddingvert_sleeptime_dialog_setremindsleep">24dp</dimen>
+    <dimen name="paddinghori_sleeptime_dialog_setremindsleep">60dp</dimen>
+    <dimen name="margin_sleeptime_dialog_setremindsleep_buttontomessage_top">24dp</dimen>
+    <dimen name="width_sleeptime_dialog_setremindsleep_button">83dp</dimen>
 </resources>
