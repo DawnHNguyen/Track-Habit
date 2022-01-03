@@ -83,10 +83,12 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
     }
 
     override fun onClickBackButton() {
-        viewModel.clearListSuggestSleeptime()
-        viewModel.onBackUpdateVisibility()
-        viewModel.resetTimepicker()
-        viewModel.setConfirmSleeptimeDisable()
+        with(viewModel){
+            clearListSuggestSleeptime()
+            onBackUpdateVisibility()
+            resetTimepicker()
+            setConfirmSleeptimeDisable()
+        }
     }
 
     private fun showDialogSetReminSleep() {
