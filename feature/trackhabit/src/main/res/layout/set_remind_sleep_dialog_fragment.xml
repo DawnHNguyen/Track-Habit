@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_sleeptime_dialog_setremindsleep_buttontomessage_top">
+            android:layout_marginTop="@dimen/margintop_sleeptime_dialog_setremindsleep_button">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_dialogsetremindsleep_cancel"

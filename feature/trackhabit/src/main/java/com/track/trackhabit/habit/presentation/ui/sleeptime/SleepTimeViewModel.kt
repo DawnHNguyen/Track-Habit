@@ -119,7 +119,7 @@ class SleepTimeViewModel @Inject constructor(
         _isEnabledConfirmSleeptimeButton.value = true
     }
 
-    fun setConfirmSleeptimeDisable(){
+    fun setConfirmSleeptimeDisable() {
         _isEnabledConfirmSleeptimeButton.value = false
     }
 

@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <stroke android:width="@dimen/stroke_sleeptime_backbutton"
         android:color="@color/purple_sleeptime"/>
-    <corners android:radius="@dimen/radius_sleeptime_dialog_buttoncorner"/>
+    <corners android:radius="@dimen/radius_sleeptime_dialog_setremindsleep_buttoncorner"/>
 
 </shape>
