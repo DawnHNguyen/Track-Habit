@@ -10,8 +10,12 @@
             type="com.track.trackhabit.habit.presentation.ui.sleeptime.SleepTimeViewModel" />
 
         <variable
-            name="confirmSleepTimeListener"
+            name="confirmWakeTimeListener"
             type="com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime" />
+
+        <variable
+            name="backListener"
+            type="com.track.trackhabit.habit.presentation.ui.OnClickBackSleeptime" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -54,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintop_sleeptime_confirmwaketimebutton"
-                android:onClick="@{() -> confirmSleepTimeListener.onClickConfirmWaketime()}"
+                android:onClick="@{() -> confirmWakeTimeListener.onClickConfirmWaketime()}"
                 android:text="@string/sleeptime_confirmwaketime"
                 android:textAllCaps="false"
                 android:textSize="@dimen/textsize_sleeptime_button"
@@ -87,18 +91,38 @@
                 app:sleeptime="@{sleeptimeViewModel.sleepTimeList}" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_sleeptime_back"
+                android:layout_width="@dimen/width_sleeptime_back"
+                android:layout_height="@dimen/height_sleeptime_back_button"
+                android:layout_marginTop="@dimen/margin_sleeptime_confirmsleeptime_buttun_top"
+                android:background="@drawable/background_sleeptime_backbutton"
+                android:gravity="center"
+                android:onClick="@{() -> backListener.onClickBackButton()}"
+                android:text="@string/sleeptime_backbutton"
+                android:textColor="@color/purple_sleeptime"
+                android:textSize="@dimen/textsize_sleeptime_button"
+                android:visibility="@{sleeptimeViewModel.backButtonVisibility}"
+                app:layout_constraintEnd_toStartOf="@id/button_sleeptime_confrimsleeptime"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/recyclerview_sleeptime_suggestsleeptime" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_sleeptime_confrimsleeptime"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_sleeptime_confirmsleeptime_buttun"
-                android:layout_marginHorizontal="@dimen/margin_sleeptime_confirmsleeptime_button_horizontal"
+                android:layout_width="@dimen/width_sleeptime_confirmsleeptime"
+                android:layout_height="@dimen/height_sleeptime_confirmsleeptime_button"
+                android:layout_marginStart="@dimen/margin_sleeptime_confirmsleeptime_buttun_start"
                 android:layout_marginTop="@dimen/margin_sleeptime_confirmsleeptime_buttun_top"
                 android:background="@drawable/background_confirmsleeptime_button"
+                android:backgroundTint="@color/background_confirmsleeptime_button_color"
+                android:enabled="@{sleeptimeViewModel.isEnabledConfirmSleeptime}"
                 android:gravity="center"
                 android:text="@string/sleeptime_confirmsleeptime"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize_sleeptime_button"
-                android:visibility="invisible"
-                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="@{sleeptimeViewModel.confirmSleeptimeVisibility}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/button_sleeptime_back"
                 app:layout_constraintTop_toBottomOf="@id/recyclerview_sleeptime_suggestsleeptime" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
