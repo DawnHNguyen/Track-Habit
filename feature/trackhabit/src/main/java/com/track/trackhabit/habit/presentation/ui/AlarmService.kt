@@ -11,45 +11,45 @@ import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
 
 class AlarmService(private val context: Context) {
+    private val intent = getIntent()
+
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
 
     fun setCancelAlarm(){
-        setCancel(getPendingIntent(
-            getIntent().apply {
-                action = Const.CANCEL_ALARM_TIME
-                putExtra(Const.EXTRA_EXACT_ALARM_TIME,0L)
-                Log.d("checkCancel","Status: OK")
-            }
-        ))
 
+        val pendingIntent = getPendingIntent(intent)
+        Log.d("checkIntentCancel"," - ${pendingIntent} - ${intent} -${intent.extras}")
+        setCancel(pendingIntent)
     }
 
     fun setSnoozeAlarm(){
-         setElapse(getPendingIntent(
-            getIntent().apply {
-                action = Const.SET_SNOOZE_ALARM_TIME
-                putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
-            }
-        ))
+
+        val pendingIntent = getPendingIntent(intent.apply {
+            action = Const.SET_SNOOZE_ALARM_TIME
+            putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
+        })
+        Log.d("checkIntentSnooze"," - ${pendingIntent} - ${intent} -${intent.extras}")
+        setElapse(pendingIntent)
+
     }
 
     fun setRepeating(timeInMillis: Long){
+
+        val pendingIntent = getPendingIntent(intent.apply {
+            action = Const.ACTION_SET_REPETITIVE_EXACT
+            putExtra(Const.EXTRA_EXACT_ALARM_TIME, timeInMillis)
+        })
+        Log.d("checkIntentRepeat"," - ${pendingIntent} - ${intent} -${intent.extras}")
         setAlarm(
             timeInMillis,
-            getPendingIntent(
-                getIntent().apply {
-                    action = Const.ACTION_SET_REPETITIVE_EXACT
-                    putExtra(Const.EXTRA_EXACT_ALARM_TIME, timeInMillis)
-                }
-            )
+            pendingIntent
         )
     }
 
 
     private fun setCancel(pendingIntent: PendingIntent){
         alarmManager?.cancel(pendingIntent)
-        Log.d("checkPenDing","${pendingIntent} ")
     }
 
     private fun setElapse(pendingIntent: PendingIntent){
