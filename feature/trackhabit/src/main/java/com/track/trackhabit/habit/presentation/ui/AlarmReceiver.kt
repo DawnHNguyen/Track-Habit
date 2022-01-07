@@ -26,6 +26,7 @@ class AlarmReceiver: BroadcastReceiver() {
 
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
         var alarmService = AlarmService(context)
+        Log.d("CheckAction","-action ${intent.action}")
         when (intent.action) {
             Const.START_SNOOZE_ALARM_TIME -> {
                 setSnoozeAlarm(alarmService)
@@ -36,10 +37,6 @@ class AlarmReceiver: BroadcastReceiver() {
 
             Const.SET_SNOOZE_ALARM_TIME ->{
                 buildNotification(context, "Set Snooze Time")
-            }
-
-            Const.CANCEL_ALARM_TIME -> {
-                setCancelAlarmService(alarmService)
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
@@ -121,9 +118,6 @@ class AlarmReceiver: BroadcastReceiver() {
         alarmService.setRepeating(cal.timeInMillis)
     }
 
-    private fun setCancelAlarmService(alarmService: AlarmService){
-        alarmService.setCancelAlarm()
-    }
     private fun setSnoozeAlarm(alarmService: AlarmService){
         alarmService.setSnoozeAlarm()
     }
