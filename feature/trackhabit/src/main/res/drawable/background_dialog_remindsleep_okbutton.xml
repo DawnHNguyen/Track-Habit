@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/maincolor_orange"/>
-    <corners android:radius="@dimen/radius_sleeptime_dialog_buttoncorner"/>
+    <corners android:radius="@dimen/radius_sleeptime_dialog_setremindsleep_buttoncorner"/>
 
 </shape>

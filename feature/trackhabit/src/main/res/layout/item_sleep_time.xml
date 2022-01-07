@@ -13,18 +13,18 @@
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:id="@+id/item_sleeptime"
+        android:id="@+id/item_sleepTime"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_itemsleeptime_sleeptime"
         android:layout_marginVertical="@dimen/margin_itemsleeptime_vertical"
         android:background="@drawable/background_itemsleeptime_default"
         android:gravity="center_vertical"
-        android:orientation="vertical"
         android:onClick="@{() -> itemListener.onClickItemSugesstTime(sleeptime.loop)}"
+        android:orientation="vertical"
         android:paddingStart="@dimen/padding_itemsleeptime_sleeptime_paddingstart">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_itemsleeptime_sleeptime"
+            android:id="@+id/textView_itemSleepTime_sleepTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{sleeptime.sleepTime}"
@@ -32,10 +32,10 @@
             android:textSize="@dimen/textsize_itemsleeptime" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textview_itemsleeptime_loop"
+            android:id="@+id/textView_itemSleepTime_loop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/sleeptime(sleeptime.sleepDuration, sleeptime.loop)}"
+            android:text="@{@string/sleeptime_description(sleeptime.sleepDuration, sleeptime.loop)}"
             android:textColor="@color/black"
             android:textSize="@dimen/textsize_itemsleeptime" />
 

@@ -17,7 +17,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerview_home_habitlist"
+            android:id="@+id/recyclerView_activityHome_habitList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
             android:text="tap here to send notification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerview_home_habitlist" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView_activityHome_habitList" />
 
         <Button
             android:id="@+id/button_cancelNotification"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/button_setNotification" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_activityhome_addhabit"
+            android:id="@+id/fab_activityHome_addHabitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_activityhome_fab"

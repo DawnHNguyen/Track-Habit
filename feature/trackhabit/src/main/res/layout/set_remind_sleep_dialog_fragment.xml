@@ -26,10 +26,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_sleeptime_dialog_setremindsleep_buttontomessage_top">
+            android:layout_marginTop="@dimen/margintop_sleeptime_dialog_setremindsleep_button">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_dialogsetremindsleep_cancel"
+                android:id="@+id/button_dialogSetRemindSleep_cancel"
                 android:layout_width="@dimen/width_sleeptime_dialog_setremindsleep_button"
                 android:layout_height="match_parent"
                 android:background="@drawable/background_dialog_remindsleep_cancelbutton"
@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_dialogsetremindsleep_ok"
+                android:id="@+id/button_dialogSetRemindSleep_ok"
                 android:layout_width="@dimen/width_sleeptime_dialog_setremindsleep_button"
                 android:layout_height="match_parent"
                 android:background="@drawable/background_dialog_remindsleep_okbutton"

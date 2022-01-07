@@ -1,47 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    all-->
+    <dimen name="all_margin_start">16dp</dimen>
+    <dimen name="all_margin_top_parent">30dp</dimen>
+    <dimen name="all_margin_end">16dp</dimen>
+    <dimen name="all_textsize_settime">32sp</dimen>
+    <dimen name="all_marginall">16dp</dimen>
+
+    <!--    activity home-->
     <dimen name="margin_activityhome_fab">16dp</dimen>
+
+    <!--    item habit-->
     <dimen name="margin_itemhabit_habit">16dp</dimen>
     <dimen name="height_itemhabit_habit">80dp</dimen>
-    <dimen name="height_itemsleeptime_sleeptime">56dp</dimen>
     <dimen name="padding_itemhabit_habit_paddingstart">16dp</dimen>
-    <dimen name="padding_itemsleeptime_sleeptime_paddingstart">16dp</dimen>
     <dimen name="textsize_itemhabit_habitname">16sp</dimen>
-    <dimen name="textsize_itemsleeptime">14sp</dimen>
     <dimen name="radius_itemhabit_itemcorner">16dp</dimen>
-    <dimen name="radius_sleeptime_time">8dp</dimen>
+
+    <!--    item sleeptime-->
+    <dimen name="height_itemsleeptime_sleeptime">56dp</dimen>
+    <dimen name="padding_itemsleeptime_sleeptime_paddingstart">16dp</dimen>
+    <dimen name="textsize_itemsleeptime">14sp</dimen>
     <dimen name="radius_itemsleeptime_itemcorner">8dp</dimen>
+    <dimen name="margin_itemsleeptime_vertical">16dp</dimen>
+
+    <!--    sleeptime fragment-->
+    <dimen name="radius_sleeptime_time">8dp</dimen>
     <dimen name="radius_sleeptime_confirmsleeptime_buttoncorner">8dp</dimen>
     <dimen name="radius_sleeptime_backbutton_buttoncorner">8dp</dimen>
-    <dimen name="radius_sleeptime_dialog_buttoncorner">8dp</dimen>
+    <dimen name="stroke_sleeptime_backbutton">2dp</dimen>
     <dimen name="textsize_sleeptime_title">16sp</dimen>
     <dimen name="textsize_sleeptime_button">14sp</dimen>
     <dimen name="textsize_sleeptime_time">56sp</dimen>
     <dimen name="margintop_sleeptime_time">36dp</dimen>
     <dimen name="margintop_sleeptime_confirmwaketimebutton">56dp</dimen>
     <dimen name="margintop_sleeptime_sleeptimetitle">56dp</dimen>
-    <dimen name="margin_itemsleeptime_vertical">16dp</dimen>
-    <dimen name="margin_sleeptime_suggestsleeptime_horizontal">32dp</dimen>
-    <dimen name="margin_sleeptime_suggestsleeptime_top">20dp</dimen>
+    <dimen name="margin_horizontal_sleeptime_suggestsleeptime">32dp</dimen>
+    <dimen name="margintop_sleeptime_suggestsleeptime">20dp</dimen>
+    <dimen name="margintop_sleeptime_confirmsleeptime_button">28dp</dimen>
+    <dimen name="marginstart_sleeptime_confirmsleeptime_button">40dp</dimen>
+    <dimen name="width_sleeptime_confirmsleeptime_button">120dp</dimen>
+    <dimen name="width_sleeptime_backbutton">120dp</dimen>
     <dimen name="height_sleeptime_confirmsleeptime_button">40dp</dimen>
     <dimen name="height_sleeptime_back_button">40dp</dimen>
-    <dimen name="margin_sleeptime_confirmsleeptime_buttun_top">28dp</dimen>
-    <dimen name="margin_sleeptime_confirmsleeptime_buttun_start">40dp</dimen>
-    <dimen name="all_margin_start">16dp</dimen>
-    <dimen name="all_margin_top_parent">30dp</dimen>
-    <dimen name="add_habit_margin_textview">8dp</dimen>
-    <dimen name="all_margin_end">16dp</dimen>
-    <dimen name="addhabit_margin_edittext">24dp</dimen>
-    <dimen name="addhabit_margin_dayselection">6dp</dimen>
-    <dimen name="all_textsize_settime">32sp</dimen>
-    <dimen name="addhabit_margin_scrollview">16dp</dimen>
-    <dimen name="all_marginall">16dp</dimen>
-    <dimen name="stroke_sleeptime_backbutton">2dp</dimen>
-    <dimen name="width_sleeptime_confirmsleeptime">120dp</dimen>
-    <dimen name="width_sleeptime_back">120dp</dimen>
+
+    <!--    sleeptime fragment -> set remind before sleep dialog-->
     <dimen name="textsize_sleeptime_dialog_setremindsleep_message">14sp</dimen>
     <dimen name="paddingvert_sleeptime_dialog_setremindsleep">24dp</dimen>
     <dimen name="paddinghori_sleeptime_dialog_setremindsleep">60dp</dimen>
-    <dimen name="margin_sleeptime_dialog_setremindsleep_buttontomessage_top">24dp</dimen>
+    <dimen name="margintop_sleeptime_dialog_setremindsleep_button">24dp</dimen>
     <dimen name="width_sleeptime_dialog_setremindsleep_button">83dp</dimen>
+    <dimen name="radius_sleeptime_dialog_setremindsleep_buttoncorner">8dp</dimen>
+
+    <!--    add habit fragment-->
+    <dimen name="margin_addhabit_textview">8dp</dimen>
+    <dimen name="margin_addhabit_edittext">24dp</dimen>
+    <dimen name="margin_addhabit_dayselection">6dp</dimen>
+    <dimen name="margin_addhabit_scrollview">16dp</dimen>
 </resources>
