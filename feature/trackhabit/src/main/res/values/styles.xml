@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <style name="ToggleButtonSelectDay">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">@dimen/margin_addhabit_dayselection</item>
+        <item name="android:background">@drawable/background_addhabit</item>
+        <item name="android:checked">true</item>
+    </style>
 </resources>

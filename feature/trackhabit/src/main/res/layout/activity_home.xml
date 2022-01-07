@@ -13,7 +13,7 @@
         tools:context=".habit.presentation.ui.HomeActivity">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomnav_activityhome_bottomnav"
+            android:id="@+id/bottomNav_activityHome_bottomNav"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toTopOf="@id/bottomnav_activityhome_bottomnav"
+            app:layout_constraintBottom_toTopOf="@id/bottomNav_activityHome_bottomNav"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
