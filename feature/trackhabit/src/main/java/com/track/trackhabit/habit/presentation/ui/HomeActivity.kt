@@ -20,7 +20,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navBottom: BottomNavigationView = binding.bottomnavActivityhomeBottomnav
+        val navBottom: BottomNavigationView = binding.bottomNavActivityHomeBottomNav
         val navController = findNavController(R.id.nav_host_fragment)
 
         AppBarConfiguration(

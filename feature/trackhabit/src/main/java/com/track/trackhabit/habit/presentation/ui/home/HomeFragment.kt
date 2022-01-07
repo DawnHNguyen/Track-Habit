@@ -42,10 +42,10 @@ class HomeFragment : Fragment() {
 
         alarmService = AlarmService(requireContext())
 
-        val recyclerView = binding.recyclerviewHomeHabitlist
+        val recyclerView = binding.recyclerViewActivityHomeHabitList
         val habitsListAdapter = HabitsListAdapter()
         val habitList = mutableListOf<Habit>()
-        val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf(),"1111111")
+        val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf(), "1111111")
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.button.setOnClickListener {
@@ -54,7 +54,7 @@ class HomeFragment : Fragment() {
         }
 
 
-        createChannel( requireContext())
+        createChannel(requireContext())
 
         binding.buttonSetNotification.setOnClickListener {
             setAlarm {
@@ -76,10 +76,10 @@ class HomeFragment : Fragment() {
 
         binding.buttonCancelNotification.setOnClickListener {
             alarmService.setCancelAlarm()
-            Toast.makeText(requireContext(),"đã hủy báo thức", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "đã hủy báo thức", Toast.LENGTH_LONG).show()
         }
 
-        binding.fabActivityhomeAddhabit.setOnClickListener {
+        binding.fabActivityHomeAddHabitButton.setOnClickListener {
             findNavController().navigate(R.id.action_nav_home_to_nav_addhabit)
         }
     }

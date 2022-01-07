@@ -54,7 +54,7 @@
             android:text="@string/addhabit_errormessage_null"
             android:textColor="@color/textcolor_error"
             android:textSize="13sp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.nameErrorVisibility}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentAddHabit_name" />
 
@@ -94,7 +94,7 @@
             android:text="@string/addhabit_errormessage_null"
             android:textColor="@color/textcolor_error"
             android:textSize="13sp"
-            android:visibility="gone"
+            android:visibility="@{viewModel.descriptionErrorVisibility}"
             app:layout_constraintLeft_toLeftOf="@id/textInputLayout_fragmentAddHabit_description"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentAddHabit_description" />
 

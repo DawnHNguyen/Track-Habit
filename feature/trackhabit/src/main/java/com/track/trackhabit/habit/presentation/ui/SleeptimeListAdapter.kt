@@ -31,27 +31,27 @@ class SleeptimeListAdapter(private val onClickSuggestTime: OnClickSuggestTimeRec
             binding.sleeptime = sleepTime
             binding.executePendingBindings()
             if (sleepTime.isClicked) {
-                binding.itemSleeptime.background =
+                binding.itemSleepTime.background =
                     binding.root.context.getDrawable(R.drawable.background_itemsleeptime_clicked)
-                binding.textviewItemsleeptimeSleeptime.setTextColor(
+                binding.textViewItemSleepTimeSleepTime.setTextColor(
                     binding.root.context.resources.getColor(
                         R.color.white
                     )
                 )
-                binding.textviewItemsleeptimeLoop.setTextColor(
+                binding.textViewItemSleepTimeLoop.setTextColor(
                     binding.root.context.resources.getColor(
                         R.color.white
                     )
                 )
             } else {
-                binding.itemSleeptime.background =
+                binding.itemSleepTime.background =
                     binding.root.context.getDrawable(R.drawable.background_itemsleeptime_default)
-                binding.textviewItemsleeptimeSleeptime.setTextColor(
+                binding.textViewItemSleepTimeSleepTime.setTextColor(
                     binding.root.context.resources.getColor(
                         R.color.black
                     )
                 )
-                binding.textviewItemsleeptimeLoop.setTextColor(
+                binding.textViewItemSleepTimeLoop.setTextColor(
                     binding.root.context.resources.getColor(
                         R.color.black
                     )

@@ -41,13 +41,13 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         binding.backListener = this
         setTimePicker()
         initializeSleeptimeRecyclerView()
-        binding.buttonSleeptimeConfrimsleeptime.setOnClickListener {
+        binding.buttonSleepTimeConfrimSleepTime.setOnClickListener {
             showDialogSetReminSleep()
         }
     }
 
     private fun initializeSleeptimeRecyclerView() {
-        val recyclerView = binding.recyclerviewSleeptimeSuggestsleeptime
+        val recyclerView = binding.recyclerViewSleepTimeSuggestSleepTime
         recyclerView.itemAnimator = null
         val sleeptimeListAdapter = SleeptimeListAdapter(object : OnClickSuggestTimeRecyclerView {
             override fun onClickItemSugesstTime(clickedLoop: Int) {
@@ -60,7 +60,7 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
     }
 
     private fun setTimePicker() {
-        binding.textviewSleeptimeWaketime.setOnClickListener {
+        binding.textViewSleepTimeWakeTime.setOnClickListener {
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
@@ -109,7 +109,7 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
             )
         }.show()
 
-        dialogBinding?.buttonDialogsetremindsleepCancel?.setOnClickListener {
+        dialogBinding?.buttonDialogSetRemindSleepCancel?.setOnClickListener {
             dialog.cancel()
         }
     }

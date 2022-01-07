@@ -3,7 +3,6 @@ package com.track.trackhabit.habit.presentation.ui.home
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,70 +40,7 @@ class AddHabitFragment : Fragment() {
 
         addHabitViewModel.timeHabit.value = SimpleDateFormat("HH:mm").format(Date())
         alarmService = AlarmService(requireContext())
-
-        binding.toggleButtonFragmentAddHabitCheckMonday.setOnClickListener {
-            addHabitViewModel.monday = binding.toggleButtonFragmentAddHabitCheckMonday.isChecked
-        }
-
-        binding.toggleButtonFragmentAddHabitCheckTuesday.setOnClickListener {
-            addHabitViewModel.tuesday = binding.toggleButtonFragmentAddHabitCheckTuesday.isChecked
-        }
-
-        binding.toggleButtonFragmentAddHabitCheckWednesday.setOnClickListener {
-            addHabitViewModel.wednesday =
-                binding.toggleButtonFragmentAddHabitCheckWednesday.isChecked
-        }
-
-        binding.toggleButtonFragmentAddHabitCheckThursday.setOnClickListener {
-            addHabitViewModel.thursday = binding.toggleButtonFragmentAddHabitCheckThursday.isChecked
-        }
-
-        binding.toggleButtonFragmentAddHabitCheckFriday.setOnClickListener {
-            addHabitViewModel.friday = binding.toggleButtonFragmentAddHabitCheckFriday.isChecked
-        }
-
-        binding.toggleButtonFragmentAddHabitCheckSaturday.setOnClickListener {
-            addHabitViewModel.saturday = binding.toggleButtonFragmentAddHabitCheckSaturday.isChecked
-        }
-        binding.toggleButtonFragmentAddHabitCheckSunday.setOnClickListener {
-            addHabitViewModel.sunday = binding.toggleButtonFragmentAddHabitCheckSunday.isChecked
-        }
-
-        binding.buttonFragmentAddHabitButtonDone.setOnClickListener {
-            setVisibilityErrorMessage()
-            if (binding.textInputEditTextFragmentAddHabitName.text.isNullOrBlank() || binding.textInputEditTextFragmentAddHabitDescription.text.isNullOrBlank()) {
-                if (binding.textInputEditTextFragmentAddHabitName.text.isNullOrBlank()) {
-                    binding.textViewFragmentAddHabitNameError.visibility = View.VISIBLE
-                }
-                if (binding.textInputEditTextFragmentAddHabitDescription.text.isNullOrBlank()) {
-                    binding.textViewFragmentAddHabitDescriptionError.visibility = View.VISIBLE
-                }
-            } else {
-                Log.d(
-                    "check_databinding",
-                    "${addHabitViewModel.nameHabit.value} + ${addHabitViewModel.descriptionHabit.value} + ${addHabitViewModel.timeHabit.value}"
-                )
-                addHabitViewModel.addHabit()
-                findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
-            }
-
-
-//                alarmService.setRepeating(it)
-//                val intent =  Intent(context, AlarmReceiver::class.java).apply {
-//                    action = Const.ACTION_SET_REPETITIVE_EXACT
-//                    putExtra("MONDAY", monday)
-//                    putExtra("TUESDAY", tuesday)
-//                    putExtra("WEDNESDAY", wednesday)
-//                    putExtra("THURSDAY", thursday)
-//                    putExtra("FRIDAY", friday)
-//                    putExtra("SATURDAY", saturday)
-//                    putExtra("SUNDAY", sunday)
-////                    putExtra("TIME", it)
-//                }
-//                requireContext().sendBroadcast(intent)
-
-
-        }
+        setupToggleButton()
         binding.buttonFragmentAddHabitSetTime.setOnClickListener {
             setAlarm {
                 binding.buttonFragmentAddHabitSetTime.text =
@@ -113,6 +49,64 @@ class AddHabitFragment : Fragment() {
         }
         binding.buttonFragmentAddHabitCancel.setOnClickListener {
             findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
+        }
+    }
+
+    private fun setupToggleButton() {
+        with(binding) {
+            toggleButtonFragmentAddHabitCheckMonday.setOnClickListener {
+                addHabitViewModel.monday = binding.toggleButtonFragmentAddHabitCheckMonday.isChecked
+            }
+
+            toggleButtonFragmentAddHabitCheckTuesday.setOnClickListener {
+                addHabitViewModel.tuesday =
+                    binding.toggleButtonFragmentAddHabitCheckTuesday.isChecked
+            }
+
+            toggleButtonFragmentAddHabitCheckWednesday.setOnClickListener {
+                addHabitViewModel.wednesday =
+                    binding.toggleButtonFragmentAddHabitCheckWednesday.isChecked
+            }
+
+            toggleButtonFragmentAddHabitCheckThursday.setOnClickListener {
+                addHabitViewModel.thursday =
+                    binding.toggleButtonFragmentAddHabitCheckThursday.isChecked
+            }
+
+            toggleButtonFragmentAddHabitCheckFriday.setOnClickListener {
+                addHabitViewModel.friday = binding.toggleButtonFragmentAddHabitCheckFriday.isChecked
+            }
+
+            toggleButtonFragmentAddHabitCheckSaturday.setOnClickListener {
+                addHabitViewModel.saturday =
+                    binding.toggleButtonFragmentAddHabitCheckSaturday.isChecked
+            }
+            toggleButtonFragmentAddHabitCheckSunday.setOnClickListener {
+                addHabitViewModel.sunday = binding.toggleButtonFragmentAddHabitCheckSunday.isChecked
+            }
+
+            buttonFragmentAddHabitButtonDone.setOnClickListener {
+                setVisibilityErrorMessage()
+                addHabitViewModel.checkInputNullError()
+                navigateOnClickDone()
+            }
+
+
+            //                alarmService.setRepeating(it)
+            //                val intent =  Intent(context, AlarmReceiver::class.java).apply {
+            //                    action = Const.ACTION_SET_REPETITIVE_EXACT
+            //                    putExtra("MONDAY", monday)
+            //                    putExtra("TUESDAY", tuesday)
+            //                    putExtra("WEDNESDAY", wednesday)
+            //                    putExtra("THURSDAY", thursday)
+            //                    putExtra("FRIDAY", friday)
+            //                    putExtra("SATURDAY", saturday)
+            //                    putExtra("SUNDAY", sunday)
+            ////                    putExtra("TIME", it)
+            //                }
+            //                requireContext().sendBroadcast(intent)
+
+
         }
     }
 
@@ -140,4 +134,7 @@ class AddHabitFragment : Fragment() {
         }
     }
 
+    private fun navigateOnClickDone() {
+        if (addHabitViewModel.inputValidity.value!!) findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
+    }
 }
