@@ -8,6 +8,11 @@
     <!--    notification-->
     <string name="featureTrackhabit_channelId_notification">channel_id</string>
     <string name="featureTrackhabit_nameOfChannel_notification">name</string>
+    <string name="sleepNoti_title">It\'s Sleep Time</string>
+    <string name="sleepNoti_content">Get ready for bed, it\'s almost time for your chosen bedtime</string>
+    <string name="sleepNoti_chanel_name">Sleep Time Notification Chanel</string>
+    <string name="sleepNoti_chanel_description">This is a chanel for notification in feature sleeptime</string>
+    <string name="sleepNoti_chanel_id">sleep_chanel_id</string>
 
     <!--    bottom nav-->
     <string name="bottomnav_home_icontitle">Home</string>

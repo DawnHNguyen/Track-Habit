@@ -112,5 +112,37 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         dialogBinding?.buttonDialogSetRemindSleepCancel?.setOnClickListener {
             dialog.cancel()
         }
+//        dialogBinding?.buttonDialogSetRemindSleepOk?.setOnClickListener {
+//            setupSleeptimeNoti()
+//        }
     }
+
+//    private fun setupSleeptimeNoti(){
+//        var builder = NotificationCompat.Builder(this.requireContext(), R.string.sleepNoti_chanel_id.toString())
+//            .setSmallIcon(R.drawable.notification_icon)
+//            .setContentTitle(R.string.sleepNoti_title.toString())
+//            .setContentText(R.string.sleepNoti_content.toString())
+//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+//        val sleeptimeNotifyId = 1
+//        with(NotificationManagerCompat.from(this.requireContext())){
+//            notify(sleeptimeNotifyId, builder.build())
+//        }
+//    }
+//
+//    private fun createNotificationChannel() {
+//        // Create the NotificationChannel, but only on API 26+ because
+//        // the NotificationChannel class is new and not in the support library
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            val name = getString(R.string.sleepNoti_chanel_name)
+//            val descriptionText = getString(R.string.sleepNoti_chanel_description)
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val channel = NotificationChannel(R.string.sleepNoti_chanel_id.toString(), name, importance).apply {
+//                description = descriptionText
+//            }
+//            // Register the channel with the system
+//            val notificationManager: NotificationManager =
+//                getSystemService() as NotificationManager
+//            notificationManager.createNotificationChannel(channel)
+//        }
+//    }
 }
