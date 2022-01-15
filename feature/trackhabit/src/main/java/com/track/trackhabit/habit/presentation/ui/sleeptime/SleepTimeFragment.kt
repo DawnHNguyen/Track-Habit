@@ -1,7 +1,11 @@
 package com.track.trackhabit.habit.presentation.ui.sleeptime
 
+import android.app.AlarmManager
 import android.app.AlertDialog
+import android.app.PendingIntent
 import android.app.TimePickerDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentSleepTimeBinding
 import com.track.trackhabit.habit.databinding.SetRemindSleepDialogFragmentBinding
-import com.track.trackhabit.habit.presentation.ui.OnClickBackSleeptime
-import com.track.trackhabit.habit.presentation.ui.OnClickConfirmWaketime
-import com.track.trackhabit.habit.presentation.ui.OnClickSuggestTimeRecyclerView
-import com.track.trackhabit.habit.presentation.ui.SleeptimeListAdapter
+import com.track.trackhabit.habit.presentation.constpackage.Const
+import com.track.trackhabit.habit.presentation.ui.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import java.text.SimpleDateFormat as SimpleDateFormat1
@@ -112,37 +114,21 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         dialogBinding?.buttonDialogSetRemindSleepCancel?.setOnClickListener {
             dialog.cancel()
         }
-//        dialogBinding?.buttonDialogSetRemindSleepOk?.setOnClickListener {
-//            setupSleeptimeNoti()
-//        }
+        dialogBinding?.buttonDialogSetRemindSleepOk?.setOnClickListener {
+            creatRemindSleepNoti()
+            dialog.hide()
+        }
     }
 
-//    private fun setupSleeptimeNoti(){
-//        var builder = NotificationCompat.Builder(this.requireContext(), R.string.sleepNoti_chanel_id.toString())
-//            .setSmallIcon(R.drawable.notification_icon)
-//            .setContentTitle(R.string.sleepNoti_title.toString())
-//            .setContentText(R.string.sleepNoti_content.toString())
-//            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//        val sleeptimeNotifyId = 1
-//        with(NotificationManagerCompat.from(this.requireContext())){
-//            notify(sleeptimeNotifyId, builder.build())
-//        }
-//    }
-//
-//    private fun createNotificationChannel() {
-//        // Create the NotificationChannel, but only on API 26+ because
-//        // the NotificationChannel class is new and not in the support library
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            val name = getString(R.string.sleepNoti_chanel_name)
-//            val descriptionText = getString(R.string.sleepNoti_chanel_description)
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val channel = NotificationChannel(R.string.sleepNoti_chanel_id.toString(), name, importance).apply {
-//                description = descriptionText
-//            }
-//            // Register the channel with the system
-//            val notificationManager: NotificationManager =
-//                getSystemService() as NotificationManager
-//            notificationManager.createNotificationChannel(channel)
-//        }
-//    }
+    private fun creatRemindSleepNoti() {
+        val intent = Intent(this.requireContext(), AlarmReceiver::class.java)
+        intent.action = Const.SET_REMIND_SLEEPTIME
+        val pendingIntent = PendingIntent.getBroadcast(this.requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            viewModel.calNotiTime(viewModel.selectedTime.value.toString()),
+            pendingIntent
+        )
+    }
 }

@@ -48,6 +48,18 @@ class AlarmReceiver : BroadcastReceiver() {
                     )
                 }
             }
+
+            Const.SET_REMIND_SLEEPTIME -> {
+                val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle("It's Sleep Time")
+                    .setContentText("It's almost time for your chosen bedtime")
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                with(NotificationManagerCompat.from(context)) {
+                    notify(ConstIdChannel.ID_REMIND_SLEEP_NOTIFICATION, builder.build())
+                }
+            }
         }
 
     }

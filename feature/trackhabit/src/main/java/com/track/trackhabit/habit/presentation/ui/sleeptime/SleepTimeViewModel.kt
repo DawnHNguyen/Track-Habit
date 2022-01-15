@@ -11,6 +11,7 @@ import com.track.trackhabit.habit.domain.entity.Sleeptime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,6 +41,14 @@ class SleepTimeViewModel @Inject constructor(
     private val _isEnabledConfirmSleeptimeButton = MutableLiveData(false)
     val isEnabledConfirmSleeptime: LiveData<Boolean>
         get() = _isEnabledConfirmSleeptimeButton
+
+//    private val _remindTime = MutableLiveData<Long>()
+//    val remindTime: LiveData<Long>
+//        get() = _remindTime
+
+    private val _selectedTime = MutableLiveData<String>()
+    val selectedTime: LiveData<String>
+        get() = _selectedTime
 
     private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
@@ -138,7 +147,18 @@ class SleepTimeViewModel @Inject constructor(
                 clickedLoop == it.loop
             )
             sleepTimeList.add(sleepTimeLoop)
+            if (sleepTimeLoop.isClicked) _selectedTime.value = sleepTimeLoop.sleepTime
         }
         _sleepTimeList.value = sleepTimeList
+    }
+
+    fun calNotiTime(timeSelect: String): Long {
+        val arr = timeSelect.split(':')
+        val presentTime = Calendar.getInstance().timeInMillis
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
+        cal.set(Calendar.MINUTE, arr[1].toInt())
+        val notiTime = cal.timeInMillis - 15*60*1000
+        return if(notiTime >= presentTime - 15*60*1000) notiTime else notiTime + 24*3600*1000
     }
 }
