@@ -42,13 +42,9 @@ class SleepTimeViewModel @Inject constructor(
     val isEnabledConfirmSleeptime: LiveData<Boolean>
         get() = _isEnabledConfirmSleeptimeButton
 
-//    private val _remindTime = MutableLiveData<Long>()
-//    val remindTime: LiveData<Long>
-//        get() = _remindTime
-
-    private val _selectedTime = MutableLiveData<String>()
-    val selectedTime: LiveData<String>
-        get() = _selectedTime
+    private val _remindTime = MutableLiveData<Long>()
+    val remindTime: LiveData<Long>
+        get() = _remindTime
 
     private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
@@ -147,18 +143,18 @@ class SleepTimeViewModel @Inject constructor(
                 clickedLoop == it.loop
             )
             sleepTimeList.add(sleepTimeLoop)
-            if (sleepTimeLoop.isClicked) _selectedTime.value = sleepTimeLoop.sleepTime
+            if (sleepTimeLoop.isClicked) _remindTime.value = calNotiTime(sleepTimeLoop.sleepTime)
         }
         _sleepTimeList.value = sleepTimeList
     }
 
-    fun calNotiTime(timeSelect: String): Long {
+    private fun calNotiTime(timeSelect: String): Long {
         val arr = timeSelect.split(':')
         val presentTime = Calendar.getInstance().timeInMillis
         val cal = Calendar.getInstance()
         cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
         cal.set(Calendar.MINUTE, arr[1].toInt())
-        val notiTime = cal.timeInMillis - 15*60*1000
-        return if(notiTime >= presentTime - 15*60*1000) notiTime else notiTime + 24*3600*1000
+        val notiTime = cal.timeInMillis - 15 * 60 * 1000
+        return if (notiTime >= presentTime - 15 * 60 * 1000) notiTime else notiTime + 24 * 3600 * 1000
     }
 }
