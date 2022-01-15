@@ -52,8 +52,8 @@ class AlarmReceiver : BroadcastReceiver() {
             Const.SET_REMIND_SLEEPTIME -> {
                 val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
                     .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle("It's Sleep Time")
-                    .setContentText("It's almost time for your chosen bedtime")
+                    .setContentTitle(context.getString(R.string.sleepNoti_title))
+                    .setContentText(context.getString(R.string.sleepNoti_content))
                     .setPriority(NotificationCompat.PRIORITY_MAX)
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
                 with(NotificationManagerCompat.from(context)) {
