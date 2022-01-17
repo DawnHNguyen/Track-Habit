@@ -6,7 +6,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.track.trackhabit.habit.R
@@ -18,7 +17,7 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-class AlarmReceiver: BroadcastReceiver() {
+class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
@@ -26,79 +25,95 @@ class AlarmReceiver: BroadcastReceiver() {
 
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
         var alarmService = AlarmService(context)
-        Log.d("CheckAction","-action ${intent.action}")
+        Log.d("CheckAction", "-action ${intent.action}")
         when (intent.action) {
             Const.START_SNOOZE_ALARM_TIME -> {
                 setSnoozeAlarm(alarmService)
-                with(NotificationManagerCompat.from(context)){
+                with(NotificationManagerCompat.from(context)) {
                     cancel(ConstIdChannel.ID_NOTIFICATION_1)
                 }
             }
 
-            Const.SET_SNOOZE_ALARM_TIME ->{
+            Const.SET_SNOOZE_ALARM_TIME -> {
                 buildNotification(context, "Set Snooze Time")
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
                 setRepetitiveAlarm(alarmService)
-                if(isToday(intent)){
-                    buildSnoozeNotification(context, "Set Repetitive Exact Time", convertDate(timeInMillis))
+                if (isToday(intent)) {
+                    buildSnoozeNotification(
+                        context,
+                        "Set Repetitive Exact Time",
+                        convertDate(timeInMillis)
+                    )
+                }
+            }
+
+            Const.SET_REMIND_SLEEPTIME -> {
+                val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
+                    .setContentTitle(context.getString(R.string.sleepNoti_title))
+                    .setContentText(context.getString(R.string.sleepNoti_content))
+                    .setPriority(NotificationCompat.PRIORITY_MAX)
+                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                with(NotificationManagerCompat.from(context)) {
+                    notify(ConstIdChannel.ID_REMIND_SLEEP_NOTIFICATION, builder.build())
                 }
             }
         }
 
     }
 
-    private fun isToday(intent: Intent): Boolean{
+    private fun isToday(intent: Intent): Boolean {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        Log.d("checkm" ,"${intent.getBooleanExtra("MONDAY", false)}")
-        Log.d("checktu" ,"${intent.getBooleanExtra("TUESDAY", false)}")
-        Log.d("checkwe" ,"${intent.getBooleanExtra("WEDNESDAY", false)}")
-        Log.d("checkmth" ,"${intent.getBooleanExtra("THURSDAY", false)}" )
-        Log.d("checkfr" ,"${intent.getBooleanExtra("FRIDAY", false)}")
-        Log.d("checksa" ,"${intent.getBooleanExtra("SATURDAY", false)}")
-        Log.d("checksu" ,"${intent.getBooleanExtra("SUNDAY", false)}")
+        Log.d("checkm", "${intent.getBooleanExtra("MONDAY", false)}")
+        Log.d("checktu", "${intent.getBooleanExtra("TUESDAY", false)}")
+        Log.d("checkwe", "${intent.getBooleanExtra("WEDNESDAY", false)}")
+        Log.d("checkmth", "${intent.getBooleanExtra("THURSDAY", false)}")
+        Log.d("checkfr", "${intent.getBooleanExtra("FRIDAY", false)}")
+        Log.d("checksa", "${intent.getBooleanExtra("SATURDAY", false)}")
+        Log.d("checksu", "${intent.getBooleanExtra("SUNDAY", false)}")
 
-        when(today){
+        when (today) {
             Calendar.MONDAY -> {
-                if (intent.getBooleanExtra("MONDAY", true)){
+                if (intent.getBooleanExtra("MONDAY", true)) {
                     return true
                 }
                 return false
             }
             Calendar.TUESDAY -> {
 
-                if (intent.getBooleanExtra("TUESDAY", true)){
+                if (intent.getBooleanExtra("TUESDAY", true)) {
                     return true
                 }
                 return false
             }
             Calendar.WEDNESDAY -> {
-                if(intent.getBooleanExtra("WEDNESDAY", true)){
+                if (intent.getBooleanExtra("WEDNESDAY", true)) {
                     return true
                 }
                 return false
             }
             Calendar.THURSDAY -> {
-                if (intent.getBooleanExtra("THURSDAY", true)){
+                if (intent.getBooleanExtra("THURSDAY", true)) {
                     return true
                 }
                 return false
             }
             Calendar.FRIDAY -> {
-                if (intent.getBooleanExtra("FRIDAY", true)){
-                     return true
+                if (intent.getBooleanExtra("FRIDAY", true)) {
+                    return true
                 }
                 return false
             }
             Calendar.SATURDAY -> {
-                if (intent.getBooleanExtra("SATURDAY", true)){
+                if (intent.getBooleanExtra("SATURDAY", true)) {
                     return true
                 }
                 return false
             }
             Calendar.SUNDAY -> {
-                if (intent.getBooleanExtra("SUNDAY", true)){
+                if (intent.getBooleanExtra("SUNDAY", true)) {
                     return true
                 }
                 return false
@@ -118,15 +133,16 @@ class AlarmReceiver: BroadcastReceiver() {
         alarmService.setRepeating(cal.timeInMillis)
     }
 
-    private fun setSnoozeAlarm(alarmService: AlarmService){
+    private fun setSnoozeAlarm(alarmService: AlarmService) {
         alarmService.setSnoozeAlarm()
     }
 
     private fun buildNotification(context: Context, title: String) {
-        val intent = Intent(context ,HomeActivity::class.java).apply {
+        val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, 0)
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, 0)
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -142,17 +158,27 @@ class AlarmReceiver: BroadcastReceiver() {
     }
 
     private fun buildSnoozeNotification(context: Context, title: String, message: String) {
-        val intent = Intent(context ,HomeActivity::class.java).apply {
+        val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(
+            context,
+            ConstRequestCode.REQUEST_CODE_ACTIVITY,
+            intent,
+            PendingIntent.FLAG_CANCEL_CURRENT
+        )
 
         val snoozeIntent = Intent(context, AlarmReceiver::class.java).apply {
             action = Const.START_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
         }
         val snoozePendingIntent: PendingIntent =
-            PendingIntent.getBroadcast(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, snoozeIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(
+                context,
+                ConstRequestCode.REQUEST_CODE_ACTIVITY,
+                snoozeIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -161,7 +187,7 @@ class AlarmReceiver: BroadcastReceiver() {
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
-            .addAction(R.drawable.ic_launcher_foreground,"Delay 5m", snoozePendingIntent)
+            .addAction(R.drawable.ic_launcher_foreground, "Delay 5m", snoozePendingIntent)
             .setAutoCancel(true)
 
 
