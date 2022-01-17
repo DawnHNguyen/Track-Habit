@@ -6,5 +6,5 @@ data class SleeptimeUIState(
     var confirmSleeptimeVisibility: Int,
     var backButtonVisibility: Int,
     var isEnabledConfirmSleeptimeButton: Boolean,
-//    var timePickerClickable: Boolean
+    var timePickerClickable: Boolean
 )
