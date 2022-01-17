@@ -22,25 +22,16 @@ class SleepTimeViewModel @Inject constructor(
     val wakeTime: LiveData<String>
         get() = _wakeTime
 
-    private val _conFirmWakeTimeVisibility = MutableLiveData(View.VISIBLE)
-    val conFirmWakeTimeVisibility: LiveData<Int>
-        get() = _conFirmWakeTimeVisibility
-
-    private val _sleepTimeTilteVisibility = MutableLiveData(View.INVISIBLE)
-    val sleepTimeTitleVisibility: LiveData<Int>
-        get() = _sleepTimeTilteVisibility
-
-    private val _confirmSleeptimeVisibility = MutableLiveData(View.INVISIBLE)
-    val confirmSleeptimeVisibility: LiveData<Int>
-        get() = _confirmSleeptimeVisibility
-
-    private val _backButtonVisibility = MutableLiveData(View.INVISIBLE)
-    val backButtonVisibility: LiveData<Int>
-        get() = _backButtonVisibility
-
-    private val _isEnabledConfirmSleeptimeButton = MutableLiveData(false)
-    val isEnabledConfirmSleeptime: LiveData<Boolean>
-        get() = _isEnabledConfirmSleeptimeButton
+    val uiState = MutableLiveData(
+        SleeptimeUIState(
+            View.VISIBLE,
+            View.INVISIBLE,
+            View.INVISIBLE,
+            View.INVISIBLE,
+            false,
+            true
+        )
+    )
 
     private val _remindTime = MutableLiveData<Long>()
     val remindTime: LiveData<Long>
@@ -98,10 +89,16 @@ class SleepTimeViewModel @Inject constructor(
     fun onConfirmWaketimeUpdateVisibility() {
         viewModelScope.launch {
             delay(20)
-            _conFirmWakeTimeVisibility.value = View.GONE
-            _sleepTimeTilteVisibility.value = View.VISIBLE
-            _confirmSleeptimeVisibility.value = View.VISIBLE
-            _backButtonVisibility.value = View.VISIBLE
+            uiState.value = uiState.value?.copy(
+                conFirmWakeTimeVisibility = View.GONE,
+                sleepTimeTitleVisibility = View.VISIBLE,
+                confirmSleeptimeVisibility = View.VISIBLE,
+                backButtonVisibility = View.VISIBLE,
+                timePickerClickable = false
+            )
+//            uiState.value = uiState.value?.copy(sleepTimeTitleVisibility = View.VISIBLE)
+//            uiState.value = uiState.value?.copy(confirmSleeptimeVisibility = View.VISIBLE)
+//            uiState.value = uiState.value?.copy(backButtonVisibility = View.VISIBLE)
         }
     }
 
@@ -110,10 +107,16 @@ class SleepTimeViewModel @Inject constructor(
     }
 
     fun onBackUpdateVisibility() {
-        _conFirmWakeTimeVisibility.value = View.VISIBLE
-        _sleepTimeTilteVisibility.value = View.INVISIBLE
-        _confirmSleeptimeVisibility.value = View.INVISIBLE
-        _backButtonVisibility.value = View.INVISIBLE
+        uiState.value = uiState.value?.copy(
+            conFirmWakeTimeVisibility = View.VISIBLE,
+            sleepTimeTitleVisibility = View.INVISIBLE,
+            confirmSleeptimeVisibility = View.INVISIBLE,
+            backButtonVisibility = View.INVISIBLE,
+            timePickerClickable = true
+        )
+//         uiState.value = uiState.value?.copy(sleepTimeTitleVisibility = View.INVISIBLE)
+//         uiState.value = uiState.value?.copy(confirmSleeptimeVisibility = View.INVISIBLE)
+//         uiState.value = uiState.value?.copy(backButtonVisibility = View.INVISIBLE)
     }
 
     fun resetTimepicker() {
@@ -121,11 +124,11 @@ class SleepTimeViewModel @Inject constructor(
     }
 
     fun setCofirmSleeptimeEnabled() {
-        _isEnabledConfirmSleeptimeButton.value = true
+        uiState.value = uiState.value?.copy(isEnabledConfirmSleeptimeButton = true)
     }
 
     fun setConfirmSleeptimeDisable() {
-        _isEnabledConfirmSleeptimeButton.value = false
+        uiState.value = uiState.value?.copy(isEnabledConfirmSleeptimeButton = false)
     }
 
     fun onClickItem(clickedLoop: Int) {
