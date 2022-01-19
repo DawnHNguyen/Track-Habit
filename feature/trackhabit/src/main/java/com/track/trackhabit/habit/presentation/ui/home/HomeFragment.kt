@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.R
@@ -25,6 +26,8 @@ import java.util.*
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
+    private val homeViewModel by viewModels<HomeViewModel>()
+
     private lateinit var alarmService: AlarmService
 
     private lateinit var binding: FragmentHomeBinding
@@ -34,6 +37,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.habits = homeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
