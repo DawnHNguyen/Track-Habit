@@ -11,6 +11,7 @@ import com.track.trackhabit.habit.domain.usecase.UpdateHabitUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
@@ -25,6 +26,10 @@ class HomeViewModel @Inject constructor(
     private val _habitList = MediatorLiveData<List<Habit>>()
     val habitList: LiveData<List<Habit>> get() = _habitList
     private var habitListSource: LiveData<List<Habit>> = MutableLiveData()
+
+    init {
+        getHabit()
+    }
 
     private fun getHabit() {
         viewModelScope.launch(dispatcher.main) {
