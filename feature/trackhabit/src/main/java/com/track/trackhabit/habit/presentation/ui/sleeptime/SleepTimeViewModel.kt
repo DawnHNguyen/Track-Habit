@@ -96,9 +96,6 @@ class SleepTimeViewModel @Inject constructor(
                 backButtonVisibility = View.VISIBLE,
                 timePickerClickable = false
             )
-//            uiState.value = uiState.value?.copy(sleepTimeTitleVisibility = View.VISIBLE)
-//            uiState.value = uiState.value?.copy(confirmSleeptimeVisibility = View.VISIBLE)
-//            uiState.value = uiState.value?.copy(backButtonVisibility = View.VISIBLE)
         }
     }
 
@@ -114,9 +111,6 @@ class SleepTimeViewModel @Inject constructor(
             backButtonVisibility = View.INVISIBLE,
             timePickerClickable = true
         )
-//         uiState.value = uiState.value?.copy(sleepTimeTitleVisibility = View.INVISIBLE)
-//         uiState.value = uiState.value?.copy(confirmSleeptimeVisibility = View.INVISIBLE)
-//         uiState.value = uiState.value?.copy(backButtonVisibility = View.INVISIBLE)
     }
 
     fun resetTimepicker() {
