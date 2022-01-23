@@ -3,6 +3,7 @@ package com.track.trackhabit.habit.presentation.ui.home
 import android.app.DatePickerDialog
 import android.app.Notification
 import android.app.TimePickerDialog
+import android.graphics.*
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
@@ -32,6 +35,50 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
+    private val habitsListAdapter = HabitsListAdapter()
+
+    private val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+
+
+        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+            return false
+        }
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.adapterPosition
+            if (direction == ItemTouchHelper.LEFT) {
+                habitsListAdapter.notifyItemChanged(position)
+                Toast.makeText(requireContext(), "Swipe left", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                val itemView = viewHolder.itemView
+                val height = itemView.bottom.toFloat() - itemView.top.toFloat()
+                val width = height / 3
+
+
+//                if (dX < 0) {
+//                    var paint.color = Color.RED
+//                    val background = RectF(itemView.right.toFloat() + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
+//                    c.drawRect(background, paint)
+//                    val icon = BitmapFactory.decodeResource(this@HomeFragment.resources, R.drawable.ic_statistical)
+//                    val margin = (dX / 5 - width) / 2
+//                    val iconDest = RectF(itemView.right.toFloat() + margin, itemView.top.toFloat() + width, itemView.right.toFloat() + (margin + width), itemView.bottom.toFloat() - width)
+//                    c.drawBitmap(icon, null, iconDest, paint)
+//                } else {
+//                    c.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+//                }
+            } else {
+                c.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+            }
+            super.onChildDraw(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive)
+        }
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,11 +95,15 @@ class HomeFragment : Fragment() {
         alarmService = AlarmService(requireContext())
 
         val recyclerView = binding.recyclerViewActivityHomeHabitList
-        val habitsListAdapter = HabitsListAdapter()
+
         val habitList = mutableListOf<Habit>()
         val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf(), "1111111")
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
+
         binding.button.setOnClickListener {
             habitList.add(habit)
             habitsListAdapter.submitList(habitList)
