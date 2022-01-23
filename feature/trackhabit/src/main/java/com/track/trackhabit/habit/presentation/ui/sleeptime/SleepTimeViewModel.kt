@@ -11,6 +11,7 @@ import com.track.trackhabit.habit.domain.entity.Sleeptime
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,25 +22,20 @@ class SleepTimeViewModel @Inject constructor(
     val wakeTime: LiveData<String>
         get() = _wakeTime
 
-    private val _conFirmWakeTimeVisibility = MutableLiveData(View.VISIBLE)
-    val conFirmWakeTimeVisibility: LiveData<Int>
-        get() = _conFirmWakeTimeVisibility
+    val uiState = MutableLiveData(
+        SleeptimeUIState(
+            View.VISIBLE,
+            View.INVISIBLE,
+            View.INVISIBLE,
+            View.INVISIBLE,
+            false,
+            true
+        )
+    )
 
-    private val _sleepTimeTilteVisibility = MutableLiveData(View.INVISIBLE)
-    val sleepTimeTitleVisibility: LiveData<Int>
-        get() = _sleepTimeTilteVisibility
-
-    private val _confirmSleeptimeVisibility = MutableLiveData(View.INVISIBLE)
-    val confirmSleeptimeVisibility: LiveData<Int>
-        get() = _confirmSleeptimeVisibility
-
-    private val _backButtonVisibility = MutableLiveData(View.INVISIBLE)
-    val backButtonVisibility: LiveData<Int>
-        get() = _backButtonVisibility
-
-    private val _isEnabledConfirmSleeptimeButton = MutableLiveData(false)
-    val isEnabledConfirmSleeptime: LiveData<Boolean>
-        get() = _isEnabledConfirmSleeptimeButton
+    private val _remindTime = MutableLiveData<Long>()
+    val remindTime: LiveData<Long>
+        get() = _remindTime
 
     private fun calSleepTime(wakeTime: String, durationHour: Int, durationMin: Int): String {
         var sleepTime: String
@@ -93,10 +89,13 @@ class SleepTimeViewModel @Inject constructor(
     fun onConfirmWaketimeUpdateVisibility() {
         viewModelScope.launch {
             delay(20)
-            _conFirmWakeTimeVisibility.value = View.GONE
-            _sleepTimeTilteVisibility.value = View.VISIBLE
-            _confirmSleeptimeVisibility.value = View.VISIBLE
-            _backButtonVisibility.value = View.VISIBLE
+            uiState.value = uiState.value?.copy(
+                conFirmWakeTimeVisibility = View.GONE,
+                sleepTimeTitleVisibility = View.VISIBLE,
+                confirmSleeptimeVisibility = View.VISIBLE,
+                backButtonVisibility = View.VISIBLE,
+                timePickerClickable = false
+            )
         }
     }
 
@@ -105,10 +104,13 @@ class SleepTimeViewModel @Inject constructor(
     }
 
     fun onBackUpdateVisibility() {
-        _conFirmWakeTimeVisibility.value = View.VISIBLE
-        _sleepTimeTilteVisibility.value = View.INVISIBLE
-        _confirmSleeptimeVisibility.value = View.INVISIBLE
-        _backButtonVisibility.value = View.INVISIBLE
+        uiState.value = uiState.value?.copy(
+            conFirmWakeTimeVisibility = View.VISIBLE,
+            sleepTimeTitleVisibility = View.INVISIBLE,
+            confirmSleeptimeVisibility = View.INVISIBLE,
+            backButtonVisibility = View.INVISIBLE,
+            timePickerClickable = true
+        )
     }
 
     fun resetTimepicker() {
@@ -116,11 +118,11 @@ class SleepTimeViewModel @Inject constructor(
     }
 
     fun setCofirmSleeptimeEnabled() {
-        _isEnabledConfirmSleeptimeButton.value = true
+        uiState.value = uiState.value?.copy(isEnabledConfirmSleeptimeButton = true)
     }
 
     fun setConfirmSleeptimeDisable() {
-        _isEnabledConfirmSleeptimeButton.value = false
+        uiState.value = uiState.value?.copy(isEnabledConfirmSleeptimeButton = false)
     }
 
     fun onClickItem(clickedLoop: Int) {
@@ -138,7 +140,18 @@ class SleepTimeViewModel @Inject constructor(
                 clickedLoop == it.loop
             )
             sleepTimeList.add(sleepTimeLoop)
+            if (sleepTimeLoop.isClicked) _remindTime.value = calNotiTime(sleepTimeLoop.sleepTime)
         }
         _sleepTimeList.value = sleepTimeList
+    }
+
+    private fun calNotiTime(timeSelect: String): Long {
+        val arr = timeSelect.split(':')
+        val presentTime = Calendar.getInstance().timeInMillis
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
+        cal.set(Calendar.MINUTE, arr[1].toInt())
+        val notiTime = cal.timeInMillis - 15 * 60 * 1000
+        return if (notiTime >= presentTime - 15 * 60 * 1000) notiTime else notiTime + 24 * 3600 * 1000
     }
 }
