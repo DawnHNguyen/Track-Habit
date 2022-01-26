@@ -61,8 +61,6 @@ object Libraries {
     // CRASHLYTIC
     val crashlytic = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytic_version}"
 
-    // SWIPE REVEAL RECYCLERVIEW
-    val swipeReviewRecyclerview = "com.chauthai.swipereveallayout:swipe-reveal-layout:${Versions.swipe_reveal}"
 }
 
 object KotlinLibraries {
@@ -86,6 +84,9 @@ object AndroidLibraries {
 
     // SAFE ARGS
     val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav}"
+
+    // SWIPE REVEAL RECYCLERVIEW
+    val swipeReviewRecyclerview = "com.chauthai.swipereveallayout:swipe-reveal-layout:${Versions.swipe_reveal}"
 }
 
 object Modules {
