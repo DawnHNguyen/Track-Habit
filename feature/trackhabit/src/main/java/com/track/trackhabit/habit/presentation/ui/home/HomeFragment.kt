@@ -37,46 +37,6 @@ class HomeFragment : Fragment() {
 
     private val habitsListAdapter = HabitsListAdapter()
 
-    private val simpleItemTouchCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-
-
-
-        override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-            return false
-        }
-
-        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-            val position = viewHolder.adapterPosition
-            if (direction == ItemTouchHelper.LEFT) {
-                habitsListAdapter.notifyItemChanged(position)
-                Toast.makeText(requireContext(), "Swipe left", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-            if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-                val itemView = viewHolder.itemView
-                val height = itemView.bottom.toFloat() - itemView.top.toFloat()
-                val width = height / 3
-
-
-//                if (dX < 0) {
-//                    var paint.color = Color.RED
-//                    val background = RectF(itemView.right.toFloat() + dX, itemView.top.toFloat(), itemView.right.toFloat(), itemView.bottom.toFloat())
-//                    c.drawRect(background, paint)
-//                    val icon = BitmapFactory.decodeResource(this@HomeFragment.resources, R.drawable.ic_statistical)
-//                    val margin = (dX / 5 - width) / 2
-//                    val iconDest = RectF(itemView.right.toFloat() + margin, itemView.top.toFloat() + width, itemView.right.toFloat() + (margin + width), itemView.bottom.toFloat() - width)
-//                    c.drawBitmap(icon, null, iconDest, paint)
-//                } else {
-//                    c.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
-//                }
-            } else {
-                c.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
-            }
-            super.onChildDraw(c, recyclerView, viewHolder, dX / 5, dY, actionState, isCurrentlyActive)
-        }
-    }
 
 
     override fun onCreateView(
@@ -101,8 +61,6 @@ class HomeFragment : Fragment() {
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
-        itemTouchHelper.attachToRecyclerView(recyclerView)
 
         binding.button.setOnClickListener {
             habitList.add(habit)
@@ -138,6 +96,16 @@ class HomeFragment : Fragment() {
         binding.fabActivityHomeAddHabitButton.setOnClickListener {
             findNavController().navigate(R.id.action_nav_home_to_nav_addhabit)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        habitsListAdapter.saveStates(outState)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        habitsListAdapter.restoreStates(savedInstanceState)
     }
 
     private fun setAlarm(callback: (Long) -> Unit) {

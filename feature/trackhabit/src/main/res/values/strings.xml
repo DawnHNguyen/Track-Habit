@@ -45,4 +45,6 @@
     <string name="addhabit_name">Name</string>
     <string name="addhabit_frequency">frequency</string>
     <string name="addhabit_errormessage_null">Không được để trống</string>
+    <string name="itemhabit_edit">Sửa</string>
+    <string name="itemhabit_delete">Xóa</string>
 </resources>

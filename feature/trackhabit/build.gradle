@@ -72,6 +72,8 @@ dependencies {
 
     implementation AndroidLibraries.kotlinCoroutineAndroid
     implementation AndroidLibraries.lifecycleViewModel
+
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
 }
 
 // Allow references to generated code
