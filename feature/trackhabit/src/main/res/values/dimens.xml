@@ -57,4 +57,6 @@
     <dimen name="margin_addhabit_edittext">24dp</dimen>
     <dimen name="margin_addhabit_dayselection">6dp</dimen>
     <dimen name="margin_addhabit_scrollview">16dp</dimen>
+    <dimen name="layoutwidth_itemhabit">64dp</dimen>
+    <dimen name="layoutwidth_itemhabit_space2button">8dp</dimen>
 </resources>

@@ -72,6 +72,8 @@ dependencies {
 
     implementation AndroidLibraries.kotlinCoroutineAndroid
     implementation AndroidLibraries.lifecycleViewModel
+
+    implementation AndroidLibraries.swipeReviewRecyclerview
 }
 
 // Allow references to generated code

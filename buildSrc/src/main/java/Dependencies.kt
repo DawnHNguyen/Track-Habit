@@ -35,6 +35,8 @@ object Versions {
 
     val firebase_version = "4.3.10"
     val crashlytic_version = "2.8.1"
+
+    val swipe_reveal = "1.4.1"
 }
 
 object Libraries {
@@ -58,6 +60,7 @@ object Libraries {
 
     // CRASHLYTIC
     val crashlytic = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytic_version}"
+
 }
 
 object KotlinLibraries {
@@ -81,6 +84,9 @@ object AndroidLibraries {
 
     // SAFE ARGS
     val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.nav}"
+
+    // SWIPE REVEAL RECYCLERVIEW
+    val swipeReviewRecyclerview = "com.chauthai.swipereveallayout:swipe-reveal-layout:${Versions.swipe_reveal}"
 }
 
 object Modules {
