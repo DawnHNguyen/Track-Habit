@@ -37,8 +37,6 @@ class HomeFragment : Fragment() {
 
     private val habitsListAdapter = HabitsListAdapter()
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -66,7 +64,6 @@ class HomeFragment : Fragment() {
             habitList.add(habit)
             habitsListAdapter.submitList(habitList)
         }
-
 
         createChannel(requireContext())
 
