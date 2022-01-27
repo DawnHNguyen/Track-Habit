@@ -46,4 +46,12 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    fun deleteHabit(habit: Habit){
+        viewModelScope.launch(dispatcher.main) {
+            withContext(dispatcher.io){
+                deleteHabitUseCase(habit.habitId)
+            }
+        }
+    }
 }
