@@ -8,6 +8,10 @@
         <variable
             name="habit"
             type="com.track.trackhabit.habit.domain.entity.Habit" />
+
+        <variable
+            name="onClick"
+            type="com.track.trackhabit.habit.presentation.ui.home.OnClickRevealButton" />
     </data>
 
     <com.chauthai.swipereveallayout.SwipeRevealLayout
@@ -36,7 +40,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="@android:color/black"
-                    android:text="@string/itemhabit_edit" />
+                    android:text="@string/itemhabit_edit"
+                    android:onClick="@{() -> onClick.onClickEdit(habit)}"/>
 
                 <ImageView
                     android:layout_width="@dimen/layoutwidth_itemhabit_space2button"
@@ -49,7 +54,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textColor="@android:color/holo_red_light"
-                    android:text="@string/itemhabit_delete"/>
+                    android:text="@string/itemhabit_delete"
+                    android:onClick="@{() -> onClick.onClickDelete(habit)}"/>
 
             </LinearLayout>
         </LinearLayout>

@@ -24,6 +24,7 @@ import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
 import com.track.trackhabit.habit.presentation.ui.createChannel
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.*
 
 @AndroidEntryPoint
@@ -35,7 +36,15 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val habitsListAdapter = HabitsListAdapter()
+    private val habitsListAdapter = HabitsListAdapter(object: OnClickRevealButton{
+        override fun onClickEdit(habit: Habit) {
+            Timber.d("on_click_edit")
+        }
+
+        override fun onClickDelete(habit: Habit) {
+            homeViewModel.deleteHabit(habit)
+        }
+    })
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

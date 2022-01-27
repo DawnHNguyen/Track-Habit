@@ -9,10 +9,11 @@ import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.track.trackhabit.habit.databinding.ItemHabitBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import android.os.Bundle
+import com.track.trackhabit.habit.presentation.ui.home.OnClickRevealButton
 import timber.log.Timber
 
 
-class HabitsListAdapter() :
+class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
     ListAdapter<Habit, HabitsListAdapter.HabitsListViewHolder>(HabitsListDiffUtil()) {
     private var viewBinderHelper = ViewBinderHelper()
 
@@ -26,19 +27,18 @@ class HabitsListAdapter() :
         position: Int,
     ) {
         val habit = getItem(position)
+        val onclick = onClickRevealButton
         viewBinderHelper.bind(holder.swipeRevealLayout,habit.habitId.toString())
-        holder.bind(habit)
+        holder.bind(habit, onclick)
 
     }
 
     class HabitsListViewHolder private constructor(private val binding: ItemHabitBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val swipeRevealLayout = binding.layoutOnSwipeReveal
-        fun bind(habit: Habit) {
+        fun bind(habit: Habit, onclick: OnClickRevealButton) {
             binding.habit = habit
-            binding.buttonItemHabitDelete.setOnClickListener {
-                Timber.d("on_click_delete")
-            }
+            binding.onClick = onclick
             binding.executePendingBindings()
         }
 
