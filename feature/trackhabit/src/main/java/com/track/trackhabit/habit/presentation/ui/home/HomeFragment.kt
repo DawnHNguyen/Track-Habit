@@ -3,7 +3,6 @@ package com.track.trackhabit.habit.presentation.ui.home
 import android.app.DatePickerDialog
 import android.app.Notification
 import android.app.TimePickerDialog
-import android.graphics.*
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +13,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
@@ -62,17 +59,8 @@ class HomeFragment : Fragment() {
         alarmService = AlarmService(requireContext())
 
         val recyclerView = binding.recyclerViewActivityHomeHabitList
-
-        val habitList = mutableListOf<Habit>()
-        val habit = Habit(1, "Ngủ sớm", "", time = Date(12), listOf(), "1111111")
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-
-        binding.button.setOnClickListener {
-            habitList.add(habit)
-            habitsListAdapter.submitList(habitList)
-        }
 
         createChannel(requireContext())
 

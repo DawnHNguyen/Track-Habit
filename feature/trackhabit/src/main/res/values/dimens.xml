@@ -7,8 +7,9 @@
     <dimen name="all_textsize_settime">32sp</dimen>
     <dimen name="all_marginall">16dp</dimen>
 
-    <!--    activity home-->
-    <dimen name="margin_activityhome_fab">16dp</dimen>
+    <!--    fragment home-->
+    <dimen name="margin_home_fab">16dp</dimen>
+    <dimen name="padding_home_parentLayout">16dp</dimen>
 
     <!--    item habit-->
     <dimen name="margin_itemhabit_habit">16dp</dimen>
@@ -25,6 +26,8 @@
     <dimen name="margin_itemsleeptime_vertical">16dp</dimen>
 
     <!--    sleeptime fragment-->
+<!--    TODO: fix parent padding-->
+    <dimen name="paddingVertical_sleeptime_parentLayout">65dp</dimen>
     <dimen name="radius_sleeptime_time">8dp</dimen>
     <dimen name="radius_sleeptime_confirmsleeptime_buttoncorner">8dp</dimen>
     <dimen name="radius_sleeptime_backbutton_buttoncorner">8dp</dimen>
