@@ -29,8 +29,8 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         val habit = getItem(position)
         val onclick = onClickRevealButton
         viewBinderHelper.bind(holder.swipeRevealLayout,habit.habitId.toString())
+        viewBinderHelper.setOpenOnlyOne(true)
         holder.bind(habit, onclick)
-
     }
 
     class HabitsListViewHolder private constructor(private val binding: ItemHabitBinding) :
