@@ -142,10 +142,13 @@ class AddHabitFragment : Fragment() {
         if (addHabitViewModel.inputValidity.value!!) findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
     }
 
-    private fun setNotification(habitId: Int){
+    private fun setNotification(habitId: Int) {
         setAlarm {
             alarmService.setRepeating(it)
-            val builder = NotificationCompat.Builder(requireContext(), getString(R.string.featureTrackhabit_channelId_notification))
+            val builder = NotificationCompat.Builder(
+                requireContext(),
+                getString(R.string.featureTrackhabit_channelId_notification)
+            )
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle(getString(R.string.featureTrackhabit_title_notification))
                 .setContentText(getString(R.string.featureTrackhabit_content_notification))

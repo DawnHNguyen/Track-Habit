@@ -10,6 +10,7 @@ interface TrackHabitRepository {
     suspend fun addHabit(habit: Habit)
     suspend fun addInspection(inspection: Inspection)
     suspend fun getHabit(): LiveData<List<Habit>>
+    suspend fun getHabitById(id: Int): LiveData<Habit>
     suspend fun getInspection(): LiveData<List<Inspection>>
     suspend fun updateHabit(habit: Habit)
     suspend fun deleteHabit(id: Int)

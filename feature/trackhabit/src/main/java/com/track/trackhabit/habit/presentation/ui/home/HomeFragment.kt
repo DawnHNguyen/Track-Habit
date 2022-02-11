@@ -3,6 +3,7 @@ package com.track.trackhabit.habit.presentation.ui.home
 import android.app.DatePickerDialog
 import android.app.Notification
 import android.app.TimePickerDialog
+import android.graphics.*
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,9 +34,12 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val habitsListAdapter = HabitsListAdapter(object : OnClickRevealButton {
+    private val habitsListAdapter = HabitsListAdapter(object: OnClickRevealButton{
         override fun onClickEdit(habit: Habit) {
-            Timber.d("on_click_edit")
+            val habitId =habit.habitId
+            val action = HomeFragmentDirections.actionNavHomeToNavEdithabit(habitId)
+            Timber.d("--${action}")
+            findNavController().navigate(action)
         }
 
         override fun onClickDelete(habit: Habit) {

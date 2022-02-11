@@ -1,7 +1,6 @@
 package com.track.trackhabit.habit.data.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.track.trackhabit.habit.data.local.dao.HabitDao
 import com.track.trackhabit.habit.data.local.dao.InspectionDao
@@ -34,6 +33,13 @@ class TrackHabitRepositoryImpl @Inject constructor(
         Transformations.map(habitDao.getHabit()) { list ->
             list.map { it.mapToDomainModel() }
         }
+
+    override suspend fun getHabitById(id: Int): LiveData<Habit> =
+        Transformations.map(habitDao.getHabitById(id)) {it ->
+            it.mapToDomainModel()
+        }
+
+
 
     override suspend fun getInspection(): LiveData<List<Inspection>> =
         Transformations.map(inspectionDao.getInspection()) { list ->

@@ -2,10 +2,7 @@ package com.track.trackhabit.habit.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.local.HabitLocal
-import org.jetbrains.annotations.NotNull
-import org.jetbrains.annotations.Nullable
 
 @Dao
 abstract class HabitDao() {
@@ -14,6 +11,9 @@ abstract class HabitDao() {
 
     @Query("SELECT * FROM habitlocal")
     abstract fun getHabit(): LiveData<List<HabitLocal>>
+
+    @Query("SELECT * FROM habitLocal WHERE habit_id=:id")
+    abstract fun getHabitById(id: Int): LiveData<HabitLocal>
 
     @Update
     abstract suspend fun updateHabit(habit: HabitLocal)
