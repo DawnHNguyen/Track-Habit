@@ -14,6 +14,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,7 +39,10 @@ class HomeFragment : Fragment() {
 
     private val habitsListAdapter = HabitsListAdapter(object: OnClickRevealButton{
         override fun onClickEdit(habit: Habit) {
-            Timber.d("on_click_edit")
+            val habitId =habit.habitId
+            val action = HomeFragmentDirections.actionNavHomeToNavEdithabit(habitId)
+            Timber.d("--${action}")
+            findNavController().navigate(action)
         }
 
         override fun onClickDelete(habit: Habit) {
