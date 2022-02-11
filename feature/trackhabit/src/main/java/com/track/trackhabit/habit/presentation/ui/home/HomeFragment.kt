@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val habitsListAdapter = HabitsListAdapter(object: OnClickRevealButton{
+    private val habitsListAdapter = HabitsListAdapter(object : OnClickRevealButton {
         override fun onClickEdit(habit: Habit) {
             Timber.d("on_click_edit")
         }
@@ -57,12 +57,11 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         alarmService = AlarmService(requireContext())
+        createChannel(requireContext())
 
         val recyclerView = binding.recyclerViewActivityHomeHabitList
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        createChannel(requireContext())
 
         binding.buttonSetNotification.setOnClickListener {
             setAlarm {
@@ -77,7 +76,6 @@ class HomeFragment : Fragment() {
                 with(NotificationManagerCompat.from(requireContext())) {
                     notify(12, builder.build())
                 }
-
             }
 
         }

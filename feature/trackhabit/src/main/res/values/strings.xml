@@ -6,8 +6,10 @@
     <string name="all_back">Back</string>
 
     <!--    notification-->
-    <string name="featureTrackhabit_channelId_notification">channel_id</string>
-    <string name="featureTrackhabit_nameOfChannel_notification">name</string>
+    <string name="featureTrackhabit_channelId_notification">habit_channel_id</string>
+    <string name="featureTrackhabit_nameOfChannel_notification">Habit Notification Chanel</string>
+    <string name="featureTrackhabit_title_notification">Habit time</string>
+    <string name="featureTrackhabit_content_notification">Time to do habit</string>
     <string name="sleepNoti_title">It\'s Sleep Time</string>
     <string name="sleepNoti_content">It\'s almost time for your chosen bedtime</string>
     <string name="sleepNoti_chanelId">sleep_chanel_id</string>

@@ -1,11 +1,14 @@
 package com.track.trackhabit.habit.presentation.ui.home
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -88,6 +91,7 @@ class AddHabitFragment : Fragment() {
             buttonFragmentAddHabitButtonDone.setOnClickListener {
                 setVisibilityErrorMessage()
                 addHabitViewModel.checkInputNullError()
+                setNotification()
                 navigateOnClickDone()
             }
 
@@ -136,5 +140,21 @@ class AddHabitFragment : Fragment() {
 
     private fun navigateOnClickDone() {
         if (addHabitViewModel.inputValidity.value!!) findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
+    }
+
+    private fun setNotification(habitId: Int){
+        setAlarm {
+            alarmService.setRepeating(it)
+            val builder = NotificationCompat.Builder(requireContext(), getString(R.string.featureTrackhabit_channelId_notification))
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentTitle(getString(R.string.featureTrackhabit_title_notification))
+                .setContentText(getString(R.string.featureTrackhabit_content_notification))
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+
+            with(NotificationManagerCompat.from(requireContext())) {
+                notify(habitId, builder.build())
+            }
+        }
     }
 }
