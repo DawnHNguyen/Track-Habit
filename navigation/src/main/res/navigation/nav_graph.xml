@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_addhabit"
             app:destination="@id/nav_addhabit" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_edithabit"
+            app:destination="@id/nav_edithabit" />
     </fragment>
 
     <fragment
@@ -43,4 +46,17 @@
             app:destination="@id/nav_home" />
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_edithabit"
+        android:name="com.track.trackhabit.habit.presentation.ui.home.EditHabitFragment"
+        android:label="profile"
+        tools:layout="@layout/fragment_edit_habit">
+
+        <action
+            android:id="@+id/action_nav_edithabit_to_nav_home"
+            app:destination="@id/nav_home" />
+        <argument
+            android:name="habit_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
