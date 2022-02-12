@@ -7,7 +7,7 @@ import com.track.trackhabit.habit.domain.entity.local.HabitLocal
 @Dao
 abstract class HabitDao() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertHabit(habit: HabitLocal)
+    abstract suspend fun insertHabit(habit: HabitLocal): Long
 
     @Query("SELECT * FROM habitlocal")
     abstract fun getHabit(): LiveData<List<HabitLocal>>

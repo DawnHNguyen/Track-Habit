@@ -7,5 +7,7 @@ import javax.inject.Inject
 class AddHabitUseCase @Inject constructor(
     private val repository: TrackHabitRepository
 ) {
-    suspend operator fun invoke(habit: Habit) = repository.addHabit(habit)
+    suspend operator fun invoke(habit: Habit) {
+        val newHabitID = repository.addHabit(habit)
+    }
 }

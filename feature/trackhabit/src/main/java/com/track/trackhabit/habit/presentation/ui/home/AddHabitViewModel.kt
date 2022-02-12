@@ -50,6 +50,10 @@ class AddHabitViewModel @Inject constructor(
     var saturday: Boolean = true
     var sunday: Boolean = true
 
+    private val _newHabitId = MutableLiveData<Long>()
+    val newHabitId: LiveData<Long>
+        get() = _newHabitId
+
     fun addHabit() {
         viewModelScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {

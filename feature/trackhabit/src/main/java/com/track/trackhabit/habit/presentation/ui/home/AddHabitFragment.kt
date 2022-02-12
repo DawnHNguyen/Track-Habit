@@ -91,7 +91,7 @@ class AddHabitFragment : Fragment() {
             buttonFragmentAddHabitButtonDone.setOnClickListener {
                 setVisibilityErrorMessage()
                 addHabitViewModel.checkInputNullError()
-                setNotification()
+                setNotification(addHabitViewModel.newHabitId.value.toString().toInt())
                 navigateOnClickDone()
             }
 

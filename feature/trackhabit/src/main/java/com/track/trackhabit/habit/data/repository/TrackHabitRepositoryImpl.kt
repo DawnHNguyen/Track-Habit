@@ -21,8 +21,8 @@ class TrackHabitRepositoryImpl @Inject constructor(
         userDao.insertUser(user.toLocalDto())
     }
 
-    override suspend fun addHabit(habit: Habit) {
-        habitDao.insertHabit(habit.toLocalDto())
+    override suspend fun addHabit(habit: Habit): Long {
+        return habitDao.insertHabit(habit.toLocalDto())
     }
 
     override suspend fun addInspection(inspection: Inspection) {
