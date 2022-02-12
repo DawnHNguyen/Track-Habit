@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.ui.home
+package com.track.trackhabit.habit.presentation.ui.home.edithabit
 
 import android.os.Bundle
 import android.view.LayoutInflater

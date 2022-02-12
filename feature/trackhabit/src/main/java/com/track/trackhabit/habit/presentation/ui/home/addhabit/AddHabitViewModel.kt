@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.ui.home
+package com.track.trackhabit.habit.presentation.ui.home.addhabit
 
 import android.util.Log
 import android.view.View
@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -65,7 +66,7 @@ class AddHabitViewModel @Inject constructor(
                         changeToTime(timeHabit.value!!),
                         emptyList(),
                         getFrequency()
-                    )
+                    ),
                 )
             }
         }

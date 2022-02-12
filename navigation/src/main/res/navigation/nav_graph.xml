@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/nav_addhabit"
-        android:name="com.track.trackhabit.habit.presentation.ui.home.AddHabitFragment"
+        android:name="com.track.trackhabit.habit.presentation.ui.home.addhabit.AddHabitFragment"
         android:label="profile"
         tools:layout="@layout/fragment_select_time_notification">
         <action
@@ -48,7 +48,7 @@
 
     <fragment
         android:id="@+id/nav_edithabit"
-        android:name="com.track.trackhabit.habit.presentation.ui.home.EditHabitFragment"
+        android:name="com.track.trackhabit.habit.presentation.ui.home.edithabit.EditHabitFragment"
         android:label="profile"
         tools:layout="@layout/fragment_edit_habit">
 
