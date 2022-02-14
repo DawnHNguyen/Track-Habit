@@ -15,7 +15,6 @@ import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
-import com.track.trackhabit.habit.presentation.ui.createChannel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.*
@@ -56,7 +55,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         alarmService = AlarmService(requireContext())
-        createChannel(requireContext())
 
         val recyclerView = binding.recyclerViewActivityHomeHabitList
         recyclerView.adapter = habitsListAdapter

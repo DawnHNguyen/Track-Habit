@@ -74,7 +74,7 @@ dependencies {
     implementation AndroidLibraries.lifecycleViewModel
 
     implementation AndroidLibraries.swipeReviewRecyclerview
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-alpha02"
+    implementation AndroidLibraries.lifecycleLivedata
 }
 
 // Allow references to generated code

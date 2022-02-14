@@ -39,7 +39,7 @@ class AlarmService(private val context: Context) {
         val pendingIntent = getPendingIntent(intent.apply {
             action = Const.ACTION_SET_REPETITIVE_EXACT
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, timeInMillis)
-            putExtra("habitId", habitId)
+            putExtra(Const.HABIT_ID, habitId)
         })
         Log.d("checkIntentRepeat"," - ${pendingIntent} - ${intent} -${intent.extras}")
         setAlarm(

@@ -45,7 +45,7 @@ class AlarmReceiver : BroadcastReceiver() {
                         context,
                         context.getString(R.string.featureTrackhabit_title_notification),
                         convertDate(timeInMillis),
-                        intent.getIntExtra("habitId", 0)
+                        intent.getIntExtra(Const.HABIT_ID, 0)
                     )
                 }
             }
