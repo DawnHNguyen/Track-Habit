@@ -15,8 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -51,10 +49,6 @@ class AddHabitViewModel @Inject constructor(
     var saturday: Boolean = true
     var sunday: Boolean = true
 
-    private val _newHabitId = MutableLiveData<Long>()
-    val newHabitId: LiveData<Long>
-        get() = _newHabitId
-
     fun addHabit() {
         viewModelScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
@@ -79,10 +73,14 @@ class AddHabitViewModel @Inject constructor(
     }
 
     private fun changeToTime(timeSelect: String): Date {
-        return Date(SimpleDateFormat("HH:mm").parse(timeSelect).time)
+        val arr = timeSelect.split(':')
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
+        cal.set(Calendar.MINUTE, arr[1].toInt())
+        return cal.time
     }
 
-    fun checkInputNullError() {
+    fun handleDifferentInputCases() {
         if (nameHabit.value.isNullOrBlank() || descriptionHabit.value.isNullOrBlank()) {
             if (nameHabit.value.isNullOrBlank()) _nameErrorVisibility.value = View.VISIBLE
             if (descriptionHabit.value.isNullOrBlank()) _descriptionErrorVisibility.value =

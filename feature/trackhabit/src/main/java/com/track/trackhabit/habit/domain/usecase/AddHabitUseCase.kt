@@ -4,6 +4,7 @@ import com.track.trackhabit.habit.device.TrackHabitNotificationManger
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
 import com.track.trackhabit.habit.presentation.ui.AlarmService
+import timber.log.Timber
 import javax.inject.Inject
 
 class AddHabitUseCase @Inject constructor(
@@ -13,7 +14,8 @@ class AddHabitUseCase @Inject constructor(
 ) {
     suspend operator fun invoke(habit: Habit) {
         val newHabitID = repository.addHabit(habit)
-        alarmService.setRepeating(habit.time.time)
-        notificationManager.setNotification(newHabitID.toInt())
+        alarmService.setRepeating(habit.time.time, newHabitID.toInt())
+        Timber.d(habit.time.toString())
+//        notificationManager.setNotification(newHabitID.toInt())
     }
 }
