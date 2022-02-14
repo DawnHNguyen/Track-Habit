@@ -37,6 +37,8 @@ object Versions {
     val crashlytic_version = "2.8.1"
 
     val swipe_reveal = "1.4.1"
+
+    val lifecycle_livedata = "2.5.0-alpha02"
 }
 
 object Libraries {
@@ -87,6 +89,9 @@ object AndroidLibraries {
 
     // SWIPE REVEAL RECYCLERVIEW
     val swipeReviewRecyclerview = "com.chauthai.swipereveallayout:swipe-reveal-layout:${Versions.swipe_reveal}"
+
+    //LIFECYCLE LIVEDATA
+    val lifecycleLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_livedata}"
 }
 
 object Modules {

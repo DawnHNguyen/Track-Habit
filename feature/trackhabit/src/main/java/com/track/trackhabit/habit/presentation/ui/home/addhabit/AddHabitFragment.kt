@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.ui.home
+package com.track.trackhabit.habit.presentation.ui.home.addhabit
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
@@ -87,7 +87,7 @@ class AddHabitFragment : Fragment() {
 
             buttonFragmentAddHabitButtonDone.setOnClickListener {
                 setVisibilityErrorMessage()
-                addHabitViewModel.checkInputNullError()
+                addHabitViewModel.handleDifferentInputCases()
                 navigateOnClickDone()
             }
 

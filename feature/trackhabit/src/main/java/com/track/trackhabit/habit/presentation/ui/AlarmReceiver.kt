@@ -39,12 +39,13 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepetitiveAlarm(alarmService)
+                setRepetitiveAlarm(alarmService, intent.getIntExtra("habitId", 0))
                 if (isToday(intent)) {
                     buildSnoozeNotification(
                         context,
-                        "Set Repetitive Exact Time",
-                        convertDate(timeInMillis)
+                        context.getString(R.string.featureTrackhabit_title_notification),
+                        convertDate(timeInMillis),
+                        intent.getIntExtra(Const.HABIT_ID, 0)
                     )
                 }
             }
@@ -126,11 +127,11 @@ class AlarmReceiver : BroadcastReceiver() {
         return SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date(timeInMillis))
     }
 
-    private fun setRepetitiveAlarm(alarmService: AlarmService) {
+    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int) {
         val cal = Calendar.getInstance().apply {
             this.timeInMillis += TimeUnit.HOURS.toMillis(24)
         }
-        alarmService.setRepeating(cal.timeInMillis)
+        alarmService.setRepeating(cal.timeInMillis, habitID)
     }
 
     private fun setSnoozeAlarm(alarmService: AlarmService) {
@@ -157,7 +158,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun buildSnoozeNotification(context: Context, title: String, message: String) {
+    private fun buildSnoozeNotification(context: Context, title: String, message: String, habitID: Int) {
         val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -183,7 +184,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
-            .setContentText("I got triggered at - $message")
+            .setContentText(context.getString(R.string.featureTrackhabit_content_notification, message))
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
@@ -192,7 +193,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
 
         with(NotificationManagerCompat.from(context)) {
-            notify(ConstIdChannel.ID_NOTIFICATION_1, builder.build())
+            notify(habitID, builder.build())
 
         }
     }
