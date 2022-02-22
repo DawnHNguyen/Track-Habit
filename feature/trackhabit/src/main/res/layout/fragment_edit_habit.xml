@@ -117,42 +117,49 @@
                 <ToggleButton
                     android:id="@+id/toggleButton_fragmentEditHabit_checkMonday"
                     style="@style/ToggleButtonSelectDay"
+                    android:checked="@={viewModel.monday}"
                     android:textOff="@string/habit_monday"
                     android:textOn="@string/habit_monday" />
 
                 <ToggleButton
                     android:id="@+id/toggleButton_fragmentEditHabit_checkTuesday"
                     style="@style/ToggleButtonSelectDay"
+                    android:checked="@={viewModel.tuesday}"
                     android:textOff="@string/habit_tuesday"
                     android:textOn="@string/habit_tuesday" />
 
                 <ToggleButton
                     android:id="@+id/toggleButton_fragmentEditHabit_checkWednesday"
                     style="@style/ToggleButtonSelectDay"
+                    android:checked="@={viewModel.wednesday}"
                     android:textOff="@string/habit_wednesday"
                     android:textOn="@string/habit_wednesday" />
 
                 <ToggleButton
                     android:id="@+id/toggleButton_fragmentEditHabit_checkThursday"
                     style="@style/ToggleButtonSelectDay"
+                    android:checked="@={viewModel.thursday}"
                     android:textOff="@string/habit_thursday"
                     android:textOn="@string/habit_thursday" />
 
                 <ToggleButton
                     android:id="@+id/toggleButton_fragmentEditHabit_checkFriday"
                     style="@style/ToggleButtonSelectDay"
+                    android:checked="@={viewModel.friday}"
                     android:textOff="@string/habit_friday"
                     android:textOn="@string/habit_friday" />
 
                 <ToggleButton
                     android:id="@+id/toggleButton_fragmentEditHabit_checkSaturday"
                     style="@style/ToggleButtonSelectDay"
+                    android:checked="@={viewModel.saturday}"
                     android:textOff="@string/habit_saturday"
                     android:textOn="@string/habit_saturday" />
 
                 <ToggleButton
                     android:id="@+id/toggleButton_fragmentEditHabit_checkSunday"
                     style="@style/ToggleButtonSelectDay"
+                    android:checked="@={viewModel.sunday}"
                     android:textOff="@string/habit_sunday"
                     android:textOn="@string/habit_sunday" />
             </LinearLayout>
@@ -176,6 +183,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_scrollview"
+            android:text="@{viewModel.time}"
             android:textSize="@dimen/all_textsize_settime"
             app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentEditHabit_setTimeTitle"
             app:layout_constraintStart_toEndOf="@+id/textView_fragmentEditHabit_setTimeTitle"
