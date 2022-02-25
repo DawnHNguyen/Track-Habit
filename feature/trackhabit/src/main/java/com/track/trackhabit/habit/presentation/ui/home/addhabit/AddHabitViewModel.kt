@@ -15,6 +15,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -60,7 +62,7 @@ class AddHabitViewModel @Inject constructor(
                         changeToTime(timeHabit.value!!),
                         emptyList(),
                         getFrequency()
-                    ),
+                    )
                 )
             }
         }

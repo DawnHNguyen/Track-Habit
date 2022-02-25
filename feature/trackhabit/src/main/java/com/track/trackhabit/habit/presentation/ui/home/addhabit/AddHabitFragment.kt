@@ -13,6 +13,7 @@ import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentAddHabitBinding
 import com.track.trackhabit.habit.presentation.ui.AlarmService
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,6 +46,7 @@ class AddHabitFragment : Fragment() {
             setAlarm {
                 binding.buttonFragmentAddHabitSetTime.text =
                     SimpleDateFormat("HH:mm").format(Date(it))
+                Timber.d("gia_tri ${addHabitViewModel.timeHabit.value}}")
             }
         }
         binding.buttonFragmentAddHabitCancel.setOnClickListener {
