@@ -26,7 +26,7 @@ data class HabitLocal(
 ) : LocalDto {
     @ColumnInfo(name = "user_id")
     lateinit var userId: String
-    override fun mapToDomainModel() = Habit(habitId, title, description, time = Date().apply { time = time }, emptyList(), frequency)
+    override fun mapToDomainModel() = Habit(habitId, title, description, time = Date().apply { time = this@HabitLocal.time }, emptyList(), frequency)
 
-    override fun mapToRemoteDto() = HabitDto(habitId, title, description,time = Date().apply { time = time }, emptyList(),frequency)
+    override fun mapToRemoteDto() = HabitDto(habitId, title, description,time = Date().apply { time = this@HabitLocal.time }, emptyList(),frequency)
 }

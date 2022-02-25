@@ -33,7 +33,7 @@ class EditHabitViewModel @Inject constructor(
     var friday = MutableLiveData<Boolean>(true)
     var saturday = MutableLiveData<Boolean>(true)
     var sunday = MutableLiveData<Boolean>(true)
-    var time = MutableLiveData<String>()
+    var timeHabit = MutableLiveData<String>()
 
 
     fun getHabit(id: Int){
@@ -52,13 +52,11 @@ class EditHabitViewModel @Inject constructor(
                     friday.value = _habit.value!!.frequency!![4] == '1'
                     saturday.value = _habit.value!!.frequency!![5] == '1'
                     sunday.value = _habit.value!!.frequency!![6] == '1'
-                    time.value = SimpleDateFormat("HH:mm").format(_habit.value!!.time)
+                    timeHabit.value = SimpleDateFormat("HH:mm").format(_habit.value!!.time)
                 }
-
             }catch (e: IllegalArgumentException){
                 Log.d("EditHabitViewModel", e.toString())
             }
-
         }
     }
 

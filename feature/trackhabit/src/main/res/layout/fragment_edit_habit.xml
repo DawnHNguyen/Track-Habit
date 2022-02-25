@@ -177,13 +177,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/scrollView_fragmentEditHabit_daySelection" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_fragmentEditHabit_setTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_scrollview"
-            android:text="@{viewModel.time}"
+            android:text="@={viewModel.timeHabit}"
             android:textSize="@dimen/all_textsize_settime"
             app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentEditHabit_setTimeTitle"
             app:layout_constraintStart_toEndOf="@+id/textView_fragmentEditHabit_setTimeTitle"

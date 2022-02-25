@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -74,7 +75,9 @@ class AddHabitViewModel @Inject constructor(
     }
 
     private fun changeToTime(timeSelect: String): Date {
-        return Date(SimpleDateFormat("HH:mm").parse(timeSelect).time)
+        val date = Date(SimpleDateFormat("HH:mm").parse(timeSelect).time)
+        Timber.d("gia_tri add habit -${date}")
+        return date
     }
 
     fun checkInputNullError() {

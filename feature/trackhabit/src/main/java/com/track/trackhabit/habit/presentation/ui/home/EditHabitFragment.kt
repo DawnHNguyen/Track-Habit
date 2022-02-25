@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui.home
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.track.trackhabit.habit.domain.entity.Habit
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_edit_habit.*
 import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -40,11 +42,21 @@ class EditHabitFragment: Fragment() {
         editHabitViewModel.getHabit(id)
         binding.textViewFragmentEditHabitDescriptionError.visibility = View.GONE
         binding.textViewFragmentEditHabitNameError.visibility = View.GONE
-        binding.buttonFragmentEditHabitSetTime.text = editHabitViewModel.time.value
-        Timber.d("gia_tri ${editHabitViewModel.time.value}}")
-        Timber.d("gia_tri -${editHabitViewModel.monday.value}}")
-        Timber.d("gia_tri --${editHabitViewModel.tuesday.value}}")
-        Timber.d("gia_tri ---${editHabitViewModel.friday.value}}")
+        binding.buttonFragmentEditHabitSetTime.text = editHabitViewModel.timeHabit.value
+
+        editHabitViewModel.timeHabit.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+            Timber.d("gia_tri ${it}}")
+        })
+
+        binding.buttonFragmentEditHabitSetTime.setOnClickListener {
+            setAlarm {
+                binding.buttonFragmentEditHabitSetTime.text =
+                    SimpleDateFormat("HH:mm").format(Date(it))
+                Timber.d("gia_tri sau khi click${editHabitViewModel.timeHabit.value}}")
+            }
+        }
+
+
         binding.buttonFragmentEditHabitButtonDone.setOnClickListener {
             Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
             Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
@@ -52,10 +64,33 @@ class EditHabitFragment: Fragment() {
             editHabitViewModel.updatehabit(Habit(habitId = id,
                 title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
                 description = binding.textInputEditTextFragmentAddHabitDescription.text.toString(),
-                editHabitViewModel.habit.value!!.time,
+                Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
                 editHabitViewModel.habit.value!!.performances,editHabitViewModel.getFrequency()))
 
             findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
+        }
+
+        binding.buttonFragmentEditHabitCancel.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
+        }
+    }
+
+    private fun setAlarm(callback: (Long) -> Unit) {
+        Calendar.getInstance().apply {
+            this.set(Calendar.SECOND, 0)
+            this.set(Calendar.MILLISECOND, 0)
+            TimePickerDialog(
+                requireContext(),
+                0,
+                { _, hour, minute ->
+                    this.set(Calendar.HOUR_OF_DAY, hour)
+                    this.set(Calendar.MINUTE, minute)
+                    callback(this.timeInMillis)
+                },
+                this.get(Calendar.HOUR_OF_DAY),
+                this.get(Calendar.MINUTE),
+                true
+            ).show()
         }
     }
 }
