@@ -45,15 +45,15 @@ class EditHabitViewModel @Inject constructor(
             try {
                 _habit.addSource(habitSource) {
                     _habit.value = it
-                    _habit.let {
-                        monday.value = it.value!!.frequency!![0] == '1'
-                        tuesday.value = it.value!!.frequency!![1] == '1'
-                        wednesday.value = it.value!!.frequency!![2] == '1'
-                        thursday.value = it.value!!.frequency!![3] == '1'
-                        friday.value = it.value!!.frequency!![4] == '1'
-                        saturday.value = it.value!!.frequency!![5] == '1'
-                        sunday.value = it.value!!.frequency!![6] == '1'
-                        timeHabit.value = SimpleDateFormat("HH:mm").format(it.value!!.time)
+                    _habit.value?.let {
+                        monday.value = it.frequency!![0] == '1'
+                        tuesday.value = it.frequency[1] == '1'
+                        wednesday.value = it.frequency[2] == '1'
+                        thursday.value = it.frequency[3] == '1'
+                        friday.value = it.frequency[4] == '1'
+                        saturday.value = it.frequency[5] == '1'
+                        sunday.value = it.frequency[6] == '1'
+                        timeHabit.value = SimpleDateFormat("HH:mm").format(it.time)
                     }
                 }
             } catch (e: IllegalArgumentException) {
