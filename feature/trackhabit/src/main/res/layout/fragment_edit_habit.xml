@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.track.trackhabit.habit.presentation.ui.home.EditHabitViewModel" />
+            type="com.track.trackhabit.habit.presentation.ui.home.edithabit.EditHabitViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

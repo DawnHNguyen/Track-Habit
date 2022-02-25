@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.ui.home
+package com.track.trackhabit.habit.presentation.ui.home.edithabit
 
 import android.util.Log
 import androidx.lifecycle.*
@@ -54,6 +54,7 @@ class EditHabitViewModel @Inject constructor(
                     sunday.value = _habit.value!!.frequency!![6] == '1'
                     timeHabit.value = SimpleDateFormat("HH:mm").format(_habit.value!!.time)
                 }
+
             }catch (e: IllegalArgumentException){
                 Log.d("EditHabitViewModel", e.toString())
             }

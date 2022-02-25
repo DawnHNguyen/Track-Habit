@@ -65,7 +65,6 @@
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_itemhabit_habit"
-            android:layout_margin="@dimen/margin_itemhabit_habit"
             android:background="@drawable/background_itemhabit"
             android:backgroundTint="@color/color_defaulthabit"
             android:paddingStart="@dimen/padding_itemhabit_habit_paddingstart"

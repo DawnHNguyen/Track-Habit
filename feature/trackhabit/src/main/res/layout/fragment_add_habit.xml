@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.track.trackhabit.habit.presentation.ui.home.AddHabitViewModel" />
+            type="com.track.trackhabit.habit.presentation.ui.home.addhabit.AddHabitViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
