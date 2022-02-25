@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class EditHabitFragment: Fragment() {
+class EditHabitFragment : Fragment() {
     private val editHabitViewModel by viewModels<EditHabitViewModel>()
 
     private val safeArgs: EditHabitFragmentArgs by navArgs()
@@ -44,9 +44,9 @@ class EditHabitFragment: Fragment() {
         binding.textViewFragmentEditHabitNameError.visibility = View.GONE
         binding.buttonFragmentEditHabitSetTime.text = editHabitViewModel.timeHabit.value
 
-        editHabitViewModel.timeHabit.observe(viewLifecycleOwner, androidx.lifecycle.Observer {
+        editHabitViewModel.timeHabit.observe(viewLifecycleOwner) {
             Timber.d("gia_tri ${it}}")
-        })
+        }
 
         binding.buttonFragmentEditHabitSetTime.setOnClickListener {
             setAlarm {
@@ -61,12 +61,15 @@ class EditHabitFragment: Fragment() {
             Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
             Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
 
-            editHabitViewModel.updatehabit(Habit(habitId = id,
-                title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
-                description = binding.textInputEditTextFragmentAddHabitDescription.text.toString(),
-                Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
-                editHabitViewModel.habit.value!!.performances,editHabitViewModel.getFrequency()))
-
+            editHabitViewModel.updatehabit(
+                Habit(
+                    habitId = id,
+                    title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
+                    description = binding.textInputEditTextFragmentAddHabitDescription.text.toString(),
+                    Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
+                    editHabitViewModel.habit.value!!.performances, editHabitViewModel.getFrequency()
+                )
+            )
             findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
         }
 

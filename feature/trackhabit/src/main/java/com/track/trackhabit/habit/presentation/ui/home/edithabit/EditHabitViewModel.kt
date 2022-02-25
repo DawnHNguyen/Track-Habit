@@ -20,7 +20,7 @@ class EditHabitViewModel @Inject constructor(
     private val getHabitByIdUseCase: GetHabitByIdUseCase,
     private val updateHabitUseCase: UpdateHabitUseCase,
     private val dispatcher: AppDispatchers
-): ViewModel() {
+) : ViewModel() {
 
     private val _habit = MediatorLiveData<Habit>()
     val habit: LiveData<Habit> get() = _habit
@@ -36,36 +36,36 @@ class EditHabitViewModel @Inject constructor(
     var timeHabit = MutableLiveData<String>()
 
 
-    fun getHabit(id: Int){
+    fun getHabit(id: Int) {
         viewModelScope.launch(dispatcher.main) {
             _habit.removeSource(habitSource)
-            withContext(dispatcher.io){
+            withContext(dispatcher.io) {
                 habitSource = getHabitByIdUseCase(id)
             }
             try {
-                _habit.addSource(habitSource){
+                _habit.addSource(habitSource) {
                     _habit.value = it
-                    monday.value = _habit.value!!.frequency!![0] == '1'
-                    tuesday.value = _habit.value!!.frequency!![1] == '1'
-                    wednesday.value = _habit.value!!.frequency!![2] == '1'
-                    thursday.value = _habit.value!!.frequency!![3] == '1'
-                    friday.value = _habit.value!!.frequency!![4] == '1'
-                    saturday.value = _habit.value!!.frequency!![5] == '1'
-                    sunday.value = _habit.value!!.frequency!![6] == '1'
-                    timeHabit.value = SimpleDateFormat("HH:mm").format(_habit.value!!.time)
+                    _habit.let {
+                        monday.value = it.value!!.frequency!![0] == '1'
+                        tuesday.value = it.value!!.frequency!![1] == '1'
+                        wednesday.value = it.value!!.frequency!![2] == '1'
+                        thursday.value = it.value!!.frequency!![3] == '1'
+                        friday.value = it.value!!.frequency!![4] == '1'
+                        saturday.value = it.value!!.frequency!![5] == '1'
+                        sunday.value = it.value!!.frequency!![6] == '1'
+                        timeHabit.value = SimpleDateFormat("HH:mm").format(it.value!!.time)
+                    }
                 }
-
-            }catch (e: IllegalArgumentException){
+            } catch (e: IllegalArgumentException) {
                 Log.d("EditHabitViewModel", e.toString())
             }
         }
     }
 
 
-
-    fun updatehabit(habit: Habit){
+    fun updatehabit(habit: Habit) {
         viewModelScope.launch(dispatcher.main) {
-            withContext(dispatcher.io){
+            withContext(dispatcher.io) {
                 updateHabitUseCase(habit)
                 Timber.d("-->${habit}_viewmodel")
                 Timber.d("successUpdate")
@@ -74,8 +74,8 @@ class EditHabitViewModel @Inject constructor(
     }
 
     private fun convertBooleanToInt(bool: MutableLiveData<Boolean>): Int {
-        if(bool.value == null) return 1
-        if(bool.value == true){
+        if (bool.value == null) return 1
+        if (bool.value == true) {
             return 1
         }
         return 0
