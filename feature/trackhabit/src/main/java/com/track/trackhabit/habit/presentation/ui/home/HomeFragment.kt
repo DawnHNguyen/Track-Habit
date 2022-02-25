@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -37,6 +36,7 @@ class HomeFragment : Fragment() {
         }
 
         override fun onClickDelete(habit: Habit) {
+            alarmService.setCancelAlarm(habit.habitId)
             homeViewModel.deleteHabit(habit)
         }
     })
@@ -59,11 +59,6 @@ class HomeFragment : Fragment() {
         val recyclerView = binding.recyclerViewActivityHomeHabitList
         recyclerView.adapter = habitsListAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        binding.buttonCancelNotification.setOnClickListener {
-            alarmService.setCancelAlarm()
-            Toast.makeText(requireContext(), "đã hủy báo thức", Toast.LENGTH_LONG).show()
-        }
 
         binding.fabActivityHomeAddHabitButton.setOnClickListener {
             findNavController().navigate(R.id.action_nav_home_to_nav_addhabit)

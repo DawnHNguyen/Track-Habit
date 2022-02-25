@@ -1,6 +1,7 @@
 package com.track.trackhabit.habit.presentation.ui
 
 import android.app.AlarmManager
+import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
@@ -12,15 +13,13 @@ import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
 
 class AlarmService(private val context: Context) {
     private val intent = getIntent()
+    private val notificationManager: NotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
     private val alarmManager: AlarmManager? =
         context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
 
-    fun setCancelAlarm(){
-
-        val pendingIntent = getPendingIntent(intent)
-        Log.d("checkIntentCancel"," - ${pendingIntent} - ${intent} -${intent.extras}")
-        setCancel(pendingIntent)
+    fun setCancelAlarm(habitId: Int){
+        notificationManager.cancel(habitId)
     }
 
     fun setSnoozeAlarm(){
@@ -46,11 +45,6 @@ class AlarmService(private val context: Context) {
             timeInMillis,
             pendingIntent
         )
-    }
-
-
-    private fun setCancel(pendingIntent: PendingIntent){
-        alarmManager?.cancel(pendingIntent)
     }
 
     private fun setElapse(pendingIntent: PendingIntent){

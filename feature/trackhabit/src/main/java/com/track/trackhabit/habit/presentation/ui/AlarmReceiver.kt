@@ -39,7 +39,7 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepetitiveAlarm(alarmService, intent.getIntExtra("habitId", 0))
+                setRepetitiveAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0))
                 if (isToday(intent)) {
                     buildSnoozeNotification(
                         context,
@@ -145,7 +145,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val pendingIntent: PendingIntent =
             PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, 0)
 
-        val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText("het thong bao roi day, co lam khong?")
@@ -181,7 +181,7 @@ class AlarmReceiver : BroadcastReceiver() {
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 
-        val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(context.getString(R.string.featureTrackhabit_content_notification, message))
