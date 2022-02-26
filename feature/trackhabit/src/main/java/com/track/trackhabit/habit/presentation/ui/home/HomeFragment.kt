@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
         override fun onClickEdit(habit: Habit) {
             val habitId =habit.habitId
             val action = HomeFragmentDirections.actionNavHomeToNavEdithabit(habitId)
-            Timber.d("--${action}")
+            Timber.d("--${action}--${habitId}")
             findNavController().navigate(action)
         }
 
