@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -33,7 +32,8 @@ class EditHabitViewModel @Inject constructor(
     var friday = MutableLiveData<Boolean>(true)
     var saturday = MutableLiveData<Boolean>(true)
     var sunday = MutableLiveData<Boolean>(true)
-    var timeHabit = MutableLiveData<String>()
+    val timeHabit = MutableLiveData<String>()
+
 
 
     fun getHabit(id: Int) {
@@ -97,5 +97,14 @@ class EditHabitViewModel @Inject constructor(
         ) + convertBooleanToInt(
             sunday
         )
+    }
+
+    fun getNewHabitTime(): Date {
+        val timeSelect = timeHabit.value.toString()
+        val arr = timeSelect.split(':')
+        val cal = Calendar.getInstance()
+        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
+        cal.set(Calendar.MINUTE, arr[1].toInt())
+        return cal.time
     }
 }

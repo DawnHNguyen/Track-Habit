@@ -13,7 +13,6 @@ import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentEditHabitBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_edit_habit.*
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
@@ -66,7 +65,7 @@ class EditHabitFragment : Fragment() {
                     habitId = id,
                     title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
                     description = binding.textInputEditTextFragmentAddHabitDescription.text.toString(),
-                    Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
+                    editHabitViewModel.getNewHabitTime(),
                     editHabitViewModel.habit.value!!.performances, editHabitViewModel.getFrequency()
                 )
             )

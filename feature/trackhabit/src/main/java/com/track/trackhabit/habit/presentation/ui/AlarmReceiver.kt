@@ -21,7 +21,6 @@ class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
-        val timeInMillis = intent.getLongExtra(Const.EXTRA_EXACT_ALARM_TIME, 0L)
 
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
         var alarmService = AlarmService(context)
@@ -39,12 +38,12 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepetitiveAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0))
+                setRepetitiveAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0), intent.getStringExtra(Const.HABIT_NAME).toString())
                 if (isToday(intent)) {
                     buildSnoozeNotification(
                         context,
                         context.getString(R.string.featureTrackhabit_title_notification),
-                        convertDate(timeInMillis),
+                        intent.getStringExtra(Const.HABIT_NAME).toString(),
                         intent.getIntExtra(Const.HABIT_ID, 0)
                     )
                 }
@@ -127,11 +126,11 @@ class AlarmReceiver : BroadcastReceiver() {
         return SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date(timeInMillis))
     }
 
-    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int) {
+    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, message: String) {
         val cal = Calendar.getInstance().apply {
             this.timeInMillis += TimeUnit.HOURS.toMillis(24)
         }
-        alarmService.setRepeating(cal.timeInMillis, habitID)
+        alarmService.setRepeating(cal.timeInMillis, habitID, message)
     }
 
     private fun setSnoozeAlarm(alarmService: AlarmService) {

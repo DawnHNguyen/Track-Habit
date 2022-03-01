@@ -9,4 +9,5 @@ object Const{
     const val ELAPSE_SNOOZE_NOTIFICATION_5M = 5*60*1000
     const val SET_REMIND_SLEEPTIME = "SET_REMIND_SLEEPTIME"
     const val HABIT_ID = "HABIT_ID"
+    const val HABIT_NAME = "HABIT_NAME"
 }
