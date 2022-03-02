@@ -29,7 +29,7 @@ class AlarmReceiver : BroadcastReceiver() {
             Const.START_SNOOZE_ALARM_TIME -> {
                 setSnoozeAlarm(alarmService)
                 with(NotificationManagerCompat.from(context)) {
-                    cancel(ConstIdChannel.ID_NOTIFICATION_1)
+                    cancel(intent.getIntExtra(Const.HABIT_ID, 0))
                 }
             }
 
@@ -171,6 +171,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val snoozeIntent = Intent(context, AlarmReceiver::class.java).apply {
             action = Const.START_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
+            putExtra(Const.HABIT_ID, habitID)
         }
         val snoozePendingIntent: PendingIntent =
             PendingIntent.getBroadcast(
