@@ -65,7 +65,6 @@ class EditHabitFragment : Fragment() {
                 Habit(
                     habitId = id,
                     title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
-                    description = binding.textInputEditTextFragmentAddHabitDescription.text.toString(),
                     Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
                     editHabitViewModel.habit.value!!.performances, editHabitViewModel.getFrequency()
                 )
