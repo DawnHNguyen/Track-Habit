@@ -28,7 +28,6 @@ class AddHabitViewModel @Inject constructor(
     private val deleteHabitUseCase: DeleteHabitUseCase,
 ) : ViewModel() {
     val nameHabit = MutableLiveData<String>()
-    val descriptionHabit = MutableLiveData<String>()
     val timeHabit = MutableLiveData<String>()
 
     private val _nameErrorVisibility = MutableLiveData(View.GONE)

@@ -114,7 +114,6 @@ class AddHabitFragment : Fragment() {
 
     private fun setVisibilityErrorMessage() {
         binding.textViewFragmentAddHabitNameError.visibility = View.GONE
-        binding.textViewFragmentAddHabitDescriptionError.visibility = View.GONE
     }
 
     private fun setAlarm(callback: (Long) -> Unit) {
