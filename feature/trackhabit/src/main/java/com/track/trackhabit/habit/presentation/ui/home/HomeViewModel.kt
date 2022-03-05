@@ -11,8 +11,6 @@ import com.track.trackhabit.habit.domain.usecase.UpdateHabitUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,23 +32,23 @@ class HomeViewModel @Inject constructor(
     private fun getHabit() {
         viewModelScope.launch(dispatcher.main) {
             _habitList.removeSource(habitListSource)
-            withContext(dispatcher.io){
+            withContext(dispatcher.io) {
                 habitListSource = getHabitUseCase()
             }
             try {
-                _habitList.addSource(habitListSource){
+                _habitList.addSource(habitListSource) {
                     _habitList.value = it
                 }
-            } catch (e: IllegalArgumentException){
+            } catch (e: IllegalArgumentException) {
                 Log.d("HomeViewModel", e.toString())
             }
         }
     }
 
-    fun deleteHabit(habit: Habit){
+    fun deleteHabit(habit: Habit) {
         viewModelScope.launch(dispatcher.main) {
-            withContext(dispatcher.io){
-                deleteHabitUseCase(habit.habitId)
+            withContext(dispatcher.io) {
+                deleteHabitUseCase(habit.habitId, habit.title)
             }
         }
     }

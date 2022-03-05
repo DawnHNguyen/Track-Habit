@@ -149,6 +149,8 @@ class SleepTimeViewModel @Inject constructor(
         val arr = timeSelect.split(':')
         val presentTime = Calendar.getInstance().timeInMillis
         val cal = Calendar.getInstance()
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
         cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
         cal.set(Calendar.MINUTE, arr[1].toInt())
         val notiTime = cal.timeInMillis - 15 * 60 * 1000

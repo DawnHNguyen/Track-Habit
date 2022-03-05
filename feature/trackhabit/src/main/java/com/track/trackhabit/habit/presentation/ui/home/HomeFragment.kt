@@ -27,16 +27,15 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    private val habitsListAdapter = HabitsListAdapter(object: OnClickRevealButton{
+    private val habitsListAdapter = HabitsListAdapter(object : OnClickRevealButton {
         override fun onClickEdit(habit: Habit) {
-            val habitId =habit.habitId
+            val habitId = habit.habitId
             val action = HomeFragmentDirections.actionNavHomeToNavEdithabit(habitId)
             Timber.d("--${action}--${habitId}")
             findNavController().navigate(action)
         }
 
         override fun onClickDelete(habit: Habit) {
-            alarmService.setCancelAlarm(habit.habitId)
             homeViewModel.deleteHabit(habit)
         }
     })

@@ -27,7 +27,7 @@ class AlarmReceiver : BroadcastReceiver() {
         Log.d("CheckAction", "-action ${intent.action}")
         when (intent.action) {
             Const.START_SNOOZE_ALARM_TIME -> {
-                setSnoozeAlarm(alarmService)
+                setSnoozeAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0))
                 with(NotificationManagerCompat.from(context)) {
                     cancel(intent.getIntExtra(Const.HABIT_ID, 0))
                 }
@@ -38,7 +38,11 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepetitiveAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0), intent.getStringExtra(Const.HABIT_NAME).toString())
+                setRepetitiveAlarm(
+                    alarmService,
+                    intent.getIntExtra(Const.HABIT_ID, 0),
+                    intent.getStringExtra(Const.HABIT_NAME).toString()
+                )
                 if (isToday(intent)) {
                     buildSnoozeNotification(
                         context,
@@ -50,12 +54,13 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             Const.SET_REMIND_SLEEPTIME -> {
-                val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle(context.getString(R.string.sleepNoti_title))
-                    .setContentText(context.getString(R.string.sleepNoti_content))
-                    .setPriority(NotificationCompat.PRIORITY_MAX)
-                    .setDefaults(NotificationCompat.DEFAULT_ALL)
+                val builder =
+                    NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentTitle(context.getString(R.string.sleepNoti_title))
+                        .setContentText(context.getString(R.string.sleepNoti_content))
+                        .setPriority(NotificationCompat.PRIORITY_MAX)
+                        .setDefaults(NotificationCompat.DEFAULT_ALL)
                 with(NotificationManagerCompat.from(context)) {
                     notify(ConstIdChannel.ID_REMIND_SLEEP_NOTIFICATION, builder.build())
                 }
@@ -133,8 +138,8 @@ class AlarmReceiver : BroadcastReceiver() {
         alarmService.setRepeating(cal.timeInMillis, habitID, message)
     }
 
-    private fun setSnoozeAlarm(alarmService: AlarmService) {
-        alarmService.setSnoozeAlarm()
+    private fun setSnoozeAlarm(alarmService: AlarmService, habitID: Int) {
+        alarmService.setSnoozeAlarm(habitID)
     }
 
     private fun buildNotification(context: Context, title: String) {
@@ -157,7 +162,12 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun buildSnoozeNotification(context: Context, title: String, message: String, habitID: Int) {
+    private fun buildSnoozeNotification(
+        context: Context,
+        title: String,
+        message: String,
+        habitID: Int
+    ) {
         val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -184,7 +194,12 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
-            .setContentText(context.getString(R.string.featureTrackhabit_content_notification, message))
+            .setContentText(
+                context.getString(
+                    R.string.featureTrackhabit_content_notification,
+                    message
+                )
+            )
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
@@ -194,8 +209,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         with(NotificationManagerCompat.from(context)) {
             notify(habitID, builder.build())
-
         }
+        Log.d("noti_ID", "$habitID")
     }
-
 }

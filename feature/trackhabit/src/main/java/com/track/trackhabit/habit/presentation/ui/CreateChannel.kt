@@ -24,7 +24,7 @@ fun createChannel(context: Context) {
         val sleepChanel = NotificationChannel(
             ConstIdChannel.REMIND_SLEEP_NOTIFICATION,
             context.getString(R.string.sleepNoti_chanel_name),
-            NotificationManager.IMPORTANCE_DEFAULT
+            NotificationManager.IMPORTANCE_HIGH
         ).apply {
             description = context.getString(R.string.sleepNoti_chanel_description)
         }
