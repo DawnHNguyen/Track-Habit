@@ -1,7 +1,6 @@
 package com.track.trackhabit.habit.data.local
 
 import android.content.Context
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -9,7 +8,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.track.trackhabit.habit.data.local.dao.HabitDao
 import com.track.trackhabit.habit.data.local.dao.InspectionDao
 import com.track.trackhabit.habit.data.local.dao.UserDao
-import com.track.trackhabit.habit.domain.entity.User
 import com.track.trackhabit.habit.domain.entity.local.HabitLocal
 import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
 import com.track.trackhabit.habit.domain.entity.local.UserLocal
@@ -17,7 +15,7 @@ import kotlinx.coroutines.runBlocking
 
 @Database(
     entities = [UserLocal::class, HabitLocal::class, InspectionLocal::class],
-    version = 2,
+    version = 3,
     exportSchema = false,
 
 )

@@ -2,7 +2,6 @@ package com.track.trackhabit.habit.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.lifecycle.map
 import com.track.trackhabit.habit.data.local.dao.HabitDao
 import com.track.trackhabit.habit.data.local.dao.InspectionDao
 import com.track.trackhabit.habit.data.local.dao.UserDao
@@ -36,7 +35,7 @@ class TrackHabitRepositoryImpl @Inject constructor(
         }
 
     override suspend fun getHabitById(id: Int): LiveData<Habit> =
-        habitDao.getHabitById(id).map { it ->
+        Transformations.map(habitDao.getHabitById(id)) { it ->
             it.mapToDomainModel()
         }
 

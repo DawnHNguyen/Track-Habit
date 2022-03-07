@@ -8,13 +8,12 @@ import java.util.*
 data class Habit(
     val habitId: Int,
     val title: String,
-    val description: String,
     val time: Date,
     val performances: List<Inspection>,
     val frequency: String?
 ) : DomainModel {
-    override fun toLocalDto() = HabitLocal(habitId, title, description, time.time,frequency).apply { userId = "AAAA" }
+    override fun toLocalDto() = HabitLocal(habitId, title, time.time,frequency).apply { userId = "AAAA" }
 
-    override fun toRemoteDto() = HabitDto(habitId, title, description, time, performances,frequency)
+    override fun toRemoteDto() = HabitDto(habitId, title, time, performances,frequency)
 
 }

@@ -10,12 +10,11 @@ import java.util.*
 data class HabitDto(
     @PrimaryKey(autoGenerate = true) val habitId: Int,
     val title: String,
-    val description: String,
     val time: Date,
     val performances: List<Inspection>,
     val frequency: String?
 ) : RemoteDto {
-    override fun mapToDomainModel() = Habit(habitId, title, description, time, performances,frequency)
+    override fun mapToDomainModel() = Habit(habitId, title, time, performances,frequency)
 
-    override fun mapToLocalDto() = HabitLocal(habitId, title, description, time.time,frequency)
+    override fun mapToLocalDto() = HabitLocal(habitId, title, time.time,frequency)
 }
