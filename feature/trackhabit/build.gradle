@@ -63,7 +63,7 @@ dependencies {
 
     implementation Libraries.Timber
 
-    implementation Libraries.roomRuntime
+    api Libraries.roomRuntime
     kapt Libraries.roomCompiler
     implementation Libraries.roomKtx
 

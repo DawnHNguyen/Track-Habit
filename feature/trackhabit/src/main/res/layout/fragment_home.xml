@@ -23,16 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button_cancelNotification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="tap here to cancel notification"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerView_activityHome_habitList" />
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_activityHome_addHabitButton"
             android:layout_width="wrap_content"

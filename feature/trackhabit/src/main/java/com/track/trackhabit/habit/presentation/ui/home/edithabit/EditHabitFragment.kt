@@ -56,10 +56,9 @@ class EditHabitFragment : Fragment() {
 
 
         binding.buttonFragmentEditHabitButtonDone.setOnClickListener {
-            if(binding.textInputEditTextFragmentEditHabitName.text.isNullOrBlank()){
+            if (binding.textInputEditTextFragmentEditHabitName.text.isNullOrBlank()) {
                 binding.textViewFragmentEditHabitNameError.visibility = View.VISIBLE
-            }
-            else{
+            } else {
                 Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
                 Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
 
@@ -67,8 +66,9 @@ class EditHabitFragment : Fragment() {
                     Habit(
                         habitId = id,
                         title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
-                        Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
-                        editHabitViewModel.habit.value!!.performances, editHabitViewModel.getFrequency()
+                        editHabitViewModel.getNewHabitTime(),
+                        editHabitViewModel.habit.value!!.performances,
+                        editHabitViewModel.getFrequency()
                     )
                 )
                 findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
