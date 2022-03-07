@@ -52,44 +52,6 @@
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentEditHabit_name" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textView_fragmentEditHabit_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/all_margin_start"
-            android:layout_marginTop="@dimen/margin_addhabit_edittext"
-            android:text="@string/habit_description"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentEditHabit_name" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_fragmentAddHabit_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/all_margin_start"
-            android:layout_marginTop="@dimen/margin_addhabit_textview"
-            android:layout_marginEnd="@dimen/all_margin_end"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_fragmentEditHabit_description">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditText_fragmentAddHabit_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.habit.description}" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textView_fragmentEditHabit_descriptionError"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/habit_errormessage_null"
-            android:textColor="@color/textcolor_error"
-            android:textSize="13sp"
-            app:layout_constraintLeft_toLeftOf="@id/textInputLayout_fragmentAddHabit_description"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentAddHabit_description" />
-
-        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textView_fragmentEditHabit_frequency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -97,7 +59,7 @@
             android:layout_marginTop="@dimen/margin_addhabit_edittext"
             android:text="@string/habit_frequency"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentAddHabit_description" />
+            app:layout_constraintTop_toBottomOf="@id/textView_fragmentEditHabit_nameError" />
 
         <HorizontalScrollView
             android:id="@+id/scrollView_fragmentEditHabit_daySelection"

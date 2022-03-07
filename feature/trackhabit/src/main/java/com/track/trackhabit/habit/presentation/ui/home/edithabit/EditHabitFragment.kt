@@ -13,7 +13,6 @@ import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentEditHabitBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_edit_habit.*
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,7 +39,6 @@ class EditHabitFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = safeArgs.habitId
         editHabitViewModel.getHabit(id)
-        binding.textViewFragmentEditHabitDescriptionError.visibility = View.GONE
         binding.textViewFragmentEditHabitNameError.visibility = View.GONE
         binding.buttonFragmentEditHabitSetTime.text = editHabitViewModel.timeHabit.value
 
@@ -58,19 +56,24 @@ class EditHabitFragment : Fragment() {
 
 
         binding.buttonFragmentEditHabitButtonDone.setOnClickListener {
-            Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
-            Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
+            if(binding.textInputEditTextFragmentEditHabitName.text.isNullOrBlank()){
+                binding.textViewFragmentEditHabitNameError.visibility = View.VISIBLE
+            }
+            else{
+                Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
+                Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
 
-            editHabitViewModel.updatehabit(
-                Habit(
-                    habitId = id,
-                    title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
-                    description = binding.textInputEditTextFragmentAddHabitDescription.text.toString(),
-                    Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
-                    editHabitViewModel.habit.value!!.performances, editHabitViewModel.getFrequency()
+                editHabitViewModel.updatehabit(
+                    Habit(
+                        habitId = id,
+                        title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
+                        Date(SimpleDateFormat("HH:mm").parse(editHabitViewModel.timeHabit.value!!).time),
+                        editHabitViewModel.habit.value!!.performances, editHabitViewModel.getFrequency()
+                    )
                 )
-            )
-            findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
+                findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
+            }
+
         }
 
         binding.buttonFragmentEditHabitCancel.setOnClickListener {

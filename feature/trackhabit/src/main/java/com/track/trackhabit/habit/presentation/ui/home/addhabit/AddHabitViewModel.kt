@@ -28,7 +28,6 @@ class AddHabitViewModel @Inject constructor(
     private val deleteHabitUseCase: DeleteHabitUseCase,
 ) : ViewModel() {
     val nameHabit = MutableLiveData<String>()
-    val descriptionHabit = MutableLiveData<String>()
     val timeHabit = MutableLiveData<String>()
 
     private val _nameErrorVisibility = MutableLiveData(View.GONE)
@@ -58,7 +57,6 @@ class AddHabitViewModel @Inject constructor(
                     Habit(
                         0,
                         nameHabit.value.toString(),
-                        descriptionHabit.value.toString(),
                         changeToTime(timeHabit.value!!),
                         emptyList(),
                         getFrequency()
@@ -83,14 +81,12 @@ class AddHabitViewModel @Inject constructor(
     }
 
     fun handleDifferentInputCases() {
-        if (nameHabit.value.isNullOrBlank() || descriptionHabit.value.isNullOrBlank()) {
-            if (nameHabit.value.isNullOrBlank()) _nameErrorVisibility.value = View.VISIBLE
-            if (descriptionHabit.value.isNullOrBlank()) _descriptionErrorVisibility.value =
-                View.VISIBLE
+        if (nameHabit.value.isNullOrBlank() ) {
+            _nameErrorVisibility.value = View.VISIBLE
         } else {
             Log.d(
                 "check_databinding",
-                "${nameHabit.value} + ${descriptionHabit.value} + ${timeHabit.value}"
+                "${nameHabit.value} + ${timeHabit.value}"
             )
             addHabit()
             _inputValidity.value = true
