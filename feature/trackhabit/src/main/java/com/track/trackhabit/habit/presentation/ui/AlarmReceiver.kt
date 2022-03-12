@@ -8,19 +8,32 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.track.trackhabit.habit.R
+import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
+import com.track.trackhabit.habit.domain.usecase.GetHabitByIdUseCase
 import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.constpackage.ConstIdChannel
 import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.*
+import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class AlarmReceiver() : BroadcastReceiver() {
+    @Inject lateinit var getHabitByIdUseCase: GetHabitByIdUseCase
 
-class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
+        goAsync()
         val timeInMillis = intent.getLongExtra(Const.EXTRA_EXACT_ALARM_TIME, 0L)
 
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
@@ -39,15 +52,21 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepetitiveAlarm(alarmService, intent.getIntExtra("habitId", 0))
-                if (isToday(intent)) {
-                    buildSnoozeNotification(
-                        context,
-                        context.getString(R.string.featureTrackhabit_title_notification),
-                        convertDate(timeInMillis),
-                        intent.getIntExtra(Const.HABIT_ID, 0)
-                    )
+
+                runBlocking {
+                    val frequencyHabit = getHabitFrequency(intent)
+                    Log.d("check_frequency","--${frequencyHabit}")
+                    if (isToday(frequencyHabit)) {
+                        buildSnoozeNotification(
+                            context,
+                            context.getString(R.string.featureTrackhabit_title_notification),
+                            convertDate(timeInMillis),
+                            intent.getIntExtra(Const.HABIT_ID, 0)
+                        )
+                    }
                 }
+
+                setRepetitiveAlarm(alarmService, intent.getIntExtra("habitId", 0))
             }
 
             Const.SET_REMIND_SLEEPTIME -> {
@@ -62,59 +81,57 @@ class AlarmReceiver : BroadcastReceiver() {
                 }
             }
         }
-
     }
 
-    private fun isToday(intent: Intent): Boolean {
+    suspend fun getHabitFrequency(intent: Intent) : String{
+        val habit: LiveData<Habit> = getHabitByIdUseCase(intent.getIntExtra(Const.HABIT_ID,0))
+        Log.d("check_habit","${habit.value} -- ${intent.getIntExtra(Const.HABIT_ID,0)}")
+        return habit.value?.frequency ?: "1111111"
+    }
+
+    private fun isToday(frequency: String): Boolean {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        Log.d("checkm", "${intent.getBooleanExtra("MONDAY", false)}")
-        Log.d("checktu", "${intent.getBooleanExtra("TUESDAY", false)}")
-        Log.d("checkwe", "${intent.getBooleanExtra("WEDNESDAY", false)}")
-        Log.d("checkmth", "${intent.getBooleanExtra("THURSDAY", false)}")
-        Log.d("checkfr", "${intent.getBooleanExtra("FRIDAY", false)}")
-        Log.d("checksa", "${intent.getBooleanExtra("SATURDAY", false)}")
-        Log.d("checksu", "${intent.getBooleanExtra("SUNDAY", false)}")
 
         when (today) {
             Calendar.MONDAY -> {
-                if (intent.getBooleanExtra("MONDAY", true)) {
+                if (frequency[0]=='1') {
                     return true
                 }
                 return false
             }
             Calendar.TUESDAY -> {
 
-                if (intent.getBooleanExtra("TUESDAY", true)) {
+                if (frequency[1]=='1') {
                     return true
                 }
                 return false
             }
             Calendar.WEDNESDAY -> {
-                if (intent.getBooleanExtra("WEDNESDAY", true)) {
+                if (frequency[2]=='1') {
                     return true
                 }
                 return false
             }
             Calendar.THURSDAY -> {
-                if (intent.getBooleanExtra("THURSDAY", true)) {
+                if (frequency[3]=='1') {
                     return true
                 }
                 return false
             }
             Calendar.FRIDAY -> {
-                if (intent.getBooleanExtra("FRIDAY", true)) {
+                if (frequency[4]=='1') {
                     return true
                 }
                 return false
             }
             Calendar.SATURDAY -> {
-                if (intent.getBooleanExtra("SATURDAY", true)) {
+                if (frequency[5]=='1') {
                     return true
                 }
                 return false
             }
             Calendar.SUNDAY -> {
-                if (intent.getBooleanExtra("SUNDAY", true)) {
+                if (frequency[6]=='1') {
                     return true
                 }
                 return false
