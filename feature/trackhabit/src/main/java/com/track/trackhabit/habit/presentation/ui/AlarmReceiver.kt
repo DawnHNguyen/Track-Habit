@@ -41,7 +41,7 @@ class AlarmReceiver() : BroadcastReceiver() {
         Log.d("CheckAction", "-action ${intent.action}")
         when (intent.action) {
             Const.START_SNOOZE_ALARM_TIME -> {
-                setSnoozeAlarm(alarmService)
+                setSnoozeAlarm(alarmService,  intent.getIntExtra(Const.HABIT_ID, 0))
                 with(NotificationManagerCompat.from(context)) {
                     cancel(ConstIdChannel.ID_NOTIFICATION_1)
                 }
@@ -66,7 +66,9 @@ class AlarmReceiver() : BroadcastReceiver() {
                     }
                 }
 
-                setRepetitiveAlarm(alarmService, intent.getIntExtra("habitId", 0))
+                setRepetitiveAlarm(alarmService,
+                    intent.getIntExtra("habitId", 0),
+                    intent.getStringExtra(Const.HABIT_NAME).toString())
             }
 
             Const.SET_REMIND_SLEEPTIME -> {
@@ -144,15 +146,15 @@ class AlarmReceiver() : BroadcastReceiver() {
         return SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date(timeInMillis))
     }
 
-    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int) {
+    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, habitName: String) {
         val cal = Calendar.getInstance().apply {
             this.timeInMillis += TimeUnit.HOURS.toMillis(24)
         }
-        alarmService.setRepeating(cal.timeInMillis, habitID)
+        alarmService.setRepeating(cal.timeInMillis, habitID, habitName)
     }
 
-    private fun setSnoozeAlarm(alarmService: AlarmService) {
-        alarmService.setSnoozeAlarm()
+    private fun setSnoozeAlarm(alarmService: AlarmService, habitID: Int) {
+        alarmService.setSnoozeAlarm(habitID)
     }
 
     private fun buildNotification(context: Context, title: String) {
@@ -162,7 +164,7 @@ class AlarmReceiver() : BroadcastReceiver() {
         val pendingIntent: PendingIntent =
             PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, 0)
 
-        val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText("het thong bao roi day, co lam khong?")
@@ -175,7 +177,12 @@ class AlarmReceiver() : BroadcastReceiver() {
         }
     }
 
-    private fun buildSnoozeNotification(context: Context, title: String, message: String, habitID: Int) {
+    private fun buildSnoozeNotification(
+        context: Context,
+        title: String,
+        message: String,
+        habitID: Int
+    ) {
         val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -198,7 +205,7 @@ class AlarmReceiver() : BroadcastReceiver() {
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 
-        val builder = NotificationCompat.Builder(context, ConstIdChannel.NOTIFICATION_1)
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(context.getString(R.string.featureTrackhabit_content_notification, message))

@@ -15,8 +15,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import timber.log.Timber
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -75,6 +73,8 @@ class AddHabitViewModel @Inject constructor(
     private fun changeToTime(timeSelect: String): Date {
         val arr = timeSelect.split(':')
         val cal = Calendar.getInstance()
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
         cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
         cal.set(Calendar.MINUTE, arr[1].toInt())
         return cal.time
