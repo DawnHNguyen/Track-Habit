@@ -29,20 +29,22 @@ class TrackHabitRepositoryImpl @Inject constructor(
         inspectionDao.insertInspection(inspection.toLocalDto())
     }
 
-    override suspend fun getHabit(): LiveData<List<Habit>> =
+    override fun getHabit(): LiveData<List<Habit>> =
         Transformations.map(habitDao.getHabit()) { list ->
             list.map { it.mapToDomainModel() }
         }
 
-    override suspend fun getHabitById(id: Int): LiveData<Habit> =
+    override fun getHabitById(id: Int): LiveData<Habit> =
         Transformations.map(habitDao.getHabitById(id)) { it ->
             it.mapToDomainModel()
         }
 
-    override suspend fun getInspection(): LiveData<List<Inspection>> =
+    override fun getInspection(): LiveData<List<Inspection>> =
         Transformations.map(inspectionDao.getInspection()) { list ->
             list.map { it.mapToDomainModel() }
         }
+
+    override suspend fun getHabitValueById(id: Int): Habit = habitDao.getHabitValueById(id).mapToDomainModel()
 
     override suspend fun updateHabit(habit: Habit) {
         habitDao.updateHabit(habit.toLocalDto())

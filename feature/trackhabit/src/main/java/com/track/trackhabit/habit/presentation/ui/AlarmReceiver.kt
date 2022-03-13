@@ -86,9 +86,9 @@ class AlarmReceiver() : BroadcastReceiver() {
     }
 
     suspend fun getHabitFrequency(intent: Intent) : String{
-        val habit: LiveData<Habit> = getHabitByIdUseCase(intent.getIntExtra(Const.HABIT_ID,0))
-        Log.d("check_habit","${habit.value} -- ${intent.getIntExtra(Const.HABIT_ID,0)}")
-        return habit.value?.frequency ?: "1111111"
+        val habit: Habit = getHabitByIdUseCase.getHabitValue(intent.getIntExtra(Const.HABIT_ID,0))
+        Log.d("check_habit","${habit} -- ${intent.getIntExtra(Const.HABIT_ID,0)}")
+        return habit.frequency ?: "1111111"
     }
 
     private fun isToday(frequency: String): Boolean {
