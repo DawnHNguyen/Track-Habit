@@ -6,11 +6,14 @@
     <string name="all_back">Back</string>
 
     <!--    notification-->
-<!--    TODO: reformat string template for sleeptime and habit notification-->
+    <!--    TODO: reformat string template for sleeptime and habit notification-->
     <string name="featureTrackhabit_channelId_notification">habit_channel_id</string>
     <string name="featureTrackhabit_nameOfChannel_notification">Habit Notification Chanel</string>
     <string name="featureTrackhabit_title_notification">No pain, no gain</string>
     <string name="featureTrackhabit_content_notification">Time to do habit %1$s</string>
+    <string name="featureTrackhabit_delayNoti_button">Delay 5 minutes</string>
+    <string name="featureTrackhabit_title_snoozeNotification">Set Snooze Time</string>
+    <string name="featureTrackhabit_content_snoozeNotification">het thong bao roi day, co lam khong?</string>
     <string name="sleepNoti_title">It\'s sleep time!</string>
     <string name="sleepNoti_content">Your bed is waiting for you. Good night ❤</string>
     <string name="sleepNoti_chanelId">sleep_chanel_id</string>

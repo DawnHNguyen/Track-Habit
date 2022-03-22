@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -12,19 +13,21 @@ import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.constpackage.ConstIdChannel
 import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
-import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-
+@SuppressLint("LogNotTimber")
 class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
 
-        Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
-        var alarmService = AlarmService(context)
+        Log.d("onClickReceiver", "${intent.action} + $intent + ${intent.extras}")
+
+        val alarmService = AlarmService(context)
+
         Log.d("CheckAction", "-action ${intent.action}")
+
         when (intent.action) {
             Const.START_SNOOZE_ALARM_TIME -> {
                 setSnoozeAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0))
@@ -34,7 +37,7 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             Const.SET_SNOOZE_ALARM_TIME -> {
-                buildNotification(context, "Set Snooze Time")
+                buildNotification(context)
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
@@ -46,7 +49,6 @@ class AlarmReceiver : BroadcastReceiver() {
                 if (isToday(intent)) {
                     buildSnoozeNotification(
                         context,
-                        context.getString(R.string.featureTrackhabit_title_notification),
                         intent.getStringExtra(Const.HABIT_NAME).toString(),
                         intent.getIntExtra(Const.HABIT_ID, 0)
                     )
@@ -68,6 +70,7 @@ class AlarmReceiver : BroadcastReceiver() {
         }
 
     }
+
 
     private fun isToday(intent: Intent): Boolean {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
@@ -127,10 +130,6 @@ class AlarmReceiver : BroadcastReceiver() {
         return true
     }
 
-    private fun convertDate(timeInMillis: Long): String {
-        return SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date(timeInMillis))
-    }
-
     private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, message: String) {
         val cal = Calendar.getInstance().apply {
             this.timeInMillis += TimeUnit.HOURS.toMillis(24)
@@ -142,7 +141,7 @@ class AlarmReceiver : BroadcastReceiver() {
         alarmService.setSnoozeAlarm(habitID)
     }
 
-    private fun buildNotification(context: Context, title: String) {
+    private fun buildNotification(context: Context) {
         val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -151,8 +150,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(title)
-            .setContentText("het thong bao roi day, co lam khong?")
+            .setContentTitle(context.getString(R.string.featureTrackhabit_title_snoozeNotification))
+            .setContentText(context.getString(R.string.featureTrackhabit_content_snoozeNotification))
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
@@ -164,7 +163,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
     private fun buildSnoozeNotification(
         context: Context,
-        title: String,
         message: String,
         habitID: Int
     ) {
@@ -193,7 +191,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(title)
+            .setContentTitle(context.getString(R.string.featureTrackhabit_title_notification))
             .setContentText(
                 context.getString(
                     R.string.featureTrackhabit_content_notification,
@@ -203,13 +201,15 @@ class AlarmReceiver : BroadcastReceiver() {
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
-            .addAction(R.drawable.ic_launcher_foreground, "Delay 5m", snoozePendingIntent)
+            .addAction(
+                R.drawable.ic_launcher_foreground,
+                context.getString(R.string.featureTrackhabit_delayNoti_button),
+                snoozePendingIntent
+            )
             .setAutoCancel(true)
-
 
         with(NotificationManagerCompat.from(context)) {
             notify(habitID, builder.build())
         }
-        Log.d("noti_ID", "$habitID")
     }
 }
