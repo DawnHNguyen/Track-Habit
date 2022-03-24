@@ -8,19 +8,14 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.domain.entity.Habit
-import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
 import com.track.trackhabit.habit.domain.usecase.GetHabitByIdUseCase
 import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.constpackage.ConstIdChannel
 import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.*
-import java.lang.IllegalArgumentException
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -33,7 +28,6 @@ class AlarmReceiver() : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
-        goAsync()
         val timeInMillis = intent.getLongExtra(Const.EXTRA_EXACT_ALARM_TIME, 0L)
 
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
@@ -52,23 +46,7 @@ class AlarmReceiver() : BroadcastReceiver() {
             }
 
             Const.ACTION_SET_REPETITIVE_EXACT -> {
-
-                runBlocking {
-                    val frequencyHabit = getHabitFrequency(intent)
-                    Log.d("check_frequency","--${frequencyHabit}")
-                    if (isToday(frequencyHabit)) {
-                        buildSnoozeNotification(
-                            context,
-                            context.getString(R.string.featureTrackhabit_title_notification),
-                            convertDate(timeInMillis),
-                            intent.getIntExtra(Const.HABIT_ID, 0)
-                        )
-                    }
-                }
-
-                setRepetitiveAlarm(alarmService,
-                    intent.getIntExtra("habitId", 0),
-                    intent.getStringExtra(Const.HABIT_NAME).toString())
+                setRepeatingNotification(intent, context, timeInMillis, alarmService)
             }
 
             Const.SET_REMIND_SLEEPTIME -> {
@@ -93,50 +71,34 @@ class AlarmReceiver() : BroadcastReceiver() {
 
     private fun isToday(frequency: String): Boolean {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-
+        val notifyMonday = frequency[0] == '1'
+        val notifyTuesday = frequency[1] == '1'
+        val notifyWednesday = frequency[2] == '1'
+        val notifyThursday = frequency[3] == '1'
+        val notifyFriday = frequency[4] == '1'
+        val notifySaturday = frequency[5] == '1'
+        val notifySunday = frequency[6] == '1'
         when (today) {
             Calendar.MONDAY -> {
-                if (frequency[0]=='1') {
-                    return true
-                }
-                return false
+                return notifyMonday
             }
             Calendar.TUESDAY -> {
-
-                if (frequency[1]=='1') {
-                    return true
-                }
-                return false
+                return notifyTuesday
             }
             Calendar.WEDNESDAY -> {
-                if (frequency[2]=='1') {
-                    return true
-                }
-                return false
+                return notifyWednesday
             }
             Calendar.THURSDAY -> {
-                if (frequency[3]=='1') {
-                    return true
-                }
-                return false
+                return notifyThursday
             }
             Calendar.FRIDAY -> {
-                if (frequency[4]=='1') {
-                    return true
-                }
-                return false
+                return notifyFriday
             }
             Calendar.SATURDAY -> {
-                if (frequency[5]=='1') {
-                    return true
-                }
-                return false
+                return notifySaturday
             }
             Calendar.SUNDAY -> {
-                if (frequency[6]=='1') {
-                    return true
-                }
-                return false
+                return notifySunday
             }
         }
         return true
@@ -220,6 +182,31 @@ class AlarmReceiver() : BroadcastReceiver() {
             notify(habitID, builder.build())
 
         }
+    }
+
+    private fun setRepeatingNotification(intent: Intent, context: Context, timeInMillis: Long, alarmService: AlarmService){
+        val habitID = intent.getIntExtra(Const.HABIT_ID, 0)
+        val habitName = intent.getStringExtra(Const.HABIT_NAME).toString()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO){
+                val frequencyHabit = getHabitFrequency(intent)
+                Log.d("check_frequency","--${frequencyHabit}")
+                if (isToday(frequencyHabit)) {
+                    buildSnoozeNotification(
+                        context,
+                        context.getString(R.string.featureTrackhabit_title_notification),
+                        convertDate(timeInMillis),
+                        habitID
+                    )
+                }
+            }
+        }
+
+        setRepetitiveAlarm(
+            alarmService,
+            habitID,
+            habitName)
     }
 
 }
