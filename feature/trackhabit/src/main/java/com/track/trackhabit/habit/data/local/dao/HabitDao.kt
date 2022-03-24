@@ -15,6 +15,9 @@ abstract class HabitDao() {
     @Query("SELECT * FROM habitLocal WHERE habit_id=:id")
     abstract fun getHabitById(id: Int): LiveData<HabitLocal>
 
+    @Query("SELECT * FROM habitLocal WHERE habit_id=:id")
+    abstract suspend fun getHabitValueById(id: Int): HabitLocal
+
     @Update
     abstract suspend fun updateHabit(habit: HabitLocal)
 

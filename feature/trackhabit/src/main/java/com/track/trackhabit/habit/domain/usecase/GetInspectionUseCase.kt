@@ -6,5 +6,5 @@ import javax.inject.Inject
 class GetInspectionUseCase @Inject constructor(
     private val repository: TrackHabitRepository
 ) {
-    suspend operator fun invoke() = repository.getInspection()
+    operator fun invoke() = repository.getInspection()
 }

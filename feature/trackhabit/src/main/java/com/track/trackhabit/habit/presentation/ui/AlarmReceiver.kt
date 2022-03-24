@@ -9,133 +9,85 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.track.trackhabit.habit.R
+import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.usecase.GetHabitByIdUseCase
 import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.constpackage.ConstIdChannel
 import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+@AndroidEntryPoint
+class AlarmReceiver() : BroadcastReceiver() {
+    @Inject lateinit var getHabitByIdUseCase: GetHabitByIdUseCase
 
-class AlarmReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
+        val timeInMillis = intent.getLongExtra(Const.EXTRA_EXACT_ALARM_TIME, 0L)
 
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
         var alarmService = AlarmService(context)
         Log.d("CheckAction", "-action ${intent.action}")
+
         when (intent.action) {
-            Const.START_SNOOZE_ALARM_TIME -> {
-                setSnoozeAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0))
-                with(NotificationManagerCompat.from(context)) {
-                    cancel(intent.getIntExtra(Const.HABIT_ID, 0))
-                }
-            }
+            Const.START_SNOOZE_ALARM_TIME -> startSnoozeAlarmTime(context, intent, alarmService)
 
-            Const.SET_SNOOZE_ALARM_TIME -> {
-                buildNotification(context, "Set Snooze Time")
-            }
+            Const.SET_SNOOZE_ALARM_TIME -> buildNotification(context, "Set Snooze Time")
 
-            Const.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepetitiveAlarm(
-                    alarmService,
-                    intent.getIntExtra(Const.HABIT_ID, 0),
-                    intent.getStringExtra(Const.HABIT_NAME).toString()
-                )
-                if (isToday(intent)) {
-                    buildSnoozeNotification(
-                        context,
-                        context.getString(R.string.featureTrackhabit_title_notification),
-                        intent.getStringExtra(Const.HABIT_NAME).toString(),
-                        intent.getIntExtra(Const.HABIT_ID, 0)
-                    )
-                }
-            }
+            Const.ACTION_SET_REPETITIVE_EXACT -> setRepeatingNotification(intent, context, timeInMillis, alarmService)
 
-            Const.SET_REMIND_SLEEPTIME -> {
-                val builder =
-                    NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
-                        .setSmallIcon(R.drawable.ic_launcher_foreground)
-                        .setContentTitle(context.getString(R.string.sleepNoti_title))
-                        .setContentText(context.getString(R.string.sleepNoti_content))
-                        .setPriority(NotificationCompat.PRIORITY_MAX)
-                        .setDefaults(NotificationCompat.DEFAULT_ALL)
-                with(NotificationManagerCompat.from(context)) {
-                    notify(ConstIdChannel.ID_REMIND_SLEEP_NOTIFICATION, builder.build())
-                }
-            }
+            Const.SET_REMIND_SLEEPTIME -> setRemindSleepTime(context)
         }
-
     }
 
-    private fun isToday(intent: Intent): Boolean {
+    suspend fun getHabitFrequency(intent: Intent) : String{
+        val habit: Habit = getHabitByIdUseCase.getHabitValue(intent.getIntExtra(Const.HABIT_ID,0))
+        Log.d("check_habit","${habit} -- ${intent.getIntExtra(Const.HABIT_ID,0)}")
+        return habit.frequency ?: "1111111"
+    }
+
+    private fun isToday(frequency: String): Boolean {
         val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
-        Log.d("checkm", "${intent.getBooleanExtra("MONDAY", false)}")
-        Log.d("checktu", "${intent.getBooleanExtra("TUESDAY", false)}")
-        Log.d("checkwe", "${intent.getBooleanExtra("WEDNESDAY", false)}")
-        Log.d("checkmth", "${intent.getBooleanExtra("THURSDAY", false)}")
-        Log.d("checkfr", "${intent.getBooleanExtra("FRIDAY", false)}")
-        Log.d("checksa", "${intent.getBooleanExtra("SATURDAY", false)}")
-        Log.d("checksu", "${intent.getBooleanExtra("SUNDAY", false)}")
+        val notifyMonday = frequency[0] == '1'
+        val notifyTuesday = frequency[1] == '1'
+        val notifyWednesday = frequency[2] == '1'
+        val notifyThursday = frequency[3] == '1'
+        val notifyFriday = frequency[4] == '1'
+        val notifySaturday = frequency[5] == '1'
+        val notifySunday = frequency[6] == '1'
+        return when (today) {
+            Calendar.MONDAY -> notifyMonday
 
-        when (today) {
-            Calendar.MONDAY -> {
-                if (intent.getBooleanExtra("MONDAY", true)) {
-                    return true
-                }
-                return false
-            }
-            Calendar.TUESDAY -> {
+            Calendar.TUESDAY -> notifyTuesday
 
-                if (intent.getBooleanExtra("TUESDAY", true)) {
-                    return true
-                }
-                return false
-            }
-            Calendar.WEDNESDAY -> {
-                if (intent.getBooleanExtra("WEDNESDAY", true)) {
-                    return true
-                }
-                return false
-            }
-            Calendar.THURSDAY -> {
-                if (intent.getBooleanExtra("THURSDAY", true)) {
-                    return true
-                }
-                return false
-            }
-            Calendar.FRIDAY -> {
-                if (intent.getBooleanExtra("FRIDAY", true)) {
-                    return true
-                }
-                return false
-            }
-            Calendar.SATURDAY -> {
-                if (intent.getBooleanExtra("SATURDAY", true)) {
-                    return true
-                }
-                return false
-            }
-            Calendar.SUNDAY -> {
-                if (intent.getBooleanExtra("SUNDAY", true)) {
-                    return true
-                }
-                return false
-            }
+            Calendar.WEDNESDAY -> notifyWednesday
+
+            Calendar.THURSDAY -> notifyThursday
+
+            Calendar.FRIDAY -> notifyFriday
+
+            Calendar.SATURDAY -> notifySaturday
+
+            Calendar.SUNDAY -> notifySunday
+
+            else -> true
         }
-        return true
     }
 
     private fun convertDate(timeInMillis: Long): String {
         return SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date(timeInMillis))
     }
 
-    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, message: String) {
+    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, habitName: String) {
         val cal = Calendar.getInstance().apply {
             this.timeInMillis += TimeUnit.HOURS.toMillis(24)
         }
-        alarmService.setRepeating(cal.timeInMillis, habitID, message)
+        alarmService.setRepeating(cal.timeInMillis, habitID, habitName)
     }
 
     private fun setSnoozeAlarm(alarmService: AlarmService, habitID: Int) {
@@ -181,7 +133,6 @@ class AlarmReceiver : BroadcastReceiver() {
         val snoozeIntent = Intent(context, AlarmReceiver::class.java).apply {
             action = Const.START_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
-            putExtra(Const.HABIT_ID, habitID)
         }
         val snoozePendingIntent: PendingIntent =
             PendingIntent.getBroadcast(
@@ -194,12 +145,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
-            .setContentText(
-                context.getString(
-                    R.string.featureTrackhabit_content_notification,
-                    message
-                )
-            )
+            .setContentText(context.getString(R.string.featureTrackhabit_content_notification, message))
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
@@ -209,7 +155,52 @@ class AlarmReceiver : BroadcastReceiver() {
 
         with(NotificationManagerCompat.from(context)) {
             notify(habitID, builder.build())
+
         }
-        Log.d("noti_ID", "$habitID")
     }
+
+    private fun setRepeatingNotification(intent: Intent, context: Context, timeInMillis: Long, alarmService: AlarmService){
+        val habitID = intent.getIntExtra(Const.HABIT_ID, 0)
+        val habitName = intent.getStringExtra(Const.HABIT_NAME).toString()
+
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO){
+                val frequencyHabit = getHabitFrequency(intent)
+                Log.d("check_frequency","--${frequencyHabit}")
+                if (isToday(frequencyHabit)) {
+                    buildSnoozeNotification(
+                        context,
+                        context.getString(R.string.featureTrackhabit_title_notification),
+                        convertDate(timeInMillis),
+                        habitID
+                    )
+                }
+            }
+        }
+
+        setRepetitiveAlarm(
+            alarmService,
+            habitID,
+            habitName)
+    }
+
+    private fun startSnoozeAlarmTime(context: Context, intent: Intent, alarmService: AlarmService){
+        setSnoozeAlarm(alarmService,  intent.getIntExtra(Const.HABIT_ID, 0))
+        with(NotificationManagerCompat.from(context)) {
+            cancel(ConstIdChannel.ID_NOTIFICATION_1)
+        }
+    }
+
+    private fun setRemindSleepTime(context: Context) {
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle(context.getString(R.string.sleepNoti_title))
+            .setContentText(context.getString(R.string.sleepNoti_content))
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+        with(NotificationManagerCompat.from(context)) {
+            notify(ConstIdChannel.ID_REMIND_SLEEP_NOTIFICATION, builder.build())
+        }
+    }
+
 }
