@@ -33,33 +33,15 @@ class AlarmReceiver() : BroadcastReceiver() {
         Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
         var alarmService = AlarmService(context)
         Log.d("CheckAction", "-action ${intent.action}")
+
         when (intent.action) {
-            Const.START_SNOOZE_ALARM_TIME -> {
-                setSnoozeAlarm(alarmService,  intent.getIntExtra(Const.HABIT_ID, 0))
-                with(NotificationManagerCompat.from(context)) {
-                    cancel(ConstIdChannel.ID_NOTIFICATION_1)
-                }
-            }
+            Const.START_SNOOZE_ALARM_TIME -> startSnoozeAlarmTime(context, intent, alarmService)
 
-            Const.SET_SNOOZE_ALARM_TIME -> {
-                buildNotification(context, "Set Snooze Time")
-            }
+            Const.SET_SNOOZE_ALARM_TIME -> buildNotification(context, "Set Snooze Time")
 
-            Const.ACTION_SET_REPETITIVE_EXACT -> {
-                setRepeatingNotification(intent, context, timeInMillis, alarmService)
-            }
+            Const.ACTION_SET_REPETITIVE_EXACT -> setRepeatingNotification(intent, context, timeInMillis, alarmService)
 
-            Const.SET_REMIND_SLEEPTIME -> {
-                val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setContentTitle(context.getString(R.string.sleepNoti_title))
-                    .setContentText(context.getString(R.string.sleepNoti_content))
-                    .setPriority(NotificationCompat.PRIORITY_MAX)
-                    .setDefaults(NotificationCompat.DEFAULT_ALL)
-                with(NotificationManagerCompat.from(context)) {
-                    notify(ConstIdChannel.ID_REMIND_SLEEP_NOTIFICATION, builder.build())
-                }
-            }
+            Const.SET_REMIND_SLEEPTIME -> setRemindSleepTime(context)
         }
     }
 
@@ -78,30 +60,23 @@ class AlarmReceiver() : BroadcastReceiver() {
         val notifyFriday = frequency[4] == '1'
         val notifySaturday = frequency[5] == '1'
         val notifySunday = frequency[6] == '1'
-        when (today) {
-            Calendar.MONDAY -> {
-                return notifyMonday
-            }
-            Calendar.TUESDAY -> {
-                return notifyTuesday
-            }
-            Calendar.WEDNESDAY -> {
-                return notifyWednesday
-            }
-            Calendar.THURSDAY -> {
-                return notifyThursday
-            }
-            Calendar.FRIDAY -> {
-                return notifyFriday
-            }
-            Calendar.SATURDAY -> {
-                return notifySaturday
-            }
-            Calendar.SUNDAY -> {
-                return notifySunday
-            }
+        return when (today) {
+            Calendar.MONDAY -> notifyMonday
+
+            Calendar.TUESDAY -> notifyTuesday
+
+            Calendar.WEDNESDAY -> notifyWednesday
+
+            Calendar.THURSDAY -> notifyThursday
+
+            Calendar.FRIDAY -> notifyFriday
+
+            Calendar.SATURDAY -> notifySaturday
+
+            Calendar.SUNDAY -> notifySunday
+
+            else -> true
         }
-        return true
     }
 
     private fun convertDate(timeInMillis: Long): String {
@@ -207,6 +182,25 @@ class AlarmReceiver() : BroadcastReceiver() {
             alarmService,
             habitID,
             habitName)
+    }
+
+    private fun startSnoozeAlarmTime(context: Context, intent: Intent, alarmService: AlarmService){
+        setSnoozeAlarm(alarmService,  intent.getIntExtra(Const.HABIT_ID, 0))
+        with(NotificationManagerCompat.from(context)) {
+            cancel(ConstIdChannel.ID_NOTIFICATION_1)
+        }
+    }
+
+    private fun setRemindSleepTime(context: Context) {
+        val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle(context.getString(R.string.sleepNoti_title))
+            .setContentText(context.getString(R.string.sleepNoti_content))
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+        with(NotificationManagerCompat.from(context)) {
+            notify(ConstIdChannel.ID_REMIND_SLEEP_NOTIFICATION, builder.build())
+        }
     }
 
 }
