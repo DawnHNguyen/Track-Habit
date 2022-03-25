@@ -20,6 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -89,10 +90,15 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, habitName: String) {
-        val cal = Calendar.getInstance().apply {
-            this.timeInMillis += TimeUnit.HOURS.toMillis(24)
-        }
+    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, habitName: String, timeHabit: Date) {
+        val cal = Calendar.getInstance()
+        val timeNoti = SimpleDateFormat("HH:mm").format(timeHabit)
+        val arr = timeNoti.split(":")
+        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
+        cal.set(Calendar.MINUTE, arr[1].toInt())
+        cal.set(Calendar.SECOND, 0)
+        cal.set(Calendar.MILLISECOND, 0)
+        cal.timeInMillis += TimeUnit.HOURS.toMillis(24)
         alarmService.setRepeating(cal.timeInMillis, habitID, habitName)
     }
 
@@ -167,6 +173,7 @@ class AlarmReceiver : BroadcastReceiver() {
             )
             .setAutoCancel(true)
 
+
         with(NotificationManagerCompat.from(context)) {
             notify(habitID, builder.build())
 
@@ -182,9 +189,11 @@ class AlarmReceiver : BroadcastReceiver() {
         val habitName = intent.getStringExtra(Const.HABIT_NAME).toString()
 
         GlobalScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO) {
-                val frequencyHabit = getHabitFrequency(intent)
-                Log.d("check_frequency", "--${frequencyHabit}")
+            withContext(Dispatchers.IO){
+                val habit: Habit = getHabitByIdUseCase.getHabitValue(habitID)
+                val frequencyHabit = habit.frequency ?: "1111111"
+                val timeHabit = habit.time
+                Log.d("check_frequency","--${frequencyHabit}")
                 if (isToday(frequencyHabit)) {
                     buildSnoozeNotification(
                         context,
@@ -192,14 +201,15 @@ class AlarmReceiver : BroadcastReceiver() {
                         habitID
                     )
                 }
+
+                setRepetitiveAlarm(
+                    alarmService,
+                    habitID,
+                    habitName,
+                    timeHabit
+                )
             }
         }
-
-        setRepetitiveAlarm(
-            alarmService,
-            habitID,
-            habitName
-        )
     }
 
     private fun startSnoozeAlarmTime(context: Context, intent: Intent, alarmService: AlarmService) {
