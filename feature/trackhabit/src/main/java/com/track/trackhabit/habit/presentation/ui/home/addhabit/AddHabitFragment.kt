@@ -6,12 +6,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentAddHabitBinding
+import com.track.trackhabit.habit.databinding.FragmentEditHabitBinding
 import com.track.trackhabit.habit.presentation.ui.AlarmService
+import com.track.trackhabit.habit.presentation.ui.home.edithabit.EditHabitViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.text.SimpleDateFormat
@@ -19,16 +22,17 @@ import java.util.*
 
 @AndroidEntryPoint
 class AddHabitFragment : Fragment() {
-    private val addHabitViewModel by viewModels<AddHabitViewModel>()
+    private val addHabitViewModel by viewModels<EditHabitViewModel>()
     private lateinit var alarmService: AlarmService
-    private lateinit var binding: FragmentAddHabitBinding
+    private lateinit var binding: FragmentEditHabitBinding
+    var check = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAddHabitBinding.inflate(inflater, container, false)
+        binding = FragmentEditHabitBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = addHabitViewModel
         return binding.root
@@ -38,82 +42,62 @@ class AddHabitFragment : Fragment() {
     @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         addHabitViewModel.timeHabit.value = SimpleDateFormat("HH:mm").format(Date())
         alarmService = AlarmService(requireContext())
         setupToggleButton()
-        binding.buttonFragmentAddHabitSetTime.setOnClickListener {
+        binding.buttonFragmentEditHabitSetTime.setOnClickListener {
             setAlarm {
-                binding.buttonFragmentAddHabitSetTime.text =
+                binding.buttonFragmentEditHabitSetTime.text =
                     SimpleDateFormat("HH:mm").format(Date(it))
                 Timber.d("gia_tri ${addHabitViewModel.timeHabit.value}}")
             }
         }
-        binding.buttonFragmentAddHabitCancel.setOnClickListener {
+        binding.buttonFragmentEditHabitCancel.setOnClickListener {
             findNavController().navigate(R.id.action_nav_addhabit_to_nav_home)
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun setupToggleButton() {
         with(binding) {
-            toggleButtonFragmentAddHabitCheckMonday.setOnClickListener {
-                addHabitViewModel.monday = binding.toggleButtonFragmentAddHabitCheckMonday.isChecked
+            toggleButtonFragmentEditHabitCheckMonday.setOnClickListener {
+                addHabitViewModel.monday.value = !(addHabitViewModel.monday.value?:true)
             }
 
-            toggleButtonFragmentAddHabitCheckTuesday.setOnClickListener {
-                addHabitViewModel.tuesday =
-                    binding.toggleButtonFragmentAddHabitCheckTuesday.isChecked
+            toggleButtonFragmentEditHabitCheckTuesday.setOnClickListener {
+                addHabitViewModel.tuesday.value = !(addHabitViewModel.tuesday.value?:true)
             }
 
-            toggleButtonFragmentAddHabitCheckWednesday.setOnClickListener {
-                addHabitViewModel.wednesday =
-                    binding.toggleButtonFragmentAddHabitCheckWednesday.isChecked
+            toggleButtonFragmentEditHabitCheckWednesday.setOnClickListener {
+                addHabitViewModel.wednesday.value = !(addHabitViewModel.wednesday.value?:true)
             }
 
-            toggleButtonFragmentAddHabitCheckThursday.setOnClickListener {
-                addHabitViewModel.thursday =
-                    binding.toggleButtonFragmentAddHabitCheckThursday.isChecked
+            toggleButtonFragmentEditHabitCheckThursday.setOnClickListener {
+                addHabitViewModel.thursday.value = !(addHabitViewModel.thursday.value?:true)
             }
 
-            toggleButtonFragmentAddHabitCheckFriday.setOnClickListener {
-                addHabitViewModel.friday = binding.toggleButtonFragmentAddHabitCheckFriday.isChecked
+            toggleButtonFragmentEditHabitCheckFriday.setOnClickListener {
+                addHabitViewModel.friday.value = !(addHabitViewModel.friday.value?: true)
             }
 
-            toggleButtonFragmentAddHabitCheckSaturday.setOnClickListener {
-                addHabitViewModel.saturday =
-                    binding.toggleButtonFragmentAddHabitCheckSaturday.isChecked
+            toggleButtonFragmentEditHabitCheckSaturday.setOnClickListener {
+                addHabitViewModel.saturday.value = !(addHabitViewModel.saturday.value?: true)
             }
-            toggleButtonFragmentAddHabitCheckSunday.setOnClickListener {
-                addHabitViewModel.sunday = binding.toggleButtonFragmentAddHabitCheckSunday.isChecked
+            toggleButtonFragmentEditHabitCheckSunday.setOnClickListener {
+                addHabitViewModel.sunday.value = !(addHabitViewModel.sunday.value?:true)
             }
 
-            buttonFragmentAddHabitButtonDone.setOnClickListener {
+            buttonFragmentEditHabitButtonDone.setOnClickListener {
                 setVisibilityErrorMessage()
-                addHabitViewModel.handleDifferentInputCases()
+                addHabitViewModel.handleInputAddCases()
                 navigateOnClickDone()
             }
-
-
-            //                alarmService.setRepeating(it)
-            //                val intent =  Intent(context, AlarmReceiver::class.java).apply {
-            //                    action = Const.ACTION_SET_REPETITIVE_EXACT
-            //                    putExtra("MONDAY", monday)
-            //                    putExtra("TUESDAY", tuesday)
-            //                    putExtra("WEDNESDAY", wednesday)
-            //                    putExtra("THURSDAY", thursday)
-            //                    putExtra("FRIDAY", friday)
-            //                    putExtra("SATURDAY", saturday)
-            //                    putExtra("SUNDAY", sunday)
-            ////                    putExtra("TIME", it)
-            //                }
-            //                requireContext().sendBroadcast(intent)
-
 
         }
     }
 
     private fun setVisibilityErrorMessage() {
-        binding.textViewFragmentAddHabitNameError.visibility = View.GONE
+        binding.textViewFragmentEditHabitNameError.visibility = View.GONE
     }
 
     private fun setAlarm(callback: (Long) -> Unit) {

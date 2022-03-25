@@ -1,10 +1,12 @@
 package com.track.trackhabit.habit.presentation.ui.home.edithabit
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -46,6 +48,8 @@ class EditHabitFragment : Fragment() {
             Timber.d("gia_tri ${it}}")
         }
 
+        setupToggleButton()
+
         binding.buttonFragmentEditHabitSetTime.setOnClickListener {
             setAlarm {
                 binding.buttonFragmentEditHabitSetTime.text =
@@ -62,11 +66,11 @@ class EditHabitFragment : Fragment() {
                 Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
                 Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
 
-                editHabitViewModel.updatehabit(
+                editHabitViewModel.handleInputEditCases(
                     Habit(
                         habitId = id,
                         title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
-                        editHabitViewModel.getNewHabitTime(),
+                        editHabitViewModel.changeToTime(),
                         editHabitViewModel.habit.value!!.performances,
                         editHabitViewModel.getFrequency()
                     )
@@ -80,6 +84,40 @@ class EditHabitFragment : Fragment() {
             findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
         }
     }
+
+
+    @SuppressLint("ResourceAsColor")
+    private fun setupToggleButton() {
+        with(binding) {
+            toggleButtonFragmentEditHabitCheckMonday.setOnClickListener {
+                editHabitViewModel.monday.value = !(editHabitViewModel.monday.value?: true)
+            }
+
+            toggleButtonFragmentEditHabitCheckTuesday.setOnClickListener {
+                editHabitViewModel.tuesday.value = !(editHabitViewModel.tuesday.value?:true)
+            }
+
+            toggleButtonFragmentEditHabitCheckWednesday.setOnClickListener {
+                editHabitViewModel.wednesday.value = !(editHabitViewModel.wednesday.value?:true)
+            }
+
+            toggleButtonFragmentEditHabitCheckThursday.setOnClickListener {
+                editHabitViewModel.thursday.value = !(editHabitViewModel.thursday.value?:true)
+            }
+
+            toggleButtonFragmentEditHabitCheckFriday.setOnClickListener {
+                editHabitViewModel.friday.value = !(editHabitViewModel.friday.value?: true)
+            }
+
+            toggleButtonFragmentEditHabitCheckSaturday.setOnClickListener {
+                editHabitViewModel.saturday.value = !(editHabitViewModel.saturday.value?:true)
+            }
+            toggleButtonFragmentEditHabitCheckSunday.setOnClickListener {
+                editHabitViewModel.sunday.value = !(editHabitViewModel.sunday.value?:true)
+            }
+        }
+    }
+
 
     private fun setAlarm(callback: (Long) -> Unit) {
         Calendar.getInstance().apply {

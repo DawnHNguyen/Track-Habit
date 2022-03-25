@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.track.trackhabit.habit.presentation.ui.home.addhabit.AddHabitViewModel" />
+            type="com.track.trackhabit.habit.presentation.ui.home.edithabit.EditHabitViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,6 +65,7 @@
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_edittext"
             android:text="@string/habit_frequency"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentAddHabit_name" />
 
@@ -83,47 +84,47 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <ToggleButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toggleButton_fragmentAddHabit_checkMonday"
                     style="@style/ToggleButtonSelectDay"
-                    android:textOff="@string/habit_monday"
-                    android:textOn="@string/habit_monday" />
+                    android:text="@string/habit_monday"
+                    app:frequencybutton = "@{viewModel.monday}"/>
 
-                <ToggleButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toggleButton_fragmentAddHabit_checkTuesday"
                     style="@style/ToggleButtonSelectDay"
-                    android:textOff="@string/habit_tuesday"
-                    android:textOn="@string/habit_tuesday" />
+                    android:text="@string/habit_tuesday"
+                    app:frequencybutton = "@{viewModel.tuesday}"/>
 
-                <ToggleButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toggleButton_fragmentAddHabit_checkWednesday"
                     style="@style/ToggleButtonSelectDay"
-                    android:textOff="@string/habit_wednesday"
-                    android:textOn="@string/habit_wednesday" />
+                    android:text="@string/habit_wednesday"
+                    app:frequencybutton = "@{viewModel.wednesday}"/>
 
-                <ToggleButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toggleButton_fragmentAddHabit_checkThursday"
                     style="@style/ToggleButtonSelectDay"
-                    android:textOff="@string/habit_thursday"
-                    android:textOn="@string/habit_thursday" />
+                    android:text="@string/habit_thursday"
+                    app:frequencybutton = "@{viewModel.thursday}"/>
 
-                <ToggleButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toggleButton_fragmentAddHabit_checkFriday"
                     style="@style/ToggleButtonSelectDay"
-                    android:textOff="@string/habit_friday"
-                    android:textOn="@string/habit_friday" />
+                    android:text="@string/habit_friday"
+                    app:frequencybutton = "@{viewModel.friday}"/>
 
-                <ToggleButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toggleButton_fragmentAddHabit_checkSaturday"
                     style="@style/ToggleButtonSelectDay"
-                    android:textOff="@string/habit_saturday"
-                    android:textOn="@string/habit_saturday" />
+                    android:text="@string/habit_saturday"
+                    app:frequencybutton = "@{viewModel.saturday}"/>
 
-                <ToggleButton
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/toggleButton_fragmentAddHabit_checkSunday"
                     style="@style/ToggleButtonSelectDay"
-                    android:textOff="@string/habit_sunday"
-                    android:textOn="@string/habit_sunday" />
+                    android:text="@string/habit_sunday"
+                    app:frequencybutton = "@{viewModel.sunday}"/>
             </LinearLayout>
         </HorizontalScrollView>
 
