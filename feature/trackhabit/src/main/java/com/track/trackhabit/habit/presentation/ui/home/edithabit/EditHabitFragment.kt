@@ -47,6 +47,9 @@ class EditHabitFragment : Fragment() {
         editHabitViewModel.timeHabit.observe(viewLifecycleOwner) {
             Timber.d("gia_tri ${it}}")
         }
+        editHabitViewModel.habit.observe(viewLifecycleOwner){
+            Timber.d("da lay duoc gia tri cua ha bit ${editHabitViewModel.habit}")
+        }
 
         setupToggleButton()
 

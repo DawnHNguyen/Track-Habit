@@ -24,7 +24,7 @@ class EditHabitViewModel @Inject constructor(
     private val addHabitUseCase: AddHabitUseCase,
     private val dispatcher: AppDispatchers
 ) : ViewModel() {
-    val nameHabit = MutableLiveData<String>()
+    val nameHabit = MutableLiveData<String>("chay bo 5km/ngay")
     val timeHabit = MutableLiveData<String>()
 
     private val _habit = MediatorLiveData<Habit>()
@@ -46,6 +46,7 @@ class EditHabitViewModel @Inject constructor(
     var friday = MutableLiveData<Boolean>(true)
     var saturday = MutableLiveData<Boolean>(true)
     var sunday = MutableLiveData<Boolean>(true)
+    var someday =MediatorLiveData<Boolean>()
 
     fun addHabit() {
         viewModelScope.launch(Dispatchers.Main) {
@@ -72,7 +73,7 @@ class EditHabitViewModel @Inject constructor(
             try {
                 _habit.addSource(habitSource) {
                     _habit.value = it
-                    _habit.value?.let {
+                    it?.let {
                         monday.value = it.frequency!![0] == '1'
                         tuesday.value = it.frequency[1] == '1'
                         wednesday.value = it.frequency[2] == '1'
@@ -82,6 +83,7 @@ class EditHabitViewModel @Inject constructor(
                         sunday.value = it.frequency[6] == '1'
                         timeHabit.value = SimpleDateFormat("HH:mm").format(it.time)
                         nameHabit.value = it.title
+                        Log.d("Check_habit","Check name habit: ${nameHabit}")
                     }
                 }
             } catch (e: IllegalArgumentException) {
