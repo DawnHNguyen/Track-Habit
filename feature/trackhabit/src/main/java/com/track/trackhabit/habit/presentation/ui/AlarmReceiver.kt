@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -8,6 +9,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.track.common.base.utils.convertStringToCalender
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.usecase.GetHabitByIdUseCase
@@ -15,39 +17,49 @@ import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.constpackage.ConstIdChannel
 import com.track.trackhabit.habit.presentation.constpackage.ConstRequestCode
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+@SuppressLint("LogNotTimber")
 @AndroidEntryPoint
-class AlarmReceiver() : BroadcastReceiver() {
-    @Inject lateinit var getHabitByIdUseCase: GetHabitByIdUseCase
+class AlarmReceiver : BroadcastReceiver() {
+    @Inject
+    lateinit var getHabitByIdUseCase: GetHabitByIdUseCase
 
     override fun onReceive(context: Context, intent: Intent) {
 
         createChannel(context)
-        val timeInMillis = intent.getLongExtra(Const.EXTRA_EXACT_ALARM_TIME, 0L)
 
-        Log.d("onClickReceiver", "${intent.action} + ${intent} + ${intent.extras}")
-        var alarmService = AlarmService(context)
+        Log.d("onClickReceiver", "${intent.action} + $intent + ${intent.extras}")
+
+        val alarmService = AlarmService(context)
+
         Log.d("CheckAction", "-action ${intent.action}")
 
         when (intent.action) {
             Const.START_SNOOZE_ALARM_TIME -> startSnoozeAlarmTime(context, intent, alarmService)
 
-            Const.SET_SNOOZE_ALARM_TIME -> buildNotification(context, "Set Snooze Time")
+            Const.SET_SNOOZE_ALARM_TIME -> buildNotification(context)
 
-            Const.ACTION_SET_REPETITIVE_EXACT -> setRepeatingNotification(intent, context, timeInMillis, alarmService)
+            Const.ACTION_SET_REPETITIVE_EXACT -> setRepeatingNotification(
+                intent,
+                context,
+                alarmService
+            )
 
             Const.SET_REMIND_SLEEPTIME -> setRemindSleepTime(context)
         }
     }
 
-    suspend fun getHabitFrequency(intent: Intent) : String{
-        val habit: Habit = getHabitByIdUseCase.getHabitValue(intent.getIntExtra(Const.HABIT_ID,0))
-        Log.d("check_habit","${habit} -- ${intent.getIntExtra(Const.HABIT_ID,0)}")
+    private suspend fun getHabitFrequency(intent: Intent): String {
+        val habit: Habit = getHabitByIdUseCase.getHabitValue(intent.getIntExtra(Const.HABIT_ID, 0))
+        Log.d("check_habit", "$habit -- ${intent.getIntExtra(Const.HABIT_ID, 0)}")
         return habit.frequency ?: "1111111"
     }
 
@@ -79,14 +91,15 @@ class AlarmReceiver() : BroadcastReceiver() {
         }
     }
 
-    private fun convertDate(timeInMillis: Long): String {
-        return SimpleDateFormat("dd/MM/yyyy hh:mm").format(Date(timeInMillis))
-    }
-
-    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, habitName: String) {
-        val cal = Calendar.getInstance().apply {
-            this.timeInMillis += TimeUnit.HOURS.toMillis(24)
-        }
+    private fun setRepetitiveAlarm(
+        alarmService: AlarmService,
+        habitID: Int,
+        habitName: String,
+        timeHabit: Date
+    ) {
+        val timeNoti = SimpleDateFormat("HH:mm").format(timeHabit)
+        val cal = convertStringToCalender(timeNoti)
+        cal.timeInMillis += TimeUnit.HOURS.toMillis(24)
         alarmService.setRepeating(cal.timeInMillis, habitID, habitName)
     }
 
@@ -94,7 +107,7 @@ class AlarmReceiver() : BroadcastReceiver() {
         alarmService.setSnoozeAlarm(habitID)
     }
 
-    private fun buildNotification(context: Context, title: String) {
+    private fun buildNotification(context: Context) {
         val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -103,8 +116,8 @@ class AlarmReceiver() : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(title)
-            .setContentText("het thong bao roi day, co lam khong?")
+            .setContentTitle(context.getString(R.string.featureTrackhabit_title_snoozeNotification))
+            .setContentText(context.getString(R.string.featureTrackhabit_content_snoozeNotification))
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
@@ -116,7 +129,6 @@ class AlarmReceiver() : BroadcastReceiver() {
 
     private fun buildSnoozeNotification(
         context: Context,
-        title: String,
         message: String,
         habitID: Int
     ) {
@@ -133,6 +145,7 @@ class AlarmReceiver() : BroadcastReceiver() {
         val snoozeIntent = Intent(context, AlarmReceiver::class.java).apply {
             action = Const.START_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
+            putExtra(Const.HABIT_ID, habitID)
         }
         val snoozePendingIntent: PendingIntent =
             PendingIntent.getBroadcast(
@@ -144,12 +157,21 @@ class AlarmReceiver() : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle(title)
-            .setContentText(context.getString(R.string.featureTrackhabit_content_notification, message))
+            .setContentTitle(context.getString(R.string.featureTrackhabit_title_notification))
+            .setContentText(
+                context.getString(
+                    R.string.featureTrackhabit_content_notification,
+                    message
+                )
+            )
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
-            .addAction(R.drawable.ic_launcher_foreground, "Delay 5m", snoozePendingIntent)
+            .addAction(
+                R.drawable.ic_launcher_foreground,
+                context.getString(R.string.featureTrackhabit_delayNoti_button),
+                snoozePendingIntent
+            )
             .setAutoCancel(true)
 
 
@@ -159,35 +181,42 @@ class AlarmReceiver() : BroadcastReceiver() {
         }
     }
 
-    private fun setRepeatingNotification(intent: Intent, context: Context, timeInMillis: Long, alarmService: AlarmService){
+    private fun setRepeatingNotification(
+        intent: Intent,
+        context: Context,
+        alarmService: AlarmService
+    ) {
         val habitID = intent.getIntExtra(Const.HABIT_ID, 0)
         val habitName = intent.getStringExtra(Const.HABIT_NAME).toString()
 
         GlobalScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO){
-                val frequencyHabit = getHabitFrequency(intent)
-                Log.d("check_frequency","--${frequencyHabit}")
+            withContext(Dispatchers.IO) {
+                val habit: Habit = getHabitByIdUseCase.getHabitValue(habitID)
+                val frequencyHabit = habit.frequency ?: "1111111"
+                val timeHabit = habit.time
+                Log.d("check_frequency", "--${frequencyHabit}")
                 if (isToday(frequencyHabit)) {
                     buildSnoozeNotification(
                         context,
-                        context.getString(R.string.featureTrackhabit_title_notification),
-                        convertDate(timeInMillis),
+                        habitName,
                         habitID
                     )
                 }
+
+                setRepetitiveAlarm(
+                    alarmService,
+                    habitID,
+                    habitName,
+                    timeHabit
+                )
             }
         }
-
-        setRepetitiveAlarm(
-            alarmService,
-            habitID,
-            habitName)
     }
 
-    private fun startSnoozeAlarmTime(context: Context, intent: Intent, alarmService: AlarmService){
-        setSnoozeAlarm(alarmService,  intent.getIntExtra(Const.HABIT_ID, 0))
+    private fun startSnoozeAlarmTime(context: Context, intent: Intent, alarmService: AlarmService) {
+        setSnoozeAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0))
         with(NotificationManagerCompat.from(context)) {
-            cancel(ConstIdChannel.ID_NOTIFICATION_1)
+            cancel(intent.getIntExtra(Const.HABIT_ID, 0))
         }
     }
 

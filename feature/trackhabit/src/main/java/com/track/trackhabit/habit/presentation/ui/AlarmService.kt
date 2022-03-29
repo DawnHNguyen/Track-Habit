@@ -11,8 +11,7 @@ import com.track.trackhabit.habit.presentation.constpackage.Const
 class AlarmService(private val context: Context) {
     private val intent = getIntent()
 
-    private val alarmManager: AlarmManager? =
-        context.getSystemService(Context.ALARM_SERVICE) as AlarmManager?
+    private val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
     fun setCancelAlarm(habitId: Int, habitName: String) {
         val pendingIntent = getPendingIntent(intent.apply {
@@ -25,7 +24,7 @@ class AlarmService(private val context: Context) {
     }
 
     private fun setCancel(pendingIntent: PendingIntent) {
-        alarmManager?.cancel(pendingIntent)
+        alarmManager.cancel(pendingIntent)
     }
 
     fun setSnoozeAlarm(habitId: Int) {
@@ -54,23 +53,19 @@ class AlarmService(private val context: Context) {
     }
 
     private fun setElapse(pendingIntent: PendingIntent) {
-        alarmManager.let {
-            it?.set(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                SystemClock.elapsedRealtime() + Const.ELAPSE_SNOOZE_NOTIFICATION_5M,
-                pendingIntent
-            )
-        }
+        alarmManager.set(
+            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+            SystemClock.elapsedRealtime() + Const.ELAPSE_SNOOZE_NOTIFICATION_5M,
+            pendingIntent
+        )
     }
 
     private fun setAlarm(timeInMillis: Long, pendingIntent: PendingIntent) {
-        alarmManager?.let {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                timeInMillis,
-                pendingIntent
-            )
-        }
+        alarmManager.setExactAndAllowWhileIdle(
+            AlarmManager.RTC_WAKEUP,
+            timeInMillis,
+            pendingIntent
+        )
     }
 
     private fun getPendingIntent(intent: Intent, requestCode: Int) = PendingIntent.getBroadcast(
