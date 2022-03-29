@@ -9,6 +9,7 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.track.common.base.utils.convertStringToCalender
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.usecase.GetHabitByIdUseCase
@@ -90,14 +91,14 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private fun setRepetitiveAlarm(alarmService: AlarmService, habitID: Int, habitName: String, timeHabit: Date) {
-        val cal = Calendar.getInstance()
+    private fun setRepetitiveAlarm(
+        alarmService: AlarmService,
+        habitID: Int,
+        habitName: String,
+        timeHabit: Date
+    ) {
         val timeNoti = SimpleDateFormat("HH:mm").format(timeHabit)
-        val arr = timeNoti.split(":")
-        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
-        cal.set(Calendar.MINUTE, arr[1].toInt())
-        cal.set(Calendar.SECOND, 0)
-        cal.set(Calendar.MILLISECOND, 0)
+        val cal = convertStringToCalender(timeNoti)
         cal.timeInMillis += TimeUnit.HOURS.toMillis(24)
         alarmService.setRepeating(cal.timeInMillis, habitID, habitName)
     }
@@ -189,11 +190,11 @@ class AlarmReceiver : BroadcastReceiver() {
         val habitName = intent.getStringExtra(Const.HABIT_NAME).toString()
 
         GlobalScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 val habit: Habit = getHabitByIdUseCase.getHabitValue(habitID)
                 val frequencyHabit = habit.frequency ?: "1111111"
                 val timeHabit = habit.time
-                Log.d("check_frequency","--${frequencyHabit}")
+                Log.d("check_frequency", "--${frequencyHabit}")
                 if (isToday(frequencyHabit)) {
                     buildSnoozeNotification(
                         context,

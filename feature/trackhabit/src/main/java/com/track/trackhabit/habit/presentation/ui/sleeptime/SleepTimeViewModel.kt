@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
+import com.track.common.base.utils.convertStringToCalender
 import com.track.trackhabit.habit.domain.entity.SleepDuration
 import com.track.trackhabit.habit.domain.entity.Sleeptime
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -146,13 +147,8 @@ class SleepTimeViewModel @Inject constructor(
     }
 
     private fun calNotiTime(timeSelect: String): Long {
-        val arr = timeSelect.split(':')
         val presentTime = Calendar.getInstance().timeInMillis
-        val cal = Calendar.getInstance()
-        cal.set(Calendar.SECOND, 0)
-        cal.set(Calendar.MILLISECOND, 0)
-        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
-        cal.set(Calendar.MINUTE, arr[1].toInt())
+        val cal = convertStringToCalender(timeSelect)
         val notiTime = cal.timeInMillis - 15 * 60 * 1000
         return if (notiTime >= presentTime - 15 * 60 * 1000) notiTime else notiTime + 24 * 3600 * 1000
     }
