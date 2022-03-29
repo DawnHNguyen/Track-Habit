@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.*
 import com.track.common.base.AppDispatchers
+import com.track.common.base.utils.convertStringToCalender
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.usecase.AddHabitUseCase
 import com.track.trackhabit.habit.domain.usecase.GetHabitByIdUseCase
@@ -130,11 +131,14 @@ class EditHabitViewModel @Inject constructor(
 
     fun changeToTime(): Date {
         val timeSelect = timeHabit.value.toString()
-        val arr = timeSelect.split(':')
-        val cal = Calendar.getInstance()
-        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
-        cal.set(Calendar.MINUTE, arr[1].toInt())
-        return cal.time
+        val presentTime = Calendar.getInstance().time
+        val cal = convertStringToCalender(timeSelect)
+
+        return if (cal.time >= presentTime) cal.time
+        else {
+            cal.add(Calendar.DATE, 1)
+            cal.time
+        }
     }
 
     fun handleInputAddCases() {

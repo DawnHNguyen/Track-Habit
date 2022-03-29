@@ -115,12 +115,12 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
             dialog.cancel()
         }
         dialogBinding?.buttonDialogSetRemindSleepOk?.setOnClickListener {
-            creatRemindSleepNoti()
+            createRemindSleepNoti()
             dialog.hide()
         }
     }
 
-    private fun creatRemindSleepNoti() {
+    private fun createRemindSleepNoti() {
         val intent = Intent(this.requireContext(), AlarmReceiver::class.java)
         intent.action = Const.SET_REMIND_SLEEPTIME
         val pendingIntent = PendingIntent.getBroadcast(
