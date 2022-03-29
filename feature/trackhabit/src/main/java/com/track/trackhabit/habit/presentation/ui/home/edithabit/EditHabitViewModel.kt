@@ -24,7 +24,7 @@ class EditHabitViewModel @Inject constructor(
     private val addHabitUseCase: AddHabitUseCase,
     private val dispatcher: AppDispatchers
 ) : ViewModel() {
-    val nameHabit = MutableLiveData<String>("chay bo 5km/ngay")
+    val nameHabit = MutableLiveData<String>()
     val timeHabit = MutableLiveData<String>()
 
     private val _habit = MediatorLiveData<Habit>()
@@ -35,18 +35,17 @@ class EditHabitViewModel @Inject constructor(
     val nameErrorVisibility: LiveData<Int>
         get() = _nameErrorVisibility
 
-    private val _inputValidity = MutableLiveData<Boolean>(false)
+    private val _inputValidity = MutableLiveData(true)
     val inputValidity: LiveData<Boolean>
         get() = _inputValidity
 
-    var monday = MutableLiveData<Boolean>(true)
-    var tuesday = MutableLiveData<Boolean>(true)
-    var wednesday = MutableLiveData<Boolean>(true)
-    var thursday = MutableLiveData<Boolean>(true)
-    var friday = MutableLiveData<Boolean>(true)
-    var saturday = MutableLiveData<Boolean>(true)
-    var sunday = MutableLiveData<Boolean>(true)
-    var someday =MediatorLiveData<Boolean>()
+    var monday = MutableLiveData(true)
+    var tuesday = MutableLiveData(true)
+    var wednesday = MutableLiveData(true)
+    var thursday = MutableLiveData(true)
+    var friday = MutableLiveData(true)
+    var saturday = MutableLiveData(true)
+    var sunday = MutableLiveData(true)
 
     fun addHabit() {
         viewModelScope.launch(Dispatchers.Main) {
@@ -93,7 +92,7 @@ class EditHabitViewModel @Inject constructor(
     }
 
 
-    fun updatehabit(habit: Habit) {
+    private fun updateHabit(habit: Habit) {
         viewModelScope.launch(dispatcher.main) {
             withContext(dispatcher.io) {
                 updateHabitUseCase(habit)
@@ -151,7 +150,7 @@ class EditHabitViewModel @Inject constructor(
         if (nameHabit.value.isNullOrBlank() ) {
             _nameErrorVisibility.value = View.VISIBLE
         } else {
-            updatehabit(habit)
+            updateHabit(habit)
             _inputValidity.value = true
         }
     }
