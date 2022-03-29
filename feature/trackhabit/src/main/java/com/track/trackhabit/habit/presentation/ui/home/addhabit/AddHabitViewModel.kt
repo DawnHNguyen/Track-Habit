@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.track.common.base.utils.convertStringToCalender
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.usecase.AddHabitUseCase
 import com.track.trackhabit.habit.domain.usecase.DeleteHabitUseCase
@@ -26,7 +27,6 @@ class AddHabitViewModel @Inject constructor(
     private val deleteHabitUseCase: DeleteHabitUseCase,
 ) : ViewModel() {
     val nameHabit = MutableLiveData<String>()
-    val descriptionHabit = MutableLiveData<String>()
     val timeHabit = MutableLiveData<String>()
 
     private val _nameErrorVisibility = MutableLiveData(View.GONE)
@@ -56,7 +56,6 @@ class AddHabitViewModel @Inject constructor(
                     Habit(
                         0,
                         nameHabit.value.toString(),
-                        descriptionHabit.value.toString(),
                         changeToTime(timeHabit.value!!),
                         emptyList(),
                         getFrequency()
@@ -73,24 +72,23 @@ class AddHabitViewModel @Inject constructor(
     }
 
     private fun changeToTime(timeSelect: String): Date {
-        val arr = timeSelect.split(':')
-        val cal = Calendar.getInstance()
-        cal.set(Calendar.SECOND, 0)
-        cal.set(Calendar.MILLISECOND, 0)
-        cal.set(Calendar.HOUR_OF_DAY, arr[0].toInt())
-        cal.set(Calendar.MINUTE, arr[1].toInt())
-        return cal.time
+        val presentTime = Calendar.getInstance().time
+        val cal = convertStringToCalender(timeSelect)
+
+        return if (cal.time >= presentTime) cal.time
+        else {
+            cal.add(Calendar.DATE, 1)
+            cal.time
+        }
     }
 
     fun handleDifferentInputCases() {
-        if (nameHabit.value.isNullOrBlank() || descriptionHabit.value.isNullOrBlank()) {
-            if (nameHabit.value.isNullOrBlank()) _nameErrorVisibility.value = View.VISIBLE
-            if (descriptionHabit.value.isNullOrBlank()) _descriptionErrorVisibility.value =
-                View.VISIBLE
+        if (nameHabit.value.isNullOrBlank()) {
+            _nameErrorVisibility.value = View.VISIBLE
         } else {
             Log.d(
                 "check_databinding",
-                "${nameHabit.value} + ${descriptionHabit.value} + ${timeHabit.value}"
+                "${nameHabit.value} + ${timeHabit.value}"
             )
             addHabit()
             _inputValidity.value = true
