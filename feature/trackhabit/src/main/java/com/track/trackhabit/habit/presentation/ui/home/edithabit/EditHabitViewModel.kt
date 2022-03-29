@@ -25,8 +25,8 @@ class EditHabitViewModel @Inject constructor(
     private val addHabitUseCase: AddHabitUseCase,
     private val dispatcher: AppDispatchers
 ) : ViewModel() {
-    val nameHabit = MutableLiveData<String>()
-    val timeHabit = MutableLiveData<String>()
+    val name = MutableLiveData<String>()
+    val time = MutableLiveData<String>()
 
     private val _habit = MediatorLiveData<Habit>()
     val habit: LiveData<Habit> get() = _habit
@@ -54,8 +54,8 @@ class EditHabitViewModel @Inject constructor(
                 addHabitUseCase(
                     Habit(
                         0,
-                        nameHabit.value.toString(),
-                        changeToTime(),
+                        name.value.toString(),
+                        formatTimeFromStringToDate(),
                         emptyList(),
                         getFrequency()
                     )
@@ -81,9 +81,9 @@ class EditHabitViewModel @Inject constructor(
                         friday.value = it.frequency[4] == '1'
                         saturday.value = it.frequency[5] == '1'
                         sunday.value = it.frequency[6] == '1'
-                        timeHabit.value = SimpleDateFormat("HH:mm").format(it.time)
-                        nameHabit.value = it.title
-                        Log.d("Check_habit","Check name habit: ${nameHabit}")
+                        time.value = SimpleDateFormat("HH:mm").format(it.time)
+                        name.value = it.title
+                        Log.d("Check_habit", "Check name habit: ${name}")
                     }
                 }
             } catch (e: IllegalArgumentException) {
@@ -129,8 +129,8 @@ class EditHabitViewModel @Inject constructor(
         )
     }
 
-    fun changeToTime(): Date {
-        val timeSelect = timeHabit.value.toString()
+    fun formatTimeFromStringToDate(): Date {
+        val timeSelect = time.value.toString()
         val presentTime = Calendar.getInstance().time
         val cal = convertStringToCalender(timeSelect)
 
@@ -142,7 +142,7 @@ class EditHabitViewModel @Inject constructor(
     }
 
     fun handleInputAddCases() {
-        if (nameHabit.value.isNullOrBlank() ) {
+        if (name.value.isNullOrBlank()) {
             _nameErrorVisibility.value = View.VISIBLE
         } else {
             addHabit()
@@ -151,7 +151,7 @@ class EditHabitViewModel @Inject constructor(
     }
 
     fun handleInputEditCases(habit: Habit) {
-        if (nameHabit.value.isNullOrBlank() ) {
+        if (name.value.isNullOrBlank()) {
             _nameErrorVisibility.value = View.VISIBLE
         } else {
             updateHabit(habit)

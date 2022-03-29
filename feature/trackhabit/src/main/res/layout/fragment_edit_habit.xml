@@ -37,7 +37,7 @@
                 android:id="@+id/textInputEditText_fragmentEditHabit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@={viewModel.nameHabit}" />
+                android:text="@={viewModel.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -139,7 +139,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_scrollview"
-            android:text="@={viewModel.timeHabit}"
+            android:text="@={viewModel.time}"
             android:textSize="@dimen/all_textsize_settime"
             app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentEditHabit_setTimeTitle"
             app:layout_constraintStart_toEndOf="@+id/textView_fragmentEditHabit_setTimeTitle"

@@ -23,7 +23,6 @@ class AddHabitFragment : Fragment() {
     private val addHabitViewModel by viewModels<EditHabitViewModel>()
     private lateinit var alarmService: AlarmService
     private lateinit var binding: FragmentEditHabitBinding
-    var check = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,14 +39,14 @@ class AddHabitFragment : Fragment() {
     @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addHabitViewModel.timeHabit.value = SimpleDateFormat("HH:mm").format(Date())
+        addHabitViewModel.time.value = SimpleDateFormat("HH:mm").format(Date())
         alarmService = AlarmService(requireContext())
         setupToggleButton()
         binding.buttonFragmentEditHabitSetTime.setOnClickListener {
             setAlarm {
                 binding.buttonFragmentEditHabitSetTime.text =
                     SimpleDateFormat("HH:mm").format(Date(it))
-                Timber.d("gia_tri ${addHabitViewModel.timeHabit.value}}")
+                Timber.d("gia_tri ${addHabitViewModel.time.value}}")
             }
         }
         binding.buttonFragmentEditHabitCancel.setOnClickListener {

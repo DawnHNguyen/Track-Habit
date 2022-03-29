@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -42,12 +41,12 @@ class EditHabitFragment : Fragment() {
         val id = safeArgs.habitId
         editHabitViewModel.getHabit(id)
         binding.textViewFragmentEditHabitNameError.visibility = View.GONE
-        binding.buttonFragmentEditHabitSetTime.text = editHabitViewModel.timeHabit.value
+        binding.buttonFragmentEditHabitSetTime.text = editHabitViewModel.time.value
 
-        editHabitViewModel.timeHabit.observe(viewLifecycleOwner) {
+        editHabitViewModel.time.observe(viewLifecycleOwner) {
             Timber.d("gia_tri ${it}}")
         }
-        editHabitViewModel.habit.observe(viewLifecycleOwner){
+        editHabitViewModel.habit.observe(viewLifecycleOwner) {
             Timber.d("da lay duoc gia tri cua ha bit ${editHabitViewModel.habit}")
         }
 
@@ -57,7 +56,7 @@ class EditHabitFragment : Fragment() {
             setAlarm {
                 binding.buttonFragmentEditHabitSetTime.text =
                     SimpleDateFormat("HH:mm").format(Date(it))
-                Timber.d("gia_tri sau khi click${editHabitViewModel.timeHabit.value}}")
+                Timber.d("gia_tri sau khi click${editHabitViewModel.time.value}}")
             }
         }
 
@@ -93,30 +92,30 @@ class EditHabitFragment : Fragment() {
     private fun setupToggleButton() {
         with(binding) {
             toggleButtonFragmentEditHabitCheckMonday.setOnClickListener {
-                editHabitViewModel.monday.value = !(editHabitViewModel.monday.value?: true)
+                editHabitViewModel.monday.value = !(editHabitViewModel.monday.value ?: true)
             }
 
             toggleButtonFragmentEditHabitCheckTuesday.setOnClickListener {
-                editHabitViewModel.tuesday.value = !(editHabitViewModel.tuesday.value?:true)
+                editHabitViewModel.tuesday.value = !(editHabitViewModel.tuesday.value ?: true)
             }
 
             toggleButtonFragmentEditHabitCheckWednesday.setOnClickListener {
-                editHabitViewModel.wednesday.value = !(editHabitViewModel.wednesday.value?:true)
+                editHabitViewModel.wednesday.value = !(editHabitViewModel.wednesday.value ?: true)
             }
 
             toggleButtonFragmentEditHabitCheckThursday.setOnClickListener {
-                editHabitViewModel.thursday.value = !(editHabitViewModel.thursday.value?:true)
+                editHabitViewModel.thursday.value = !(editHabitViewModel.thursday.value ?: true)
             }
 
             toggleButtonFragmentEditHabitCheckFriday.setOnClickListener {
-                editHabitViewModel.friday.value = !(editHabitViewModel.friday.value?: true)
+                editHabitViewModel.friday.value = !(editHabitViewModel.friday.value ?: true)
             }
 
             toggleButtonFragmentEditHabitCheckSaturday.setOnClickListener {
-                editHabitViewModel.saturday.value = !(editHabitViewModel.saturday.value?:true)
+                editHabitViewModel.saturday.value = !(editHabitViewModel.saturday.value ?: true)
             }
             toggleButtonFragmentEditHabitCheckSunday.setOnClickListener {
-                editHabitViewModel.sunday.value = !(editHabitViewModel.sunday.value?:true)
+                editHabitViewModel.sunday.value = !(editHabitViewModel.sunday.value ?: true)
             }
         }
     }

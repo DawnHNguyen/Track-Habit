@@ -24,11 +24,10 @@ fun listHabit(recyclerView: RecyclerView?, habit: List<Habit>?){
 }
 
 @BindingAdapter("app:frequencybutton")
-fun onPressButton(button: AppCompatButton, bool: Boolean){
-    if(bool){
+fun onPressButton(button: AppCompatButton, isTodayChecked: Boolean){
+    if(isTodayChecked){
         button.setBackgroundResource(R.drawable.background_addhabit_checked)
-    }
-    else{
+    } else {
         button.setBackgroundResource(R.drawable.background_addhabit_unchecked)
     }
 }
