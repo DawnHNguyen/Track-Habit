@@ -42,7 +42,7 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         fun bind(habit: Habit, onclick: OnClickRevealButton) {
             binding.habit = habit
             binding.onClick = onclick
-            changeHabitColor(habit.time)
+            changeHabitColor(habit.time, habit.isNotiToday())
             binding.executePendingBindings()
         }
 
@@ -54,12 +54,15 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
             return presentTimeArr[0].toInt() < habitTimeArr[0].toInt() || (presentTimeArr[0].toInt() == habitTimeArr[0].toInt() && presentTimeArr[1].toInt() < habitTimeArr[1].toInt())
         }
 
-        private fun changeHabitColor(habitTime: Date) {
-            if (checkIsBeforeHabit(habitTime)) {
-                binding.layoutItem.background =
-                    binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_default)
+        private fun changeHabitColor(habitTime: Date, isNotiToday: Boolean) {
+            if (isNotiToday) {
+                if (checkIsBeforeHabit(habitTime)) {
+                    binding.layoutItem.background =
+                        binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_default)
+                } else binding.layoutItem.background =
+                    binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_missed)
             } else binding.layoutItem.background =
-                binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_done)
+                binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_default)
         }
 
         companion object {
