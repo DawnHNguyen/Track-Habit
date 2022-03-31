@@ -49,18 +49,23 @@ class EditHabitViewModel @Inject constructor(
     var sunday = MutableLiveData(true)
 
     fun addHabit() {
-        viewModelScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO) {
-                addHabitUseCase(
-                    Habit(
-                        0,
-                        name.value.toString(),
-                        formatTimeFromStringToDate(),
-                        emptyList(),
-                        getFrequency()
+        if (name.value.isNullOrBlank()) {
+            _nameErrorVisibility.value = View.VISIBLE
+        } else {
+            viewModelScope.launch(Dispatchers.Main) {
+                withContext(Dispatchers.IO) {
+                    addHabitUseCase(
+                        Habit(
+                            0,
+                            name.value.toString(),
+                            formatTimeFromStringToDate(),
+                            emptyList(),
+                            getFrequency()
+                        )
                     )
-                )
+                }
             }
+            _inputValidity.value = true
         }
     }
 
@@ -93,13 +98,18 @@ class EditHabitViewModel @Inject constructor(
     }
 
 
-    private fun updateHabit(habit: Habit) {
-        viewModelScope.launch(dispatcher.main) {
-            withContext(dispatcher.io) {
-                updateHabitUseCase(habit)
-                Timber.d("-->${habit}_viewmodel")
-                Timber.d("successUpdate")
+     fun updateHabit(habit: Habit) {
+        if (name.value.isNullOrBlank()) {
+            _nameErrorVisibility.value = View.VISIBLE
+        } else {
+            viewModelScope.launch(dispatcher.main) {
+                withContext(dispatcher.io) {
+                    updateHabitUseCase(habit)
+                    Timber.d("-->${habit}_viewmodel")
+                    Timber.d("successUpdate")
+                }
             }
+            _inputValidity.value = true
         }
     }
 
@@ -141,21 +151,4 @@ class EditHabitViewModel @Inject constructor(
         }
     }
 
-    fun handleInputAddCases() {
-        if (name.value.isNullOrBlank()) {
-            _nameErrorVisibility.value = View.VISIBLE
-        } else {
-            addHabit()
-            _inputValidity.value = true
-        }
-    }
-
-    fun handleInputEditCases(habit: Habit) {
-        if (name.value.isNullOrBlank()) {
-            _nameErrorVisibility.value = View.VISIBLE
-        } else {
-            updateHabit(habit)
-            _inputValidity.value = true
-        }
-    }
 }

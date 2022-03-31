@@ -68,11 +68,11 @@ class EditHabitFragment : Fragment() {
                 Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
                 Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
 
-                editHabitViewModel.handleInputEditCases(
+                editHabitViewModel.updateHabit(
                     Habit(
                         habitId = id,
                         title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
-                        editHabitViewModel.changeToTime(),
+                        editHabitViewModel.formatTimeFromStringToDate(),
                         editHabitViewModel.habit.value!!.performances,
                         editHabitViewModel.getFrequency()
                     )

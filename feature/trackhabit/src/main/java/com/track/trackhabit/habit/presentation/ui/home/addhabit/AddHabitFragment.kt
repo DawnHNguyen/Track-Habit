@@ -86,7 +86,7 @@ class AddHabitFragment : Fragment() {
 
             buttonFragmentEditHabitButtonDone.setOnClickListener {
                 setVisibilityErrorMessage()
-                addHabitViewModel.handleInputAddCases()
+                addHabitViewModel.addHabit()
                 navigateOnClickDone()
             }
 
