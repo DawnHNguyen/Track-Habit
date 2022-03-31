@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.track.trackhabit.habit.presentation.ui.home.edithabit.EditHabitViewModel" />
+            type="com.track.trackhabit.habit.presentation.ui.home.habitinfo.HabitInfoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textView_fragmentEditHabit_nameTitle"
+            android:id="@+id/textView_fragmentHabitInfo_nameTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
@@ -24,24 +24,24 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_fragmentEditHabit_name"
+            android:id="@+id/textInputLayout_fragmentHabitInfo_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_textview"
             android:layout_marginEnd="@dimen/all_margin_end"
-            app:layout_constraintStart_toEndOf="@id/textView_fragmentEditHabit_nameTitle"
-            app:layout_constraintTop_toBottomOf="@id/textView_fragmentEditHabit_nameTitle">
+            app:layout_constraintStart_toEndOf="@id/textView_fragmentHabitInfo_nameTitle"
+            app:layout_constraintTop_toBottomOf="@id/textView_fragmentHabitInfo_nameTitle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInputEditText_fragmentEditHabit_name"
+                android:id="@+id/textInputEditText_fragmentHabitInfo_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={viewModel.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/textView_fragmentEditHabit_nameError"
+            android:id="@+id/textView_fragmentHabitInfo_nameError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
@@ -50,27 +50,27 @@
             android:textColor="@color/textcolor_error"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentEditHabit_name" />
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentHabitInfo_name" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textView_fragmentEditHabit_frequency"
+            android:id="@+id/textView_fragmentHabitInfo_frequency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_edittext"
             android:text="@string/habit_frequency"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView_fragmentEditHabit_nameError" />
+            app:layout_constraintTop_toBottomOf="@id/textView_fragmentHabitInfo_nameError" />
 
         <HorizontalScrollView
-            android:id="@+id/scrollView_fragmentEditHabit_daySelection"
+            android:id="@+id/scrollView_fragmentHabitInfo_daySelection"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_textview"
             android:layout_marginEnd="@dimen/all_margin_end"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_fragmentEditHabit_frequency">
+            app:layout_constraintTop_toBottomOf="@+id/textView_fragmentHabitInfo_frequency">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -78,43 +78,43 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/toggleButton_fragmentEditHabit_checkMonday"
+                    android:id="@+id/toggleButton_fragmentHabitInfo_checkMonday"
                     style="@style/ToggleButtonSelectDay"
                     android:text="@string/habit_monday"
                     app:frequencybutton = "@{viewModel.monday}"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/toggleButton_fragmentEditHabit_checkTuesday"
+                    android:id="@+id/toggleButton_fragmentHabitInfo_checkTuesday"
                     style="@style/ToggleButtonSelectDay"
                     android:text="@string/habit_tuesday"
                     app:frequencybutton = "@{viewModel.tuesday}"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/toggleButton_fragmentEditHabit_checkWednesday"
+                    android:id="@+id/toggleButton_fragmentHabitInfo_checkWednesday"
                     style="@style/ToggleButtonSelectDay"
                     android:text="@string/habit_wednesday"
                     app:frequencybutton = "@{viewModel.wednesday}"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/toggleButton_fragmentEditHabit_checkThursday"
+                    android:id="@+id/toggleButton_fragmentHabitInfo_checkThursday"
                     style="@style/ToggleButtonSelectDay"
                     android:text="@string/habit_thursday"
                     app:frequencybutton = "@{viewModel.thursday}"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/toggleButton_fragmentEditHabit_checkFriday"
+                    android:id="@+id/toggleButton_fragmentHabitInfo_checkFriday"
                     style="@style/ToggleButtonSelectDay"
                     android:text="@string/habit_friday"
                     app:frequencybutton = "@{viewModel.friday}"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/toggleButton_fragmentEditHabit_checkSaturday"
+                    android:id="@+id/toggleButton_fragmentHabitInfo_checkSaturday"
                     style="@style/ToggleButtonSelectDay"
                     android:text="@string/habit_saturday"
                     app:frequencybutton = "@{viewModel.saturday}"/>
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/toggleButton_fragmentEditHabit_checkSunday"
+                    android:id="@+id/toggleButton_fragmentHabitInfo_checkSunday"
                     style="@style/ToggleButtonSelectDay"
                     android:text="@string/habit_sunday"
                     app:frequencybutton = "@{viewModel.sunday}"/>
@@ -122,7 +122,7 @@
         </HorizontalScrollView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textView_fragmentEditHabit_setTimeTitle"
+            android:id="@+id/textView_fragmentHabitInfo_setTimeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -131,36 +131,37 @@
             android:textSize="@dimen/all_textsize_settime"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scrollView_fragmentEditHabit_daySelection" />
+            app:layout_constraintTop_toBottomOf="@id/scrollView_fragmentHabitInfo_daySelection" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_fragmentEditHabit_setTime"
+            android:id="@+id/button_fragmentHabitInfo_setTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_scrollview"
             android:text="@={viewModel.time}"
             android:textSize="@dimen/all_textsize_settime"
-            app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentEditHabit_setTimeTitle"
-            app:layout_constraintStart_toEndOf="@+id/textView_fragmentEditHabit_setTimeTitle"
-            app:layout_constraintTop_toBottomOf="@id/scrollView_fragmentEditHabit_daySelection" />
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentHabitInfo_setTimeTitle"
+            app:layout_constraintStart_toEndOf="@+id/textView_fragmentHabitInfo_setTimeTitle"
+            app:layout_constraintTop_toBottomOf="@id/scrollView_fragmentHabitInfo_daySelection" />
 
         <Button
-            android:id="@+id/button_fragmentEditHabit_buttonDone"
+            android:id="@+id/button_fragmentHabitInfo_buttonDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/all_marginall"
             android:text="@string/text_habitbutton_done"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_fragmentEditHabit_setTime" />
+            app:layout_constraintTop_toBottomOf="@id/button_fragmentHabitInfo_setTime" />
 
         <Button
-            android:id="@+id/button_fragmentEditHabit_cancel"
-            android:layout_width="wrap_content"
+            android:id="@+id/button_fragmentHabitInfo_cancel"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
+            android:layout_marginEnd="@dimen/all_margin_end"
             android:text="@string/all_cancel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_fragmentEditHabit_buttonDone" />
+            app:layout_constraintTop_toBottomOf="@id/button_fragmentHabitInfo_buttonDone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

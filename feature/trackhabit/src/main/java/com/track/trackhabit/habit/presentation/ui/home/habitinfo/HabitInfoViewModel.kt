@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.ui.home.edithabit
+package com.track.trackhabit.habit.presentation.ui.home.habitinfo
 
 import android.util.Log
 import android.view.View
@@ -19,7 +19,7 @@ import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
-class EditHabitViewModel @Inject constructor(
+class HabitInfoViewModel @Inject constructor(
     private val getHabitByIdUseCase: GetHabitByIdUseCase,
     private val updateHabitUseCase: UpdateHabitUseCase,
     private val addHabitUseCase: AddHabitUseCase,
@@ -36,7 +36,7 @@ class EditHabitViewModel @Inject constructor(
     val nameErrorVisibility: LiveData<Int>
         get() = _nameErrorVisibility
 
-    private val _inputValidity = MutableLiveData(true)
+    private val _inputValidity = MutableLiveData(false)
     val inputValidity: LiveData<Boolean>
         get() = _inputValidity
 
@@ -92,7 +92,7 @@ class EditHabitViewModel @Inject constructor(
                     }
                 }
             } catch (e: IllegalArgumentException) {
-                Log.d("EditHabitViewModel", e.toString())
+                Log.d("HabitInfoViewModel", e.toString())
             }
         }
     }

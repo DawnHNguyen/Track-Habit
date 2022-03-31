@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.presentation.ui.home.edithabit
+package com.track.trackhabit.habit.presentation.ui.home.habitinfo
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
@@ -11,26 +11,27 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.track.trackhabit.habit.R
-import com.track.trackhabit.habit.databinding.FragmentEditHabitBinding
+import com.track.trackhabit.habit.databinding.FragmentHabitInfoBinding
 import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.presentation.constpackage.Const
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class EditHabitFragment : Fragment() {
-    private val editHabitViewModel by viewModels<EditHabitViewModel>()
+class HabitInfoFragment : Fragment() {
+    private val editHabitViewModel by viewModels<HabitInfoViewModel>()
 
-    private val safeArgs: EditHabitFragmentArgs by navArgs()
+    private val safeArgs: HabitInfoFragmentArgs by navArgs()
 
-    private lateinit var binding: FragmentEditHabitBinding
+    private lateinit var binding: FragmentHabitInfoBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentEditHabitBinding.inflate(inflater, container, false)
+        binding = FragmentHabitInfoBinding.inflate(inflater, container, false)
         binding.viewModel = editHabitViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -39,51 +40,60 @@ class EditHabitFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = safeArgs.habitId
-        editHabitViewModel.getHabit(id)
-        binding.textViewFragmentEditHabitNameError.visibility = View.GONE
-        binding.buttonFragmentEditHabitSetTime.text = editHabitViewModel.time.value
+        val role = safeArgs.roleFragment
+        if(role == Const.ROLE_EDIT && id != -1){
+            editHabitViewModel.getHabit(id)
+            binding.buttonFragmentHabitInfoSetTime.text = editHabitViewModel.time.value
 
-        editHabitViewModel.time.observe(viewLifecycleOwner) {
-            Timber.d("gia_tri ${it}}")
+            editHabitViewModel.time.observe(viewLifecycleOwner) {
+                Timber.d("gia_tri ${it}}")
+            }
+            editHabitViewModel.habit.observe(viewLifecycleOwner) {
+                Timber.d("da lay duoc gia tri cua ha bit ${editHabitViewModel.habit}")
+            }
+        } else if( role == Const.ROLE_ADD && id == -1){
+            editHabitViewModel.time.value = SimpleDateFormat("HH:mm").format(Date())
         }
-        editHabitViewModel.habit.observe(viewLifecycleOwner) {
-            Timber.d("da lay duoc gia tri cua ha bit ${editHabitViewModel.habit}")
-        }
 
-        setupToggleButton()
+        binding.textViewFragmentHabitInfoNameError.visibility = View.GONE
 
-        binding.buttonFragmentEditHabitSetTime.setOnClickListener {
+
+        binding.buttonFragmentHabitInfoSetTime.setOnClickListener {
             setAlarm {
-                binding.buttonFragmentEditHabitSetTime.text =
+                binding.buttonFragmentHabitInfoSetTime.text =
                     SimpleDateFormat("HH:mm").format(Date(it))
                 Timber.d("gia_tri sau khi click${editHabitViewModel.time.value}}")
             }
         }
 
 
-        binding.buttonFragmentEditHabitButtonDone.setOnClickListener {
-            if (binding.textInputEditTextFragmentEditHabitName.text.isNullOrBlank()) {
-                binding.textViewFragmentEditHabitNameError.visibility = View.VISIBLE
-            } else {
+        binding.buttonFragmentHabitInfoButtonDone.setOnClickListener {
+            if(role == Const.ROLE_EDIT && id != -1){
                 Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
                 Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
 
                 editHabitViewModel.updateHabit(
                     Habit(
                         habitId = id,
-                        title = binding.textInputEditTextFragmentEditHabitName.text.toString(),
+                        title = binding.textInputEditTextFragmentHabitInfoName.text.toString(),
                         editHabitViewModel.formatTimeFromStringToDate(),
                         editHabitViewModel.habit.value!!.performances,
                         editHabitViewModel.getFrequency()
                     )
                 )
-                findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
+            } else if (role == Const.ROLE_ADD && id == -1){
+                editHabitViewModel.addHabit()
+
             }
+            navHome()
+
 
         }
 
-        binding.buttonFragmentEditHabitCancel.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_edithabit_to_nav_home)
+        setupToggleButton()
+
+        binding.buttonFragmentHabitInfoCancel.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_habitinfo_to_nav_home)
         }
     }
 
@@ -91,35 +101,40 @@ class EditHabitFragment : Fragment() {
     @SuppressLint("ResourceAsColor")
     private fun setupToggleButton() {
         with(binding) {
-            toggleButtonFragmentEditHabitCheckMonday.setOnClickListener {
+            toggleButtonFragmentHabitInfoCheckMonday.setOnClickListener {
                 editHabitViewModel.monday.value = !(editHabitViewModel.monday.value ?: true)
             }
 
-            toggleButtonFragmentEditHabitCheckTuesday.setOnClickListener {
+            toggleButtonFragmentHabitInfoCheckTuesday.setOnClickListener {
                 editHabitViewModel.tuesday.value = !(editHabitViewModel.tuesday.value ?: true)
             }
 
-            toggleButtonFragmentEditHabitCheckWednesday.setOnClickListener {
+            toggleButtonFragmentHabitInfoCheckWednesday.setOnClickListener {
                 editHabitViewModel.wednesday.value = !(editHabitViewModel.wednesday.value ?: true)
             }
 
-            toggleButtonFragmentEditHabitCheckThursday.setOnClickListener {
+            toggleButtonFragmentHabitInfoCheckThursday.setOnClickListener {
                 editHabitViewModel.thursday.value = !(editHabitViewModel.thursday.value ?: true)
             }
 
-            toggleButtonFragmentEditHabitCheckFriday.setOnClickListener {
+            toggleButtonFragmentHabitInfoCheckFriday.setOnClickListener {
                 editHabitViewModel.friday.value = !(editHabitViewModel.friday.value ?: true)
             }
 
-            toggleButtonFragmentEditHabitCheckSaturday.setOnClickListener {
+            toggleButtonFragmentHabitInfoCheckSaturday.setOnClickListener {
                 editHabitViewModel.saturday.value = !(editHabitViewModel.saturday.value ?: true)
             }
-            toggleButtonFragmentEditHabitCheckSunday.setOnClickListener {
+            toggleButtonFragmentHabitInfoCheckSunday.setOnClickListener {
                 editHabitViewModel.sunday.value = !(editHabitViewModel.sunday.value ?: true)
             }
         }
     }
 
+    private fun navHome(){
+        editHabitViewModel.inputValidity.observe(viewLifecycleOwner){
+            if (editHabitViewModel.inputValidity.value == true) findNavController().navigate(R.id.action_nav_habitinfo_to_nav_home)
+        }
+    }
 
     private fun setAlarm(callback: (Long) -> Unit) {
         Calendar.getInstance().apply {
