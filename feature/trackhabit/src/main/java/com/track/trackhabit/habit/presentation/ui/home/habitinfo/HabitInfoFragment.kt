@@ -41,7 +41,7 @@ class HabitInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val id = safeArgs.habitId
         val role = safeArgs.roleFragment
-        if(role == Const.ROLE_EDIT && id != -1){
+        if (role == Const.ROLE_EDIT && id != -1) {
             editHabitViewModel.getHabit(id)
             binding.buttonFragmentHabitInfoSetTime.text = editHabitViewModel.time.value
 
@@ -51,7 +51,7 @@ class HabitInfoFragment : Fragment() {
             editHabitViewModel.habit.observe(viewLifecycleOwner) {
                 Timber.d("da lay duoc gia tri cua ha bit ${editHabitViewModel.habit}")
             }
-        } else if( role == Const.ROLE_ADD && id == -1){
+        } else if (role == Const.ROLE_ADD && id == -1) {
             editHabitViewModel.time.value = SimpleDateFormat("HH:mm").format(Date())
         }
 
@@ -68,7 +68,7 @@ class HabitInfoFragment : Fragment() {
 
 
         binding.buttonFragmentHabitInfoButtonDone.setOnClickListener {
-            if(role == Const.ROLE_EDIT && id != -1){
+            if (role == Const.ROLE_EDIT && id != -1) {
                 Timber.d("-->${editHabitViewModel.habit.value!!.time} -- ${id}")
                 Timber.d("-->${editHabitViewModel.habit.value!!.performances}")
 
@@ -81,13 +81,11 @@ class HabitInfoFragment : Fragment() {
                         editHabitViewModel.getFrequency()
                     )
                 )
-            } else if (role == Const.ROLE_ADD && id == -1){
+            } else if (role == Const.ROLE_ADD && id == -1) {
                 editHabitViewModel.addHabit()
 
             }
-            navHome()
-
-
+            if (editHabitViewModel.inputValidity.value == true) findNavController().navigate(R.id.action_nav_habitinfo_to_nav_home)
         }
 
         setupToggleButton()
@@ -130,11 +128,6 @@ class HabitInfoFragment : Fragment() {
         }
     }
 
-    private fun navHome(){
-        editHabitViewModel.inputValidity.observe(viewLifecycleOwner){
-            if (editHabitViewModel.inputValidity.value == true) findNavController().navigate(R.id.action_nav_habitinfo_to_nav_home)
-        }
-    }
 
     private fun setAlarm(callback: (Long) -> Unit) {
         Calendar.getInstance().apply {
