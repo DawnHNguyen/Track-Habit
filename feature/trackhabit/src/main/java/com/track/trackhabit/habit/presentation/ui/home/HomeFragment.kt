@@ -31,8 +31,7 @@ class HomeFragment : Fragment() {
     private val habitsListAdapter = HabitsListAdapter(object : OnClickRevealButton {
         override fun onClickEdit(habit: Habit) {
             val habitId = habit.habitId
-            val roleFragment = Const.ROLE_EDIT
-            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId, roleFragment)
+            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId)
             Timber.d("--${action}--${habitId}")
             findNavController().navigate(action)
         }
@@ -63,8 +62,7 @@ class HomeFragment : Fragment() {
 
         binding.fabActivityHomeAddHabitButton.setOnClickListener {
             val habitId = -1
-            val roleFragment = Const.ROLE_ADD
-            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId, roleFragment)
+            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId)
             findNavController().navigate(action)
         }
     }

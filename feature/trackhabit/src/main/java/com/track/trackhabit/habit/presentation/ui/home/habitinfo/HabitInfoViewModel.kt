@@ -98,13 +98,19 @@ class HabitInfoViewModel @Inject constructor(
     }
 
 
-     fun updateHabit(habit: Habit) {
+     fun updateHabit(id: Int) {
         if (name.value.isNullOrBlank()) {
             _nameErrorVisibility.value = View.VISIBLE
         } else {
             viewModelScope.launch(dispatcher.main) {
                 withContext(dispatcher.io) {
-                    updateHabitUseCase(habit)
+                    updateHabitUseCase(Habit(
+                        habitId = id,
+                        name.value.toString(),
+                        formatTimeFromStringToDate(),
+                        habit.value!!.performances,
+                        getFrequency()
+                    ))
                     Timber.d("-->${habit}_viewmodel")
                     Timber.d("successUpdate")
                 }
@@ -151,4 +157,8 @@ class HabitInfoViewModel @Inject constructor(
         }
     }
 
+    fun checkRoleWithId(id: Int): Boolean{
+        // if id == -1 => role add habit, else => role edit
+        return id != -1
+    }
 }

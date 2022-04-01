@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_nav_home_to_nav_habitinfo"
-            app:destination="@id/nav_habitinfo" />
+            app:destination="@id/nav_habitinfo"
+            app:popUpTo="@id/nav_habitinfo"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -41,12 +43,11 @@
 
         <action
             android:id="@+id/action_nav_habitinfo_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"/>
         <argument
             android:name="habit_id"
             app:argType="integer" />
-        <argument
-            android:name="role_fragment"
-            app:argType="string" />
     </fragment>
 </navigation>

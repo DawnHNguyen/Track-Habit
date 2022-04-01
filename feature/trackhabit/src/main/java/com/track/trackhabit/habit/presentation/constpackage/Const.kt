@@ -10,6 +10,4 @@ object Const{
     const val SET_REMIND_SLEEPTIME = "SET_REMIND_SLEEPTIME"
     const val HABIT_ID = "HABIT_ID"
     const val HABIT_NAME = "HABIT_NAME"
-    const val ROLE_ADD = "Add"
-    const val ROLE_EDIT = "Edit"
 }
