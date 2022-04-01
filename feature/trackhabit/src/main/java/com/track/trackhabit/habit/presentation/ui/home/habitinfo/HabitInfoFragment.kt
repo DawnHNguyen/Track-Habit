@@ -39,9 +39,9 @@ class HabitInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = safeArgs.habitId
-        if (habitInfoViewModel.checkRoleWithId(id)) {
-            habitInfoViewModel.getHabit(id)
+        habitInfoViewModel.getHabitId(safeArgs.habitId)
+        if (habitInfoViewModel.negativeIsAddPositiveIsEdit()) {
+            habitInfoViewModel.getHabit()
             binding.buttonFragmentHabitInfoSetTime.text = habitInfoViewModel.time.value
 
             habitInfoViewModel.time.observe(viewLifecycleOwner) {
@@ -66,11 +66,11 @@ class HabitInfoFragment : Fragment() {
         }
 
         binding.buttonFragmentHabitInfoButtonDone.setOnClickListener {
-            if (habitInfoViewModel.checkRoleWithId(id)) {
+            if (habitInfoViewModel.negativeIsAddPositiveIsEdit()) {
                 Timber.d("-->${habitInfoViewModel.habit.value!!.time} -- ${id}")
                 Timber.d("-->${habitInfoViewModel.habit.value!!.performances}")
 
-                habitInfoViewModel.updateHabit(id)
+                habitInfoViewModel.updateHabit()
             } else {
                 habitInfoViewModel.addHabit()
 
@@ -81,7 +81,7 @@ class HabitInfoFragment : Fragment() {
         setupToggleButton()
 
         binding.buttonFragmentHabitInfoCancel.setOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_nav_habitinfo_to_nav_home)
         }
     }
 

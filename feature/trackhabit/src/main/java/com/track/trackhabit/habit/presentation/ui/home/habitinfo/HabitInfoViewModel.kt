@@ -25,6 +25,7 @@ class HabitInfoViewModel @Inject constructor(
     private val addHabitUseCase: AddHabitUseCase,
     private val dispatcher: AppDispatchers
 ) : ViewModel() {
+    private val idHabit = MutableLiveData<Int>()
     val name = MutableLiveData<String>()
     val time = MutableLiveData<String>()
 
@@ -69,11 +70,11 @@ class HabitInfoViewModel @Inject constructor(
         }
     }
 
-    fun getHabit(id: Int) {
+    fun getHabit() {
         viewModelScope.launch(dispatcher.main) {
             _habit.removeSource(habitSource)
             withContext(dispatcher.io) {
-                habitSource = getHabitByIdUseCase(id)
+                habitSource = getHabitByIdUseCase(idHabit.value!!)
             }
             try {
                 _habit.addSource(habitSource) {
@@ -98,14 +99,14 @@ class HabitInfoViewModel @Inject constructor(
     }
 
 
-     fun updateHabit(id: Int) {
+     fun updateHabit() {
         if (name.value.isNullOrBlank()) {
             _nameErrorVisibility.value = View.VISIBLE
         } else {
             viewModelScope.launch(dispatcher.main) {
                 withContext(dispatcher.io) {
                     updateHabitUseCase(Habit(
-                        habitId = id,
+                        idHabit.value!!,
                         name.value.toString(),
                         formatTimeFromStringToDate(),
                         habit.value!!.performances,
@@ -157,8 +158,11 @@ class HabitInfoViewModel @Inject constructor(
         }
     }
 
-    fun checkRoleWithId(id: Int): Boolean{
-        // if id == -1 => role add habit, else => role edit
-        return id != -1
+    fun negativeIsAddPositiveIsEdit(): Boolean{
+        return idHabit.value != -1
+    }
+
+    fun getHabitId(id: Int){
+        idHabit.value = id
     }
 }
