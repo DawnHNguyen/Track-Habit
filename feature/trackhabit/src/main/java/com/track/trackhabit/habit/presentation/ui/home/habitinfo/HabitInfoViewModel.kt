@@ -25,7 +25,7 @@ class HabitInfoViewModel @Inject constructor(
     private val addHabitUseCase: AddHabitUseCase,
     private val dispatcher: AppDispatchers
 ) : ViewModel() {
-    private val idHabit = MutableLiveData<Int>()
+    private var idHabit: Int = 0
     val name = MutableLiveData<String>()
     val time = MutableLiveData<String>()
 
@@ -74,7 +74,7 @@ class HabitInfoViewModel @Inject constructor(
         viewModelScope.launch(dispatcher.main) {
             _habit.removeSource(habitSource)
             withContext(dispatcher.io) {
-                habitSource = getHabitByIdUseCase(idHabit.value!!)
+                habitSource = getHabitByIdUseCase(idHabit)
             }
             try {
                 _habit.addSource(habitSource) {
@@ -106,7 +106,7 @@ class HabitInfoViewModel @Inject constructor(
             viewModelScope.launch(dispatcher.main) {
                 withContext(dispatcher.io) {
                     updateHabitUseCase(Habit(
-                        idHabit.value!!,
+                        idHabit,
                         name.value.toString(),
                         formatTimeFromStringToDate(),
                         habit.value!!.performances,
@@ -158,11 +158,11 @@ class HabitInfoViewModel @Inject constructor(
         }
     }
 
-    fun negativeIsAddPositiveIsEdit(): Boolean{
-        return idHabit.value != -1
+    fun isEditCase(): Boolean{
+        return idHabit != -1
     }
 
     fun getHabitId(id: Int){
-        idHabit.value = id
+        idHabit = id
     }
 }

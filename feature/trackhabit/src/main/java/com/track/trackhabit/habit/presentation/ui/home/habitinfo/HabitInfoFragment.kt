@@ -40,7 +40,7 @@ class HabitInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         habitInfoViewModel.getHabitId(safeArgs.habitId)
-        if (habitInfoViewModel.negativeIsAddPositiveIsEdit()) {
+        if (habitInfoViewModel.isEditCase()) {
             habitInfoViewModel.getHabit()
             binding.buttonFragmentHabitInfoSetTime.text = habitInfoViewModel.time.value
 
@@ -66,7 +66,7 @@ class HabitInfoFragment : Fragment() {
         }
 
         binding.buttonFragmentHabitInfoButtonDone.setOnClickListener {
-            if (habitInfoViewModel.negativeIsAddPositiveIsEdit()) {
+            if (habitInfoViewModel.isEditCase()) {
                 Timber.d("-->${habitInfoViewModel.habit.value!!.time} -- ${id}")
                 Timber.d("-->${habitInfoViewModel.habit.value!!.performances}")
 
