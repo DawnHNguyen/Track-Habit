@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,7 +31,7 @@ class HomeFragment : Fragment() {
     private val habitsListAdapter = HabitsListAdapter(object : OnClickRevealButton {
         override fun onClickEdit(habit: Habit) {
             val habitId = habit.habitId
-            val action = HomeFragmentDirections.actionNavHomeToNavEdithabit(habitId)
+            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId)
             Timber.d("--${action}--${habitId}")
             findNavController().navigate(action)
         }
@@ -60,7 +61,9 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         binding.fabActivityHomeAddHabitButton.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_home_to_nav_addhabit)
+            val habitId = -1
+            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId)
+            findNavController().navigate(action)
         }
     }
 

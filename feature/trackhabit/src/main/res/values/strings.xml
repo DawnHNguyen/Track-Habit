@@ -49,7 +49,7 @@
     <string name="habit_description">Description</string>
     <string name="addhabit_habitname">Habit name</string>
     <string name="habit_name">Name</string>
-    <string name="habit_frequency">frequency</string>
+    <string name="habit_frequency">Frequency</string>
     <string name="habit_errormessage_null">Không được để trống</string>
     <string name="itemhabit_edit">Sửa</string>
     <string name="itemhabit_delete">Xóa</string>
