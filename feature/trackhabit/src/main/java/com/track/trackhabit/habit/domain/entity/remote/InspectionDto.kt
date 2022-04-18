@@ -7,10 +7,12 @@ import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
 import java.util.*
 
 data class InspectionDto(
-    @PrimaryKey val time: Date,
+    @PrimaryKey
+    val inspectionId: Int,
+    val time: Date,
     val check: Boolean
 ) : RemoteDto {
-    override fun mapToDomainModel() = Inspection(time, check)
+    override fun mapToDomainModel() = Inspection(inspectionId,time, check)
 
-    override fun mapToLocalDto() = InspectionLocal(time.time, check)
+    override fun mapToLocalDto() = InspectionLocal(inspectionId,time.time, check)
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inspector.InspectionCompanion
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.entity.Inspection
 import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.ui.AlarmService
 import com.track.trackhabit.habit.presentation.ui.HabitsListAdapter
@@ -38,6 +40,10 @@ class HomeFragment : Fragment() {
 
         override fun onClickDelete(habit: Habit) {
             homeViewModel.deleteHabit(habit)
+        }
+
+        override fun onClickUpdate(habit: Habit) {
+
         }
     })
 
