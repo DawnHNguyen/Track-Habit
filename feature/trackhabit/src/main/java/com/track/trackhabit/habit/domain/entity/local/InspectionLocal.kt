@@ -21,8 +21,8 @@ data class InspectionLocal(
     val check: Boolean
 ) : LocalDto {
     @ColumnInfo(name = "habit_id")
-    lateinit var id: String
+    var id: Int = -1
     override fun mapToDomainModel() = Inspection(inspectionId,time = Date().apply { time = time }, check)
 
-    override fun mapToRemoteDto() = InspectionDto(time = Date().apply { time = time }, check)
+    override fun mapToRemoteDto() = InspectionDto(inspectionId,time = Date().apply { time = time }, check)
 }
