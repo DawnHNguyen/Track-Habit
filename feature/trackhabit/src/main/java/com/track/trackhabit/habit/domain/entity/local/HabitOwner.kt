@@ -6,8 +6,8 @@ import androidx.room.Relation
 data class HabitOwner(
     @Embedded val userLocal: UserLocal,
     @Relation(
-        parentColumn = "userId",
-        entityColumn = "habitId"
+        parentColumn = "user_id",
+        entityColumn = "habit_id"
     )
     val habitList: List<HabitLocal>
 )

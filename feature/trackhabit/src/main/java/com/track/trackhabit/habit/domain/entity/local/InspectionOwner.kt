@@ -6,8 +6,8 @@ import androidx.room.Relation
 data class InspectionOwner(
     @Embedded val habit: HabitLocal,
     @Relation(
-        parentColumn = "habitId",
-        entityColumn = "inspectionId"
+        parentColumn = "habit_id",
+        entityColumn = "inspection_id"
     )
     val listInspection: List<InspectionLocal>
 )

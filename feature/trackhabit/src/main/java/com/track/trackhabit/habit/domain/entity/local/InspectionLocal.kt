@@ -16,7 +16,7 @@ import java.util.*
 )])
 data class InspectionLocal(
     @PrimaryKey(autoGenerate = true)
-    val inspectionId: Int,
+    @ColumnInfo(name = "inspection_id") val inspectionId: Int,
     val time: Long,
     val check: Boolean
 ) : LocalDto {
