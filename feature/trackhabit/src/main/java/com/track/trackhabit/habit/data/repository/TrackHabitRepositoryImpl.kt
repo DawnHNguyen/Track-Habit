@@ -41,7 +41,7 @@ class TrackHabitRepositoryImpl @Inject constructor(
             it.mapToDomainModel()
         }
 
-    override fun getInspectionByHabit(id: Int): LiveData<List<Inspection>> =
+    override fun getInspectionByHabitId(id: Int): LiveData<List<Inspection>> =
         Transformations.map(inspectionDao.getInspectionByHabit(id)) { it ->
             it.listInspection.map { it.mapToDomainModel() }
         }
