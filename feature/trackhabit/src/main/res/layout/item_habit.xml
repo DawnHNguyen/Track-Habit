@@ -67,6 +67,7 @@
             android:layout_height="@dimen/height_itemhabit_habit"
             android:background="@drawable/background_itemhabit"
             android:backgroundTint="@color/color_defaulthabit"
+            android:onClick="@{() -> onClick.onClickUpdate(habit)}"
             android:paddingStart="@dimen/padding_itemhabit_habit_paddingstart"
             tools:ignore="RtlSymmetry">
 
