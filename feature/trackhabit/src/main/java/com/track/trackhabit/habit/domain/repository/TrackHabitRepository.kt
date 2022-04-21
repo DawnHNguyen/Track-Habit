@@ -8,7 +8,7 @@ import com.track.trackhabit.habit.domain.entity.User
 interface TrackHabitRepository {
     suspend fun addUser(user: User)
     suspend fun addHabit(habit: Habit): Long
-    suspend fun addInspection(inspection: Inspection, habitId: Int)
+    suspend fun addInspectionToHabit(inspection: Inspection, habitId: Int)
     fun getHabit(): LiveData<List<Habit>>
     fun getHabitById(id: Int): LiveData<Habit>
     fun getInspectionByHabit(id: Int): LiveData<List<Inspection>>

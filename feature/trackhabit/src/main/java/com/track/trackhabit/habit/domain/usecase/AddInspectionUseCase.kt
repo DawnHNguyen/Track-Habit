@@ -8,5 +8,5 @@ class AddInspectionUseCase @Inject constructor(
     private val repository: TrackHabitRepository
 ) {
     suspend operator fun invoke(inspection: Inspection, habitId: Int) =
-        repository.addInspection(inspection, habitId)
+        repository.addInspectionToHabit(inspection, habitId)
 }

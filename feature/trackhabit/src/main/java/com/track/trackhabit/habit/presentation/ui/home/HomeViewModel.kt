@@ -4,13 +4,13 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.track.common.base.AppDispatchers
 import com.track.trackhabit.habit.domain.entity.Habit
-import com.track.trackhabit.habit.domain.usecase.AddHabitUseCase
-import com.track.trackhabit.habit.domain.usecase.DeleteHabitUseCase
-import com.track.trackhabit.habit.domain.usecase.GetHabitUseCase
-import com.track.trackhabit.habit.domain.usecase.UpdateHabitUseCase
+import com.track.trackhabit.habit.domain.entity.Inspection
+import com.track.trackhabit.habit.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,11 +19,14 @@ class HomeViewModel @Inject constructor(
     private val addHabitUseCase: AddHabitUseCase,
     private val updateHabitUseCase: UpdateHabitUseCase,
     private val deleteHabitUseCase: DeleteHabitUseCase,
+    private val addInspectionUseCase: AddInspectionUseCase,
     private val dispatcher: AppDispatchers
 ) : ViewModel() {
     private val _habitList = MediatorLiveData<List<Habit>>()
     val habitList: LiveData<List<Habit>> get() = _habitList
     private var habitListSource: LiveData<List<Habit>> = MutableLiveData()
+
+    private var idHabit: Int = 0
 
     init {
         getHabit()
@@ -51,5 +54,18 @@ class HomeViewModel @Inject constructor(
                 deleteHabitUseCase(habit.habitId, habit.title)
             }
         }
+    }
+
+    fun addInspection() {
+        viewModelScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                addInspectionUseCase(Inspection(0, Date(), true), idHabit)
+                Log.d("check_update_inspection", "${idHabit}")
+            }
+        }
+    }
+
+    fun getHabitId(id: Int){
+        idHabit = id
     }
 }
