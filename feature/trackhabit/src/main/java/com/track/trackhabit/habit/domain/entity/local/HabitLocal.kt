@@ -13,7 +13,7 @@ import java.util.*
 @Entity(foreignKeys = [ForeignKey(
     entity = UserLocal::class,
     parentColumns = arrayOf("user_id"),
-    childColumns = arrayOf("huser_id"),
+    childColumns = arrayOf("user_id"),
     onDelete = CASCADE
 )])
 data class HabitLocal(
@@ -23,7 +23,7 @@ data class HabitLocal(
     val time: Long,
     val frequency: String?
 ) : LocalDto {
-    @ColumnInfo(name = "huser_id")
+    @ColumnInfo(name = "user_id")
     lateinit var userId: String
     override fun mapToDomainModel() = Habit(habitId, title, time = Date().apply { time = this@HabitLocal.time }, emptyList(), frequency)
 
