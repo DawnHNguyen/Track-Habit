@@ -16,6 +16,6 @@ abstract class InspectionDao() {
     @Query("SELECT * FROM inspectionlocal")
     abstract fun getInspection(): LiveData<List<InspectionLocal>>
 
-    @Query("SELECT * FROM HabitLocal WHERE habit_id = :id")
-    abstract fun getInspectionByHabit(id: Int): LiveData<InspectionOwner>
+    @Query("SELECT * FROM HabitLocal WHERE habit_id = :idHabit")
+    abstract fun getInspectionByHabit(idHabit: Int): LiveData<InspectionOwner>
 }

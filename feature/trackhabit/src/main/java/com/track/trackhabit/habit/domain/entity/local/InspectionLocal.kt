@@ -12,15 +12,15 @@ import java.util.*
 @Entity(foreignKeys = [ForeignKey(
     entity = HabitLocal::class,
     parentColumns = arrayOf("habit_id"),
-    childColumns = arrayOf("habit_id")
+    childColumns = arrayOf("ihabit_id")
 )])
 data class InspectionLocal(
     @PrimaryKey(autoGenerate = true)
-    val inspectionId: Int,
+    @ColumnInfo(name = "inspection_id")val inspectionId: Int,
     val time: Long,
     val check: Boolean
 ) : LocalDto {
-    @ColumnInfo(name = "habit_id")
+    @ColumnInfo(name = "ihabit_id")
     var id: Int = -1
     override fun mapToDomainModel() = Inspection(inspectionId,time = Date().apply { time = time }, check)
 

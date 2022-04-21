@@ -13,8 +13,8 @@ abstract class HabitDao() {
     @Query("SELECT * FROM habitlocal")
     abstract fun getHabit(): LiveData<List<HabitLocal>>
 
-    @Query("SELECT * FROM UserLocal WHERE user_id = :id")
-    abstract fun getHabitByUser(id: String): LiveData<HabitOwner>
+    @Query("SELECT * FROM UserLocal WHERE user_id = :idUser")
+    abstract fun getHabitByUser(idUser: String): LiveData<HabitOwner>
 
     @Query("SELECT * FROM habitLocal WHERE habit_id=:id")
     abstract fun getHabitById(id: Int): LiveData<HabitLocal>
