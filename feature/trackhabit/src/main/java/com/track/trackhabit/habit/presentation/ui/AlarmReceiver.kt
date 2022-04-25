@@ -115,7 +115,7 @@ class AlarmReceiver : BroadcastReceiver() {
             PendingIntent.getActivity(context, ConstRequestCode.REQUEST_CODE_ACTIVITY, intent, 0)
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.ic_trackhabit_logo)
             .setContentTitle(context.getString(R.string.featureTrackhabit_title_snoozeNotification))
             .setContentText(context.getString(R.string.featureTrackhabit_content_snoozeNotification))
             .setDefaults(Notification.DEFAULT_ALL)
@@ -156,7 +156,7 @@ class AlarmReceiver : BroadcastReceiver() {
             )
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.ic_trackhabit_logo)
             .setContentTitle(context.getString(R.string.featureTrackhabit_title_notification))
             .setContentText(
                 context.getString(
@@ -168,7 +168,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
             .addAction(
-                R.drawable.ic_launcher_foreground,
+                R.mipmap.ic_trackhabit_logo,
                 context.getString(R.string.featureTrackhabit_delayNoti_button),
                 snoozePendingIntent
             )
@@ -222,7 +222,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
     private fun setRemindSleepTime(context: Context) {
         val builder = NotificationCompat.Builder(context, ConstIdChannel.REMIND_SLEEP_NOTIFICATION)
-            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setSmallIcon(R.mipmap.ic_trackhabit_logo)
             .setContentTitle(context.getString(R.string.sleepNoti_title))
             .setContentText(context.getString(R.string.sleepNoti_content))
             .setPriority(NotificationCompat.PRIORITY_MAX)

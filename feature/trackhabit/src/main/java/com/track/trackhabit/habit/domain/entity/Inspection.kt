@@ -7,11 +7,12 @@ import java.util.*
 
 
 data class Inspection(
+    val inspectionId: Int,
     val time: Date,
     val check: Boolean
 ) : DomainModel {
-    override fun toLocalDto() = InspectionLocal(time.time, check)
+    override fun toLocalDto() = InspectionLocal(inspectionId,time.time, check)
 
-    override fun toRemoteDto() = InspectionDto(time, check)
+    override fun toRemoteDto() = InspectionDto(inspectionId,time, check)
 
 }

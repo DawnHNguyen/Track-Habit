@@ -27,7 +27,7 @@ object Versions {
 
     val nav = "2.3.5"
 
-    val core_version = "1.6.0"
+    val core_version = "1.7.0"
 
     val coroutines = "1.3.8"
 
@@ -55,7 +55,7 @@ object Libraries {
     val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 
     // NOTIFICATION
-    val notification = "androidx.core:core-ktx:${Versions}.core_version"
+    val notification = "androidx.core:core-ktx:${Versions.core_version}"
 
     //FIREBASE
     val firebase = "com.google.gms:google-services:${Versions.firebase_version}"

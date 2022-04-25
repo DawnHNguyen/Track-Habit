@@ -33,7 +33,8 @@
     <string name="sleeptime_defaulttimepicker">00:00</string>
     <string name="sleeptime_confirmsleeptime">Confirm</string>
     <string name="sleeptime_description">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
-    <string name="dialogsetnotisleeptime_message">Reminders will be sent to you 15 minutes before bedtime</string>
+    <string name="dialogsetnotisleeptime_message">Reminder will be sent to you 15 minutes before bedtime</string>
+    <string name="sleeptime_toast_set_remind_ok">Reminder has been created successfully</string>
 
     <!--    add habit fragment-->
     <string name="habit_monday">Monday</string>
@@ -49,7 +50,7 @@
     <string name="habit_description">Description</string>
     <string name="addhabit_habitname">Habit name</string>
     <string name="habit_name">Name</string>
-    <string name="habit_frequency">frequency</string>
+    <string name="habit_frequency">Frequency</string>
     <string name="habit_errormessage_null">Không được để trống</string>
     <string name="itemhabit_edit">Sửa</string>
     <string name="itemhabit_delete">Xóa</string>

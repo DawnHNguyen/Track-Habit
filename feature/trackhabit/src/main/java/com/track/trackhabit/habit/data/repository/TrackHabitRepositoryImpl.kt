@@ -25,8 +25,10 @@ class TrackHabitRepositoryImpl @Inject constructor(
         return habitDao.insertHabit(habit.toLocalDto())
     }
 
-    override suspend fun addInspection(inspection: Inspection) {
-        inspectionDao.insertInspection(inspection.toLocalDto())
+    override suspend fun addInspectionToHabit(inspection: Inspection, habitId: Int) {
+        inspectionDao.insertInspection(inspection.toLocalDto().apply {
+            id = habitId
+        })
     }
 
     override fun getHabit(): LiveData<List<Habit>> =
@@ -37,6 +39,11 @@ class TrackHabitRepositoryImpl @Inject constructor(
     override fun getHabitById(id: Int): LiveData<Habit> =
         Transformations.map(habitDao.getHabitById(id)) { it ->
             it.mapToDomainModel()
+        }
+
+    override fun getInspectionByHabitId(id: Int): LiveData<List<Inspection>> =
+        Transformations.map(inspectionDao.getInspectionByHabit(id)) { it ->
+            it.listInspection.map { it.mapToDomainModel() }
         }
 
     override fun getInspection(): LiveData<List<Inspection>> =

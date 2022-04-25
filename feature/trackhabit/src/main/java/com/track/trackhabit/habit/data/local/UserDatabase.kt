@@ -15,7 +15,7 @@ import kotlinx.coroutines.runBlocking
 
 @Database(
     entities = [UserLocal::class, HabitLocal::class, InspectionLocal::class],
-    version = 3,
+    version = 4,
     exportSchema = false,
 
 )
