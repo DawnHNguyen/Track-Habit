@@ -57,11 +57,11 @@ class AlarmReceiver : BroadcastReceiver() {
         }
     }
 
-    private suspend fun getHabitFrequency(intent: Intent): String {
-        val habit: Habit = getHabitByIdUseCase.getHabitValue(intent.getIntExtra(Const.HABIT_ID, 0))
-        Log.d("check_habit", "$habit -- ${intent.getIntExtra(Const.HABIT_ID, 0)}")
-        return habit.frequency ?: "1111111"
-    }
+//    private suspend fun getHabitFrequency(intent: Intent): String {
+//        val habit: Habit = getHabitByIdUseCase.getHabitValue(intent.getIntExtra(Const.HABIT_ID, 0))
+//        Log.d("check_habit", "$habit -- ${intent.getIntExtra(Const.HABIT_ID, 0)}")
+//        return habit.frequency ?: "1111111"
+//    }
 
 //    private fun isToday(frequency: String): Boolean {
 //        val today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK)
