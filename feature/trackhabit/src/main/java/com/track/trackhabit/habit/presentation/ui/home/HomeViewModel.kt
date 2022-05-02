@@ -60,7 +60,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
                 addInspectionUseCase(Inspection(0, Date(), true), idHabit)
-                Log.d("check_update_inspection", "${idHabit}")
+                Log.d("check_update_inspection", "$idHabit")
             }
         }
     }
