@@ -7,4 +7,6 @@ class GetHabitUseCase @Inject constructor(
     private val repository: TrackHabitRepository
 ) {
     operator fun invoke() = repository.getHabit()
+
+    suspend fun getHabitValue() = repository.getHabitsValue()
 }

@@ -1,16 +1,19 @@
 package com.track.trackhabit.habit.presentation.ui
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
+import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.ItemHabitBinding
 import com.track.trackhabit.habit.domain.entity.Habit
-import android.os.Bundle
 import com.track.trackhabit.habit.presentation.ui.home.OnClickRevealButton
-import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 
 class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
@@ -28,7 +31,7 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
     ) {
         val habit = getItem(position)
         val onclick = onClickRevealButton
-        viewBinderHelper.bind(holder.swipeRevealLayout,habit.habitId.toString())
+        viewBinderHelper.bind(holder.swipeRevealLayout, habit.habitId.toString())
         viewBinderHelper.setOpenOnlyOne(true)
         holder.bind(habit, onclick)
     }
@@ -39,7 +42,27 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         fun bind(habit: Habit, onclick: OnClickRevealButton) {
             binding.habit = habit
             binding.onClick = onclick
+            changeHabitColor(habit.time, habit.isNotiToday())
             binding.executePendingBindings()
+        }
+
+        private fun checkIsBeforeHabit(habitTime: Date): Boolean {
+            val cal = Calendar.getInstance()
+            cal.timeInMillis -= TimeUnit.MINUTES.toMillis(10)
+            val presentTimeArr = SimpleDateFormat("HH:mm").format(cal.time).split(":")
+            val habitTimeArr = SimpleDateFormat("HH:mm").format(habitTime).split(":")
+            return presentTimeArr[0].toInt() < habitTimeArr[0].toInt() || (presentTimeArr[0].toInt() == habitTimeArr[0].toInt() && presentTimeArr[1].toInt() < habitTimeArr[1].toInt())
+        }
+
+        private fun changeHabitColor(habitTime: Date, isNotiToday: Boolean) {
+            if (isNotiToday) {
+                if (checkIsBeforeHabit(habitTime)) {
+                    binding.layoutItem.background =
+                        binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_default)
+                } else binding.layoutItem.background =
+                    binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_missed)
+            } else binding.layoutItem.background =
+                binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_default)
         }
 
         companion object {
@@ -51,9 +74,10 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         }
     }
 
-    class HabitsListDiffUtil() : DiffUtil.ItemCallback<Habit>() {
+    class HabitsListDiffUtil : DiffUtil.ItemCallback<Habit>() {
         override fun areContentsTheSame(oldItem: Habit, newItem: Habit) = oldItem == newItem
-        override fun areItemsTheSame(oldItem: Habit, newItem: Habit) = oldItem.habitId == newItem.habitId
+        override fun areItemsTheSame(oldItem: Habit, newItem: Habit) =
+            oldItem.habitId == newItem.habitId
     }
 
     fun saveStates(outState: Bundle?) {
@@ -63,4 +87,5 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
     fun restoreStates(inState: Bundle?) {
         viewBinderHelper.restoreStates(inState)
     }
+
 }

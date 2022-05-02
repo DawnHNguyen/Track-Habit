@@ -60,4 +60,6 @@ class TrackHabitRepositoryImpl @Inject constructor(
     override suspend fun deleteHabit(id: Int) {
         habitDao.deleteHabit(id)
     }
+
+    override suspend fun getHabitsValue(): List<Habit> = habitDao.getHabitsValue().map { it.mapToDomainModel() }
 }

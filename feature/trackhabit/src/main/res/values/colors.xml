@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_defaulthabit">#B3C4C4C4</color>
+    <color name="color_missedHabit">#FE3535</color>
+    <color name="color_doneHabit">#6DB5CB</color>
     <color name="purple_sleeptime">#6869AC</color>
     <color name="disable_confirmsleeptime_button">#C4C4C4</color>
 </resources>

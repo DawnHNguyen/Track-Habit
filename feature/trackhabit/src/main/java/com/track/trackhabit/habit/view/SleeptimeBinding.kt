@@ -2,7 +2,6 @@ package com.track.trackhabit.habit.view
 
 import androidx.appcompat.widget.AppCompatButton
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.track.trackhabit.habit.R

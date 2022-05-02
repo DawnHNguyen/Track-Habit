@@ -30,7 +30,7 @@
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@drawable/background_itemhabit"
+                android:background="@drawable/background_itemhabit_default"
                 android:backgroundTint="@color/color_defaulthabit"
                 android:layout_marginStart="@dimen/all_margin_start">
 
@@ -65,8 +65,7 @@
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_itemhabit_habit"
-            android:background="@drawable/background_itemhabit"
-            android:backgroundTint="@color/color_defaulthabit"
+            android:background="@drawable/background_itemhabit_default"
             android:onClick="@{() -> onClick.onClickUpdate(habit)}"
             android:paddingStart="@dimen/padding_itemhabit_habit_paddingstart"
             tools:ignore="RtlSymmetry">
@@ -76,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{habit.title}"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textsize_itemhabit_habitname" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>

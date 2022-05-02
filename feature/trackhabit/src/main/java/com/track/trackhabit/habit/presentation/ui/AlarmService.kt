@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -8,6 +9,7 @@ import android.os.SystemClock
 import android.util.Log
 import com.track.trackhabit.habit.presentation.constpackage.Const
 
+@SuppressLint("LogNotTimber")
 class AlarmService(private val context: Context) {
     private val intent = getIntent()
 
@@ -19,7 +21,7 @@ class AlarmService(private val context: Context) {
             putExtra(Const.HABIT_NAME, habitName)
             putExtra(Const.HABIT_ID, habitId)
         }, habitId)
-        Log.d("checkIntentCancel", " - ${pendingIntent} - ${intent} -${intent.extras}")
+        Log.d("checkIntentCancel", " - $pendingIntent - $intent -${intent.extras}")
         setCancel(pendingIntent)
     }
 
@@ -33,7 +35,7 @@ class AlarmService(private val context: Context) {
             action = Const.SET_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
         }, habitId)
-        Log.d("checkIntentSnooze", " - ${pendingIntent} - ${intent} -${intent.extras}")
+        Log.d("checkIntentSnooze", " - $pendingIntent - $intent -${intent.extras}")
         setElapse(pendingIntent)
 
     }
@@ -45,7 +47,7 @@ class AlarmService(private val context: Context) {
             putExtra(Const.HABIT_NAME, habitName)
             putExtra(Const.HABIT_ID, habitId)
         }, habitId)
-        Log.d("checkIntentRepeat", " - ${pendingIntent} - ${intent} -${intent.extras}")
+        Log.d("checkIntentRepeat", " - $pendingIntent - $intent -${intent.extras}")
         setAlarm(
             timeInMillis,
             pendingIntent

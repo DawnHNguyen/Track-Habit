@@ -12,8 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHabitInfoBinding
-import com.track.trackhabit.habit.domain.entity.Habit
-import com.track.trackhabit.habit.presentation.constpackage.Const
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.text.SimpleDateFormat
