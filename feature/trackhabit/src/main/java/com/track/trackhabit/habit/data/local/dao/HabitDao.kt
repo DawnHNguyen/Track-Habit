@@ -27,4 +27,7 @@ abstract class HabitDao() {
 
     @Query("DELETE FROM habitlocal WHERE habit_id=:id")
     abstract suspend fun deleteHabit(id: Int)
+
+    @Query("SELECT * FROM habitlocal")
+    abstract fun getHabitsValue(): List<HabitLocal>
 }
