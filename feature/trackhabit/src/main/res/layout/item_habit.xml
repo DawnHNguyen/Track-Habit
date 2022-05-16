@@ -61,24 +61,40 @@
         </LinearLayout>
 
         <!-- Your main layout here -->
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_itemhabit_habit"
             android:background="@drawable/background_itemhabit_default"
             android:onClick="@{() -> onClick.onClickUpdate(habit)}"
-            android:paddingStart="@dimen/padding_itemhabit_habit_paddingstart"
+            android:paddingHorizontal="@dimen/padding_itemhabit_habit_paddingstart"
             tools:ignore="RtlSymmetry">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_itemhabit_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{habit.title}"
-                android:layout_gravity="center"
+                android:textSize="@dimen/textsize_itemhabit_habitname"
                 android:textColor="@color/white"
-                android:textSize="@dimen/textsize_itemhabit_habitname" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Sleep early"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_itemhabit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_itemhabit_habitname"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="20:00"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

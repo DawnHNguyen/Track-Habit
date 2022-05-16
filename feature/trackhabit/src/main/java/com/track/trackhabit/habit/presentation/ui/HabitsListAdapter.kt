@@ -42,6 +42,7 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         fun bind(habit: Habit, onclick: OnClickRevealButton) {
             binding.habit = habit
             binding.onClick = onclick
+            binding.textviewItemhabitTime.text = SimpleDateFormat("HH:mm").format(habit.time)
             changeHabitColor(habit.time, habit.isNotiToday())
             binding.executePendingBindings()
         }
