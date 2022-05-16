@@ -1,6 +1,7 @@
 package com.track.trackhabit.habit.presentation.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +11,7 @@ import com.chauthai.swipereveallayout.ViewBinderHelper
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.ItemHabitBinding
 import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.entity.Inspection
 import com.track.trackhabit.habit.presentation.ui.home.OnClickRevealButton
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,7 +45,7 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
             binding.habit = habit
             binding.onClick = onclick
             binding.textviewItemhabitTime.text = SimpleDateFormat("HH:mm").format(habit.time)
-            changeHabitColor(habit.time, habit.isNotiToday())
+            changeHabitColor(habit.time, habit.isNotiToday(), habit.performances)
             binding.executePendingBindings()
         }
 
@@ -55,15 +57,39 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
             return presentTimeArr[0].toInt() < habitTimeArr[0].toInt() || (presentTimeArr[0].toInt() == habitTimeArr[0].toInt() && presentTimeArr[1].toInt() < habitTimeArr[1].toInt())
         }
 
-        private fun changeHabitColor(habitTime: Date, isNotiToday: Boolean) {
-            if (isNotiToday) {
-                if (checkIsBeforeHabit(habitTime)) {
-                    binding.layoutItem.background =
-                        binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_default)
-                } else binding.layoutItem.background =
-                    binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_missed)
-            } else binding.layoutItem.background =
-                binding.root.context.resources.getDrawable(R.drawable.background_itemhabit_default)
+        private fun changeHabitColor(
+            habitTime: Date,
+            isNotiToday: Boolean,
+            performance: List<Inspection>
+        ) {
+            with(binding) {
+                val source = root.context.resources
+                layoutItem.background = if (isNotiToday) {
+                    var isDoneToday = false
+                    Log.d("isPerformanceEmpty", performance.isEmpty().toString())
+                    if (performance.isNotEmpty()) {
+                            isDoneToday = performance.last().check
+                        Log.d("isDone", isDoneToday.toString())
+                    }
+                    if (checkIsBeforeHabit(habitTime) || isDoneToday) {
+                        if (isDoneToday) {
+                            source.getDrawable(R.drawable.background_itemhabit_done)
+                        }
+                        else{
+                            source.getDrawable(R.drawable.background_itemhabit_default)
+                        }
+                    }
+                    else source.getDrawable(R.drawable.background_itemhabit_missed)
+                } else source.getDrawable(R.drawable.background_itemhabit_default)
+                 if(checkIsBeforeHabit(habitTime)) {
+                     textviewItemhabitTitle.setTextColor(source.getColor(R.color.black))
+                     textviewItemhabitTime.setTextColor(source.getColor(R.color.black))
+                 }
+                else {
+                     textviewItemhabitTitle.setTextColor(source.getColor(R.color.white))
+                     textviewItemhabitTime.setTextColor(source.getColor(R.color.white))
+                 }
+            }
         }
 
         companion object {
