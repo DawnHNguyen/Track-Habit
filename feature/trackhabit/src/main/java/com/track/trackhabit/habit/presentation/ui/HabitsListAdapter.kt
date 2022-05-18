@@ -44,6 +44,7 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         fun bind(habit: Habit, onclick: OnClickRevealButton) {
             binding.habit = habit
             binding.onClick = onclick
+            binding.textviewItemhabitTime.text = SimpleDateFormat("HH:mm").format(habit.time)
             changeHabitColor(habit.time, habit.isNotiToday(), habit.performances)
             binding.executePendingBindings()
         }
@@ -71,11 +72,23 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
                         Log.d("isDone", isDoneToday.toString())
                     }
                     if (checkIsBeforeHabit(habitTime) || isDoneToday) {
-                        if (isDoneToday) source.getDrawable(R.drawable.background_itemhabit_done)
-                        else source.getDrawable(R.drawable.background_itemhabit_default)
+                        if (isDoneToday) {
+                            source.getDrawable(R.drawable.background_itemhabit_done)
+                        }
+                        else{
+                            source.getDrawable(R.drawable.background_itemhabit_default)
+                        }
                     }
                     else source.getDrawable(R.drawable.background_itemhabit_missed)
                 } else source.getDrawable(R.drawable.background_itemhabit_default)
+                 if(checkIsBeforeHabit(habitTime)) {
+                     textviewItemhabitTitle.setTextColor(source.getColor(R.color.black))
+                     textviewItemhabitTime.setTextColor(source.getColor(R.color.black))
+                 }
+                else {
+                     textviewItemhabitTitle.setTextColor(source.getColor(R.color.white))
+                     textviewItemhabitTime.setTextColor(source.getColor(R.color.white))
+                 }
             }
         }
 
