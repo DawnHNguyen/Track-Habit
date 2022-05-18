@@ -72,7 +72,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textview_itemhabit_title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{habit.title}"
                 android:textSize="@dimen/textsize_itemhabit_habitname"
@@ -80,7 +80,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Sleep early"/>
+                android:singleLine="true"
+                app:layout_constraintEnd_toStartOf="@id/textview_itemhabit_time"
+                tools:text="Sleep earlyooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textview_itemhabit_time"
