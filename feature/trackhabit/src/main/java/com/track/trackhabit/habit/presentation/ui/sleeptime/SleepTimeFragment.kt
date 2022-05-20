@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -115,12 +116,13 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
             dialog.cancel()
         }
         dialogBinding?.buttonDialogSetRemindSleepOk?.setOnClickListener {
-            creatRemindSleepNoti()
+            createRemindSleepNoti()
+            Toast.makeText(context, R.string.sleeptime_toast_set_remind_ok, Toast.LENGTH_LONG).show()
             dialog.hide()
         }
     }
 
-    private fun creatRemindSleepNoti() {
+    private fun createRemindSleepNoti() {
         val intent = Intent(this.requireContext(), AlarmReceiver::class.java)
         intent.action = Const.SET_REMIND_SLEEPTIME
         val pendingIntent = PendingIntent.getBroadcast(

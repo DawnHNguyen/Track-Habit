@@ -6,11 +6,14 @@
     <string name="all_back">Back</string>
 
     <!--    notification-->
-<!--    TODO: reformat string template for sleeptime and habit notification-->
+    <!--    TODO: reformat string template for sleeptime and habit notification-->
     <string name="featureTrackhabit_channelId_notification">habit_channel_id</string>
     <string name="featureTrackhabit_nameOfChannel_notification">Habit Notification Chanel</string>
     <string name="featureTrackhabit_title_notification">No pain, no gain</string>
     <string name="featureTrackhabit_content_notification">Time to do habit %1$s</string>
+    <string name="featureTrackhabit_delayNoti_button">Delay 5 minutes</string>
+    <string name="featureTrackhabit_title_snoozeNotification">Set Snooze Time</string>
+    <string name="featureTrackhabit_content_snoozeNotification">het thong bao roi day, co lam khong?</string>
     <string name="sleepNoti_title">It\'s sleep time!</string>
     <string name="sleepNoti_content">Your bed is waiting for you. Good night ❤</string>
     <string name="sleepNoti_chanelId">sleep_chanel_id</string>
@@ -30,7 +33,8 @@
     <string name="sleeptime_defaulttimepicker">00:00</string>
     <string name="sleeptime_confirmsleeptime">Confirm</string>
     <string name="sleeptime_description">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
-    <string name="dialogsetnotisleeptime_message">Reminders will be sent to you 15 minutes before bedtime</string>
+    <string name="dialogsetnotisleeptime_message">Reminder will be sent to you 15 minutes before bedtime</string>
+    <string name="sleeptime_toast_set_remind_ok">Reminder has been created successfully</string>
 
     <!--    add habit fragment-->
     <string name="habit_monday">Monday</string>
@@ -46,7 +50,7 @@
     <string name="habit_description">Description</string>
     <string name="addhabit_habitname">Habit name</string>
     <string name="habit_name">Name</string>
-    <string name="habit_frequency">frequency</string>
+    <string name="habit_frequency">Frequency</string>
     <string name="habit_errormessage_null">Không được để trống</string>
     <string name="itemhabit_edit">Sửa</string>
     <string name="itemhabit_delete">Xóa</string>

@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.presentation.ui.AlarmService
@@ -30,13 +29,18 @@ class HomeFragment : Fragment() {
     private val habitsListAdapter = HabitsListAdapter(object : OnClickRevealButton {
         override fun onClickEdit(habit: Habit) {
             val habitId = habit.habitId
-            val action = HomeFragmentDirections.actionNavHomeToNavEdithabit(habitId)
+            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId)
             Timber.d("--${action}--${habitId}")
             findNavController().navigate(action)
         }
 
         override fun onClickDelete(habit: Habit) {
             homeViewModel.deleteHabit(habit)
+        }
+
+        override fun onClickUpdate(habit: Habit) {
+            homeViewModel.getHabitId(habit.habitId)
+            homeViewModel.addInspection()
         }
     })
 
@@ -60,7 +64,9 @@ class HomeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         binding.fabActivityHomeAddHabitButton.setOnClickListener {
-            findNavController().navigate(R.id.action_nav_home_to_nav_addhabit)
+            val habitId = -1
+            val action = HomeFragmentDirections.actionNavHomeToNavHabitinfo(habitId)
+            findNavController().navigate(action)
         }
     }
 

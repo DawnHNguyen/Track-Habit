@@ -20,13 +20,12 @@ data class HabitLocal(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "habit_id") val habitId: Int,
     val title: String,
-    val description: String,
     val time: Long,
     val frequency: String?
 ) : LocalDto {
     @ColumnInfo(name = "user_id")
     lateinit var userId: String
-    override fun mapToDomainModel() = Habit(habitId, title, description, time = Date().apply { time = this@HabitLocal.time }, emptyList(), frequency)
+    override fun mapToDomainModel() = Habit(habitId, title, time = Date().apply { time = this@HabitLocal.time }, emptyList(), frequency)
 
-    override fun mapToRemoteDto() = HabitDto(habitId, title, description,time = Date().apply { time = this@HabitLocal.time }, emptyList(),frequency)
+    override fun mapToRemoteDto() = HabitDto(habitId, title, time = Date().apply { time = this@HabitLocal.time }, emptyList(),frequency)
 }

@@ -12,6 +12,14 @@
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/fragment_statistical.xml" value="0.13360507246376813" />
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/item_habit_test.xml" value="0.1" />
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/common/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/common/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/common/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_addhabit.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_confirmsleeptime_button.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_confirmsleeptime_button_color.xml" value="0.17777777777777778" />
@@ -21,6 +29,8 @@
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_itemsleeptime_default.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_sleeptime_backbutton.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_sleeptime_time.xml" value="0.17777777777777778" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/notification_icon.xml" value="0.17222222222222222" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/fragment_add_habit.xml" value="0.20416666666666666" />
@@ -33,6 +43,10 @@
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/item_sleep_time.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/set_remind_sleep_dialog_fragment.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/remote/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/remote/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/ic_launcher_background.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/itemcolor_bottomnav_selectedicon.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.25" />
@@ -42,12 +56,16 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2270168855534709" />
         <entry key="feature/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_addhabit.xml" value="0.2989583333333333" />
+        <entry key="feature/trackhabit/src/main/res/drawable/background_addhabit_checked.xml" value="0.158" />
+        <entry key="feature/trackhabit/src/main/res/drawable/background_addhabit_unchecked.xml" value="0.1065" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_confirmsleeptime_button.xml" value="0.2630208333333333" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_dialog_remindsleep_okbutton.xml" value="0.2630208333333333" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_dialog_setremindsleep.xml" value="0.2630208333333333" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_itemhabit.xml" value="0.30572916666666666" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_itemsleeptime_clicked.xml" value="0.2630208333333333" />
+        <entry key="feature/trackhabit/src/main/res/drawable/background_sleeptime_time.xml" value="0.108" />
         <entry key="feature/trackhabit/src/main/res/drawable/button_selector.xml" value="0.31927083333333334" />
+        <entry key="feature/trackhabit/src/main/res/drawable/changed_background_button.xml" value="0.16" />
         <entry key="feature/trackhabit/src/main/res/drawable/ic_plus_fab.xml" value="0.2630208333333333" />
         <entry key="feature/trackhabit/src/main/res/drawable/ic_statistical.xml" value="0.2630208333333333" />
         <entry key="feature/trackhabit/src/main/res/drawable/layout_on_swipe.xml" value="0.26145833333333335" />

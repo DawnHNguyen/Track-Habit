@@ -8,6 +8,6 @@ import javax.inject.Inject
 class AddInspectionUseCase @Inject constructor(
     private val repository: InspectionRepository
 ) {
-    suspend operator fun invoke(inspection: Inspection) =
-        repository.addInspection(inspection)
+    suspend operator fun invoke(inspection: Inspection, habitId: Int) =
+        repository.addInspectionToHabit(inspection, habitId)
 }

@@ -15,12 +15,14 @@ import java.util.*
     childColumns = arrayOf("habit_id")
 )])
 data class InspectionLocal(
-    @PrimaryKey val time: Long,
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "inspection_id") val inspectionId: Int,
+    val time: Long,
     val check: Boolean
 ) : LocalDto {
     @ColumnInfo(name = "habit_id")
-    lateinit var id: String
-    override fun mapToDomainModel() = Inspection(time = Date().apply { time = time }, check)
+    var id: Int = -1
+    override fun mapToDomainModel() = Inspection(inspectionId,time = Date().apply { time = time }, check)
 
-    override fun mapToRemoteDto() = InspectionDto(time = Date().apply { time = time }, check)
+    override fun mapToRemoteDto() = InspectionDto(inspectionId,time = Date().apply { time = time }, check)
 }

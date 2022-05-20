@@ -61,23 +61,42 @@
         </LinearLayout>
 
         <!-- Your main layout here -->
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_item"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_itemhabit_habit"
             android:background="@drawable/background_itemhabit_default"
-            android:paddingStart="@dimen/padding_itemhabit_habit_paddingstart"
+            android:onClick="@{() -> onClick.onClickUpdate(habit)}"
+            android:paddingHorizontal="@dimen/padding_itemhabit_habit_paddingstart"
             tools:ignore="RtlSymmetry">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:id="@+id/textview_itemhabit_title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{habit.title}"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize_itemhabit_habitname" />
+                android:textSize="@dimen/textsize_itemhabit_habitname"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:singleLine="true"
+                app:layout_constraintEnd_toStartOf="@id/textview_itemhabit_time"
+                tools:text="Sleep earlyooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textview_itemhabit_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize_itemhabit_habitname"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="20:00"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

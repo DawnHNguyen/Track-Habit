@@ -20,8 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:habit="@{habits.habitList}"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/height_itemhabit_habit"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_activityHome_addHabitButton"
