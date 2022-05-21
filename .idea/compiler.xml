@@ -5,6 +5,8 @@
       <module name="track-habit.buildSrc" target="11" />
       <module name="TrackHabit.app" target="11" />
       <module name="TrackHabit.buildSrc" target="11" />
+      <module name="TrackHabit.buildSrc.main" target="11" />
+      <module name="TrackHabit.buildSrc.test" target="11" />
       <module name="TrackHabit.common" target="11" />
       <module name="TrackHabit.feature.trackhabit" target="11" />
       <module name="TrackHabit.navigation" target="11" />
