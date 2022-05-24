@@ -22,7 +22,14 @@ class TrackHabitRepositoryImpl @Inject constructor(
 
     override suspend fun getHabit(): LiveData<List<Habit>> =
         Transformations.map(habitDao.getHabit()) { list ->
-            list.map { it.mapToDomainModel() }
+            list.map {
+                val listInspection = ArrayList<Inspection>()
+                it.listInspection.forEach { item ->
+                    listInspection.add(item.mapToDomainModel())
+                }
+                it.habit.performance = listInspection
+                it.habit.mapToDomainModel()
+            }
         }
 
     override suspend fun getHabitById(id: Int): LiveData<Habit> =

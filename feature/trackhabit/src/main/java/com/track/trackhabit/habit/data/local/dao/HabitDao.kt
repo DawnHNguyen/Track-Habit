@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.track.trackhabit.habit.domain.entity.local.HabitLocal
 import com.track.trackhabit.habit.domain.entity.local.HabitOwner
+import com.track.trackhabit.habit.domain.entity.local.InspectionOwner
 
 @Dao
 abstract class HabitDao() {
@@ -11,7 +12,7 @@ abstract class HabitDao() {
     abstract suspend fun insertHabit(habit: HabitLocal): Long
 
     @Query("SELECT * FROM habitlocal")
-    abstract fun getHabit(): LiveData<List<HabitLocal>>
+    abstract fun getHabit(): LiveData<List<InspectionOwner>>
 
     @Query("SELECT * FROM UserLocal WHERE user_id = :idUser")
     abstract fun getHabitByUser(idUser: String): LiveData<HabitOwner>
