@@ -9,6 +9,7 @@ import com.track.trackhabit.habit.data.local.dao.UserDao
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.Inspection
 import com.track.trackhabit.habit.domain.entity.User
+import com.track.trackhabit.habit.domain.entity.local.HabitLocal
 import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
 import javax.inject.Inject
 
@@ -27,8 +28,9 @@ class TrackHabitRepositoryImpl @Inject constructor(
                 it.listInspection.forEach { item ->
                     listInspection.add(item.mapToDomainModel())
                 }
-                it.habit.performance = listInspection
-                it.habit.mapToDomainModel()
+                val habit = it.habit.mapToDomainModel()
+                habit.performances = listInspection
+                habit
             }
         }
 
