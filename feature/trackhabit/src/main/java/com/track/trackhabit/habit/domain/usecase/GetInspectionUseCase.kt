@@ -7,5 +7,5 @@ import javax.inject.Inject
 class GetInspectionUseCase @Inject constructor(
     private val repository: InspectionRepository
 ) {
-    operator fun invoke() = repository.getInspection()
+    suspend operator fun invoke() = repository.getInspection()
 }

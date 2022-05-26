@@ -34,7 +34,7 @@ class TrackHabitRepositoryImpl @Inject constructor(
             }
         }
 
-    override suspend fun getHabitById(id: Int): LiveData<Habit> =
+    override fun getHabitById(id: Int): LiveData<Habit> =
         habitDao.getHabitById(id).map { it ->
             it.mapToDomainModel()
         }
@@ -48,4 +48,8 @@ class TrackHabitRepositoryImpl @Inject constructor(
     override suspend fun deleteHabit(id: Int) {
         habitDao.deleteHabit(id)
     }
+
+    override suspend fun getHabitValueById(id: Int): Habit =
+        habitDao.getHabitValueById(id).mapToDomainModel()
+
 }
