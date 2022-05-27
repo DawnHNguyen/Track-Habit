@@ -12,4 +12,5 @@ interface TrackHabitRepository {
     suspend fun deleteHabit(id: Int)
     fun getHabitById(id: Int): LiveData<Habit>
     suspend fun getHabitValueById(id: Int): Habit
+    fun getHabitValues(): LiveData<List<Habit>>
 }

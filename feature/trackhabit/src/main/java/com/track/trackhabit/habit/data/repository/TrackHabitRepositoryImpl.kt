@@ -10,6 +10,7 @@ import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.Inspection
 import com.track.trackhabit.habit.domain.entity.User
 import com.track.trackhabit.habit.domain.entity.local.HabitLocal
+import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
 import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
 import javax.inject.Inject
 
@@ -24,13 +25,8 @@ class TrackHabitRepositoryImpl @Inject constructor(
     override suspend fun getHabit(): LiveData<List<Habit>> =
         Transformations.map(habitDao.getHabit()) { list ->
             list.map {
-                val listInspection = ArrayList<Inspection>()
-                it.listInspection.forEach { item ->
-                    listInspection.add(item.mapToDomainModel())
-                }
-                val habit = it.habit.mapToDomainModel()
-                habit.performances = listInspection
-                habit
+                val inspections = it.listInspection.map(InspectionLocal::mapToDomainModel)
+                it.habit.mapToDomainModel().copy(performances = inspections)
             }
         }
 
@@ -51,5 +47,13 @@ class TrackHabitRepositoryImpl @Inject constructor(
 
     override suspend fun getHabitValueById(id: Int): Habit =
         habitDao.getHabitValueById(id).mapToDomainModel()
+
+    override fun getHabitValues(): LiveData<List<Habit>> =
+        Transformations.map(habitDao.getHabitsValue()) {
+            it.map { item ->
+                item.mapToDomainModel()
+            }
+        }
+
 
 }

@@ -8,5 +8,5 @@ class GetHabitUseCase @Inject constructor(
 ) {
     suspend operator fun invoke() = repository.getHabit()
 
-    suspend fun getHabitValue() = repository.getHabit()
+    fun getHabitValue() = repository.getHabitValues()
 }
