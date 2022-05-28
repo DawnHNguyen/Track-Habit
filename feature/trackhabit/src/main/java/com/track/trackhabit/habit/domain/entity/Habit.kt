@@ -9,7 +9,7 @@ data class Habit(
     val habitId: Int,
     val title: String,
     val time: Date,
-    val performances: List<Inspection>,
+    var performances: List<Inspection>,
     val frequency: String?
 ) : DomainModel {
     override fun toLocalDto() =

@@ -6,7 +6,7 @@ import javax.inject.Inject
 class GetHabitUseCase @Inject constructor(
     private val repository: TrackHabitRepository
 ) {
-    operator fun invoke() = repository.getHabit()
+    suspend operator fun invoke() = repository.getHabit()
 
-    suspend fun getHabitValue() = repository.getHabitsValue()
+    fun getHabitValue() = repository.getHabitValues()
 }

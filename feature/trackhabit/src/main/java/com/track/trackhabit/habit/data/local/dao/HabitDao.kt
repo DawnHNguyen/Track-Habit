@@ -4,14 +4,15 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.track.trackhabit.habit.domain.entity.local.HabitLocal
 import com.track.trackhabit.habit.domain.entity.local.HabitOwner
+import com.track.trackhabit.habit.domain.entity.local.InspectionOwner
 
 @Dao
 abstract class HabitDao() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertHabit(habit: HabitLocal): Long
 
-    @Query("SELECT * FROM habitlocal")
-    abstract fun getHabit(): LiveData<List<HabitLocal>>
+    @Query("SELECT * FROM habitLocal")
+    abstract fun getHabit(): LiveData<List<InspectionOwner>>
 
     @Query("SELECT * FROM UserLocal WHERE user_id = :idUser")
     abstract fun getHabitByUser(idUser: String): LiveData<HabitOwner>
@@ -25,9 +26,9 @@ abstract class HabitDao() {
     @Update
     abstract suspend fun updateHabit(habit: HabitLocal)
 
-    @Query("DELETE FROM habitlocal WHERE habit_id=:id")
+    @Query("DELETE FROM habitLocal WHERE habit_id=:id")
     abstract suspend fun deleteHabit(id: Int)
 
-    @Query("SELECT * FROM habitlocal")
-    abstract fun getHabitsValue(): List<HabitLocal>
+    @Query("SELECT * FROM habitLocal")
+    abstract fun getHabitsValue(): LiveData<List<HabitLocal>>
 }

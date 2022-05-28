@@ -23,7 +23,7 @@ class BootReceiver : BroadcastReceiver() {
             GlobalScope.launch {
                 withContext(Dispatchers.IO) {
                     val alarmService = AlarmService(context)
-                    getHabitUseCase.getHabitValue().forEach {
+                    getHabitUseCase.getHabitValue().value?.forEach {
                         val timeNoti = SimpleDateFormat("HH:mm").format(it.time)
                         val cal = convertStringToCalender(timeNoti)
                         alarmService.setRepeating(cal.timeInMillis, it.habitId, it.title)

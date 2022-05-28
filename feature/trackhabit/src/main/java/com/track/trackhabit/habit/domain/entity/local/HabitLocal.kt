@@ -7,6 +7,7 @@ import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
 import com.track.common.base.dto.LocalDto
 import com.track.trackhabit.habit.domain.entity.Habit
+import com.track.trackhabit.habit.domain.entity.Inspection
 import com.track.trackhabit.habit.domain.entity.remote.HabitDto
 import java.util.*
 
