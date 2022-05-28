@@ -9,7 +9,7 @@ data class InspectionOwner(
     @Embedded val habit: HabitLocal,
     @Relation(
         parentColumn = "habit_id",
-        entityColumn = "inspection_id"
+        entityColumn = "habit_id"
     )
     val listInspection: List<InspectionLocal>
 )

@@ -11,6 +11,7 @@ abstract class HabitDao() {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertHabit(habit: HabitLocal): Long
 
+    @Transaction
     @Query("SELECT * FROM habitlocal")
     abstract fun getHabit(): LiveData<List<InspectionOwner>>
 

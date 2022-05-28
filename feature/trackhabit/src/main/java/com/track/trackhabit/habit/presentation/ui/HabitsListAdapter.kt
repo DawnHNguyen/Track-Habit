@@ -62,16 +62,15 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
             isNotiToday: Boolean,
             performance: List<Inspection>
         ) {
+            var isDoneToday = false
             with(binding) {
                 val source = root.context.resources
                 layoutItem.background = if (isNotiToday) {
-                    var isDoneToday = false
-                    Log.d("isPerformanceEmpty", performance.isEmpty().toString())
                     if (performance.isNotEmpty()) {
                             isDoneToday = performance.last().check
-                        Log.d("isDone", isDoneToday.toString())
                     }
                     if (checkIsBeforeHabit(habitTime) || isDoneToday) {
+                        Log.d("isBeforeHabit",checkIsBeforeHabit(habitTime).toString())
                         if (isDoneToday) {
                             source.getDrawable(R.drawable.background_itemhabit_done)
                         }
@@ -81,11 +80,14 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
                     }
                     else source.getDrawable(R.drawable.background_itemhabit_missed)
                 } else source.getDrawable(R.drawable.background_itemhabit_default)
-                 if(checkIsBeforeHabit(habitTime)) {
+
+                 if(checkIsBeforeHabit(habitTime) && !isDoneToday) {
+                     layoutItem.isEnabled = true
                      textviewItemhabitTitle.setTextColor(source.getColor(R.color.black))
                      textviewItemhabitTime.setTextColor(source.getColor(R.color.black))
                  }
                 else {
+                     layoutItem.isEnabled = false
                      textviewItemhabitTitle.setTextColor(source.getColor(R.color.white))
                      textviewItemhabitTime.setTextColor(source.getColor(R.color.white))
                  }
