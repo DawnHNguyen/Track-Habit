@@ -12,7 +12,9 @@ import java.util.*
 @Entity(foreignKeys = [ForeignKey(
     entity = HabitLocal::class,
     parentColumns = arrayOf("habit_id"),
-    childColumns = arrayOf("habit_id")
+    childColumns = arrayOf("habit_id"),
+    onDelete = ForeignKey.CASCADE
+
 )])
 data class InspectionLocal(
     @PrimaryKey(autoGenerate = true)
