@@ -12,7 +12,7 @@ abstract class HabitDao() {
     abstract suspend fun insertHabit(habit: HabitLocal): Long
 
     @Transaction
-    @Query("SELECT * FROM habitlocal")
+    @Query("SELECT * FROM habitLocal")
     abstract fun getHabit(): LiveData<List<InspectionOwner>>
 
     @Query("SELECT * FROM UserLocal WHERE user_id = :idUser")
@@ -27,9 +27,9 @@ abstract class HabitDao() {
     @Update
     abstract suspend fun updateHabit(habit: HabitLocal)
 
-    @Query("DELETE FROM habitlocal WHERE habit_id=:id")
+    @Query("DELETE FROM habitLocal WHERE habit_id=:id")
     abstract suspend fun deleteHabit(id: Int)
 
-    @Query("SELECT * FROM habitlocal")
-    abstract fun getHabitsValue(): List<HabitLocal>
+    @Query("SELECT * FROM habitLocal")
+    abstract fun getHabitsValue(): LiveData<List<HabitLocal>>
 }

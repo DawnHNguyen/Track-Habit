@@ -21,5 +21,5 @@ abstract class TrackHabitRepositoryModule {
     @Binds
     abstract fun bindInspectionRepository(impl: InspectionRepositoryImpl): InspectionRepository
     @Binds
-    abstract fun bindUserREpository(impl: UserRepositoryImpl): UserRepository
+    abstract fun bindUserRepository(impl: UserRepositoryImpl): UserRepository
 }
