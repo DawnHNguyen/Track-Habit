@@ -53,30 +53,27 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
             isNotiToday: Boolean,
             performance: List<Inspection>
         ) {
-            var isDoneToday = false
             with(binding) {
-                val source = root.context.resources
+                val isDoneToday = checkIsDoneToday(performance)
+                val resources = root.context.resources
                 layoutItem.background = if (isNotiToday) {
-                    if (performance.isNotEmpty()) {
-                        isDoneToday = checkIsDoneToday(performance)
-                    }
                     if (checkIsBeforeHabit(habitTime) || isDoneToday) {
                         if (isDoneToday) {
-                            source.getDrawable(R.drawable.background_itemhabit_done)
+                            resources.getDrawable(R.drawable.background_itemhabit_done)
                         } else {
-                            source.getDrawable(R.drawable.background_itemhabit_default)
+                            resources.getDrawable(R.drawable.background_itemhabit_default)
                         }
-                    } else source.getDrawable(R.drawable.background_itemhabit_missed)
-                } else source.getDrawable(R.drawable.background_itemhabit_default)
+                    } else resources.getDrawable(R.drawable.background_itemhabit_missed)
+                } else resources.getDrawable(R.drawable.background_itemhabit_default)
 
-                if (checkIsBeforeHabit(habitTime) && !isDoneToday) {
-                    layoutItem.isEnabled = true
-                    textviewItemhabitTitle.setTextColor(source.getColor(R.color.black))
-                    textviewItemhabitTime.setTextColor(source.getColor(R.color.black))
+                if ((checkIsBeforeHabit(habitTime) && !isDoneToday) || !isNotiToday) {
+                    layoutItem.isEnabled = isNotiToday
+                    textviewItemhabitTitle.setTextColor(resources.getColor(R.color.black))
+                    textviewItemhabitTime.setTextColor(resources.getColor(R.color.black))
                 } else {
                     layoutItem.isEnabled = false
-                    textviewItemhabitTitle.setTextColor(source.getColor(R.color.white))
-                    textviewItemhabitTime.setTextColor(source.getColor(R.color.white))
+                    textviewItemhabitTitle.setTextColor(resources.getColor(R.color.white))
+                    textviewItemhabitTime.setTextColor(resources.getColor(R.color.white))
                 }
             }
         }
@@ -90,17 +87,22 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         }
 
         private fun checkIsDoneToday(performance: List<Inspection>): Boolean {
-            val cal = Calendar.getInstance()
-            cal.set(Calendar.HOUR, 0)
-            cal.set(Calendar.MINUTE, 0)
-            cal.set(Calendar.SECOND, 0)
-            cal.set(Calendar.MILLISECOND, 0)
-            val calLast = Calendar.getInstance()
-            calLast.set(Calendar.HOUR, 24)
-            calLast.set(Calendar.MINUTE, 0)
-            calLast.set(Calendar.SECOND, 0)
-            calLast.set(Calendar.MILLISECOND, 0)
-            return performance.last().check && (performance.last().time in cal.time..calLast.time)
+            return if (performance.isEmpty()) false
+            else {
+                val cal = Calendar.getInstance().apply {
+                    set(Calendar.HOUR, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                val calLast = Calendar.getInstance().apply {
+                    set(Calendar.HOUR, 24)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                performance.last().check && (performance.last().time in cal.time..calLast.time)
+            }
         }
 
         companion object {
