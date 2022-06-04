@@ -24,7 +24,7 @@ data class InspectionLocal(
 ) : LocalDto {
     @ColumnInfo(name = "habit_id")
     var id: Int = -1
-    override fun mapToDomainModel() = Inspection(inspectionId,time = Date().apply { time = time }, check)
+    override fun mapToDomainModel() = Inspection(inspectionId,time = Date(time), check)
 
-    override fun mapToRemoteDto() = InspectionDto(inspectionId,time = Date().apply { time = time }, check)
+    override fun mapToRemoteDto() = InspectionDto(inspectionId,time = Date(time), check)
 }
