@@ -57,13 +57,12 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
                 val isDoneToday = checkIsDoneToday(performance)
                 val resources = root.context.resources
                 layoutItem.background = if (isNotiToday) {
-                    if (checkIsBeforeHabit(habitTime) || isDoneToday) {
-                        if (isDoneToday) {
-                            resources.getDrawable(R.drawable.background_itemhabit_done)
-                        } else {
-                            resources.getDrawable(R.drawable.background_itemhabit_default)
-                        }
-                    } else resources.getDrawable(R.drawable.background_itemhabit_missed)
+                    val drawableRes = when {
+                        isDoneToday -> R.drawable.background_itemhabit_done
+                        checkIsBeforeHabit(habitTime) -> R.drawable.background_itemhabit_default
+                        else -> R.drawable.background_itemhabit_missed
+                    }
+                    resources.getDrawable(drawableRes)
                 } else resources.getDrawable(R.drawable.background_itemhabit_default)
 
                 if ((checkIsBeforeHabit(habitTime) && !isDoneToday) || !isNotiToday) {
