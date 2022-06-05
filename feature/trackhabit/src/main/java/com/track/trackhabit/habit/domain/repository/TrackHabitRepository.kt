@@ -2,8 +2,6 @@ package com.track.trackhabit.habit.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.track.trackhabit.habit.domain.entity.Habit
-import com.track.trackhabit.habit.domain.entity.Inspection
-import com.track.trackhabit.habit.domain.entity.User
 
 interface TrackHabitRepository {
     suspend fun getHabit(): LiveData<List<Habit>>

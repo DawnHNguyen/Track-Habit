@@ -4,12 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.map
 import com.track.trackhabit.habit.data.local.dao.HabitDao
-import com.track.trackhabit.habit.data.local.dao.InspectionDao
-import com.track.trackhabit.habit.data.local.dao.UserDao
 import com.track.trackhabit.habit.domain.entity.Habit
-import com.track.trackhabit.habit.domain.entity.Inspection
-import com.track.trackhabit.habit.domain.entity.User
-import com.track.trackhabit.habit.domain.entity.local.HabitLocal
 import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
 import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
 import javax.inject.Inject

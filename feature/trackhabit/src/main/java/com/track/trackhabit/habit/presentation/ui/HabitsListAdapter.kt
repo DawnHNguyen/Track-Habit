@@ -1,7 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -49,6 +48,35 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
             binding.executePendingBindings()
         }
 
+        private fun changeHabitColor(
+            habitTime: Date,
+            isNotiToday: Boolean,
+            performance: List<Inspection>
+        ) {
+            with(binding) {
+                val isDoneToday = checkIsDoneToday(performance)
+                val resources = root.context.resources
+                layoutItem.background = if (isNotiToday) {
+                    val drawableRes = when {
+                        isDoneToday -> R.drawable.background_itemhabit_done
+                        checkIsBeforeHabit(habitTime) -> R.drawable.background_itemhabit_default
+                        else -> R.drawable.background_itemhabit_missed
+                    }
+                    resources.getDrawable(drawableRes)
+                } else resources.getDrawable(R.drawable.background_itemhabit_default)
+
+                if ((checkIsBeforeHabit(habitTime) && !isDoneToday) || !isNotiToday) {
+                    layoutItem.isEnabled = isNotiToday
+                    textviewItemhabitTitle.setTextColor(resources.getColor(R.color.black))
+                    textviewItemhabitTime.setTextColor(resources.getColor(R.color.black))
+                } else {
+                    layoutItem.isEnabled = false
+                    textviewItemhabitTitle.setTextColor(resources.getColor(R.color.white))
+                    textviewItemhabitTime.setTextColor(resources.getColor(R.color.white))
+                }
+            }
+        }
+
         private fun checkIsBeforeHabit(habitTime: Date): Boolean {
             val cal = Calendar.getInstance()
             cal.timeInMillis -= TimeUnit.MINUTES.toMillis(10)
@@ -57,38 +85,22 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
             return presentTimeArr[0].toInt() < habitTimeArr[0].toInt() || (presentTimeArr[0].toInt() == habitTimeArr[0].toInt() && presentTimeArr[1].toInt() < habitTimeArr[1].toInt())
         }
 
-        private fun changeHabitColor(
-            habitTime: Date,
-            isNotiToday: Boolean,
-            performance: List<Inspection>
-        ) {
-            with(binding) {
-                val source = root.context.resources
-                layoutItem.background = if (isNotiToday) {
-                    var isDoneToday = false
-                    Log.d("isPerformanceEmpty", performance.isEmpty().toString())
-                    if (performance.isNotEmpty()) {
-                            isDoneToday = performance.last().check
-                        Log.d("isDone", isDoneToday.toString())
-                    }
-                    if (checkIsBeforeHabit(habitTime) || isDoneToday) {
-                        if (isDoneToday) {
-                            source.getDrawable(R.drawable.background_itemhabit_done)
-                        }
-                        else{
-                            source.getDrawable(R.drawable.background_itemhabit_default)
-                        }
-                    }
-                    else source.getDrawable(R.drawable.background_itemhabit_missed)
-                } else source.getDrawable(R.drawable.background_itemhabit_default)
-                 if(checkIsBeforeHabit(habitTime)) {
-                     textviewItemhabitTitle.setTextColor(source.getColor(R.color.black))
-                     textviewItemhabitTime.setTextColor(source.getColor(R.color.black))
-                 }
-                else {
-                     textviewItemhabitTitle.setTextColor(source.getColor(R.color.white))
-                     textviewItemhabitTime.setTextColor(source.getColor(R.color.white))
-                 }
+        private fun checkIsDoneToday(performance: List<Inspection>): Boolean {
+            return if (performance.isEmpty()) false
+            else {
+                val cal = Calendar.getInstance().apply {
+                    set(Calendar.HOUR, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                val calLast = Calendar.getInstance().apply {
+                    set(Calendar.HOUR, 24)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }
+                performance.last().check && (performance.last().time in cal.time..calLast.time)
             }
         }
 
