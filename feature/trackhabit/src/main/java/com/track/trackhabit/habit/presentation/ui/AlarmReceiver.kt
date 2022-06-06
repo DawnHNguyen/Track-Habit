@@ -45,7 +45,7 @@ class AlarmReceiver : BroadcastReceiver() {
         when (intent.action) {
             Const.START_SNOOZE_ALARM_TIME -> startSnoozeAlarmTime(context, intent, alarmService)
 
-            Const.SET_SNOOZE_ALARM_TIME -> buildNotification(context)
+            Const.SET_SNOOZE_ALARM_TIME -> buildNotification(context, intent.getStringExtra(Const.HABIT_NAME).toString())
 
             Const.ACTION_SET_REPETITIVE_EXACT -> setRepeatingNotification(
                 intent,
@@ -69,11 +69,11 @@ class AlarmReceiver : BroadcastReceiver() {
         alarmService.setRepeating(cal.timeInMillis, habitID, habitName)
     }
 
-    private fun setSnoozeAlarm(alarmService: AlarmService, habitID: Int) {
-        alarmService.setSnoozeAlarm(habitID)
+    private fun setSnoozeAlarm(alarmService: AlarmService, habitID: Int, habitName: String) {
+        alarmService.setSnoozeAlarm(habitID, habitName)
     }
 
-    private fun buildNotification(context: Context) {
+    private fun buildNotification(context: Context, habitName: String) {
         val intent = Intent(context, HomeActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -82,8 +82,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context, ConstIdChannel.HABIT_NOTIFICATION)
             .setSmallIcon(R.mipmap.ic_trackhabit_logo)
-            .setContentTitle(context.getString(R.string.featureTrackhabit_title_snoozeNotification))
-            .setContentText(context.getString(R.string.featureTrackhabit_content_snoozeNotification))
+            .setContentTitle(context.getString(R.string.featureTrackhabit_title_notification))
+            .setContentText(context.getString(R.string.featureTrackhabit_content_notification, habitName))
             .setDefaults(Notification.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setContentIntent(pendingIntent)
@@ -95,7 +95,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
     private fun buildSnoozeNotification(
         context: Context,
-        message: String,
+        habitName: String,
         habitID: Int
     ) {
         val intent = Intent(context, HomeActivity::class.java).apply {
@@ -112,6 +112,7 @@ class AlarmReceiver : BroadcastReceiver() {
             action = Const.START_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
             putExtra(Const.HABIT_ID, habitID)
+            putExtra(Const.HABIT_NAME, habitName)
         }
         val snoozePendingIntent: PendingIntent =
             PendingIntent.getBroadcast(
@@ -127,7 +128,7 @@ class AlarmReceiver : BroadcastReceiver() {
             .setContentText(
                 context.getString(
                     R.string.featureTrackhabit_content_notification,
-                    message
+                    habitName
                 )
             )
             .setDefaults(Notification.DEFAULT_ALL)
@@ -180,7 +181,7 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun startSnoozeAlarmTime(context: Context, intent: Intent, alarmService: AlarmService) {
-        setSnoozeAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0))
+        setSnoozeAlarm(alarmService, intent.getIntExtra(Const.HABIT_ID, 0), intent.getStringExtra(Const.HABIT_NAME).toString())
         with(NotificationManagerCompat.from(context)) {
             cancel(intent.getIntExtra(Const.HABIT_ID, 0))
         }
