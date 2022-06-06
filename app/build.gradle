@@ -13,7 +13,7 @@ plugins {
 
 // Note: 2 digits max for each value
 ext.versionMajor = 0
-ext.versionMinor = 1
+ext.versionMinor = 2
 ext.versionPatch = 0
 
 
@@ -24,8 +24,8 @@ android {
         applicationId "com.track.trackhabit"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "$versionMajor.$versionMinor.$versionPatch"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
