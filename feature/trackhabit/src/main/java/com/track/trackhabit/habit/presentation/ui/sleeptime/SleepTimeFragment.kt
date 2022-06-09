@@ -123,21 +123,14 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
     }
 
     private fun createRemindSleepNoti() {
-        val intent = Intent(this.requireContext(), AlarmReceiver::class.java)
-        intent.action = Const.SET_REMIND_SLEEPTIME
-        val pendingIntent = PendingIntent.getBroadcast(
-            this.requireContext(),
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        viewModel.remindTime.value?.let {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                it,
-                pendingIntent
-            )
-        }
+        val alarmService = AlarmService(this.requireContext())
+                viewModel.remindTime.value?.let { alarmService.setSleepReminder(it) }
+    }
+
+    private fun cancelRemindSleepNoti(){
+        val alarmService = AlarmService(this.requireContext())
+        alarmService.setCancelSleepReminder()
+        Toast.makeText(context, Successfully cancel all alarm, Toast.LENGTH_LONG).show()
+
     }
 }
