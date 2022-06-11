@@ -29,11 +29,12 @@ class AlarmService(private val context: Context) {
         alarmManager.cancel(pendingIntent)
     }
 
-    fun setSnoozeAlarm(habitId: Int) {
+    fun setSnoozeAlarm(habitId: Int, habitName: String) {
 
         val pendingIntent = getPendingIntent(intent.apply {
             action = Const.SET_SNOOZE_ALARM_TIME
             putExtra(Const.EXTRA_EXACT_ALARM_TIME, 1L)
+            putExtra(Const.HABIT_NAME, habitName)
         }, habitId)
         Log.d("checkIntentSnooze", " - $pendingIntent - $intent -${intent.extras}")
         setElapse(pendingIntent)
