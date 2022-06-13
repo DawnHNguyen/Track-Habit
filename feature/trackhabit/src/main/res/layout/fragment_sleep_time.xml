@@ -63,21 +63,31 @@
                 android:text="@string/sleeptime_confirmwaketime"
                 android:textAllCaps="false"
                 android:textSize="@dimen/textsize_sleeptime_button"
-                android:visibility="@{sleeptimeViewModel.uiState.conFirmWakeTimeVisibility}"
+                android:visibility="@{sleeptimeViewModel.uiState.confirmWakeTimeVisibility}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textView_sleepTime_wakeTime" />
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/all_or"
+                android:textSize="@dimen/textsize_sleeptime_button"
+                android:visibility="@{sleeptimeViewModel.uiState.clearRemindButtonVisibility}"
+                app:layout_constraintBottom_toTopOf="@id/button_sleepTime_clearRemind"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_sleepTime_cancelRemind"
+                android:id="@+id/button_sleepTime_clearRemind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margintop_sleeptime_confirmwaketimebutton"
                 android:background="@android:color/transparent"
-                android:text="Clear all reminder"
+                android:text="@string/sleeptime_clearReminder_button"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:visibility="@{sleeptimeViewModel.uiState.conFirmWakeTimeVisibility}"
+                android:textSize="@dimen/textsize_sleeptime_button"
+                android:visibility="@{sleeptimeViewModel.uiState.clearRemindButtonVisibility}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/button_sleepTime_confirmWakeTime" />

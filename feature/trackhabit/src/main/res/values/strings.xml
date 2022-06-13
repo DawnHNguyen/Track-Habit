@@ -4,6 +4,7 @@
     <string name="all_cancel">Cancel</string>
     <string name="all_ok">OK</string>
     <string name="all_back">Back</string>
+    <string name="all_or">Or</string>
 
     <!--    notification-->
     <!--    TODO: reformat string template for sleeptime and habit notification-->
@@ -35,6 +36,8 @@
     <string name="sleeptime_description">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
     <string name="dialogsetnotisleeptime_message">Reminder will be sent to you 15 minutes before bedtime</string>
     <string name="sleeptime_toast_set_remind_ok">Reminder has been created successfully</string>
+    <string name="sleeptime_toast_cleared_remind">Successfully clear all reminder</string>
+    <string name="sleeptime_clearReminder_button">Clear all reminder</string>
 
     <!--    add habit fragment-->
     <string name="habit_monday">Monday</string>

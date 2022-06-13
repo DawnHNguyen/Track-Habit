@@ -26,11 +26,12 @@ class SleepTimeViewModel @Inject constructor(
     val uiState = MutableLiveData(
         SleeptimeUIState(
             View.VISIBLE,
+            View.VISIBLE,
             View.INVISIBLE,
             View.INVISIBLE,
             View.INVISIBLE,
-            false,
-            true
+            isEnabledConfirmSleeptimeButton = false,
+            timePickerClickable = true
         )
     )
 
@@ -91,10 +92,11 @@ class SleepTimeViewModel @Inject constructor(
         viewModelScope.launch {
             delay(20)
             uiState.value = uiState.value?.copy(
-                conFirmWakeTimeVisibility = View.GONE,
+                confirmWakeTimeVisibility = View.GONE,
                 sleepTimeTitleVisibility = View.VISIBLE,
                 confirmSleeptimeVisibility = View.VISIBLE,
                 backButtonVisibility = View.VISIBLE,
+                clearRemindButtonVisibility = View.GONE,
                 timePickerClickable = false
             )
         }
@@ -106,10 +108,11 @@ class SleepTimeViewModel @Inject constructor(
 
     fun onBackUpdateVisibility() {
         uiState.value = uiState.value?.copy(
-            conFirmWakeTimeVisibility = View.VISIBLE,
+            confirmWakeTimeVisibility = View.VISIBLE,
             sleepTimeTitleVisibility = View.INVISIBLE,
             confirmSleeptimeVisibility = View.INVISIBLE,
             backButtonVisibility = View.INVISIBLE,
+            clearRemindButtonVisibility = View.VISIBLE,
             timePickerClickable = true
         )
     }

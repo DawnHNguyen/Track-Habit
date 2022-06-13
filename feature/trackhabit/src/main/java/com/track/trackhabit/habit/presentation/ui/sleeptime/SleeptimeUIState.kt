@@ -1,7 +1,8 @@
 package com.track.trackhabit.habit.presentation.ui.sleeptime
 
 data class SleeptimeUIState(
-    var conFirmWakeTimeVisibility: Int,
+    var confirmWakeTimeVisibility: Int,
+    var clearRemindButtonVisibility: Int,
     var sleepTimeTitleVisibility: Int,
     var confirmSleeptimeVisibility: Int,
     var backButtonVisibility: Int,
