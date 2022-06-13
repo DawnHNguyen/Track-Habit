@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="featureTrackhabit_title_notification">Cần cù bù thông minh</string>
+    <string name="featureTrackhabit_content_notification">Tới giờ thực hiện thói quen %1$s</string>
+    <string name="featureTrackhabit_delayNoti_button">Hoãn lại 5 phút</string>
+    <string name="sleepNoti_title">Tới giờ ngủ rồi!</string>
+    <string name="sleepNoti_content">Chiếc giường thân yêu đang đợi bạn. Ngủ ngon ❤</string>
+    <string name="bottomnav_home_icontitle">Trang chủ</string>
+    <string name="bottomnav_statistical_icontitle">Phân tích</string>
+    <string name="bottomnav_sleeptime_icontitle">Giờ ngủ</string>
+    <string name="bottomnav_profile_icontitle">Hồ sơ</string>
+    <string name="sleeptime_waketimetitle">Bạn muốn thức dậy lúc</string>
+    <string name="sleeptime_sleeptimetitle">Bạn cần đi ngủ lúc</string>
+    <string name="sleeptime_confirmwaketime">Ngủ</string>
+    <string name="sleeptime_confirmsleeptime">Xác nhận</string>
+    <string name="sleeptime_description">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
+    <string name="dialogsetnotisleeptime_message">Nhắc nhở sẽ được gửi tới bạn 15 phút trước giờ ngủ</string>
+    <string name="sleeptime_toast_set_remind_ok">Nhắc nhở đã được tạo</string>
+    <string name="habit_monday">T.Hai</string>
+    <string name="habit_tuesday">T.Ba</string>
+    <string name="habit_wednesday">T.Tư</string>
+    <string name="habit_thursday">T.Năm</string>
+    <string name="habit_friday">T.Sáu</string>
+    <string name="habit_saturday">T.Bảy</string>
+    <string name="habit_sunday">C.Nhật</string>
+    <string name="habit_settime">Đặt giờ:</string>
+    <string name="text_habitbutton_done">Hoàn tất</string>
+    <string name="habit_name">Tên</string>
+    <string name="habit_frequency">Lặp lại</string>
+    <string name="habit_errormessage_null">Không được để trống</string>
+    <string name="itemhabit_edit">Sửa</string>
+    <string name="itemhabit_delete">Xóa</string>
+    <string name="all_cancel">Hủy</string>
+    <string name="all_back">Quay lại</string>
+    <string name="all_or">Hoặc</string>
+    <string name="sleeptime_toast_cleared_remind">Đã hủy toàn bộ nhắc nhở</string>
+    <string name="sleeptime_clearReminder_button">Hủy toàn bộ nhắc nhở</string>
+    <string name="featureTrackhabit_nameOfChannel_notification">Kênh Thông báo Thói quen</string>
+    <string name="sleepNoti_chanel_name">Kênh Thông báo Giờ ngủ</string>
+    <string name="sleepNoti_chanel_description" translatable="false">Đây là kênh thông báo của tính năng giờ đi ngủ</string>
+</resources>

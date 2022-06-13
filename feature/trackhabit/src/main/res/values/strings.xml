@@ -1,23 +1,21 @@
 <resources>
     <!--    all-->
-    <string name="app_name">trackhabit</string>
+    <string name="app_name" translatable="false">trackhabit</string>
     <string name="all_cancel">Cancel</string>
-    <string name="all_ok">OK</string>
+    <string name="all_ok" translatable="false">OK</string>
     <string name="all_back">Back</string>
     <string name="all_or">Or</string>
 
     <!--    notification-->
     <!--    TODO: reformat string template for sleeptime and habit notification-->
-    <string name="featureTrackhabit_channelId_notification">habit_channel_id</string>
+    <string name="featureTrackhabit_channelId_notification" translatable="false">habit_channel_id</string>
     <string name="featureTrackhabit_nameOfChannel_notification">Habit Notification Chanel</string>
     <string name="featureTrackhabit_title_notification">No pain, no gain</string>
     <string name="featureTrackhabit_content_notification">Time to do habit %1$s</string>
     <string name="featureTrackhabit_delayNoti_button">Delay 5 minutes</string>
-    <string name="featureTrackhabit_title_snoozeNotification">Set Snooze Time</string>
-    <string name="featureTrackhabit_content_snoozeNotification">het thong bao roi day, co lam khong?</string>
     <string name="sleepNoti_title">It\'s sleep time!</string>
     <string name="sleepNoti_content">Your bed is waiting for you. Good night ❤</string>
-    <string name="sleepNoti_chanelId">sleep_chanel_id</string>
+    <string name="sleepNoti_chanelId" translatable="false">sleep_chanel_id</string>
     <string name="sleepNoti_chanel_name">Sleep Time Notification Chanel</string>
     <string name="sleepNoti_chanel_description">This is a chanel for notification in feature sleeptime</string>
 
@@ -31,9 +29,9 @@
     <string name="sleeptime_waketimetitle">You want to wake up at</string>
     <string name="sleeptime_sleeptimetitle">You need to go to bed at</string>
     <string name="sleeptime_confirmwaketime">Sleep</string>
-    <string name="sleeptime_defaulttimepicker">00:00</string>
+    <string name="sleeptime_defaulttimepicker" translatable="false">00:00</string>
     <string name="sleeptime_confirmsleeptime">Confirm</string>
-    <string name="sleeptime_description">Ngủ %1$.1f tiếng - %2$d chu kỳ giấc ngủ</string>
+    <string name="sleeptime_description">Sleep %1$.1f hours - %2$d sleep cycle</string>
     <string name="dialogsetnotisleeptime_message">Reminder will be sent to you 15 minutes before bedtime</string>
     <string name="sleeptime_toast_set_remind_ok">Reminder has been created successfully</string>
     <string name="sleeptime_toast_cleared_remind">Successfully clear all reminder</string>
@@ -48,13 +46,10 @@
     <string name="habit_saturday">Saturday</string>
     <string name="habit_sunday">Sunday</string>
     <string name="habit_settime">Set time:</string>
-    <string name="text_habitbutton_done">Hoàn tất</string>
-    <string name="addhabit_habitdescription">Habit description</string>
-    <string name="habit_description">Description</string>
-    <string name="addhabit_habitname">Habit name</string>
     <string name="habit_name">Name</string>
-    <string name="habit_frequency">Frequency</string>
-    <string name="habit_errormessage_null">Không được để trống</string>
-    <string name="itemhabit_edit">Sửa</string>
-    <string name="itemhabit_delete">Xóa</string>
+    <string name="habit_frequency">Repeat</string>
+    <string name="text_habitbutton_done">Done</string>
+    <string name="habit_errormessage_null">You can\'t leave it blank</string>
+    <string name="itemhabit_edit">Edit</string>
+    <string name="itemhabit_delete">Delete</string>
 </resources>
