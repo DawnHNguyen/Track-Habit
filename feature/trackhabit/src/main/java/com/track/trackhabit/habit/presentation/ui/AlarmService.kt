@@ -29,6 +29,16 @@ class AlarmService(private val context: Context) {
         alarmManager.cancel(pendingIntent)
     }
 
+    fun setSleepReminder(timeInMillis: Long){
+        val pendingIntent = getPendingIntent(intent.apply { action = Const.SET_REMIND_SLEEPTIME }, 0)
+        setAlarm(timeInMillis, pendingIntent)
+    }
+
+    fun setCancelSleepReminder(){
+        val pendingIntent = getPendingIntent(intent.apply { action = Const.SET_REMIND_SLEEPTIME }, 0)
+        setCancel(pendingIntent)
+    }
+
     fun setSnoozeAlarm(habitId: Int, habitName: String) {
 
         val pendingIntent = getPendingIntent(intent.apply {

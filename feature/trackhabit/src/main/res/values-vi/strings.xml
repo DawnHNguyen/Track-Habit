@@ -32,4 +32,10 @@
     <string name="itemhabit_delete">Xóa</string>
     <string name="all_cancel">Hủy</string>
     <string name="all_back">Quay lại</string>
+    <string name="all_or">Hoặc</string>
+    <string name="sleeptime_toast_cleared_remind">Đã hủy toàn bộ nhắc nhở</string>
+    <string name="sleeptime_clearReminder_button">Hủy toàn bộ nhắc nhở</string>
+    <string name="featureTrackhabit_nameOfChannel_notification">Kênh Thông báo Thói quen</string>
+    <string name="sleepNoti_chanel_name">Kênh Thông báo Giờ ngủ</string>
+    <string name="sleepNoti_chanel_description" translatable="false">Đây là kênh thông báo của tính năng giờ đi ngủ</string>
 </resources>

@@ -1,11 +1,7 @@
 package com.track.trackhabit.habit.presentation.ui.sleeptime
 
-import android.app.AlarmManager
 import android.app.AlertDialog
-import android.app.PendingIntent
 import android.app.TimePickerDialog
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentSleepTimeBinding
 import com.track.trackhabit.habit.databinding.SetRemindSleepDialogFragmentBinding
-import com.track.trackhabit.habit.presentation.constpackage.Const
 import com.track.trackhabit.habit.presentation.ui.*
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -46,6 +41,9 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         initializeSleeptimeRecyclerView()
         binding.buttonSleepTimeConfrimSleepTime.setOnClickListener {
             showDialogSetReminSleep()
+        }
+        binding.buttonSleepTimeClearRemind.setOnClickListener {
+            cancelRemindSleepNoti()
         }
     }
 
@@ -117,27 +115,20 @@ class SleepTimeFragment : Fragment(), OnClickConfirmWaketime, OnClickBackSleepti
         }
         dialogBinding?.buttonDialogSetRemindSleepOk?.setOnClickListener {
             createRemindSleepNoti()
-            Toast.makeText(context, R.string.sleeptime_toast_set_remind_ok, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.sleeptime_toast_set_remind_ok, Toast.LENGTH_LONG)
+                .show()
             dialog.hide()
         }
     }
 
     private fun createRemindSleepNoti() {
-        val intent = Intent(this.requireContext(), AlarmReceiver::class.java)
-        intent.action = Const.SET_REMIND_SLEEPTIME
-        val pendingIntent = PendingIntent.getBroadcast(
-            this.requireContext(),
-            0,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT
-        )
-        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        viewModel.remindTime.value?.let {
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                it,
-                pendingIntent
-            )
-        }
+        val alarmService = AlarmService(this.requireContext())
+        viewModel.remindTime.value?.let { alarmService.setSleepReminder(it) }
+    }
+
+    private fun cancelRemindSleepNoti() {
+        val alarmService = AlarmService(this.requireContext())
+        alarmService.setCancelSleepReminder()
+        Toast.makeText(context, R.string.sleeptime_toast_cleared_remind, Toast.LENGTH_LONG).show()
     }
 }
