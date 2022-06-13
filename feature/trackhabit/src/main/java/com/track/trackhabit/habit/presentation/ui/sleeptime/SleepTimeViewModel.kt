@@ -1,6 +1,5 @@
 package com.track.trackhabit.habit.presentation.ui.sleeptime
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,17 +22,7 @@ class SleepTimeViewModel @Inject constructor(
     val wakeTime: LiveData<String>
         get() = _wakeTime
 
-    val uiState = MutableLiveData(
-        SleeptimeUIState(
-            View.VISIBLE,
-            View.VISIBLE,
-            View.INVISIBLE,
-            View.INVISIBLE,
-            View.INVISIBLE,
-            isEnabledConfirmSleeptimeButton = false,
-            timePickerClickable = true
-        )
-    )
+    val uiState = MutableLiveData(SleeptimeUIState())
 
     private val _remindTime = MutableLiveData<Long>()
     val remindTime: LiveData<Long>
@@ -91,14 +80,7 @@ class SleepTimeViewModel @Inject constructor(
     fun onConfirmWaketimeUpdateVisibility() {
         viewModelScope.launch {
             delay(20)
-            uiState.value = uiState.value?.copy(
-                confirmWakeTimeVisibility = View.GONE,
-                sleepTimeTitleVisibility = View.VISIBLE,
-                confirmSleeptimeVisibility = View.VISIBLE,
-                backButtonVisibility = View.VISIBLE,
-                clearRemindButtonVisibility = View.GONE,
-                timePickerClickable = false
-            )
+            uiState.value = uiState.value?.copy(isChosenWaketime = true)
         }
     }
 
@@ -107,14 +89,7 @@ class SleepTimeViewModel @Inject constructor(
     }
 
     fun onBackUpdateVisibility() {
-        uiState.value = uiState.value?.copy(
-            confirmWakeTimeVisibility = View.VISIBLE,
-            sleepTimeTitleVisibility = View.INVISIBLE,
-            confirmSleeptimeVisibility = View.INVISIBLE,
-            backButtonVisibility = View.INVISIBLE,
-            clearRemindButtonVisibility = View.VISIBLE,
-            timePickerClickable = true
-        )
+        uiState.value = uiState.value?.copy(isChosenWaketime = false)
     }
 
     fun resetTimepicker() {
