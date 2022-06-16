@@ -37,5 +37,8 @@
     <string name="sleeptime_clearReminder_button">Hủy toàn bộ nhắc nhở</string>
     <string name="featureTrackhabit_nameOfChannel_notification">Kênh Thông báo Thói quen</string>
     <string name="sleepNoti_chanel_name">Kênh Thông báo Giờ ngủ</string>
-    <string name="sleepNoti_chanel_description" translatable="false">Đây là kênh thông báo của tính năng giờ đi ngủ</string>
+    <string name="sleepNoti_chanel_description">Đây là kênh thông báo của tính năng giờ đi ngủ</string>
+    <string name="profile_feedback_notice">Track Habit vẫn đang phát triển, chúng tôi rất mong được góp ý.</string>
+    <string name="profile_feedback_button">Gửi phản hồi</string>
+    <string name="profile_language">Ngôn ngữ</string>
 </resources>

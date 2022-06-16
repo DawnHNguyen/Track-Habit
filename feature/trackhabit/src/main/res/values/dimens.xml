@@ -62,4 +62,7 @@
     <dimen name="margin_addhabit_scrollview">16dp</dimen>
     <dimen name="layoutwidth_itemhabit">64dp</dimen>
     <dimen name="layoutwidth_itemhabit_space2button">8dp</dimen>
+
+    <!--    fragment profile-->
+    <dimen name="size_profile_languageSwitch_thumb">35dp</dimen>
 </resources>
