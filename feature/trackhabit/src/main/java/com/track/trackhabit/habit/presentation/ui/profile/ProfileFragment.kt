@@ -1,6 +1,5 @@
 package com.track.trackhabit.habit.presentation.ui.profile
 
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -8,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.track.trackhabit.habit.data.local.SharedPrefs
 import com.track.trackhabit.habit.databinding.FragmentProfileBinding
 import com.track.trackhabit.habit.presentation.constpackage.Const
+import com.track.trackhabit.habit.presentation.constpackage.ConstLanguageCode
 import com.track.trackhabit.habit.presentation.ui.HomeActivity
 import java.util.*
 
@@ -32,21 +33,29 @@ class ProfileFragment : Fragment() {
         binding.buttonProfileGiveFeedback.setOnClickListener {
             startActivity(intent)
         }
-        binding.switchButtonProfileLanguage.isChecked = resources.configuration.locale == Locale("en")
+        binding.switchButtonProfileLanguage.isChecked =
+            resources.configuration.locale == Locale("en")
         binding.switchButtonProfileLanguage.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) changeLanguage("en") else changeLanguage("vi")
+            if (isChecked) changeLanguage(ConstLanguageCode.US) else changeLanguage(
+                ConstLanguageCode.VN
+            )
         }
 
     }
 
-    private fun changeLanguage(localeName: String) {
-        val locale = Locale(localeName)
+    private fun changeLanguage(languageCode: String) {
+        val locale = Locale(languageCode)
         resources.configuration.setLocale(locale)
         resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-        val languageSharedPref = activity?.getSharedPreferences(Const.LANGUAGE_PREF, MODE_PRIVATE)
-        languageSharedPref?.edit()?.putString(Const.LOCALE_CODE, localeName)?.apply()
+        SharedPrefs().putStringSharedPreferences(
+            requireContext(),
+            Const.LANGUAGE_PREF,
+            Const.LANGUAGE_CODE,
+            languageCode
+        )
+
         val refresh = Intent(
-            this.requireContext(),
+            requireContext(),
             HomeActivity::class.java
         )
         startActivity(refresh)

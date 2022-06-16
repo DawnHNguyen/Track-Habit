@@ -11,5 +11,5 @@ object Const{
     const val HABIT_ID = "HABIT_ID"
     const val HABIT_NAME = "HABIT_NAME"
     const val LANGUAGE_PREF = "LANGUAGE_PREF"
-    const val LOCALE_CODE = "LOCALE_CODE"
+    const val LANGUAGE_CODE = "LANGUAGE_CODE"
 }

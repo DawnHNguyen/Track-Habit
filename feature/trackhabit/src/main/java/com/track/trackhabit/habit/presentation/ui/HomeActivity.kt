@@ -7,8 +7,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.track.trackhabit.habit.R
+import com.track.trackhabit.habit.data.local.SharedPrefs
 import com.track.trackhabit.habit.databinding.ActivityHomeBinding
 import com.track.trackhabit.habit.presentation.constpackage.Const
+import com.track.trackhabit.habit.presentation.constpackage.ConstLanguageCode
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -19,9 +21,13 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val languageSharedPref = getSharedPreferences(Const.LANGUAGE_PREF, MODE_PRIVATE)
-        val language = languageSharedPref.getString(Const.LOCALE_CODE, "en")
-        val locale = Locale(language!!)
+        val language = SharedPrefs().getStringSharedPreferences(
+            this,
+            Const.LANGUAGE_PREF,
+            Const.LANGUAGE_CODE,
+            ConstLanguageCode.US
+        )
+        val locale = Locale(language)
         resources.configuration.setLocale(locale)
         resources.updateConfiguration(resources.configuration, resources.displayMetrics)
 
