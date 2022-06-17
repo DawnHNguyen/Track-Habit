@@ -2,22 +2,32 @@ package com.track.trackhabit.habit.data.local
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import com.track.trackhabit.habit.presentation.constpackage.Const
+import javax.inject.Inject
 
-class SharedPrefs {
-    fun putStringSharedPreferences(
-        context: Context,
+class SharedPrefs @Inject constructor(private val context: Context) {
+    private fun putStringSharedPreferences(
         PREF_NAME: String,
-        stringName: String,
-        string: String
+        valueName: String,
+        value: String
     ) {
-        context.getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit().putString(stringName, string).apply()
+        context.getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit().putString(valueName, value)
+            .apply()
     }
 
-    fun getStringSharedPreferences(
-        context: Context,
+    private fun getStringSharedPreferences(
         PREF_NAME: String,
         stringName: String,
         defaultValue: String
     ): String =
-        context.getSharedPreferences(PREF_NAME, MODE_PRIVATE).getString(stringName, defaultValue)?: defaultValue
+        context.getSharedPreferences(PREF_NAME, MODE_PRIVATE).getString(stringName, defaultValue)
+            ?: defaultValue
+
+    fun getLanguagePreferences(defaultValue: String): String =
+        getStringSharedPreferences(Const.LANGUAGE_PREF, Const.LANGUAGE_CODE, defaultValue)
+
+
+    fun putLanguagePreferences(value: String) {
+        putStringSharedPreferences(Const.LANGUAGE_PREF, Const.LANGUAGE_CODE, value)
+    }
 }

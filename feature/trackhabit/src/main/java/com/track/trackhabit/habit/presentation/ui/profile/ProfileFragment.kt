@@ -7,16 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.track.trackhabit.habit.data.local.SharedPrefs
+import androidx.fragment.app.viewModels
 import com.track.trackhabit.habit.databinding.FragmentProfileBinding
-import com.track.trackhabit.habit.presentation.constpackage.Const
-import com.track.trackhabit.habit.presentation.constpackage.ConstLanguageCode
-import com.track.trackhabit.habit.presentation.ui.HomeActivity
+import com.track.trackhabit.habit.domain.entity.LanguageCode
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
+    private val profileViewModel by viewModels<ProfileViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +36,7 @@ class ProfileFragment : Fragment() {
         binding.switchButtonProfileLanguage.isChecked =
             resources.configuration.locale == Locale("en")
         binding.switchButtonProfileLanguage.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) changeLanguage(ConstLanguageCode.US) else changeLanguage(
-                ConstLanguageCode.VN
-            )
+            if (isChecked) changeLanguage(LanguageCode.US.languageCode) else changeLanguage(LanguageCode.VN.languageCode)
         }
 
     }
@@ -47,18 +45,8 @@ class ProfileFragment : Fragment() {
         val locale = Locale(languageCode)
         resources.configuration.setLocale(locale)
         resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-        SharedPrefs().putStringSharedPreferences(
-            requireContext(),
-            Const.LANGUAGE_PREF,
-            Const.LANGUAGE_CODE,
-            languageCode
-        )
-
-        val refresh = Intent(
-            requireContext(),
-            HomeActivity::class.java
-        )
-        startActivity(refresh)
+        profileViewModel.addLanguagePref(languageCode)
+        startActivity(activity?.intent)
         activity?.finish()
     }
 }

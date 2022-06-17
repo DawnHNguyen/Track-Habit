@@ -1,6 +1,7 @@
 package com.track.trackhabit.habit.data.di
 
 import android.content.Context
+import com.track.trackhabit.habit.data.local.SharedPrefs
 import com.track.trackhabit.habit.data.local.UserDatabase
 import com.track.trackhabit.habit.data.local.dao.HabitDao
 import com.track.trackhabit.habit.data.local.dao.InspectionDao
@@ -31,4 +32,8 @@ object TrackHabitLocalModule {
     @Singleton
     @Provides
     fun provideInspectionDao(database: UserDatabase): InspectionDao = database.inspectionDao()
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPrefs = SharedPrefs(context)
 }
