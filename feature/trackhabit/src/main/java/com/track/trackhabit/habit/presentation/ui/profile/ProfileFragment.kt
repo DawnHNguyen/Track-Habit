@@ -46,7 +46,7 @@ class ProfileFragment : Fragment() {
         resources.configuration.setLocale(locale)
         resources.updateConfiguration(resources.configuration, resources.displayMetrics)
         profileViewModel.addLanguagePref(languageCode)
-        startActivity(activity?.intent)
         activity?.finish()
+        startActivity(activity?.intent)
     }
 }
