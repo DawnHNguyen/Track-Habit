@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.data.di
+package com.track.trackhabit.habit.device.di
 
 import android.content.Context
 import com.track.trackhabit.habit.device.TrackHabitNotificationManger
@@ -16,6 +16,8 @@ object TrackHabitDeviceModule {
     @Singleton
     @Provides
     fun provideNotificationManager(@ApplicationContext context: Context) = TrackHabitNotificationManger(context)
+
+    @Singleton
     @Provides
     fun provideAlarmService(@ApplicationContext context: Context) = AlarmService(context)
 }

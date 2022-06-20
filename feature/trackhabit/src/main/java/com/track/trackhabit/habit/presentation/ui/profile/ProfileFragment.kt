@@ -7,12 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.track.trackhabit.habit.databinding.FragmentProfileBinding
+import com.track.trackhabit.habit.domain.entity.LanguageCode
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
-
+    private val profileViewModel by viewModels<ProfileViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,5 +33,20 @@ class ProfileFragment : Fragment() {
         binding.buttonProfileGiveFeedback.setOnClickListener {
             startActivity(intent)
         }
+        binding.switchButtonProfileLanguage.isChecked =
+            resources.configuration.locale == Locale("en")
+        binding.switchButtonProfileLanguage.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) changeLanguage(LanguageCode.US.languageCode) else changeLanguage(LanguageCode.VN.languageCode)
+        }
+
+    }
+
+    private fun changeLanguage(languageCode: String) {
+        val locale = Locale(languageCode)
+        resources.configuration.setLocale(locale)
+        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+        profileViewModel.addLanguagePref(languageCode)
+        activity?.finish()
+        startActivity(activity?.intent)
     }
 }

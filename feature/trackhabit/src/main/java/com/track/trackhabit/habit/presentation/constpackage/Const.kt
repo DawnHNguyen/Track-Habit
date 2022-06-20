@@ -10,4 +10,6 @@ object Const{
     const val SET_REMIND_SLEEPTIME = "SET_REMIND_SLEEPTIME"
     const val HABIT_ID = "HABIT_ID"
     const val HABIT_NAME = "HABIT_NAME"
+    const val LANGUAGE_PREF = "LANGUAGE_PREF"
+    const val LANGUAGE_CODE = "LANGUAGE_CODE"
 }

@@ -12,6 +12,7 @@
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/fragment_statistical.xml" value="0.13360507246376813" />
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/layout/item_habit_test.xml" value="0.1" />
         <entry key="..\:/AIBLES/track-habit/feature/trackhabit/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Administrator/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/fragment_sleep_time.xml" value="0.196875" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
@@ -32,6 +33,8 @@
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/notification_icon.xml" value="0.17222222222222222" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/switch_thumb_custom.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/switch_track_custom.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/fragment_add_habit.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
