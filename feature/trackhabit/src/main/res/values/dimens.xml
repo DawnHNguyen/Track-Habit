@@ -14,7 +14,7 @@
     <!--    item habit-->
     <dimen name="margin_itemhabit_habit">16dp</dimen>
     <dimen name="height_itemhabit_habit">80dp</dimen>
-    <dimen name="padding_itemhabit_habit_paddingstart">16dp</dimen>
+    <dimen name="padding_itemhabit_habit_paddingHorizontal">16dp</dimen>
     <dimen name="textsize_itemhabit_habitname">16sp</dimen>
     <dimen name="radius_itemhabit_itemcorner">16dp</dimen>
 
