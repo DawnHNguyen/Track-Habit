@@ -55,7 +55,7 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         ) {
             with(binding) {
                 val isDoneToday = checkIsDoneToday(performance)
-                val resources = root.context.resources
+                val resources = root.context
                 layoutItem.background = if (isNotiToday) {
                     val drawableRes = when {
                         isDoneToday -> R.drawable.background_itemhabit_done

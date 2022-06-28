@@ -3,6 +3,8 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.8">
       <module name="track-habit.buildSrc" target="11" />
+      <module name="track-habit.buildSrc.main" target="11" />
+      <module name="track-habit.buildSrc.test" target="11" />
       <module name="TrackHabit.app" target="11" />
       <module name="TrackHabit.buildSrc" target="11" />
       <module name="TrackHabit.buildSrc.main" target="11" />

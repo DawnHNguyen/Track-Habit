@@ -59,6 +59,7 @@
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_edittext"
             android:text="@string/habit_frequency"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView_fragmentHabitInfo_nameError" />
 
@@ -151,6 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/all_marginall"
             android:text="@string/text_habitbutton_done"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_fragmentHabitInfo_setTime" />
 
@@ -161,6 +163,7 @@
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginEnd="@dimen/all_margin_end"
             android:text="@string/all_cancel"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_fragmentHabitInfo_buttonDone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
