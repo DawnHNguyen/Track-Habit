@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.data.di
+package com.track.trackhabit.habit.data.remote.di
 
 import android.content.Context
 import com.track.trackhabit.habit.data.local.SharedPrefs

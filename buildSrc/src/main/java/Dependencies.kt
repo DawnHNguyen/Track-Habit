@@ -39,6 +39,10 @@ object Versions {
     val swipe_reveal = "1.4.1"
 
     val lifecycle_livedata = "2.5.0-alpha02"
+
+    val gson = "2.8.6"
+    val retrofit = "2.9.0"
+    val loggingIntercepter = "4.10.0"
 }
 
 object Libraries {
@@ -92,6 +96,15 @@ object AndroidLibraries {
 
     //LIFECYCLE LIVEDATA
     val lifecycleLivedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle_livedata}"
+
+    //RETROFIT
+    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    val retrofitConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    val gson = "com.google.code.gson:gson:${Versions.gson}"
+
+    //OKHTTP3
+    val loggingIntercepter = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingIntercepter}"
+
 }
 
 object Modules {

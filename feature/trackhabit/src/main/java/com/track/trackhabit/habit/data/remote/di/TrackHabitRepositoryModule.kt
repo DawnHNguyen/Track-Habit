@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.data.di
+package com.track.trackhabit.habit.data.remote.di
 
 import com.track.trackhabit.habit.data.repository.InspectionRepositoryImpl
 import com.track.trackhabit.habit.data.repository.LanguageRepositoryImpl
