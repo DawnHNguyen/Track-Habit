@@ -17,7 +17,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object TrackHabitRemoteModule {
-    private const val BASE_URL ="https://trackhabit.tk/api/v1/"
+    private const val BASE_URL ="https://api.trackhabit.gq/api/v1/"
 
     @Singleton
     @Provides
