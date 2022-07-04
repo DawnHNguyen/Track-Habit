@@ -1,7 +1,7 @@
 package com.track.trackhabit.habit.data.di
 
 import com.google.gson.Gson
-import com.track.trackhabit.habit.data.remote.services.AuthService
+import com.track.trackhabit.habit.data.remote.auth.services.AuthService
 import com.track.trackhabit.habit.data.remote.util.CallAdapterFactory
 import dagger.Module
 import dagger.Provides

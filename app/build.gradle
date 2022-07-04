@@ -88,7 +88,7 @@ dependencies {
     implementation AndroidLibraries.appCompat
     implementation AndroidLibraries.material
     implementation AndroidLibraries.constraintLayout
-    implementation "com.orhanobut:hawk:2.0.1"
+    implementation AndroidLibraries.hawk
     testImplementation TestLibraries.junit
     debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.34'
     debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.34'

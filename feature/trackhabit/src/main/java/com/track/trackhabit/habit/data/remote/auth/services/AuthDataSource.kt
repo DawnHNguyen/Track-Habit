@@ -1,9 +1,9 @@
-package com.track.trackhabit.habit.data.remote.services
+package com.track.trackhabit.habit.data.remote.auth.services
 
-import com.track.trackhabit.habit.data.remote.dto.emailtoken.EmailTokenRequest
-import com.track.trackhabit.habit.data.remote.dto.login.LoginRequest
-import com.track.trackhabit.habit.data.remote.dto.register.RegisterRequest
-import com.track.trackhabit.habit.data.remote.dto.verifytoken.VerifyEmailTokenRequest
+import com.track.trackhabit.habit.data.remote.auth.dto.EmailTokenRequest
+import com.track.trackhabit.habit.data.remote.auth.dto.LoginRequest
+import com.track.trackhabit.habit.data.remote.auth.dto.RegisterRequest
+import com.track.trackhabit.habit.data.remote.auth.dto.VerifyEmailTokenRequest
 import javax.inject.Inject
 
 class AuthDataSource @Inject constructor(

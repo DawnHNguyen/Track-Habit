@@ -1,8 +1,8 @@
-package com.track.trackhabit.habit.data.remote.dto.emailtoken
+package com.track.trackhabit.habit.data.remote.auth.dto.response
 
 import com.google.gson.annotations.SerializedName
 
-data class EmailTokenResponse(
+data class LoginResponse(
     @SerializedName("message")
     val message: String
 )

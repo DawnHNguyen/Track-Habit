@@ -1,8 +1,8 @@
-package com.track.trackhabit.habit.data.remote.dto.verifytoken
+package com.track.trackhabit.habit.data.remote.auth.dto.response
 
 import com.google.gson.annotations.SerializedName
 
-data class VerifyEmailTokenResponse(
+data class RegisterResponse(
     @SerializedName("message")
     val message: String
 )

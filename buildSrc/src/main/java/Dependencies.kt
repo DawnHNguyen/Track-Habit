@@ -45,6 +45,8 @@ object Versions {
     val retrofit = "2.9.0"
     val loggingIntercepter = "4.10.0"
 
+    val hawk = "2.0.1"
+
     val junit = "4.+"
     val ext = "1.1.3"
     val espresso = "3.4.0"
@@ -110,6 +112,9 @@ object AndroidLibraries {
 
     //OKHTTP3
     val loggingIntercepter = "com.squareup.okhttp3:logging-interceptor:${Versions.loggingIntercepter}"
+
+    //Hawk
+    val hawk = "com.orhanobut:hawk:${Versions.hawk}"
 
 }
 
