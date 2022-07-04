@@ -20,6 +20,7 @@ object Versions {
     val appCompat = "1.3.0-alpha01"
     val coreKtx = "1.5.0-alpha01"
     val constraintLayout = "2.0.0-rc1"
+    val material = "1.6.1"
 
     val recyclerview = "1.2.0-alpha05"
 
@@ -43,6 +44,10 @@ object Versions {
     val gson = "2.8.6"
     val retrofit = "2.9.0"
     val loggingIntercepter = "4.10.0"
+
+    val junit = "4.+"
+    val ext = "1.1.3"
+    val espresso = "3.4.0"
 }
 
 object Libraries {
@@ -83,6 +88,7 @@ object AndroidLibraries {
     val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
+    val material = "com.google.android.material:material:${Versions.material}"
 
     // NAVIGATION
     val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"
@@ -118,6 +124,9 @@ object Modules {
 }
 
 object TestLibraries{
+    val junit = "junit:junit:${Versions.junit}"
+    val ext = "androidx.test.ext:junit:${Versions.ext}"
+    val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
 
 }
 

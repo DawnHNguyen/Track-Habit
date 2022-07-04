@@ -1,7 +1,7 @@
-package com.track.trackhabit.habit.data.remote.di
+package com.track.trackhabit.habit.data.di
 
 import com.google.gson.Gson
-import com.track.trackhabit.habit.data.remote.services.TrackHabitService
+import com.track.trackhabit.habit.data.remote.services.AuthService
 import com.track.trackhabit.habit.data.remote.util.CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -56,7 +56,7 @@ object TrackHabitRemoteModule {
 
     @Singleton
     @Provides
-    fun providesTrackHabitService(retrofit: Retrofit): TrackHabitService {
-        return retrofit.create(TrackHabitService::class.java)
+    fun providesTrackHabitService(retrofit: Retrofit): AuthService {
+        return retrofit.create(AuthService::class.java)
     }
 }
