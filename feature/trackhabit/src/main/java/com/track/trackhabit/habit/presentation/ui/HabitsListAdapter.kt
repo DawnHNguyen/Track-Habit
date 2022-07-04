@@ -55,24 +55,24 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         ) {
             with(binding) {
                 val isDoneToday = checkIsDoneToday(performance)
-                val resources = root.context
+                val context = root.context
                 layoutItem.background = if (isNotiToday) {
                     val drawableRes = when {
                         isDoneToday -> R.drawable.background_itemhabit_done
                         checkIsBeforeHabit(habitTime) -> R.drawable.background_itemhabit_default
                         else -> R.drawable.background_itemhabit_missed
                     }
-                    resources.getDrawable(drawableRes)
-                } else resources.getDrawable(R.drawable.background_itemhabit_default)
+                    context.getDrawable(drawableRes)
+                } else context.getDrawable(R.drawable.background_itemhabit_default)
 
                 if ((checkIsBeforeHabit(habitTime) && !isDoneToday) || !isNotiToday) {
                     layoutItem.isEnabled = isNotiToday
-                    textviewItemhabitTitle.setTextColor(resources.getColor(R.color.black))
-                    textviewItemhabitTime.setTextColor(resources.getColor(R.color.black))
+                    textviewItemhabitTitle.setTextColor(context.getColor(R.color.black))
+                    textviewItemhabitTime.setTextColor(context.getColor(R.color.black))
                 } else {
                     layoutItem.isEnabled = false
-                    textviewItemhabitTitle.setTextColor(resources.getColor(R.color.white))
-                    textviewItemhabitTime.setTextColor(resources.getColor(R.color.white))
+                    textviewItemhabitTitle.setTextColor(context.getColor(R.color.white))
+                    textviewItemhabitTime.setTextColor(context.getColor(R.color.white))
                 }
             }
         }
