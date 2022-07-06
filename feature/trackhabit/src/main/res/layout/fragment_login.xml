@@ -14,7 +14,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_home"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -23,11 +22,10 @@
             android:id="@+id/textView_fragmentLogin_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome"
+            android:text="@string/loginfrgm_welcome"
             android:textStyle="bold"
             android:textSize="50dp"
             android:textColor="@color/black"
-
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,16 +39,15 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="50dp"
             android:layout_marginStart="@dimen/margin_logintextinput_marginstart"
-            android:layout_marginEnd="@dimen/margin_logintextinput_marginend"
+            android:layout_marginEnd="@dimen/margin_logintextinput_marginend">
 
-            >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textInput_fragmentLogin_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:paddingTop="20dp"
-                android:hint="Username"/>
+                android:textSize="@dimen/textsize_loginfrgm_input"
+
+                android:hint="@string/loginfrgm_usernamehint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -67,17 +64,16 @@
                 android:id="@+id/textInput_fragmentLogin_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"/>
+                android:textSize="@dimen/textsize_loginfrgm_input"
+                android:hint="@string/loginfrgm_passwordhint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="forgot password?"
+            android:text="@string/loginfrgm_forgot_password"
             android:textStyle="bold"
             android:textColor="@color/black"
-
             android:layout_marginTop="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentLogin_password"/>
@@ -86,17 +82,16 @@
             android:id="@+id/button_fragmentLogin_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/loginfrgm_login"
             android:textColor="@color/white"
             android:background="@color/maincolor_orange"
             android:padding="6dp"
-            android:textSize="30dp"
+            android:textSize="@dimen/textsize_loginfrgm_button"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginEnd="@dimen/margin_loginbutton_marginend"
             android:layout_marginStart="@dimen/margin_loginbutton_marginstart"
             android:layout_marginTop="@dimen/margin_loginbutton_margintop"
-
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentLogin_password"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -106,8 +101,7 @@
                 android:id="@+id/textView_fragmentLogin_noAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="Don't have an account?"
+                android:text="@string/loginfrgm_noacc"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="16dp"
@@ -118,10 +112,10 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Register"
+            android:text="@string/loginfrgm_register"
             android:textStyle="bold"
             android:textColor="#2196F3"
-            android:textSize="16dp"
+            android:textSize="@dimen/textsize_loginfrgm_register"
             android:layout_marginStart="6dp"
             app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentLogin_noAccount"
             app:layout_constraintStart_toEndOf="@id/textView_fragmentLogin_noAccount"/>

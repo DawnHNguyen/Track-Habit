@@ -70,6 +70,9 @@
     <dimen name="margin_loginbutton_marginend">16dp</dimen>
     <dimen name="margin_loginbutton_marginstart">16dp</dimen>
     <dimen name="margin_loginbutton_margintop">32dp</dimen>
+    <dimen name="textsize_loginfrgm_input">20dp</dimen>
+    <dimen name="textsize_loginfrgm_button">30sp</dimen>
+    <dimen name="textsize_loginfrgm_register">16sp</dimen>
 
     <!--    login fragment-->
 
