@@ -65,4 +65,15 @@
 
     <!--    fragment profile-->
     <dimen name="size_profile_languageSwitch_thumb">35dp</dimen>
+    <dimen name="margin_logintextinput_marginstart">8dp</dimen>
+    <dimen name="margin_logintextinput_marginend">8dp</dimen>
+    <dimen name="margin_loginbutton_marginend">16dp</dimen>
+    <dimen name="margin_loginbutton_marginstart">16dp</dimen>
+    <dimen name="margin_loginbutton_margintop">32dp</dimen>
+    <dimen name="textsize_login_input">20sp</dimen>
+    <dimen name="textsize_login_button">30sp</dimen>
+    <dimen name="textsize_login_register">16sp</dimen>
+
+    <!--    login fragment-->
+
 </resources>

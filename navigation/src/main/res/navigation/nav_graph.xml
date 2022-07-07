@@ -50,4 +50,11 @@
             android:name="habit_id"
             app:argType="integer" />
     </fragment>
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.track.trackhabit.habit.presentation.ui.login.LoginFragment"
+        android:label="login"
+        tools:layout="@layout/fragment_login">
+    </fragment>
 </navigation>
