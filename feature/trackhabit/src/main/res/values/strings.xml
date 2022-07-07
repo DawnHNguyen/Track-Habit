@@ -57,11 +57,11 @@
     <string name="profile_feedback_notice">Track Habit is still in development, and we\'d love to hear from you.</string>
     <string name="profile_feedback_button">Give Feedback</string>
     <string name="profile_language">Language</string>
-    <string name="loginfrgm_welcome">Welcome</string>
-    <string name="loginfrgm_usernamehint">Username</string>
-    <string name="loginfrgm_passwordhint">Password</string>
-    <string name="loginfrgm_forgot_password">forgot password?</string>
-    <string name="loginfrgm_login">Login</string>
-    <string name="loginfrgm_noacc">Don\'t have an account?</string>
-    <string name="loginfrgm_register">Register</string>
+    <string name="login_welcome">Welcome</string>
+    <string name="login_usernamehint">Username</string>
+    <string name="login_passwordhint">Password</string>
+    <string name="login_forgot_password">forgot password?</string>
+    <string name="login_textlogin">Login</string>
+    <string name="login_noacc">Don\'t have an account?</string>
+    <string name="login_register">Register</string>
 </resources>

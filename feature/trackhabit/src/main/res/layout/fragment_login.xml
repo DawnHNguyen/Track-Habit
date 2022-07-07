@@ -22,7 +22,7 @@
             android:id="@+id/textView_fragmentLogin_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loginfrgm_welcome"
+            android:text="@string/login_welcome"
             android:textStyle="bold"
             android:textSize="50sp"
             android:textColor="@color/black"
@@ -45,9 +45,9 @@
                 android:id="@+id/textInput_fragmentLogin_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize_loginfrgm_input"
+                android:textSize="@dimen/textsize_login_input"
 
-                android:hint="@string/loginfrgm_usernamehint"/>
+                android:hint="@string/login_usernamehint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -64,14 +64,14 @@
                 android:id="@+id/textInput_fragmentLogin_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/textsize_loginfrgm_input"
-                android:hint="@string/loginfrgm_passwordhint"/>
+                android:textSize="@dimen/textsize_login_input"
+                android:hint="@string/login_passwordhint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loginfrgm_forgot_password"
+            android:text="@string/login_forgot_password"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:layout_marginTop="6dp"
@@ -82,11 +82,11 @@
             android:id="@+id/button_fragmentLogin_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/loginfrgm_login"
+            android:text="@string/login_textlogin"
             android:textColor="@color/white"
             android:background="@color/maincolor_orange"
             android:padding="6dp"
-            android:textSize="@dimen/textsize_loginfrgm_button"
+            android:textSize="@dimen/textsize_login_button"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginEnd="@dimen/margin_loginbutton_marginend"
@@ -101,7 +101,7 @@
                 android:id="@+id/textView_fragmentLogin_noAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/loginfrgm_noacc"
+                android:text="@string/login_noacc"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:layout_marginBottom="16dp"
@@ -112,10 +112,10 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/loginfrgm_register"
+            android:text="@string/login_register"
             android:textStyle="bold"
             android:textColor="#2196F3"
-            android:textSize="@dimen/textsize_loginfrgm_register"
+            android:textSize="@dimen/textsize_login_register"
             android:layout_marginStart="6dp"
             app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentLogin_noAccount"
             app:layout_constraintStart_toEndOf="@id/textView_fragmentLogin_noAccount"/>
