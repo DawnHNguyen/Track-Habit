@@ -1,9 +1,9 @@
 package com.track.trackhabit.habit.presentation.ui.auth
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
-import com.track.trackhabit.habit.data.remote.auth.dto.LoginRequest
 import com.track.trackhabit.habit.domain.usecase.GetEmailTokenUseCase
 import com.track.trackhabit.habit.domain.usecase.LoginUseCase
 import com.track.trackhabit.habit.domain.usecase.RegisterUseCase
@@ -20,13 +20,18 @@ class AuthViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val getEmailTokenUseCase: GetEmailTokenUseCase,
     private val verifyEmailTokenUseCase: VerifyEmailTokenUseCase
-): ViewModel(){
+) : ViewModel() {
 
-    fun login(username: String, password: String ){
-        val loginRequest = LoginRequest(username, password)
-        viewModelScope.launch(dispatcher.main){
-            withContext(dispatcher.io){
-                loginUseCase(loginRequest)
+    val username = MutableLiveData<String>()
+    val password = MutableLiveData<String>()
+    val email = MutableLiveData<String>()
+    val fullname = MutableLiveData<String>()
+    val verifyCode = MutableLiveData<String>()
+
+    fun login() {
+        viewModelScope.launch(dispatcher.main) {
+            withContext(dispatcher.io) {
+                loginUseCase(username.value.toString(), password.value.toString())
             }
         }
     }

@@ -31,9 +31,7 @@ class LoginFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonFragmentLoginLogin.setOnClickListener {
-        val username = binding.textInputFragmentLoginUsername.text.toString()
-        val password = binding.textInputFragmentLoginPassword.text.toString()
-            viewModel.login(username, password)
+            viewModel.login()
         }
     }
 }
