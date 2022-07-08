@@ -60,7 +60,7 @@
     <string name="login_welcome">Welcome</string>
     <string name="login_usernamehint">Username</string>
     <string name="login_passwordhint">Password</string>
-    <string name="login_forgot_password">forgot password?</string>
+    <string name="login_forgot_password">Forgot password?</string>
     <string name="login_textlogin">Login</string>
     <string name="login_noacc">Don\'t have an account?</string>
     <string name="login_register">Register</string>
