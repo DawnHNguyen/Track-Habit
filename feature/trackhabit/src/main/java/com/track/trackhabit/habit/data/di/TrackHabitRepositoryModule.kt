@@ -1,13 +1,7 @@
 package com.track.trackhabit.habit.data.di
 
-import com.track.trackhabit.habit.data.repository.InspectionRepositoryImpl
-import com.track.trackhabit.habit.data.repository.LanguageRepositoryImpl
-import com.track.trackhabit.habit.data.repository.TrackHabitRepositoryImpl
-import com.track.trackhabit.habit.data.repository.UserRepositoryImpl
-import com.track.trackhabit.habit.domain.repository.InspectionRepository
-import com.track.trackhabit.habit.domain.repository.LanguageRepository
-import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
-import com.track.trackhabit.habit.domain.repository.UserRepository
+import com.track.trackhabit.habit.data.repository.*
+import com.track.trackhabit.habit.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,4 +26,8 @@ abstract class TrackHabitRepositoryModule {
     @Singleton
     @Binds
     abstract fun bindLanguageRepository(impl: LanguageRepositoryImpl): LanguageRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 }
