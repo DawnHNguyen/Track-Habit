@@ -3,10 +3,12 @@ package com.track.trackhabit.habit.presentation.ui
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.ViewBinderHelper
+import com.track.common.base.utils.checkIsTodayDateFormatValue
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.ItemHabitBinding
 import com.track.trackhabit.habit.domain.entity.Habit
@@ -62,15 +64,13 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
                         checkIsBeforeHabit(habitTime) -> R.drawable.background_itemhabit_default
                         else -> R.drawable.background_itemhabit_missed
                     }
-                    context.getDrawable(drawableRes)
-                } else context.getDrawable(R.drawable.background_itemhabit_default)
+                    ContextCompat.getDrawable(context, drawableRes)
+                } else ContextCompat.getDrawable(context, R.drawable.background_itemhabit_default)
 
                 if ((checkIsBeforeHabit(habitTime) && !isDoneToday) || !isNotiToday) {
-                    layoutItem.isEnabled = isNotiToday
                     textviewItemhabitTitle.setTextColor(context.getColor(R.color.black))
                     textviewItemhabitTime.setTextColor(context.getColor(R.color.black))
                 } else {
-                    layoutItem.isEnabled = false
                     textviewItemhabitTitle.setTextColor(context.getColor(R.color.white))
                     textviewItemhabitTime.setTextColor(context.getColor(R.color.white))
                 }
@@ -88,19 +88,7 @@ class HabitsListAdapter(private val onClickRevealButton: OnClickRevealButton) :
         private fun checkIsDoneToday(performance: List<Inspection>): Boolean {
             return if (performance.isEmpty()) false
             else {
-                val cal = Calendar.getInstance().apply {
-                    set(Calendar.HOUR, 0)
-                    set(Calendar.MINUTE, 0)
-                    set(Calendar.SECOND, 0)
-                    set(Calendar.MILLISECOND, 0)
-                }
-                val calLast = Calendar.getInstance().apply {
-                    set(Calendar.HOUR, 24)
-                    set(Calendar.MINUTE, 0)
-                    set(Calendar.SECOND, 0)
-                    set(Calendar.MILLISECOND, 0)
-                }
-                performance.last().check && (performance.last().time in cal.time..calLast.time)
+                performance.last().check && checkIsTodayDateFormatValue(performance.last().time)
             }
         }
 

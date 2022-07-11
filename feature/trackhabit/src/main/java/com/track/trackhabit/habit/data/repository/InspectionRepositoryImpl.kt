@@ -22,4 +22,9 @@ class InspectionRepositoryImpl @Inject constructor(private val inspectionDao: In
             list.map { it.mapToDomainModel() }
         }
 
+    override suspend fun updateInspectionToHabit(inspection: Inspection, habitId: Int) {
+        inspectionDao.updateInspection(inspection.toLocalDto().apply {
+            id = habitId
+        })
+    }
 }

@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentHomeBinding
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.presentation.ui.AlarmService
@@ -39,8 +41,8 @@ class HomeFragment : Fragment() {
         }
 
         override fun onClickUpdate(habit: Habit) {
-            homeViewModel.getHabitId(habit.habitId)
-            homeViewModel.addInspection()
+            if (habit.isNotiToday()) homeViewModel.updateInspection(habit)
+            else Toast.makeText(context, R.string.home_toast_cannotClick_notNotiDay, Toast.LENGTH_LONG).show()
         }
     })
 
