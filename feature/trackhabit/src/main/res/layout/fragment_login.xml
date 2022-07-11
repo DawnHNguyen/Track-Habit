@@ -4,6 +4,10 @@
 
     <data>
 
+        <variable
+            name="authViewModel"
+            type="com.track.trackhabit.habit.presentation.ui.auth.AuthViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,8 +49,8 @@
                 android:id="@+id/textInput_fragmentLogin_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@={authViewModel.username}"
                 android:textSize="@dimen/textsize_login_input"
-
                 android:hint="@string/login_usernamehint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,6 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textsize_login_input"
+                android:text="@={authViewModel.password}"
+                android:inputType="textPassword"
                 android:hint="@string/login_passwordhint"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -93,9 +99,7 @@
             android:layout_marginStart="@dimen/margin_loginbutton_marginstart"
             android:layout_marginTop="@dimen/margin_loginbutton_margintop"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentLogin_password"
-            app:layout_constraintStart_toStartOf="parent"
-
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textView_fragmentLogin_noAccount"
