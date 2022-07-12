@@ -25,6 +25,9 @@
     <string name="bottomnav_sleeptime_icontitle">Sleep time</string>
     <string name="bottomnav_profile_icontitle">Profile</string>
 
+    <!--    home fragment-->
+    <string name="home_toast_cannotClick_notNotiDay">You can\'t set Done for this habit because today is not the day to do your habit</string>
+
     <!--    sleeptime fragment-->
     <string name="sleeptime_waketimetitle">You want to wake up at</string>
     <string name="sleeptime_sleeptimetitle">You need to go to bed at</string>
