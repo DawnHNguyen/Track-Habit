@@ -8,5 +8,4 @@ fun Activity.hideKeyboard() {
     currentFocus?.run {
         inputMethodManager.hideSoftInputFromWindow(this.windowToken, 0)
     }
-
 }

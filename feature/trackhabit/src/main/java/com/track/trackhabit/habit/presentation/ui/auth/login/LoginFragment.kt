@@ -27,6 +27,7 @@ class LoginFragment : Fragment() {
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.authViewModel = viewModel
         return binding.root
     }
 
@@ -34,18 +35,15 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             viewModel.loginStateFlow.collect {
-                if (viewModel.loginStateFlow.value.isError()) Toast.makeText(
-                    context,
-                    viewModel.loginStateFlow.value.error?.message.toString(),
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (viewModel.loginStateFlow.value.isError()) Toast.makeText(context, viewModel.loginStateFlow.value.error?.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
         binding.buttonFragmentLoginLogin.setOnClickListener {
             viewModel.login()
+            hideKeyboard()
         }
         binding.parentView.setOnClickListener {
-           activity?.hideKeyboard()
+           hideKeyboard()
         }
     }
 }
