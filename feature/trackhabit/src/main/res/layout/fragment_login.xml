@@ -11,8 +11,11 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/parentView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true">
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView_fragmentLogin_iconApp"
             android:layout_width="wrap_content"
@@ -51,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:text="@={authViewModel.username}"
                 android:textSize="@dimen/textsize_login_input"
-                android:hint="@string/login_usernamehint"/>
+                android:hint="@string/login_usernamehint"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +75,8 @@
                 android:textSize="@dimen/textsize_login_input"
                 android:text="@={authViewModel.password}"
                 android:inputType="textPassword"
-                android:hint="@string/login_passwordhint"/>
+                android:hint="@string/login_passwordhint"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView

@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.data.remote.util
 
+import com.google.gson.Gson
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.IOException
@@ -90,11 +91,17 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
                     if (response.isSuccessful && response.body() != null) {
                         callback.onResponse(this@ResourceCall, Response.success(Resource.success(body!!)))
                     } else {
+                        val gson = Gson()
+                        val message = try {
+                            gson.fromJson(response.errorBody()?.string().orEmpty(), BaseErrorResponse::class.java).message
+                        } catch (e: Exception) {
+                            ""
+                        }
                         val exception = when (code) {
-                            400 -> BadRequestException(null)
-                            401,403 -> NetworkAuthenticationException(null)
-                            404 -> NetworkResourceNotFoundException(null)
-                            408 -> RequestTimeoutException(null)
+                            400 -> BadRequestException(message)
+                            401,403 -> NetworkAuthenticationException(message)
+                            404 -> NetworkResourceNotFoundException(message)
+                            408 -> RequestTimeoutException(message)
                             500 -> NetworkServerException(null)
                             else -> NetworkException()
                         }

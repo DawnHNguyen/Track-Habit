@@ -21,7 +21,11 @@
         android:id="@+id/nav_profile"
         android:name="com.track.trackhabit.habit.presentation.ui.profile.ProfileFragment"
         android:label="profile"
-        tools:layout="@layout/fragment_profile"/>
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_nav_profile_to_login"
+            app:destination="@id/login" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_statistical"
@@ -53,7 +57,7 @@
 
     <fragment
         android:id="@+id/login"
-        android:name="com.track.trackhabit.habit.presentation.ui.login.LoginFragment"
+        android:name="com.track.trackhabit.habit.presentation.ui.auth.login.LoginFragment"
         android:label="login"
         tools:layout="@layout/fragment_login">
     </fragment>

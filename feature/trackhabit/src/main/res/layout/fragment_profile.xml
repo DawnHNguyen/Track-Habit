@@ -48,5 +48,16 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_profile_auth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_confirmsleeptime_button"
+            android:backgroundTint="@color/background_confirmsleeptime_button_color"
+            android:padding="10dp"
+            android:text="auth"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

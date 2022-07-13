@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentProfileBinding
 import com.track.trackhabit.habit.domain.entity.LanguageCode
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +39,10 @@ class ProfileFragment : Fragment() {
             resources.configuration.locale == Locale("en")
         binding.switchButtonProfileLanguage.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) changeLanguage(LanguageCode.US.languageCode) else changeLanguage(LanguageCode.VN.languageCode)
+        }
+
+        binding.buttonProfileAuth.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_profile_to_login)
         }
 
     }
