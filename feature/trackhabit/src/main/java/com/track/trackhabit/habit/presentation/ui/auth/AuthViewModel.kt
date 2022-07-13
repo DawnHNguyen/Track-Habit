@@ -4,11 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
+import com.track.trackhabit.habit.data.remote.auth.dto.response.LoginResponse
+import com.track.trackhabit.habit.data.remote.util.Resource
 import com.track.trackhabit.habit.domain.usecase.GetEmailTokenUseCase
 import com.track.trackhabit.habit.domain.usecase.LoginUseCase
 import com.track.trackhabit.habit.domain.usecase.RegisterUseCase
 import com.track.trackhabit.habit.domain.usecase.VerifyEmailTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -22,6 +26,9 @@ class AuthViewModel @Inject constructor(
     private val verifyEmailTokenUseCase: VerifyEmailTokenUseCase
 ) : ViewModel() {
 
+    private var _loginStateFlow: MutableStateFlow<Resource<LoginResponse>> = MutableStateFlow(Resource.loading())
+    val loginStateFlow: StateFlow<Resource<LoginResponse>> get() = _loginStateFlow
+
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     val email = MutableLiveData<String>()
@@ -29,9 +36,11 @@ class AuthViewModel @Inject constructor(
     val verifyCode = MutableLiveData<String>()
 
     fun login() {
+        _loginStateFlow.value = Resource.loading()
         viewModelScope.launch(dispatcher.main) {
             withContext(dispatcher.io) {
-                loginUseCase(username.value.toString(), password.value.toString())
+                val loginResponse = loginUseCase(username.value.toString(), password.value.toString())
+                _loginStateFlow.tryEmit(loginResponse)
             }
         }
     }
