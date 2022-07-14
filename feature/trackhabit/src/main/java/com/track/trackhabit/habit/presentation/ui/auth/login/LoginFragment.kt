@@ -35,13 +35,16 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             viewModel.loginStateFlow.collect {
-                if (viewModel.loginStateFlow.value.isError()) Toast.makeText(context, viewModel.loginStateFlow.value.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                if (it.isError()) Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
+
         binding.buttonFragmentLoginLogin.setOnClickListener {
             viewModel.login()
             hideKeyboard()
+            viewModel.updateProgressBarVisibility()
         }
+
         binding.parentView.setOnClickListener {
            hideKeyboard()
         }
