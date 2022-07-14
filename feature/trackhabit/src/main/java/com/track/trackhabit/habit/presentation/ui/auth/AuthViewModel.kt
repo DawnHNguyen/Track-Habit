@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.presentation.ui.auth
 
+import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +14,7 @@ import com.track.trackhabit.habit.domain.usecase.VerifyEmailTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -28,6 +30,7 @@ class AuthViewModel @Inject constructor(
 
     private var _loginStateFlow: MutableStateFlow<Resource<LoginResponse>> = MutableStateFlow(Resource.loading())
     val loginStateFlow: StateFlow<Resource<LoginResponse>> get() = _loginStateFlow
+    val progressBarVisibility = MutableLiveData(View.GONE)
 
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
@@ -41,6 +44,15 @@ class AuthViewModel @Inject constructor(
             withContext(dispatcher.io) {
                 val loginResponse = loginUseCase(username.value.toString(), password.value.toString())
                 _loginStateFlow.tryEmit(loginResponse)
+            }
+        }
+    }
+
+    fun updateProgressBarVisibility(){
+        viewModelScope.launch(dispatcher.main) {
+            loginStateFlow.collect {
+                progressBarVisibility.value = if (it.isLoading()) View.VISIBLE
+                                            else View.GONE
             }
         }
     }
