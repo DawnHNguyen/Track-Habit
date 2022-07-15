@@ -2,6 +2,7 @@ import com.track.buildsrc.Libraries
 import com.track.buildsrc.Modules
 import com.track.buildsrc.AndroidLibraries
 import com.track.buildsrc.TestLibraries
+import com.track.buildsrc.SdkVersions
 
 plugins {
     id("kotlin-kapt")
@@ -33,17 +34,21 @@ android {
             keyPassword 'trackhabitsquad1'
         }
     }
-    compileSdk 31
+    compileSdk SdkVersions.compileSdkVersion
 
     defaultConfig {
         applicationId "com.track.trackhabit"
-        minSdk 23
-        targetSdk 30
+        minSdk SdkVersions.minSdkVersion
+        targetSdk SdkVersions.targetSdkVersion
+
         versionCode 3
         versionName "$versionMajor.$versionMinor.$versionPatch"
 
+        testInstrumentationRunnerArguments clearPackageData: 'true'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.debug
+
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -69,11 +74,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility SdkVersions.javaVersion
+        targetCompatibility SdkVersions.javaVersion
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = SdkVersions.jvmTarget
     }
 
     buildFeatures {
@@ -90,15 +95,16 @@ dependencies {
     implementation AndroidLibraries.constraintLayout
     implementation AndroidLibraries.hawk
     testImplementation TestLibraries.junit
-    debugImplementation 'com.willowtreeapps.hyperion:hyperion-core:0.9.34'
-    debugImplementation 'com.willowtreeapps.hyperion:hyperion-crash:0.9.34'
-    debugImplementation 'com.willowtreeapps.hyperion:hyperion-measurement:0.9.34'
+    debugImplementation Libraries.hyperionCore
+    debugImplementation Libraries.hyperionCrash
+    debugImplementation Libraries.hyperionMeasurement
     androidTestImplementation TestLibraries.ext
     androidTestImplementation TestLibraries.espresso
     implementation project(Modules.trackHabit)
     implementation project(Modules.navigation)
     implementation project(Modules.common)
     implementation project(Modules.remote)
+    implementation project(Modules.authentication)
 
     implementation Libraries.Timber
 

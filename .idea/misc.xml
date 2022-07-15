@@ -17,9 +17,24 @@
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/auth/src/main/res/layout/activity_authentication.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/auth/src/main/res/layout/fragment_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/authen/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/authen/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/authen/src/main/res/layout/activity_authentication.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/authen/src/main/res/layout/fragment_login.xml" value="0.11944444444444445" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/authentication/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/authentication/src/main/res/layout/fragment_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/common/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/common/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/common/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/auth/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/auth/src/main/res/layout/fragment_login.xml" value="0.19010416666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/authentication/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/authentication/src/main/res/layout/activity_authentication.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/authentication/src/main/res/layout/fragment_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/authentication/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/authentication/src/main/res/mipmap-xxxhdpi/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_addhabit.xml" value="0.17777777777777778" />
         <entry key="..\:/Users/lopho/AndroidStudioProjects/track-habit/feature/trackhabit/src/main/res/drawable/background_confirmsleeptime_button.xml" value="0.17777777777777778" />
