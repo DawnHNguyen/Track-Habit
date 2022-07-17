@@ -6,9 +6,9 @@ object SdkVersions {
     const val compileSdkVersion = 31
     const val buildToolsVersion = "31.0.0"
     const val minSdkVersion = 23
-    const val targetSdkVersion = 31
+    const val targetSdkVersion = 30
 
-    val javaVersion = JavaVersion.VERSION_1_8
+     val javaVersion = JavaVersion.VERSION_1_8
     const val jvmTarget = "1.8"
 }
 
@@ -16,6 +16,7 @@ object Versions {
     val kotlin = "1.5.31"
     const val room = "2.3.0"
     val timber = "4.7.1"
+    val hyperion = "0.9.34"
 
     val appCompat = "1.3.0-alpha01"
     val coreKtx = "1.5.0-alpha01"
@@ -74,6 +75,10 @@ object Libraries {
     // CRASHLYTIC
     val crashlytic = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlytic_version}"
 
+    /// Hyperion
+    val hyperionCore = "com.willowtreeapps.hyperion:hyperion-core:${Versions.hyperion}"
+    val hyperionCrash = "com.willowtreeapps.hyperion:hyperion-crash:${Versions.hyperion}"
+    val hyperionMeasurement = "com.willowtreeapps.hyperion:hyperion-measurement:${Versions.hyperion}"
 }
 
 object KotlinLibraries {
@@ -126,6 +131,8 @@ object Modules {
     val remote = ":remote"
 
     val trackHabit = ":feature:trackhabit"
+
+    val authentication = ":feature:auth"
 }
 
 object TestLibraries{

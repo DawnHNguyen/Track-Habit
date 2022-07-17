@@ -6,10 +6,15 @@
       <module name="track-habit.buildSrc.main" target="11" />
       <module name="track-habit.buildSrc.test" target="11" />
       <module name="TrackHabit.app" target="11" />
+      <module name="TrackHabit.Auth" target="11" />
+      <module name="TrackHabit.authen" target="11" />
+      <module name="TrackHabit.authentication" target="11" />
       <module name="TrackHabit.buildSrc" target="11" />
       <module name="TrackHabit.buildSrc.main" target="11" />
       <module name="TrackHabit.buildSrc.test" target="11" />
       <module name="TrackHabit.common" target="11" />
+      <module name="TrackHabit.feature.auth" target="11" />
+      <module name="TrackHabit.feature.authentication" target="11" />
       <module name="TrackHabit.feature.trackhabit" target="11" />
       <module name="TrackHabit.navigation" target="11" />
       <module name="TrackHabit.remote" target="11" />
