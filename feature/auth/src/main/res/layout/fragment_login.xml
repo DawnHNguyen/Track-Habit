@@ -111,6 +111,7 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/buttonText_login_registAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_register"

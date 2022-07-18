@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.track.trackhabit.auth.R
 import com.track.trackhabit.auth.databinding.FragmentRegisterBinding
 
 
@@ -19,5 +21,13 @@ class RegisterFragment: Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonTextRegisterLoginAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_register_to_login)
+        }
     }
 }

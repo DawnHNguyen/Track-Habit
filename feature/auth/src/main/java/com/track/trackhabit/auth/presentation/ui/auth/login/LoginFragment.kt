@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.track.common.base.utils.hideKeyboard
+import com.track.trackhabit.auth.R
 import com.track.trackhabit.auth.databinding.FragmentLoginBinding
 import com.track.trackhabit.auth.presentation.ui.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +49,10 @@ class LoginFragment : Fragment() {
 
         binding.parentView.setOnClickListener {
            hideKeyboard()
+        }
+
+        binding.buttonTextLoginRegistAccount.setOnClickListener {
+            findNavController().navigate(R.id.action_login_to_nav_register)
         }
     }
 }
