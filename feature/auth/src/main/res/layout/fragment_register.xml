@@ -145,7 +145,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textView_fragmentLogin_noAccount"
+            android:id="@+id/textView_register_noAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account?"
@@ -164,8 +164,8 @@
             android:textColor="#2196F3"
             android:textSize="16sp"
             android:layout_marginStart="6dp"
-            app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentLogin_noAccount"
-            app:layout_constraintStart_toEndOf="@id/textView_fragmentLogin_noAccount"/>
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_register_noAccount"
+            app:layout_constraintStart_toEndOf="@id/textView_register_noAccount"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
