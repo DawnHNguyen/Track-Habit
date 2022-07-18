@@ -50,7 +50,7 @@ dependencies {
     implementation AndroidLibraries.material
     implementation AndroidLibraries.constraintLayout
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation AndroidLibraries.legacy
     testImplementation TestLibraries.junit
     androidTestImplementation TestLibraries.ext
     androidTestImplementation TestLibraries.espresso

@@ -22,6 +22,8 @@ object Versions {
     val coreKtx = "1.5.0-alpha01"
     val constraintLayout = "2.0.0-rc1"
     val material = "1.6.1"
+    val annotation = "1.4.0"
+    val legacy = "1.0.0"
 
     val recyclerview = "1.2.0-alpha05"
 
@@ -96,6 +98,8 @@ object AndroidLibraries {
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
     val material = "com.google.android.material:material:${Versions.material}"
+    val annotation = "androidx.annotation:annotation:${Versions.annotation}"
+    val legacy = "androidx.legacy:legacy-support-v4:${Versions.legacy}"
 
     // NAVIGATION
     val navigation = "androidx.navigation:navigation-ui-ktx:${Versions.nav}"

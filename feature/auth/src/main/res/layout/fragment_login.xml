@@ -18,7 +18,7 @@
         android:focusable="true">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textView_fragmentLogin_welcome"
+            android:id="@+id/textView_login_welcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_welcome"
@@ -31,17 +31,17 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_fragmentLogin_username"
+            android:id="@+id/textInputLayout_login_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/textView_fragmentLogin_welcome"
+            app:layout_constraintTop_toBottomOf="@id/textView_login_welcome"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="50dp"
             android:layout_marginStart="@dimen/margin_logintextinput_marginstart"
             android:layout_marginEnd="@dimen/margin_logintextinput_marginend">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_fragmentLogin_username"
+                android:id="@+id/textInput_login_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@={authViewModel.username}"
@@ -51,17 +51,17 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout_fragmentLogin_password"
+            android:id="@+id/textInputLayout_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentLogin_username"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout_login_username"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
             android:layout_marginStart="@dimen/margin_logintextinput_marginstart"
             android:layout_marginEnd="@dimen/margin_logintextinput_marginend">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/textInput_fragmentLogin_password"
+                android:id="@+id/textInput_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/textsize_login_input"
@@ -79,10 +79,10 @@
             android:textColor="@color/black"
             android:layout_marginTop="6dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentLogin_password"/>
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout_login_password"/>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_fragmentLogin_login"
+            android:id="@+id/button_login_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/login_textlogin"
@@ -95,11 +95,11 @@
             android:layout_marginEnd="@dimen/margin_loginbutton_marginend"
             android:layout_marginStart="@dimen/margin_loginbutton_marginstart"
             android:layout_marginTop="@dimen/margin_loginbutton_margintop"
-            app:layout_constraintTop_toBottomOf="@id/textInputLayout_fragmentLogin_password"
+            app:layout_constraintTop_toBottomOf="@id/textInputLayout_login_password"
             app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textView_fragmentLogin_noAccount"
+                android:id="@+id/textView_login_noAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login_noacc"
@@ -118,8 +118,8 @@
             android:textColor="#2196F3"
             android:textSize="@dimen/textsize_login_register"
             android:layout_marginStart="6dp"
-            app:layout_constraintBaseline_toBaselineOf="@id/textView_fragmentLogin_noAccount"
-            app:layout_constraintStart_toEndOf="@id/textView_fragmentLogin_noAccount"/>
+            app:layout_constraintBaseline_toBaselineOf="@id/textView_login_noAccount"
+            app:layout_constraintStart_toEndOf="@id/textView_login_noAccount"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -130,7 +130,7 @@
             android:visibility="@{authViewModel.progressBarVisibility}">
 
             <ProgressBar
-                android:id="@+id/progressBar_fragmentLogin"
+                android:id="@+id/progressBar_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
