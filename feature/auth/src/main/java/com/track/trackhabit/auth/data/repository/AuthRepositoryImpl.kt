@@ -19,9 +19,9 @@ class AuthRepositoryImpl @Inject constructor(private val authDataSource: AuthDat
         email: String,
         username: String,
         password: String,
-        fullname: String
+        fullName: String
     ): Resource<RegisterResponse> {
-        val registerRequest = RegisterRequest(email, username, password, fullname)
+        val registerRequest = RegisterRequest(email, username, password, fullName)
         return authDataSource.register(registerRequest)
     }
 

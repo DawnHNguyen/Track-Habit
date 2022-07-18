@@ -47,6 +47,7 @@
                 android:text="@={authViewModel.username}"
                 android:textSize="@dimen/textsize_login_input"
                 android:hint="@string/login_usernamehint"
+                android:inputType="textEmailAddress"
                 android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
