@@ -1,6 +1,7 @@
 import com.track.buildsrc.AndroidLibraries
 import com.track.buildsrc.Libraries
 import com.track.buildsrc.TestLibraries
+import com.track.buildsrc.SdkVersions
 
 plugins {
     id 'com.android.library'
@@ -9,11 +10,11 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk SdkVersions.compileSdkVersion
 
     defaultConfig {
-        minSdk 23
-        targetSdk 30
+        minSdk SdkVersions.minSdkVersion
+        targetSdk SdkVersions.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -27,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility SdkVersions.javaVersion
+        targetCompatibility SdkVersions.javaVersion
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = SdkVersions.jvmTarget
     }
 }
 

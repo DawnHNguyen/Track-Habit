@@ -3,6 +3,7 @@ package com.track.trackhabit.habit.presentation.ui.home
 import android.util.Log
 import androidx.lifecycle.*
 import com.track.common.base.AppDispatchers
+import com.track.common.base.utils.checkIsTodayDateFormatValue
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.Inspection
 import com.track.trackhabit.habit.domain.usecase.*
@@ -20,13 +21,12 @@ class HomeViewModel @Inject constructor(
     private val updateHabitUseCase: UpdateHabitUseCase,
     private val deleteHabitUseCase: DeleteHabitUseCase,
     private val addInspectionUseCase: AddInspectionUseCase,
+    private val updateInspectionUseCase: UpdateInspectionUseCase,
     private val dispatcher: AppDispatchers
 ) : ViewModel() {
     private val _habitList = MediatorLiveData<List<Habit>>()
     val habitList: LiveData<List<Habit>> get() = _habitList
     private var habitListSource: LiveData<List<Habit>> = MutableLiveData()
-
-    private var idHabit: Int = 0
 
     init {
         getHabit()
@@ -56,16 +56,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun addInspection() {
+    fun updateInspection(habit: Habit) {
         viewModelScope.launch(Dispatchers.Main) {
             withContext(Dispatchers.IO) {
-                addInspectionUseCase(Inspection(0, Date(), true), idHabit)
-                Log.d("check_update_inspection", "$idHabit")
+                if (habit.performances.isNotEmpty() && checkIsTodayDateFormatValue(habit.performances.last().time)){
+                    val performance = habit.performances.last()
+                    updateInspectionUseCase(Inspection(performance.inspectionId, performance.time, !performance.check), habit.habitId)
+                }
+                else addInspectionUseCase(Inspection(0, Date(), true), habit.habitId)
             }
         }
-    }
-
-    fun getHabitId(id: Int){
-        idHabit = id
     }
 }

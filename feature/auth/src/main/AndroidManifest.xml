@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.track.trackhabit.auth">
+
+    <application>
+        <activity
+            android:name=".presentation.ui.AuthenticationActivity"
+            android:exported="true"
+            android:label="Auth demo screen"
+            android:theme="@style/Theme.TrackHabit">
+        </activity>
+    </application>
+
+</manifest>
