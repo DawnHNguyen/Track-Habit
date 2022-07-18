@@ -5,10 +5,10 @@ import com.track.buildsrc.TestLibraries
 import com.track.buildsrc.SdkVersions
 
 plugins {
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
     id 'com.android.application'
     id 'kotlin-android'
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
