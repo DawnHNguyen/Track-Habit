@@ -1,6 +1,8 @@
 package com.track.trackhabit.auth.data.remote.util
 
 import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonPrimitive
 import okhttp3.Request
 import okhttp3.ResponseBody
 import okio.IOException
@@ -90,6 +92,7 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
                     Timber.d("EO-75 onResponse()")
                     val body = response.body()
                     val code = response.code()
+                    val errorBody = response.errorBody()?.string().orEmpty()
 
                     if (response.isSuccessful && response.body() != null) {
                         callback.onResponse(this@ResourceCall, Response.success(
@@ -100,7 +103,17 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
                     } else {
                         val gson = Gson()
                         val message = try {
-                            gson.fromJson(response.errorBody()?.string().orEmpty(), BaseErrorResponse::class.java).message
+                            val errorResponse = gson.fromJson(errorBody, BaseErrorResponse::class.java).message
+                            when (errorResponse) {
+                                is JsonPrimitive -> if(errorResponse.isString) errorResponse.asString else ""
+                                is JsonArray -> {
+                                    if (errorResponse.size() > 0 && errorResponse.get(0).isJsonPrimitive) {
+                                        val errorResponsePrimitive = errorResponse.get(0) as JsonPrimitive
+                                        if (errorResponsePrimitive.isString) errorResponsePrimitive.asString else ""
+                                    } else ""
+                                }
+                                else -> ""
+                            }
                         } catch (e: Exception) {
                             ""
                         }
