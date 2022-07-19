@@ -12,7 +12,7 @@ interface AuthRepository {
         email: String,
         username: String,
         password: String,
-        fullname: String
+        fullName: String
     ): Resource<RegisterResponse>
 
     suspend fun getEmailToken(email: String): Resource<EmailTokenResponse>
