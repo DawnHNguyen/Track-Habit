@@ -81,31 +81,70 @@ class AuthViewModel @Inject constructor(
     }
 
     fun register() {
-        if (
-            (username.value?.length ?: 0) < 6 ||
-            (password.value?.length ?: 0) < 8 ||
-            password.value != confirmPassword.value ||
-            (fullName.value?.length ?: 0) < 6
-        ) {
-            if ((username.value?.length ?: 0) < 6) _usernameErrorVisibility.value = View.VISIBLE
-            if ((password.value?.length ?: 0) < 8) _passwordErrorVisibility.value = View.VISIBLE
-            if (password.value != confirmPassword.value) _confirmPasswordErrorVisibility.value = View.VISIBLE
-            if ((fullName.value?.length ?: 0) < 6) _fullNameErrorVisibility.value = View.VISIBLE
-        } else {
-            _registerStateFlow.value = Resource.loading()
-            updateRegisterProgressBarVisibility()
-            viewModelScope.launch(dispatcher.main) {
-                withContext(dispatcher.io) {
-                    val registerResponse =
-                        registerUseCase(
-                            email.value.toString(),
-                            username.value.toString(),
-                            password.value.toString(),
-                            fullName.value.toString()
-                        )
-                    _registerStateFlow.tryEmit(registerResponse)
-                }
+        if (!isValidInput()) return
+        _registerStateFlow.value = Resource.loading()
+        updateRegisterProgressBarVisibility()
+        viewModelScope.launch(dispatcher.main) {
+            withContext(dispatcher.io) {
+                val registerResponse =
+                    registerUseCase(
+                        email.value.toString(),
+                        username.value.toString(),
+                        password.value.toString(),
+                        fullName.value.toString()
+                    )
+                _registerStateFlow.tryEmit(registerResponse)
             }
+        }
+
+    }
+
+    private fun isValidInput(): Boolean{
+        var isValid = true
+        if(!isValidUsernameInput()) isValid = false
+        if(!isValidPasswordInput()) isValid = false
+        if(!isMatchConfirmPassword()) isValid = false
+        if(!isValidFullNameInput()) isValid = false
+        return isValid
+    }
+
+    private fun isValidUsernameInput(): Boolean{
+        return if ((username.value?.length ?: 0) < 6) {
+            _usernameErrorVisibility.value = View.VISIBLE
+            false
+        } else {
+            _usernameErrorVisibility.value = View.GONE
+            true
+        }
+    }
+
+    private fun isValidPasswordInput(): Boolean{
+        return if ((password.value?.length ?: 0) < 8) {
+            _passwordErrorVisibility.value = View.VISIBLE
+            false
+        } else {
+            _passwordErrorVisibility.value = View.GONE
+            true
+        }
+    }
+
+    private fun isMatchConfirmPassword(): Boolean{
+        return if (password.value != confirmPassword.value) {
+            _confirmPasswordErrorVisibility.value = View.VISIBLE
+            false
+        } else {
+            _confirmPasswordErrorVisibility.value = View.GONE
+            true
+        }
+    }
+
+    private fun isValidFullNameInput(): Boolean{
+        return if ((fullName.value?.length ?: 0) < 6) {
+            _fullNameErrorVisibility.value = View.VISIBLE
+            false
+        } else {
+            _fullNameErrorVisibility.value = View.GONE
+            true
         }
     }
 
