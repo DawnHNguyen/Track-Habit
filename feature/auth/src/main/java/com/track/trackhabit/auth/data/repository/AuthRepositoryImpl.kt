@@ -1,5 +1,7 @@
 package com.track.trackhabit.auth.data.repository
 
+import com.orhanobut.hawk.Hawk
+import com.track.common.base.constpackage.HawkKey
 import com.track.trackhabit.auth.data.remote.auth.dto.EmailTokenRequest
 import com.track.trackhabit.auth.data.remote.auth.dto.LoginRequest
 import com.track.trackhabit.auth.data.remote.auth.dto.RegisterRequest
@@ -40,6 +42,11 @@ class AuthRepositoryImpl @Inject constructor(private val authDataSource: AuthDat
 
     override suspend fun login(username: String, password: String): Resource<LoginResponse> {
         val loginRequest = LoginRequest(username, password)
-        return authDataSource.login(loginRequest)
+        val loginResponse = authDataSource.login(loginRequest)
+        if (loginResponse.isSuccessful()) {
+            Hawk.put(HawkKey.ACCESS_TOKEN, loginResponse.data?.accessToken)
+            Hawk.put(HawkKey.REFRESH_TOKEN, loginResponse.data?.refreshToken)
+        }
+        return loginResponse
     }
 }

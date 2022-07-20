@@ -101,10 +101,12 @@ class AuthViewModel @Inject constructor(
 
     private fun isValidInput(): Boolean{
         var isValid = true
+
         if(!isValidUsernameInput()) isValid = false
         if(!isValidPasswordInput()) isValid = false
         if(!isMatchConfirmPassword()) isValid = false
         if(!isValidFullNameInput()) isValid = false
+
         return isValid
     }
 
