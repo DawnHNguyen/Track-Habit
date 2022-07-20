@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.orhanobut.hawk.Hawk
+import com.track.common.base.constpackage.HawkKey
 import com.track.common.base.utils.hideKeyboard
 import com.track.trackhabit.auth.R
 import com.track.trackhabit.auth.databinding.FragmentLoginBinding
@@ -38,6 +40,10 @@ class LoginFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.loginStateFlow.collect {
                 if (it.isError()) Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                else if (it.isSuccessful()) {
+                    Hawk.put(HawkKey.ACCESS_TOKEN, it.data?.accessToken)
+                    Hawk.put(HawkKey.REFRESH_TOKEN, it.data?.refreshToken)
+                }
             }
         }
 
