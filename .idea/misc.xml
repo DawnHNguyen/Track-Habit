@@ -19,6 +19,7 @@
         <entry key="feature/auth/src/main/res/layout/activity_authentication.xml" value="0.13381787088499358" />
         <entry key="feature/auth/src/main/res/layout/fragment_login.xml" value="0.13381787088499358" />
         <entry key="feature/auth/src/main/res/layout/fragment_register.xml" value="0.13936481404095277" />
+        <entry key="feature/auth/src/main/res/layout/fragment_verify_email.xml" value="0.33" />
         <entry key="feature/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_itemhabit.xml" value="0.30572916666666666" />
         <entry key="feature/trackhabit/src/main/res/drawable/switch_thumb_custom.xml" value="0.26" />

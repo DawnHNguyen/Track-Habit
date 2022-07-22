@@ -27,6 +27,20 @@
         <action
             android:id="@+id/action_nav_register_to_login"
             app:destination="@id/login" />
+        <action
+            android:id="@+id/action_nav_register_to_nav_verifyEmail"
+            app:destination="@id/nav_verifyEmail" />
     </fragment>
     <include app:graph="@navigation/nav_graph" />
+
+    <fragment
+        android:id="@+id/nav_verifyEmail"
+        android:name="com.track.trackhabit.auth.presentation.ui.auth.register.VerifyEmailFragment"
+        android:label="verify"
+        tools:layout="@layout/fragment_verify_email">
+
+        <action
+            android:id="@+id/action_nav_verifyEmail_to_login"
+            app:destination="@id/login" />
+    </fragment>
 </navigation>
