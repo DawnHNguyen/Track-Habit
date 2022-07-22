@@ -109,7 +109,7 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
                                 is JsonArray -> {
                                     if (errorResponse.size() > 0 && errorResponse.get(0).isJsonPrimitive) {
                                         val errorResponsePrimitive = errorResponse.get(0) as JsonPrimitive
-                                        if (errorResponsePrimitive.isString) errorResponsePrimitive.asString else ""
+                                        if (errorResponsePrimitive.isString) errorResponsePrimitive.asString.replaceFirstChar { it.uppercase() } else ""
                                     } else ""
                                 }
                                 else -> ""

@@ -1,18 +1,20 @@
 package com.track.trackhabit.auth.presentation.ui.auth.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.track.common.base.utils.hideKeyboard
 import com.track.trackhabit.auth.R
 import com.track.trackhabit.auth.databinding.FragmentLoginBinding
 import com.track.trackhabit.auth.presentation.ui.auth.AuthViewModel
+import com.track.trackhabit.habit.presentation.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -20,7 +22,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private val viewModel by viewModels<AuthViewModel>()
+    private val viewModel by activityViewModels<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,7 +39,14 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             viewModel.loginStateFlow.collect {
-                if (it.isError()) Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                when{
+                    it.isError() -> Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                    it.isSuccessful() -> {
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }
+                }
             }
         }
 
