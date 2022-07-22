@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class EmailTokenResponse(
     @SerializedName("message")
-    val message: String
+    val message: String?
 )

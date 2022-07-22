@@ -44,7 +44,6 @@ class LoginFragment : Fragment() {
         binding.buttonLoginLogin.setOnClickListener {
             viewModel.login()
             hideKeyboard()
-            viewModel.updateProgressBarVisibility()
         }
 
         binding.parentView.setOnClickListener {

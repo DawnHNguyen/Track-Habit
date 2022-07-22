@@ -81,6 +81,8 @@ dependencies {
     implementation AndroidLibraries.retrofitConverter
     implementation AndroidLibraries.gson
     implementation AndroidLibraries.loggingIntercepter
+
+    implementation AndroidLibraries.hawk
 }
 
 // Allow references to generated code
