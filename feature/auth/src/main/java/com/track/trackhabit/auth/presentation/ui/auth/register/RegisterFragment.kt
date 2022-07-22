@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isNotEmpty
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,7 +20,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterFragment: Fragment() {
-    private lateinit var binding: FragmentRegisterBinding
+    private var _binding: FragmentRegisterBinding? = null
+
+    private val binding get() = _binding!!
     private val viewModel by viewModels<AuthViewModel>()
 
     override fun onCreateView(
@@ -27,7 +30,7 @@ class RegisterFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.authViewModel = viewModel
         return binding.root
@@ -43,6 +46,9 @@ class RegisterFragment: Fragment() {
         lifecycleScope.launch {
             viewModel.registerStateFlow.collect {
                 if (it.isError()) Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                else if(it.isSuccessful()) {
+                    findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
+                }
             }
         }
 
@@ -54,6 +60,10 @@ class RegisterFragment: Fragment() {
         binding.parentView.setOnClickListener {
             hideKeyboard()
         }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

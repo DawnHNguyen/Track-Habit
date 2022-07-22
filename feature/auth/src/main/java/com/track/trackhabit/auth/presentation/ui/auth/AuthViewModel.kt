@@ -81,7 +81,7 @@ class AuthViewModel @Inject constructor(
     }
 
     fun register() {
-        if (!isValidInput()) return
+        if(!isValidInput()) return
         _registerStateFlow.value = Resource.loading()
         updateRegisterProgressBarVisibility()
         viewModelScope.launch(dispatcher.main) {
