@@ -46,24 +46,24 @@ class RegisterFragment: Fragment() {
         lifecycleScope.launch {
             viewModel.registerStateFlow.collect {
                 if (it.isError()) Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                else if(it.isSuccessful()) {
+                    findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
+                }
             }
         }
 
         binding.buttonRegisterRegister.setOnClickListener {
             viewModel.register()
             hideKeyboard()
-//            xử lý navigation chuyển sang màn verify
-            findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
         }
 
         binding.parentView.setOnClickListener {
             hideKeyboard()
         }
-
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
