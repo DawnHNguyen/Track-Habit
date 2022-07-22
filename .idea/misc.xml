@@ -76,6 +76,8 @@
         <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/layout/item_sleep_time.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/lopho/StudioProjects/track-habit/feature/trackhabit/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2270168855534709" />
+        <entry key="feature/auth/src/main/res/layout/fragment_register.xml" value="0.19281744335185977" />
+        <entry key="feature/auth/src/main/res/layout/fragment_verify_email.xml" value="0.19281744335185977" />
         <entry key="feature/src/main/res/layout/activity_main.xml" value="0.16869300911854104" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_addhabit.xml" value="0.2989583333333333" />
         <entry key="feature/trackhabit/src/main/res/drawable/background_addhabit_checked.xml" value="0.158" />

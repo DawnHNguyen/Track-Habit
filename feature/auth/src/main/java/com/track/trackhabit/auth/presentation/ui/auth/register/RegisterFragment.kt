@@ -20,7 +20,9 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterFragment: Fragment() {
-    private lateinit var binding: FragmentRegisterBinding
+    private var _binding: FragmentRegisterBinding? = null
+
+    private val binding get() = _binding!!
     private val viewModel by viewModels<AuthViewModel>()
 
     override fun onCreateView(
@@ -28,7 +30,7 @@ class RegisterFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.authViewModel = viewModel
         return binding.root
@@ -40,15 +42,6 @@ class RegisterFragment: Fragment() {
         binding.buttonTextRegisterLoginAccount.setOnClickListener {
             findNavController().navigate(R.id.action_nav_register_to_login)
         }
-//      xử lý navigation chuyển sang màn verify
-        binding.buttonRegisterRegister.setOnClickListener{
-            if (binding.textInputRegisterEmail.text.toString().isNotEmpty()
-                && binding.textInputRegisterUsername.text.toString().isNotEmpty()
-                && binding.textInputRegisterPassword.text.toString().isNotEmpty()
-                && binding.textInputRegisterConfirmPass.text.toString().isNotEmpty()
-                && binding.textInputRegisterFullname.text.toString().isNotEmpty())
-            findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
-        }
 
         lifecycleScope.launch {
             viewModel.registerStateFlow.collect {
@@ -59,11 +52,18 @@ class RegisterFragment: Fragment() {
         binding.buttonRegisterRegister.setOnClickListener {
             viewModel.register()
             hideKeyboard()
+//            xử lý navigation chuyển sang màn verify
+            findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
         }
 
         binding.parentView.setOnClickListener {
             hideKeyboard()
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
