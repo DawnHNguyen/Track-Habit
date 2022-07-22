@@ -7,7 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeActivityViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     private val dispatcher: AppDispatchers,
     private val getLanguagePrefUseCase: GetLanguagePrefUseCase
 ) : ViewModel() {

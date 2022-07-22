@@ -5,7 +5,7 @@
 
     <application>
         <activity
-            android:name=".presentation.ui.HomeActivity"
+            android:name=".presentation.ui.MainActivity"
             android:exported="true">
         </activity>
     </application>
