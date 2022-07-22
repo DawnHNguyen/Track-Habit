@@ -1,6 +1,5 @@
 package com.track.trackhabit.auth.presentation.ui.auth.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.track.common.base.utils.hideKeyboard
+import com.track.navigation.navigateToMainActivity
 import com.track.trackhabit.auth.R
 import com.track.trackhabit.auth.databinding.FragmentLoginBinding
 import com.track.trackhabit.auth.presentation.ui.auth.AuthViewModel
-import com.track.trackhabit.habit.presentation.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -42,8 +41,7 @@ class LoginFragment : Fragment() {
                 when{
                     it.isError() -> Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
                     it.isSuccessful() -> {
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent)
+                        navigateToMainActivity(requireContext())
                         activity?.finish()
                     }
                 }
