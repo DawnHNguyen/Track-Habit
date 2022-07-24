@@ -50,11 +50,22 @@ class VerifyEmailFragment: Fragment() {
                     }
                 }
             }
+
+            viewModel.getCodeStateFlow.collect {
+                when {
+                    it.isError() -> Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                    it.isSuccessful() -> Toast.makeText(context, it.data?.message.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
         }
 
         binding.buttonVerifyConfirm.setOnClickListener {
             viewModel.verifyEmail()
             hideKeyboard()
+        }
+
+        binding.textViewVerifyEmailGetCodeAgain.setOnClickListener {
+            viewModel.getEmailToken()
         }
 
     }

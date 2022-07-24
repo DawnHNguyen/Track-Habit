@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
+import com.track.trackhabit.auth.data.remote.auth.dto.response.EmailTokenResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
@@ -36,6 +37,9 @@ class AuthViewModel @Inject constructor(
 
     private var _registerStateFlow: MutableStateFlow<Resource<RegisterResponse>> = MutableStateFlow(Resource.loading())
     val registerStateFlow: StateFlow<Resource<RegisterResponse>> get() = _registerStateFlow
+
+    private var _getCodeStateFlow: MutableStateFlow<Resource<EmailTokenResponse>> = MutableStateFlow(Resource.loading())
+    val getCodeStateFlow: StateFlow<Resource<EmailTokenResponse>> get() = _getCodeStateFlow
 
     private var _verifyEmailStateFlow: MutableStateFlow<Resource<VerifyEmailTokenResponse>> = MutableStateFlow(Resource.loading())
     val verifyEmailStateFlow: StateFlow<Resource<VerifyEmailTokenResponse>> get() = _verifyEmailStateFlow
@@ -98,7 +102,6 @@ class AuthViewModel @Inject constructor(
                         fullName.value.toString()
                     )
                 _registerStateFlow.tryEmit(registerResponse)
-                if (registerResponse.isSuccessful()) getEmailTokenUseCase(email.value.toString())
             }
         }
 
@@ -178,6 +181,15 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch(dispatcher.main) {
             verifyEmailStateFlow.collect {
                 progressBarVisibility.value = if (it.isLoading()) View.VISIBLE else View.GONE
+            }
+        }
+    }
+
+    fun getEmailToken(){
+        viewModelScope.launch(dispatcher.main) {
+            withContext(dispatcher.io) {
+                val getEmailToken = getEmailTokenUseCase(email.value.toString())
+                _getCodeStateFlow.tryEmit(getEmailToken)
             }
         }
     }

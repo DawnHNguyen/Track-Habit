@@ -46,7 +46,10 @@ class RegisterFragment: Fragment() {
             viewModel.registerStateFlow.collect {
                 when {
                     it.isError() -> Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
-                    it.isSuccessful() -> findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
+                    it.isSuccessful() -> {
+                        viewModel.getEmailToken()
+                        findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
+                    }
                 }
             }
         }

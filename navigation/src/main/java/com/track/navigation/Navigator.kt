@@ -8,3 +8,8 @@ fun navigateToMainActivity(context: Context){
     val intent = Intent(context, Class.forName("com.track.trackhabit.habit.presentation.ui.MainActivity"))
     startActivity(context, intent, null)
 }
+
+fun navigateToAuthActivity(context: Context){
+    val intent = Intent(context, Class.forName("com.track.trackhabit.auth.presentation.ui.AuthenticationActivity"))
+    startActivity(context, intent, null)
+}
