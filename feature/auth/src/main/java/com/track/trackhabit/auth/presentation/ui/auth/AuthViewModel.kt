@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
+import com.track.trackhabit.auth.data.remote.auth.dto.response.EmailTokenResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
+import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
 import com.track.trackhabit.auth.data.remote.util.Resource
 import com.track.trackhabit.auth.domain.usecase.GetEmailTokenUseCase
 import com.track.trackhabit.auth.domain.usecase.LoginUseCase
@@ -35,6 +37,12 @@ class AuthViewModel @Inject constructor(
 
     private var _registerStateFlow: MutableStateFlow<Resource<RegisterResponse>> = MutableStateFlow(Resource.loading())
     val registerStateFlow: StateFlow<Resource<RegisterResponse>> get() = _registerStateFlow
+
+    private var _getCodeStateFlow: MutableStateFlow<Resource<EmailTokenResponse>> = MutableStateFlow(Resource.loading())
+    val getCodeStateFlow: StateFlow<Resource<EmailTokenResponse>> get() = _getCodeStateFlow
+
+    private var _verifyEmailStateFlow: MutableStateFlow<Resource<VerifyEmailTokenResponse>> = MutableStateFlow(Resource.loading())
+    val verifyEmailStateFlow: StateFlow<Resource<VerifyEmailTokenResponse>> get() = _verifyEmailStateFlow
 
     val progressBarVisibility = MutableLiveData(View.GONE)
 
@@ -154,6 +162,34 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch(dispatcher.main) {
             registerStateFlow.collect {
                 progressBarVisibility.value = if (it.isLoading()) View.VISIBLE else View.GONE
+            }
+        }
+    }
+
+    fun verifyEmail(){
+        _verifyEmailStateFlow.value = Resource.loading()
+        updateVerifyEmailProgressBarVisibility()
+        viewModelScope.launch(dispatcher.main) {
+            withContext(dispatcher.io) {
+                val verifyEmailResponse = verifyEmailTokenUseCase(email.value.toString(), verifyCode.value.toString())
+                _verifyEmailStateFlow.tryEmit(verifyEmailResponse)
+            }
+        }
+    }
+
+    private fun updateVerifyEmailProgressBarVisibility() {
+        viewModelScope.launch(dispatcher.main) {
+            verifyEmailStateFlow.collect {
+                progressBarVisibility.value = if (it.isLoading()) View.VISIBLE else View.GONE
+            }
+        }
+    }
+
+    fun getEmailToken(){
+        viewModelScope.launch(dispatcher.main) {
+            withContext(dispatcher.io) {
+                val getEmailToken = getEmailTokenUseCase(email.value.toString())
+                _getCodeStateFlow.tryEmit(getEmailToken)
             }
         }
     }

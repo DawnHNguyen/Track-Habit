@@ -60,8 +60,6 @@ dependencies {
 
     implementation project(Modules.common)
     implementation project(Modules.navigation)
-    
-
 
     implementation Libraries.Timber
 
