@@ -1,4 +1,4 @@
-package com.track.trackhabit.auth.data.remote.util
+package com.track.common.base.data.remote.util
 
 class NoNetworkException(message: String?): Exception(message)
 class NetworkAuthenticationException(message: String?) : Exception(message)

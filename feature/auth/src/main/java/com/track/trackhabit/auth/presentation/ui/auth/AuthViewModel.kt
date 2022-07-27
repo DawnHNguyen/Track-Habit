@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
+import com.track.common.base.data.remote.util.Resource
 import com.track.trackhabit.auth.data.remote.auth.dto.response.EmailTokenResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
-import com.track.trackhabit.auth.data.remote.util.Resource
 import com.track.trackhabit.auth.domain.usecase.GetEmailTokenUseCase
 import com.track.trackhabit.auth.domain.usecase.LoginUseCase
 import com.track.trackhabit.auth.domain.usecase.RegisterUseCase
@@ -32,16 +32,20 @@ class AuthViewModel @Inject constructor(
     private val verifyEmailTokenUseCase: VerifyEmailTokenUseCase
 ) : ViewModel() {
 
-    private var _loginStateFlow: MutableStateFlow<Resource<LoginResponse>> = MutableStateFlow(Resource.loading())
+    private var _loginStateFlow: MutableStateFlow<Resource<LoginResponse>> = MutableStateFlow(
+        Resource.loading())
     val loginStateFlow: StateFlow<Resource<LoginResponse>> get() = _loginStateFlow
 
-    private var _registerStateFlow: MutableStateFlow<Resource<RegisterResponse>> = MutableStateFlow(Resource.loading())
+    private var _registerStateFlow: MutableStateFlow<Resource<RegisterResponse>> = MutableStateFlow(
+        Resource.loading())
     val registerStateFlow: StateFlow<Resource<RegisterResponse>> get() = _registerStateFlow
 
-    private var _getCodeStateFlow: MutableStateFlow<Resource<EmailTokenResponse>> = MutableStateFlow(Resource.loading())
+    private var _getCodeStateFlow: MutableStateFlow<Resource<EmailTokenResponse>> = MutableStateFlow(
+        Resource.loading())
     val getCodeStateFlow: StateFlow<Resource<EmailTokenResponse>> get() = _getCodeStateFlow
 
-    private var _verifyEmailStateFlow: MutableStateFlow<Resource<VerifyEmailTokenResponse>> = MutableStateFlow(Resource.loading())
+    private var _verifyEmailStateFlow: MutableStateFlow<Resource<VerifyEmailTokenResponse>> = MutableStateFlow(
+        Resource.loading())
     val verifyEmailStateFlow: StateFlow<Resource<VerifyEmailTokenResponse>> get() = _verifyEmailStateFlow
 
     val progressBarVisibility = MutableLiveData(View.GONE)

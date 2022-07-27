@@ -1,8 +1,9 @@
 package com.track.trackhabit.auth.data.di
 
 import com.google.gson.Gson
+import com.track.common.base.data.remote.util.CallAdapterFactory
+import com.track.common.base.data.remote.util.HeaderAuthorizationInterceptor
 import com.track.trackhabit.auth.data.remote.auth.services.AuthService
-import com.track.trackhabit.auth.data.remote.util.CallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AuthenticationRemoteModule {
-    private const val BASE_URL = "https://api.trackhabit.gq/api/v1/auth/"
+    private const val BASE_URL = "https://api.trackhabit.gq/api/v1/"
 
     @Singleton
     @Provides
@@ -30,6 +31,7 @@ object AuthenticationRemoteModule {
     fun provideClient(httpLoggingInterceptor: HttpLoggingInterceptor) =
         OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(HeaderAuthorizationInterceptor())
             .callTimeout(1, TimeUnit.MINUTES)
             .connectTimeout(1, TimeUnit.MINUTES)
             .readTimeout(1, TimeUnit.MINUTES)

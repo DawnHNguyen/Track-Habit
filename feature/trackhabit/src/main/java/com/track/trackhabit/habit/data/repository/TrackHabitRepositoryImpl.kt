@@ -4,16 +4,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.map
 import com.track.trackhabit.habit.data.local.dao.HabitDao
+import com.track.trackhabit.habit.data.remote.dto.AddHabitRequest
+import com.track.trackhabit.habit.data.remote.services.HabitDataSource
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
 import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class TrackHabitRepositoryImpl @Inject constructor(
-    private val habitDao: HabitDao
+    private val habitDao: HabitDao,
+    private val habitDataSource: HabitDataSource
 ): TrackHabitRepository {
 
     override suspend fun addHabit(habit: Habit): Long {
+        val reminderDays = mutableListOf<Int>()
+        habit.frequency?.forEachIndexed { index, c ->
+            if(c == '1') reminderDays.add(index)
+        }
+        val reminderTime = SimpleDateFormat("HH:mm").format(habit.time.time)
+        val addHabitRequest = AddHabitRequest(null, reminderDays, reminderTime, habit.title)
+        habitDataSource.addHabit(addHabitRequest)
         return habitDao.insertHabit(habit.toLocalDto())
     }
 

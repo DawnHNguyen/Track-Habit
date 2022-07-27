@@ -1,7 +1,7 @@
 package com.track.trackhabit.auth.domain.usecase
 
+import com.track.common.base.data.remote.util.Resource
 import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
-import com.track.trackhabit.auth.data.remote.util.Resource
 import com.track.trackhabit.auth.domain.repository.AuthRepository
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.track.trackhabit.auth.data.remote.util
+package com.track.common.base.data.remote.util
 
 import com.google.gson.JsonElement
 import com.google.gson.annotations.SerializedName
