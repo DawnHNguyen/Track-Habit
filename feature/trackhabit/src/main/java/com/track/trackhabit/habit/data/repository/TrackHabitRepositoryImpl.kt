@@ -16,14 +16,18 @@ class TrackHabitRepositoryImpl @Inject constructor(
 ): TrackHabitRepository {
 
     override suspend fun addHabit(habit: Habit): Long {
-//        Đây là logic để addHabit qua API, không uncomment ở đây vì logic navigate sẽ làm quá trình call API bị Cancel
+//        Đây là logic để test API, không uncomment ở đây vì logic navigate sẽ làm quá trình call API bị Cancel
 //        val reminderDays = mutableListOf<Int>()
 //        habit.frequency?.forEachIndexed { index, c ->
 //            if(c == '1') reminderDays.add(index)
 //        }
 //        val reminderTime = SimpleDateFormat("HH:mm").format(habit.time.time)
-//        val addHabitRequest = AddHabitRequest(null, reminderDays, reminderTime, habit.title)
-//        habitDataSource.addHabit(addHabitRequest)
+//
+//        val habitRequest = HabitRequest(null, reminderDays, reminderTime, habit.title)
+////        habitDataSource.addHabit(addHabitRequest)
+////        habitDataSource.updateHabit(43, habitRequest)
+////        habitDataSource.getHabit("2022-07-29")
+////        habitDataSource.deleteHabit(43)
         return habitDao.insertHabit(habit.toLocalDto())
     }
 

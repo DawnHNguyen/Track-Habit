@@ -73,6 +73,7 @@ class HabitInfoFragment : Fragment() {
                 habitInfoViewModel.addHabit()
 
             }
+//            Comment to test are APIs whether or not work
             if (habitInfoViewModel.inputValidity.value == true) findNavController().navigate(R.id.action_nav_habitinfo_to_nav_home)
         }
 

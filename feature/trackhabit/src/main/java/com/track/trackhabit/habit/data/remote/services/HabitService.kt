@@ -10,11 +10,12 @@ interface HabitService {
     suspend fun addHabit(@Body habitRequest: HabitRequest): Resource<HabitResponse>
 
     @GET("habit")
-    suspend fun getHabit(@Path("before") before: String, @Path("limit") limit: Int = 0, @Path("page") page: Int = 1): Resource<List<HabitResponse?>>
+    suspend fun getHabit(@Query("before") before: String, @Query("limit") limit: Int = 0, @Query("page") page: Int = 1): Resource<List<HabitResponse?>>
 
-    @PATCH("habit")
+    @PATCH("habit/{id}")
     suspend fun updateHabit(@Path("id") id: Int, @Body habitRequest: HabitRequest): Resource<HabitResponse>
 
-    @DELETE("habit")
+    @DELETE("habit/{id}")
     suspend fun deleteHabit(@Path("id") id: Int): Resource<HabitResponse>
+
 }
