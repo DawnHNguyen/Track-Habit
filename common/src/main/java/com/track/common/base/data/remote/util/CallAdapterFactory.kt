@@ -1,4 +1,4 @@
-package com.track.trackhabit.auth.data.remote.util
+package com.track.common.base.data.remote.util
 
 import com.google.gson.Gson
 import com.google.gson.JsonArray
@@ -8,7 +8,6 @@ import okhttp3.ResponseBody
 import okio.IOException
 import okio.Timeout
 import retrofit2.*
-import timber.log.Timber
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import javax.net.ssl.SSLHandshakeException
@@ -26,7 +25,6 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
         annotations: Array<Annotation>,
         retrofit: Retrofit
     ): CallAdapter<*, *>? {
-        Timber.d("EO-75 CallAdapterFactory get()")
         if (getRawType(returnType) != Call::class.java) {
             return null
         }
@@ -61,7 +59,6 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
         override fun responseType() : Type = responseType
 
         override fun adapt(call: Call<T>): Call<Resource<T>> {
-            Timber.d("EO-75 BodyCallAdapter adapt()")
             return ResourceCall(call, converter)
         }
     }
@@ -69,11 +66,9 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
     internal class ResourceCall<S: Any>(private val delegate: Call<S>, private val converter: Converter<ResponseBody, Resource<S>>) :
         Call<Resource<S>> {
         override fun enqueue(callback: Callback<Resource<S>>) {
-            Timber.d("EO-75 ResourceCall enqueue()")
 
             delegate.enqueue(object : Callback<S> {
                 override fun onFailure(call: Call<S>, t: Throwable) {
-                    Timber.d("EO-75 onFailure()")
                     val apiResponse = when (t) {
                         is IOException, is SSLHandshakeException -> Resource.error(
                             NoNetworkException("No network connection"),
@@ -89,7 +84,6 @@ class CallAdapterFactory private constructor() : CallAdapter.Factory() {
                 }
 
                 override fun onResponse(call: Call<S>, response: Response<S>) {
-                    Timber.d("EO-75 onResponse()")
                     val body = response.body()
                     val code = response.code()
                     val errorBody = response.errorBody()?.string().orEmpty()

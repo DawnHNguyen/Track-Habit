@@ -49,4 +49,11 @@ dependencies {
 
     implementation Libraries.daggerHilt
     kapt Libraries.hiltCompiler
+
+    implementation AndroidLibraries.retrofit
+    implementation AndroidLibraries.retrofitConverter
+    implementation AndroidLibraries.gson
+    implementation AndroidLibraries.loggingIntercepter
+
+    implementation AndroidLibraries.hawk
 }

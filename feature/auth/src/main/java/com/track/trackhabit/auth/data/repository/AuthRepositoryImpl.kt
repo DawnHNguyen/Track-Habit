@@ -2,6 +2,7 @@ package com.track.trackhabit.auth.data.repository
 
 import com.orhanobut.hawk.Hawk
 import com.track.common.base.constpackage.HawkKey
+import com.track.common.base.data.remote.util.Resource
 import com.track.trackhabit.auth.data.remote.auth.dto.EmailTokenRequest
 import com.track.trackhabit.auth.data.remote.auth.dto.LoginRequest
 import com.track.trackhabit.auth.data.remote.auth.dto.RegisterRequest
@@ -11,7 +12,6 @@ import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
 import com.track.trackhabit.auth.data.remote.auth.services.AuthDataSource
-import com.track.trackhabit.auth.data.remote.util.Resource
 import com.track.trackhabit.auth.domain.repository.AuthRepository
 import javax.inject.Inject
 

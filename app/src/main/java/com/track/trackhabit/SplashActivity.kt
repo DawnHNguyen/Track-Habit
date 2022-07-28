@@ -18,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
             delay(600)
 //            val intent = if (Hawk.contains(HawkKey.ACCESS_TOKEN)) Intent(this@SplashActivity, MainActivity::class.java)
 //            else
-               val intent = Intent(this@SplashActivity, AuthenticationActivity::class.java)
+                val intent = Intent(this@SplashActivity, AuthenticationActivity::class.java)
             startActivity(intent)
             finish()
         }
