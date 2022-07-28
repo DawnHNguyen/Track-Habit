@@ -1,10 +1,10 @@
 package com.track.trackhabit.auth.domain.repository
 
+import com.track.common.base.data.remote.util.Resource
 import com.track.trackhabit.auth.data.remote.auth.dto.response.EmailTokenResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
-import com.track.trackhabit.auth.data.remote.util.Resource
 
 
 interface AuthRepository {

@@ -1,6 +1,5 @@
 <resources>
     <!--    all-->
-    <string name="app_name" translatable="false">trackhabit</string>
     <string name="all_cancel">Cancel</string>
     <string name="all_ok" translatable="false">OK</string>
     <string name="all_back">Back</string>

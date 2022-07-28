@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isNotEmpty
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.track.common.base.utils.hideKeyboard
@@ -23,7 +22,7 @@ class RegisterFragment: Fragment() {
     private var _binding: FragmentRegisterBinding? = null
 
     private val binding get() = _binding!!
-    private val viewModel by viewModels<AuthViewModel>()
+    private val viewModel by activityViewModels<AuthViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +44,12 @@ class RegisterFragment: Fragment() {
 
         lifecycleScope.launch {
             viewModel.registerStateFlow.collect {
-                if (it.isError()) Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
-                else if(it.isSuccessful()) {
-                    findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
+                when {
+                    it.isError() -> Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
+                    it.isSuccessful() -> {
+                        viewModel.getEmailToken()
+                        findNavController().navigate(R.id.action_nav_register_to_nav_verifyEmail)
+                    }
                 }
             }
         }

@@ -74,7 +74,7 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun buildNotification(context: Context, habitName: String) {
-        val intent = Intent(context, HomeActivity::class.java).apply {
+        val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent: PendingIntent =
@@ -98,7 +98,7 @@ class AlarmReceiver : BroadcastReceiver() {
         habitName: String,
         habitID: Int
     ) {
-        val intent = Intent(context, HomeActivity::class.java).apply {
+        val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(

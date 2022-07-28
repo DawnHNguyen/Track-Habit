@@ -1,4 +1,4 @@
-package com.track.trackhabit.auth.data.remote.util
+package com.track.common.base.data.remote.util
 
 data class Resource<out T>(val status: Status, val data: T?, val error: Throwable?) {
     enum class Status {
