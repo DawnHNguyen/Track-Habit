@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.orhanobut.hawk.Hawk
+import com.track.common.base.constpackage.HawkKey
 import com.track.common.base.utils.hideKeyboard
 import com.track.navigation.navigateToMainActivity
 import com.track.trackhabit.auth.R
@@ -41,6 +43,7 @@ class LoginFragment : Fragment() {
                 when{
                     it.isError() -> Toast.makeText(context, it.error?.message.toString(), Toast.LENGTH_SHORT).show()
                     it.isSuccessful() -> {
+                        Hawk.put(HawkKey.IS_USE_ACC, true)
                         navigateToMainActivity(requireContext())
                         activity?.finish()
                     }
@@ -59,6 +62,12 @@ class LoginFragment : Fragment() {
 
         binding.buttonTextLoginRegistAccount.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_nav_register)
+        }
+
+        binding.buttonTextLoginSkipAccount.setOnClickListener {
+            Hawk.put(HawkKey.IS_USE_ACC, false)
+            navigateToMainActivity(requireContext())
+            activity?.finish()
         }
     }
 }

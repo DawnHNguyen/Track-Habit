@@ -8,6 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.orhanobut.hawk.Hawk
+import com.track.common.base.constpackage.HawkKey
+import com.track.navigation.navigateToAuthActivity
+import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentProfileBinding
 import com.track.trackhabit.habit.domain.entity.LanguageCode
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,6 +42,13 @@ class ProfileFragment : Fragment() {
         binding.switchButtonProfileLanguage.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) changeLanguage(LanguageCode.US.languageCode) else changeLanguage(LanguageCode.VN.languageCode)
         }
+
+        binding.buttonProfileLogOutLogIn.setOnClickListener {
+            navigateToAuthActivity(requireContext())
+            activity?.finish()
+        }
+
+        binding.buttonProfileLogOutLogIn.text = if (Hawk.get(HawkKey.IS_USE_ACC)) getString(R.string.profile_logout_button) else getString(R.string.profile_login_button)
 
     }
 
