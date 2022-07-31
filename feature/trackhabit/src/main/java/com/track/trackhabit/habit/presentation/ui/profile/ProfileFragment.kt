@@ -46,8 +46,9 @@ class ProfileFragment : Fragment() {
             activity?.finish()
         }
 
-        binding.buttonProfileLogOutLogIn.text = if (profileViewModel.isUseAcc.value == true) getString(R.string.profile_logout_button) else getString(R.string.profile_login_button)
-
+        profileViewModel.isUseAcc.observe(viewLifecycleOwner){
+            binding.buttonProfileLogOutLogIn.text = if (it) getString(R.string.profile_logout_button) else getString(R.string.profile_login_button)
+        }
     }
 
     private fun changeLanguage(languageCode: String) {

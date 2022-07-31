@@ -4,5 +4,5 @@ import com.track.trackhabit.habit.domain.repository.UserRepository
 import javax.inject.Inject
 
 class GetValueIsUseAccUseCase @Inject constructor(private val repository: UserRepository) {
-    suspend operator fun invoke(): Boolean = repository.getValueIsUseAcc()
+    operator fun invoke(): Boolean = repository.getValueIsUseAcc()
 }

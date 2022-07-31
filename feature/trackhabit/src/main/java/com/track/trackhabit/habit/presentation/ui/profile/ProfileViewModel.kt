@@ -34,10 +34,6 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun getValueIsUseAcc(){
-        viewModelScope.launch(dispatcher.main) {
-            withContext(dispatcher.io){
-                _isUseAcc.value = getValueIsUseAccUseCase()
-            }
-        }
+        _isUseAcc.value = getValueIsUseAccUseCase()
     }
 }

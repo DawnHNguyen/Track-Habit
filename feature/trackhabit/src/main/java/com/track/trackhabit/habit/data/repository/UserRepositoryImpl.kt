@@ -12,5 +12,5 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao,): Use
         userDao.insertUser(user.toLocalDto())
     }
 
-    override suspend fun getValueIsUseAcc(): Boolean = Hawk.get(HawkKey.IS_USE_ACC, false)
+    override fun getValueIsUseAcc(): Boolean = Hawk.get(HawkKey.IS_USE_ACC, false)
 }
