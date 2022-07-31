@@ -20,4 +20,6 @@ interface AuthRepository {
     suspend fun verifyEmailToken(email: String, code: String): Resource<VerifyEmailTokenResponse>
 
     suspend fun login(username: String, password: String): Resource<LoginResponse>
+
+    suspend fun skipAccount()
 }

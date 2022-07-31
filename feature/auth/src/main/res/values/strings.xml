@@ -8,5 +8,6 @@
     <string name="login_textlogin">Login</string>
     <string name="login_noacc">Don\'t have an account?</string>
     <string name="login_register">Register</string>
+    <string name="login_skipAccount">I don\'t want to use account</string>
 
 </resources>

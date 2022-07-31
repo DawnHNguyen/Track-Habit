@@ -60,5 +60,11 @@ class LoginFragment : Fragment() {
         binding.buttonTextLoginRegistAccount.setOnClickListener {
             findNavController().navigate(R.id.action_login_to_nav_register)
         }
+
+        binding.buttonTextLoginSkipAccount.setOnClickListener {
+            viewModel.skipAccount()
+            navigateToMainActivity(requireContext())
+            activity?.finish()
+        }
     }
 }

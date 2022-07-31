@@ -41,4 +41,6 @@
     <string name="profile_feedback_notice">Track Habit vẫn đang phát triển, chúng tôi rất mong được góp ý.</string>
     <string name="profile_feedback_button">Gửi phản hồi</string>
     <string name="profile_language">Ngôn ngữ</string>
+    <string name="profile_login_button">Đăng nhập</string>
+    <string name="profile_logout_button">Đăng xuất</string>
 </resources>

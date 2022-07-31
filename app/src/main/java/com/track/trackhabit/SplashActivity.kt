@@ -4,7 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.orhanobut.hawk.Hawk
+import com.track.common.base.constpackage.HawkKey
 import com.track.trackhabit.auth.presentation.ui.AuthenticationActivity
+import com.track.trackhabit.habit.presentation.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,9 +19,8 @@ class SplashActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(600)
-//            val intent = if (Hawk.contains(HawkKey.ACCESS_TOKEN)) Intent(this@SplashActivity, MainActivity::class.java)
-//            else
-                val intent = Intent(this@SplashActivity, AuthenticationActivity::class.java)
+            val intent = if (Hawk.contains(HawkKey.ACCESS_TOKEN)) Intent(this@SplashActivity, MainActivity::class.java)
+            else Intent(this@SplashActivity, AuthenticationActivity::class.java)
             startActivity(intent)
             finish()
         }
