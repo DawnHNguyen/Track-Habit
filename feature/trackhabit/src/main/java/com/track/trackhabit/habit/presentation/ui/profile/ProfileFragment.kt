@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.orhanobut.hawk.Hawk
-import com.track.common.base.constpackage.HawkKey
 import com.track.navigation.navigateToAuthActivity
 import com.track.trackhabit.habit.R
 import com.track.trackhabit.habit.databinding.FragmentProfileBinding
@@ -48,7 +46,7 @@ class ProfileFragment : Fragment() {
             activity?.finish()
         }
 
-        binding.buttonProfileLogOutLogIn.text = if (Hawk.get(HawkKey.IS_USE_ACC)) getString(R.string.profile_logout_button) else getString(R.string.profile_login_button)
+        binding.buttonProfileLogOutLogIn.text = if (profileViewModel.isUseAcc.value == true) getString(R.string.profile_logout_button) else getString(R.string.profile_login_button)
 
     }
 

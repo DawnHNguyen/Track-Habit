@@ -11,10 +11,7 @@ import com.track.trackhabit.auth.data.remote.auth.dto.response.EmailTokenRespons
 import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
-import com.track.trackhabit.auth.domain.usecase.GetEmailTokenUseCase
-import com.track.trackhabit.auth.domain.usecase.LoginUseCase
-import com.track.trackhabit.auth.domain.usecase.RegisterUseCase
-import com.track.trackhabit.auth.domain.usecase.VerifyEmailTokenUseCase
+import com.track.trackhabit.auth.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,7 +26,8 @@ class AuthViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
     private val loginUseCase: LoginUseCase,
     private val getEmailTokenUseCase: GetEmailTokenUseCase,
-    private val verifyEmailTokenUseCase: VerifyEmailTokenUseCase
+    private val verifyEmailTokenUseCase: VerifyEmailTokenUseCase,
+    private val skipAccountUseCase: SkipAccountUseCase
 ) : ViewModel() {
 
     private var _loginStateFlow: MutableStateFlow<Resource<LoginResponse>> = MutableStateFlow(
@@ -194,6 +192,14 @@ class AuthViewModel @Inject constructor(
             withContext(dispatcher.io) {
                 val getEmailToken = getEmailTokenUseCase(email.value.toString())
                 _getCodeStateFlow.tryEmit(getEmailToken)
+            }
+        }
+    }
+
+    fun skipAccount(){
+        viewModelScope.launch(dispatcher.main){
+            withContext(dispatcher.io){
+                skipAccountUseCase()
             }
         }
     }
