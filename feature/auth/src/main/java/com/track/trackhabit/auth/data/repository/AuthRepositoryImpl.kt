@@ -46,7 +46,12 @@ class AuthRepositoryImpl @Inject constructor(private val authDataSource: AuthDat
         if (loginResponse.isSuccessful()) {
             Hawk.put(HawkKey.ACCESS_TOKEN, loginResponse.data?.accessToken)
             Hawk.put(HawkKey.REFRESH_TOKEN, loginResponse.data?.refreshToken)
+            Hawk.put(HawkKey.IS_USE_ACC, true)
         }
         return loginResponse
+    }
+
+    override fun skipAccount() {
+        Hawk.put(HawkKey.IS_USE_ACC, false)
     }
 }

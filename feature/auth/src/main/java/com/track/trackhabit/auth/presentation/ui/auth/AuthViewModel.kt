@@ -7,14 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
 import com.track.common.base.data.remote.util.Resource
+import com.track.common.base.utils.isValidEmail
 import com.track.trackhabit.auth.data.remote.auth.dto.response.EmailTokenResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.VerifyEmailTokenResponse
-import com.track.trackhabit.auth.domain.usecase.GetEmailTokenUseCase
-import com.track.trackhabit.auth.domain.usecase.LoginUseCase
-import com.track.trackhabit.auth.domain.usecase.RegisterUseCase
-import com.track.trackhabit.auth.domain.usecase.VerifyEmailTokenUseCase
+import com.track.trackhabit.auth.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,7 +27,8 @@ class AuthViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
     private val loginUseCase: LoginUseCase,
     private val getEmailTokenUseCase: GetEmailTokenUseCase,
-    private val verifyEmailTokenUseCase: VerifyEmailTokenUseCase
+    private val verifyEmailTokenUseCase: VerifyEmailTokenUseCase,
+    private val skipAccountUseCase: SkipAccountUseCase
 ) : ViewModel() {
 
     private var _loginStateFlow: MutableStateFlow<Resource<LoginResponse>> = MutableStateFlow(
@@ -65,6 +64,10 @@ class AuthViewModel @Inject constructor(
     private val _fullNameErrorVisibility = MutableLiveData(View.GONE)
     val fullNameErrorVisibility: LiveData<Int>
         get() = _fullNameErrorVisibility
+
+    private val _emailErrorVisibility = MutableLiveData(View.GONE)
+    val emailErrorVisibility: LiveData<Int>
+        get() = _emailErrorVisibility
 
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
@@ -118,6 +121,7 @@ class AuthViewModel @Inject constructor(
         if(!isValidPasswordInput()) isValid = false
         if(!isMatchConfirmPassword()) isValid = false
         if(!isValidFullNameInput()) isValid = false
+        if(!isValidEmailInput()) isValid = false
 
         return isValid
     }
@@ -162,6 +166,23 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    private fun isValidEmailInput(): Boolean{
+        return when {
+            email.value.isNullOrEmpty() -> {
+                _emailErrorVisibility.value = View.VISIBLE
+                false
+            }
+            !email.value!!.isValidEmail() -> {
+                _emailErrorVisibility.value = View.VISIBLE
+                false
+            }
+            else -> {
+                _emailErrorVisibility.value = View.GONE
+                true
+            }
+        }
+    }
+
     private fun updateRegisterProgressBarVisibility() {
         viewModelScope.launch(dispatcher.main) {
             registerStateFlow.collect {
@@ -198,4 +219,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    fun skipAccount(){
+        skipAccountUseCase()
+    }
 }

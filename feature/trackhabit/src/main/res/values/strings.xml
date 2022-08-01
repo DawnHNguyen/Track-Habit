@@ -58,5 +58,7 @@
     <!--    fragment profile-->
     <string name="profile_feedback_notice">Track Habit is still in development, and we\'d love to hear from you.</string>
     <string name="profile_feedback_button">Give Feedback</string>
+    <string name="profile_login_button">Login</string>
+    <string name="profile_logout_button">Logout</string>
     <string name="profile_language">Language</string>
 </resources>
