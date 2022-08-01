@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
 import com.track.common.base.data.remote.util.Resource
+import com.track.common.base.utils.isValidEmail
 import com.track.trackhabit.auth.data.remote.auth.dto.response.EmailTokenResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.LoginResponse
 import com.track.trackhabit.auth.data.remote.auth.dto.response.RegisterResponse
@@ -64,6 +65,10 @@ class AuthViewModel @Inject constructor(
     val fullNameErrorVisibility: LiveData<Int>
         get() = _fullNameErrorVisibility
 
+    private val _emailErrorVisibility = MutableLiveData(View.GONE)
+    val emailErrorVisibility: LiveData<Int>
+        get() = _emailErrorVisibility
+
     val username = MutableLiveData<String>()
     val password = MutableLiveData<String>()
     val confirmPassword = MutableLiveData<String>()
@@ -116,6 +121,7 @@ class AuthViewModel @Inject constructor(
         if(!isValidPasswordInput()) isValid = false
         if(!isMatchConfirmPassword()) isValid = false
         if(!isValidFullNameInput()) isValid = false
+        if(!isValidEmailInput()) isValid = false
 
         return isValid
     }
@@ -160,6 +166,23 @@ class AuthViewModel @Inject constructor(
         }
     }
 
+    private fun isValidEmailInput(): Boolean{
+        return when {
+            email.value.isNullOrEmpty() -> {
+                _emailErrorVisibility.value = View.VISIBLE
+                false
+            }
+            !email.value!!.isValidEmail() -> {
+                _emailErrorVisibility.value = View.VISIBLE
+                false
+            }
+            else -> {
+                _emailErrorVisibility.value = View.GONE
+                true
+            }
+        }
+    }
+
     private fun updateRegisterProgressBarVisibility() {
         viewModelScope.launch(dispatcher.main) {
             registerStateFlow.collect {
@@ -197,11 +220,6 @@ class AuthViewModel @Inject constructor(
     }
 
     fun skipAccount(){
-        viewModelScope.launch(dispatcher.main){
-            withContext(dispatcher.io){
-                skipAccountUseCase()
-            }
-        }
+        skipAccountUseCase()
     }
-
 }
