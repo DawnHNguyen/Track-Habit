@@ -21,5 +21,5 @@ interface AuthRepository {
 
     suspend fun login(username: String, password: String): Resource<LoginResponse>
 
-    suspend fun skipAccount()
+    fun skipAccount()
 }

@@ -51,7 +51,7 @@ class AuthRepositoryImpl @Inject constructor(private val authDataSource: AuthDat
         return loginResponse
     }
 
-    override suspend fun skipAccount() {
+    override fun skipAccount() {
         Hawk.put(HawkKey.IS_USE_ACC, false)
     }
 }
