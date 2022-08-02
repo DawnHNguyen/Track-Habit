@@ -46,8 +46,11 @@ class ProfileFragment : Fragment() {
             activity?.finish()
         }
 
-        profileViewModel.isUseAcc.observe(viewLifecycleOwner){
-            binding.buttonProfileLogOutLogIn.text = if (it) getString(R.string.profile_logout_button) else getString(R.string.profile_login_button)
+        profileViewModel.isUseAcc.observe(viewLifecycleOwner) {
+            binding.buttonProfileLogOutLogIn.text = if (it) {
+                profileViewModel.logout()
+                getString(R.string.profile_logout_button)
+            } else getString(R.string.profile_login_button)
         }
     }
 
