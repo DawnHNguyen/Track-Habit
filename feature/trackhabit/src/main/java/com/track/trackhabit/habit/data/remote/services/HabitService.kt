@@ -2,7 +2,9 @@ package com.track.trackhabit.habit.data.remote.services
 
 import com.track.common.base.data.remote.util.Resource
 import com.track.trackhabit.habit.data.remote.dto.HabitRequest
+import com.track.trackhabit.habit.data.remote.dto.RefreshTokenRequest
 import com.track.trackhabit.habit.data.remote.dto.response.HabitResponse
+import com.track.trackhabit.habit.data.remote.dto.response.RefreshTokenResponse
 import retrofit2.http.*
 
 interface HabitService {
@@ -17,5 +19,8 @@ interface HabitService {
 
     @DELETE("habit/{id}")
     suspend fun deleteHabit(@Path("id") id: Int): Resource<HabitResponse>
+
+    @POST("auth/refresh-token")
+    suspend fun refreshToken(@Body refreshTokenRequest: RefreshTokenRequest): Resource<RefreshTokenResponse>
 
 }
