@@ -13,4 +13,9 @@ class UserRepositoryImpl @Inject constructor(private val userDao: UserDao,): Use
     }
 
     override fun getValueIsUseAcc(): Boolean = Hawk.get(HawkKey.IS_USE_ACC, false)
+
+    override fun logout() {
+        Hawk.delete(HawkKey.ACCESS_TOKEN)
+        Hawk.delete(HawkKey.REFRESH_TOKEN)
+    }
 }

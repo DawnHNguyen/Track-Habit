@@ -166,20 +166,13 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    private fun isValidEmailInput(): Boolean{
-        return when {
-            email.value.isNullOrEmpty() -> {
-                _emailErrorVisibility.value = View.VISIBLE
-                false
-            }
-            !email.value!!.isValidEmail() -> {
-                _emailErrorVisibility.value = View.VISIBLE
-                false
-            }
-            else -> {
-                _emailErrorVisibility.value = View.GONE
-                true
-            }
+    private fun isValidEmailInput(): Boolean {
+        return if (email.value.isNullOrEmpty() || !email.value!!.isValidEmail()) {
+            _emailErrorVisibility.value = View.VISIBLE
+            false
+        } else {
+            _emailErrorVisibility.value = View.GONE
+            true
         }
     }
 

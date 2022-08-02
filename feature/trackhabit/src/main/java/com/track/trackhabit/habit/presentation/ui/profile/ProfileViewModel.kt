@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.track.common.base.AppDispatchers
 import com.track.trackhabit.habit.domain.usecase.AddLanguagePrefUseCase
 import com.track.trackhabit.habit.domain.usecase.GetValueIsUseAccUseCase
+import com.track.trackhabit.habit.domain.usecase.LogoutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -16,7 +17,8 @@ import javax.inject.Inject
 class ProfileViewModel @Inject constructor(
     private val dispatcher: AppDispatchers,
     private val addLanguagePrefUseCase: AddLanguagePrefUseCase,
-    private val getValueIsUseAccUseCase: GetValueIsUseAccUseCase
+    private val getValueIsUseAccUseCase: GetValueIsUseAccUseCase,
+    private val logoutUseCase: LogoutUseCase
 ): ViewModel() {
 
     private val _isUseAcc = MutableLiveData(false)
@@ -35,5 +37,9 @@ class ProfileViewModel @Inject constructor(
 
     private fun getValueIsUseAcc(){
         _isUseAcc.value = getValueIsUseAccUseCase()
+    }
+
+    fun logout(){
+        logoutUseCase()
     }
 }
