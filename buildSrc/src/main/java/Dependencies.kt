@@ -14,7 +14,7 @@ object SdkVersions {
 
 object Versions {
     val kotlin = "1.5.31"
-    const val room = "2.3.0"
+    const val room = "2.4.3"
     val timber = "4.7.1"
     val hyperion = "0.9.34"
 

@@ -61,9 +61,9 @@ class HomeViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 if (habit.performances.isNotEmpty() && checkIsTodayDateFormatValue(habit.performances.last().time)){
                     val performance = habit.performances.last()
-                    updateInspectionUseCase(Inspection(performance.inspectionId, performance.time, !performance.check), habit.habitId)
+                    updateInspectionUseCase(Inspection(performance.inspectionId, performance.time, !performance.check, performance.createAt, Date()), habit.habitId)
                 }
-                else addInspectionUseCase(Inspection(0, Date(), true), habit.habitId)
+                else addInspectionUseCase(Inspection(0, Date(), true, Date(), Date()), habit.habitId)
             }
         }
     }
