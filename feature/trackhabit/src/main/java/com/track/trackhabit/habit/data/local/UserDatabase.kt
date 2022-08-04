@@ -18,8 +18,11 @@ import java.util.*
 @Database(
     entities = [UserLocal::class, HabitLocal::class, InspectionLocal::class],
      exportSchema = true,
-    version = 5,
-    autoMigrations = [AutoMigration(from = 4, to = 5)]
+    version = 6,
+    autoMigrations = [
+        AutoMigration(from = 4, to = 5),
+        AutoMigration(from = 5, to = 6)
+    ]
 )
 abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao

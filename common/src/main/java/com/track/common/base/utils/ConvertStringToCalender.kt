@@ -4,7 +4,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-const val DISPLAY_DATE_FORMAT = "dd/MM/yyyy"
+const val DISPLAY_DATE_FORMAT = "dd/MM/yyyy'T'HH:mm:ss.SSS'Z'"
 
 fun convertStringToCalender(timeFormatted: String): Calendar{
     val arr = timeFormatted.split(':')

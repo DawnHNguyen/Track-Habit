@@ -61,7 +61,9 @@ class HabitInfoViewModel @Inject constructor(
                             name.value.toString(),
                             formatTimeFromStringToDate(),
                             emptyList(),
-                            getFrequency()
+                            getFrequency(),
+                            Date(),
+                            Date()
                         )
                     )
                 }
@@ -110,7 +112,9 @@ class HabitInfoViewModel @Inject constructor(
                         name.value.toString(),
                         formatTimeFromStringToDate(),
                         habit.value!!.performances,
-                        getFrequency()
+                        getFrequency(),
+                        habit.value!!.createAt,
+                        Date()
                     ))
                     Timber.d("-->${habit}_viewmodel")
                     Timber.d("successUpdate")
