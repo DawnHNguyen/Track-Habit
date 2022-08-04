@@ -2,7 +2,6 @@ package com.track.trackhabit.habit.domain.entity.remote
 
 import androidx.room.PrimaryKey
 import com.track.common.base.dto.RemoteDto
-import com.track.common.base.utils.DATE_FORMAT
 import com.track.common.base.utils.DISPLAY_DATE_FORMAT
 import com.track.common.base.utils.toDate
 import com.track.trackhabit.habit.domain.entity.Habit
@@ -28,7 +27,7 @@ class UserDto(
     override fun mapToLocalDto() = UserLocal(
         userId,
         name,
-        createAt = createAt.toDate(DISPLAY_DATE_FORMAT)?.time ?: 0,
-        updateAt = updateAt.toDate(DISPLAY_DATE_FORMAT)?.time ?: 0
+        createAt = createAt.toDate(DISPLAY_DATE_FORMAT)?.time ?: Date().time,
+        updateAt = updateAt.toDate(DISPLAY_DATE_FORMAT)?.time ?: Date().time
     )
 }

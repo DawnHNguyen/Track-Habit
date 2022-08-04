@@ -15,7 +15,9 @@ data class UserLocal(
     @PrimaryKey
     @ColumnInfo(name = "user_id") val userId: String,
     val name: String,
+    @ColumnInfo(name = "createAt", defaultValue = "0")
     val createAt: Long,
+    @ColumnInfo(name = "updateAt", defaultValue = "0")
     val updateAt: Long
 ) : LocalDto {
     override fun mapToDomainModel() = User(
