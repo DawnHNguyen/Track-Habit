@@ -3,12 +3,7 @@ package com.track.trackhabit.habit.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.map
-import com.orhanobut.hawk.Hawk
-import com.track.common.base.constpackage.HawkKey
-import com.track.common.base.data.remote.util.Resource
 import com.track.trackhabit.habit.data.local.dao.HabitDao
-import com.track.trackhabit.habit.data.remote.dto.RefreshTokenRequest
-import com.track.trackhabit.habit.data.remote.dto.response.RefreshTokenResponse
 import com.track.trackhabit.habit.data.remote.services.HabitDataSource
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
@@ -68,13 +63,4 @@ class TrackHabitRepositoryImpl @Inject constructor(
                 item.mapToDomainModel()
             }
         }
-
-    override suspend fun refreshToken(): Resource<RefreshTokenResponse> {
-        val refreshToken = Hawk.get<String>(HawkKey.REFRESH_TOKEN)
-        val refreshTokenRequest = RefreshTokenRequest(refreshToken)
-        val refreshTokenResponse = habitDataSource.refreshToken(refreshTokenRequest)
-        if (refreshTokenResponse.isSuccessful()) Hawk.put(HawkKey.ACCESS_TOKEN, refreshTokenResponse.data?.accessToken)
-        return refreshTokenResponse
-    }
-
 }

@@ -1,4 +1,4 @@
-package com.track.trackhabit.habit.data.remote.dto.response
+package com.track.common.base.data.remote.dto.response
 
 
 import com.google.gson.annotations.SerializedName
