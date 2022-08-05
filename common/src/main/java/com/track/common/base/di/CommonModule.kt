@@ -2,6 +2,7 @@ package com.track.common.base.di
 
 import com.google.gson.Gson
 import com.track.common.base.AppDispatchers
+import com.track.common.base.data.remote.services.TrackHabitCommonService
 import com.track.common.base.data.remote.util.CallAdapterFactory
 import com.track.common.base.data.remote.util.HeaderAuthorizationInterceptor
 import dagger.Module
@@ -59,6 +60,12 @@ object CommonModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(CallAdapterFactory())
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun providesCommonService(retrofit: Retrofit): TrackHabitCommonService {
+        return retrofit.create(TrackHabitCommonService::class.java)
     }
 
 }
