@@ -8,7 +8,7 @@ data class Resource<out T>(val status: Status, val data: T?, val error: Throwabl
     }
 
     companion object {
-        fun <T> success(data: T): Resource<T> {
+        fun <T> success(data: T? = null): Resource<T> {
             return Resource(
                 Status.SUCCESS,
                 data,
