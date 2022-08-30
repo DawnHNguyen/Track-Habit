@@ -77,7 +77,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     protected abstract suspend fun saveCallResults(items: ResultType)
 
     @MainThread
-    protected abstract fun shouldFetch(data: ResultType?): Boolean
+    protected abstract suspend fun shouldFetch(data: ResultType?): Boolean
 
     @MainThread
     protected abstract suspend fun loadFromDb(): ResultType?

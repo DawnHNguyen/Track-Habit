@@ -3,6 +3,7 @@ package com.track.trackhabit.habit.presentation.ui.home
 import android.util.Log
 import androidx.lifecycle.*
 import com.track.common.base.AppDispatchers
+import com.track.common.base.data.remote.util.Resource
 import com.track.common.base.utils.checkIsTodayDateFormatValue
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.Inspection
@@ -11,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -26,7 +28,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
     private val _habitList = MediatorLiveData<List<Habit>>()
     val habitList: LiveData<List<Habit>> get() = _habitList
-    private var habitListSource: LiveData<List<Habit>> = MutableLiveData()
+    private var habitListSource: LiveData<Resource<List<Habit>>> = MutableLiveData()
 
     init {
         getHabit()
@@ -40,7 +42,9 @@ class HomeViewModel @Inject constructor(
             }
             try {
                 _habitList.addSource(habitListSource) {
-                    _habitList.value = it
+                    _habitList.addSource(habitListSource){
+                        //nothing to do in here
+                    }
                 }
             } catch (e: IllegalArgumentException) {
                 Log.d("HomeViewModel", e.toString())
