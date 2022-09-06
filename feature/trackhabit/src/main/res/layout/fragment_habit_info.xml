@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_textview"
+
             android:layout_marginEnd="@dimen/all_margin_end"
             app:layout_constraintStart_toEndOf="@id/textView_fragmentHabitInfo_nameTitle"
             app:layout_constraintTop_toBottomOf="@id/textView_fragmentHabitInfo_nameTitle">
@@ -70,6 +71,7 @@
             android:layout_marginStart="@dimen/all_margin_start"
             android:layout_marginTop="@dimen/margin_addhabit_textview"
             android:layout_marginEnd="@dimen/all_margin_end"
+            android:scrollbars="none"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_fragmentHabitInfo_frequency">
 

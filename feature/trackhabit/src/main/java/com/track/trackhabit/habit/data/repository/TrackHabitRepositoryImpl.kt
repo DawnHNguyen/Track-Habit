@@ -1,5 +1,6 @@
 package com.track.trackhabit.habit.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.map
@@ -8,6 +9,7 @@ import com.track.common.base.data.remote.util.Resource
 import com.track.common.base.utils.DISPLAY_DATE_FORMAT
 import com.track.common.base.utils.toDate
 import com.track.trackhabit.habit.data.local.dao.HabitDao
+import com.track.trackhabit.habit.data.remote.dto.HabitRequest
 import com.track.trackhabit.habit.data.remote.services.HabitDataSource
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
@@ -43,12 +45,20 @@ class TrackHabitRepositoryImpl @Inject constructor(
     override suspend fun getHabit(): LiveData<Resource<List<Habit>>> {
         return object : NetworkBoundResource<List<Habit>, List<HabitDto>>(){
             override suspend fun loadFromDb(): List<Habit>? {
-                val habitOwner = habitDao.getHabit()
+//                val habitOwner = habitDao.getHabit()
                 val listHabitLocal = ArrayList<Habit>()
-                habitOwner.value?.forEach{
-                    val localHabit = it.habit
-                    listHabitLocal.add(localHabit.mapToDomainModel())
+
+                 Transformations.map(habitDao.getHabit()) { list ->
+                    list.map {
+                        val inspections = it.listInspection.map(InspectionLocal::mapToDomainModel)
+                        listHabitLocal.add(it.habit.mapToDomainModel().copy(performances = inspections))
+                    }
                 }
+
+//                habitOwner.value?.forEach{
+//                    listHabitLocal.add(it.mapToDomainModel())
+//                }
+                Log.d("checkListHabit","-- $listHabitLocal and habitlocal")
                 return listHabitLocal
             }
 
@@ -57,9 +67,12 @@ class TrackHabitRepositoryImpl @Inject constructor(
             }
 
             override fun processResponse(response: Response<List<HabitDto>>): List<Habit> {
-                return response.body()!!.forEach {
-                    it.mapToDomainModel()
-                } as List<Habit>
+                val listHabitLocal = ArrayList<Habit>()
+                response.body()!!.forEach {
+                    listHabitLocal.add(it.mapToDomainModel())
+                }
+                Log.d("checkListHabit","-- $listHabitLocal")
+                return  listHabitLocal
             }
 
             override suspend fun saveCallResults(items: List<Habit>) {
@@ -70,8 +83,9 @@ class TrackHabitRepositoryImpl @Inject constructor(
             }
 
             override suspend fun shouldFetch(data: List<Habit>?): Boolean {
-                if (data != null) {
+                if (data != null ) {
                     val listDto = habitDataSource.getHabit()
+                    Log.d("checkListHabit","-- ${listDto.body()} -dto")
                     if (!listDto.body().isNullOrEmpty()){
                         if (listDto.body()?.size != data.size){
                             return true
