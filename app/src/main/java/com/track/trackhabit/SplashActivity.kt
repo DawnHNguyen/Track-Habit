@@ -20,7 +20,7 @@ class SplashActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(600)
             val intent = if (Hawk.contains(HawkKey.ACCESS_TOKEN) || Hawk.get<Boolean>(HawkKey.IS_USE_ACC) == false) Intent(this@SplashActivity, MainActivity::class.java)
-            else Intent(this@SplashActivity, MainActivity::class.java)
+            else Intent(this@SplashActivity, AuthenticationActivity::class.java)
             startActivity(intent)
             finish()
         }
