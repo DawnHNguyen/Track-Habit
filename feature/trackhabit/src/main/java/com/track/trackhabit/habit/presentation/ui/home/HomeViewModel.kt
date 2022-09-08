@@ -42,7 +42,9 @@ class HomeViewModel @Inject constructor(
             }
             try {
                 _habitList.addSource(habitListSource) {
-                        //nothing to do in here
+                    if (it != null) {
+                        _habitList.value = it.data?: emptyList()
+                    }
                 }
             } catch (e: IllegalArgumentException) {
                 Log.d("HomeViewModel", e.toString())

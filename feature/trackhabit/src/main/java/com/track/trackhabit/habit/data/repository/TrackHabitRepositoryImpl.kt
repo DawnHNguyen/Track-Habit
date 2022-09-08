@@ -45,20 +45,13 @@ class TrackHabitRepositoryImpl @Inject constructor(
     override suspend fun getHabit(): LiveData<Resource<List<Habit>>> {
         return object : NetworkBoundResource<List<Habit>, List<HabitDto>>(){
             override suspend fun loadFromDb(): List<Habit>? {
-//                val habitOwner = habitDao.getHabit()
+                val habitOwner = habitDao.getHabitList()
                 val listHabitLocal = ArrayList<Habit>()
 
-                 Transformations.map(habitDao.getHabit()) { list ->
-                    list.map {
-                        val inspections = it.listInspection.map(InspectionLocal::mapToDomainModel)
-                        listHabitLocal.add(it.habit.mapToDomainModel().copy(performances = inspections))
-                    }
-                }
-
-//                habitOwner.value?.forEach{
-//                    listHabitLocal.add(it.mapToDomainModel())
-//                }
-                Log.d("checkListHabit","-- $listHabitLocal and habitlocal")
+                 habitOwner.forEach{
+                    val inspections = it.listInspection.map(InspectionLocal::mapToDomainModel)
+                    listHabitLocal.add(it.habit.mapToDomainModel().copy(performances = inspections))
+                 }
                 return listHabitLocal
             }
 
@@ -71,7 +64,7 @@ class TrackHabitRepositoryImpl @Inject constructor(
                 response.body()!!.forEach {
                     listHabitLocal.add(it.mapToDomainModel())
                 }
-                Log.d("checkListHabit","-- $listHabitLocal")
+
                 return  listHabitLocal
             }
 
@@ -85,7 +78,6 @@ class TrackHabitRepositoryImpl @Inject constructor(
             override suspend fun shouldFetch(data: List<Habit>?): Boolean {
                 if (data != null ) {
                     val listDto = habitDataSource.getHabit()
-                    Log.d("checkListHabit","-- ${listDto.body()} -dto")
                     if (!listDto.body().isNullOrEmpty()){
                         if (listDto.body()?.size != data.size){
                             return true

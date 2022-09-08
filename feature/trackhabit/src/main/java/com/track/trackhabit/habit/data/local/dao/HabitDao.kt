@@ -15,6 +15,9 @@ abstract class HabitDao() {
     @Query("SELECT * FROM habitLocal")
     abstract fun getHabit(): LiveData<List<InspectionOwner>>
 
+    @Query("SELECT * FROM habitLocal")
+    abstract suspend fun getHabitList(): List<InspectionOwner>
+
     @Query("SELECT * FROM UserLocal WHERE user_id = :idUser")
     abstract fun getHabitByUser(idUser: String): LiveData<HabitOwner>
 
