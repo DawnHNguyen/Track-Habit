@@ -20,7 +20,7 @@ import kotlin.collections.ArrayList
 class TrackHabitRepositoryImpl @Inject constructor(
     private val habitDao: HabitDao,
     private val habitDataSource: HabitDataSource
-): TrackHabitRepository {
+) : TrackHabitRepository {
 
     override suspend fun addHabit(habit: Habit): Long {
 //        Đây là logic để test API, không uncomment ở đây vì logic navigate sẽ làm quá trình call API bị Cancel
@@ -39,11 +39,11 @@ class TrackHabitRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getHabit(): LiveData<Resource<List<Habit>>> {
-        return object : NetworkBoundResource<List<Habit>, List<HabitDto>>(){
+        return object : NetworkBoundResource<List<Habit>, List<HabitDto>>() {
             override suspend fun loadFromDb(): List<Habit>? {
                 val listHabitLocal = ArrayList<Habit>()
 
-                habitDao.getHabitList().map{ it ->
+                habitDao.getHabitList().map { it ->
                     val inspections = it.listInspection.map(InspectionLocal::mapToDomainModel)
                     listHabitLocal.add(it.habit.mapToDomainModel().copy(performances = inspections))
                 }
@@ -58,12 +58,11 @@ class TrackHabitRepositoryImpl @Inject constructor(
                 val listHabitLocal = ArrayList<Habit>()
                 if (response.body().isNullOrEmpty()) return emptyList()
 
-                response.body()!!.forEach {
+                response.body()?.forEach {
                     listHabitLocal.add(it.mapToDomainModel())
                 }
 
-                Log.d("checkListProcess","--$listHabitLocal")
-                return  listHabitLocal
+                return listHabitLocal
             }
 
             override suspend fun saveCallResults(items: List<Habit>) {
@@ -74,11 +73,12 @@ class TrackHabitRepositoryImpl @Inject constructor(
             }
 
             override suspend fun shouldFetch(data: List<Habit>?): Boolean {
-                if (data == null ) return true
-                for (i in data.indices){
-                    if (data[i].updateAt.time + SHOULD_UPDATE_DURATION_MILLIS < Date().time) return true
+                if (data == null) return true
+
+                return data.any {
+                    it.updateAt.time + SHOULD_UPDATE_DURATION_MILLIS < Date().time
                 }
-                return false
+
             }
 
         }.build().asLiveData()
@@ -88,7 +88,6 @@ class TrackHabitRepositoryImpl @Inject constructor(
         habitDao.getHabitById(id).map { it ->
             it.mapToDomainModel()
         }
-
 
 
     override suspend fun updateHabit(habit: Habit) {
