@@ -15,8 +15,8 @@ data class HabitDto(
     val time: Date,
     val performances: List<Inspection>,
     val frequency: String?,
-    private val createAt: String,
-    private val updateAt: String
+    val createAt: String,
+    val updateAt: String
 ) : RemoteDto {
     override fun mapToDomainModel() = Habit(
         habitId,

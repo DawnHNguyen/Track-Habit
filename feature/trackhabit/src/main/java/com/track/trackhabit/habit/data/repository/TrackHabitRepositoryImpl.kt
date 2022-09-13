@@ -1,19 +1,26 @@
 package com.track.trackhabit.habit.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.map
+import com.track.common.base.data.remote.util.NetworkBoundResource
+import com.track.common.base.data.remote.util.Resource
 import com.track.trackhabit.habit.data.local.dao.HabitDao
 import com.track.trackhabit.habit.data.remote.services.HabitDataSource
 import com.track.trackhabit.habit.domain.entity.Habit
 import com.track.trackhabit.habit.domain.entity.local.InspectionLocal
+import com.track.trackhabit.habit.domain.entity.remote.HabitDto
 import com.track.trackhabit.habit.domain.repository.TrackHabitRepository
+import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class TrackHabitRepositoryImpl @Inject constructor(
     private val habitDao: HabitDao,
     private val habitDataSource: HabitDataSource
-): TrackHabitRepository {
+) : TrackHabitRepository {
 
     override suspend fun addHabit(habit: Habit): Long {
 //        Đây là logic để test API, không uncomment ở đây vì logic navigate sẽ làm quá trình call API bị Cancel
@@ -31,19 +38,56 @@ class TrackHabitRepositoryImpl @Inject constructor(
         return habitDao.insertHabit(habit.toLocalDto())
     }
 
-    override suspend fun getHabit(): LiveData<List<Habit>> =
-        Transformations.map(habitDao.getHabit()) { list ->
-            list.map {
-                val inspections = it.listInspection.map(InspectionLocal::mapToDomainModel)
-                it.habit.mapToDomainModel().copy(performances = inspections)
+    override suspend fun getHabit(): LiveData<Resource<List<Habit>>> {
+        return object : NetworkBoundResource<List<Habit>, List<HabitDto>>() {
+            override suspend fun loadFromDb(): List<Habit>? {
+                val listHabitLocal = ArrayList<Habit>()
+
+                habitDao.getHabitList().map { it ->
+                    val inspections = it.listInspection.map(InspectionLocal::mapToDomainModel)
+                    listHabitLocal.add(it.habit.mapToDomainModel().copy(performances = inspections))
+                }
+                return listHabitLocal
             }
-        }
+
+            override suspend fun createCallAsync(): Response<List<HabitDto>> {
+                return habitDataSource.getHabit()
+            }
+
+            override fun processResponse(response: Response<List<HabitDto>>): List<Habit> {
+                val listHabitLocal = ArrayList<Habit>()
+                if (response.body().isNullOrEmpty()) return emptyList()
+
+                response.body()?.forEach {
+                    listHabitLocal.add(it.mapToDomainModel())
+                }
+
+                return listHabitLocal
+            }
+
+            override suspend fun saveCallResults(items: List<Habit>) {
+                habitDao.insertAllHabit(items.map {
+                    it.toLocalDto().copy(updateAt = Date().time)
+                })
+
+            }
+
+            override suspend fun shouldFetch(data: List<Habit>?): Boolean {
+                if (data == null) return true
+
+                return data.any {
+                    it.updateAt.time + SHOULD_UPDATE_DURATION_MILLIS < Date().time
+                }
+
+            }
+
+        }.build().asLiveData()
+    }
 
     override fun getHabitById(id: Int): LiveData<Habit> =
         habitDao.getHabitById(id).map { it ->
             it.mapToDomainModel()
         }
-
 
 
     override suspend fun updateHabit(habit: Habit) {
@@ -63,4 +107,8 @@ class TrackHabitRepositoryImpl @Inject constructor(
                 item.mapToDomainModel()
             }
         }
+
+    companion object {
+        const val SHOULD_UPDATE_DURATION_MILLIS = 15 * 60 * 1000
+    }
 }

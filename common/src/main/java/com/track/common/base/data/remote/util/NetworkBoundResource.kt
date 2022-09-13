@@ -1,5 +1,6 @@
 package com.track.common.base.data.remote.util
 
+import android.util.Log
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
@@ -77,7 +78,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     protected abstract suspend fun saveCallResults(items: ResultType)
 
     @MainThread
-    protected abstract fun shouldFetch(data: ResultType?): Boolean
+    protected abstract suspend fun shouldFetch(data: ResultType?): Boolean
 
     @MainThread
     protected abstract suspend fun loadFromDb(): ResultType?
