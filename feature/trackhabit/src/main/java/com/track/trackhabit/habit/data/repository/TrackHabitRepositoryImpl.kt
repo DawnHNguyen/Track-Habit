@@ -55,14 +55,9 @@ class TrackHabitRepositoryImpl @Inject constructor(
             }
 
             override fun processResponse(response: Response<List<HabitDto>>): List<Habit> {
-                val listHabitLocal = ArrayList<Habit>()
-                if (response.body().isNullOrEmpty()) return emptyList()
-
-                response.body()?.forEach {
-                    listHabitLocal.add(it.mapToDomainModel())
-                }
-
-                return listHabitLocal
+                return response.body()?.map {
+                    it.mapToDomainModel()
+                } ?: emptyList()
             }
 
             override suspend fun saveCallResults(items: List<Habit>) {

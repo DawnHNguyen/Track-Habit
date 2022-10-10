@@ -1,6 +1,7 @@
 package com.track.trackhabit.habit.data.di
 
 import com.track.trackhabit.habit.data.remote.services.HabitService
+import com.track.trackhabit.habit.data.remote.services.InspectionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +16,11 @@ object TrackHabitRemoteModule {
     @Provides
     fun providesTrackHabitService(retrofit: Retrofit): HabitService {
         return retrofit.create(HabitService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun providesInspectionService(retrofit: Retrofit): InspectionService {
+        return retrofit.create(InspectionService::class.java)
     }
 }
