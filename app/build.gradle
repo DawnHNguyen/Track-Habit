@@ -9,8 +9,6 @@ plugins {
     id 'kotlin-android'
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
 }
 
 // Note: 2 digits max for each value
@@ -20,20 +18,6 @@ ext.versionPatch = 1
 
 
 android {
-    signingConfigs {
-        debug {
-            storeFile file('./signature/trackhabit.debug.keystore.jks')
-            storePassword 'trackhabitsquad1'
-            keyAlias 'trackhabit'
-            keyPassword 'trackhabitsquad1'
-        }
-        release {
-            storeFile file('./signature/trackhabit.release.keystore.jks')
-            storePassword 'trackhabitsquad1'
-            keyAlias 'trackhabit'
-            keyPassword 'trackhabitsquad1'
-        }
-    }
     compileSdk SdkVersions.compileSdkVersion
 
     defaultConfig {
@@ -46,7 +30,6 @@ android {
 
         testInstrumentationRunnerArguments clearPackageData: 'true'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.debug
 
         multiDexEnabled true
     }
@@ -56,7 +39,6 @@ android {
         debug {
             applicationIdSuffix ".debug"
             resValue "string", "app_name", "Track Habit dbg"
-            signingConfig signingConfigs.debug
         }
 
         release {
@@ -70,7 +52,6 @@ android {
                 optimizeCode true
                 proguardFiles 'proguard-rules.pro'
             }
-            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -103,7 +84,6 @@ dependencies {
     implementation project(Modules.trackHabit)
     implementation project(Modules.navigation)
     implementation project(Modules.common)
-    implementation project(Modules.remote)
     implementation project(Modules.authentication)
 
     implementation Libraries.Timber
@@ -112,13 +92,6 @@ dependencies {
     implementation AndroidLibraries.kotlinCoroutineAndroid
     kapt Libraries.hiltCompiler
 
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:29.0.2')
-
-    // Declare the dependencies for the Crashlytics and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
 kapt {
     correctErrorTypes true
