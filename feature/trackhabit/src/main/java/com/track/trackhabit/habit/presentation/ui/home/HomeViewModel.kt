@@ -68,6 +68,7 @@ class HomeViewModel @Inject constructor(
                     updateInspectionUseCase(Inspection(performance.inspectionId, performance.time, !performance.check, performance.createAt, Date()), habit.habitId)
                 }
                 else addInspectionUseCase(Inspection(0, Date(), true, Date(), Date()), habit.habitId)
+                getHabit()
             }
         }
     }
